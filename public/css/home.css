@@ -1,0 +1,9 @@
+.title-block{
+    display: flex;
+    align-items: center;
+}
+
+#home-title{
+    margin-left: 15px;
+    text-align: justify;
+}
