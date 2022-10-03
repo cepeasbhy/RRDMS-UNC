@@ -10,9 +10,10 @@
 
 .transaction-block{
     display: flex;
+    margin: auto;
     margin-top: 20px;
 }
 
 .transac-item{
-    padding: 5px;
+    padding-left: 35px;
 }

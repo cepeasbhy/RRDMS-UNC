@@ -5,12 +5,10 @@
 @endsection
 
 @section('content')
-    <div class="container">
+   
         <div class="title-block">
-            <img src="{{asset('/img/unc-logo.png')}}" width="100px" height="100px">
             <h2 id="home-title">REGISTRAR RECORS AND DOCUMENT MANAGEMENT SYSTEM</h2>
         </div>
-    </div>
     <div class="transaction-block">
         <div class="transac-item">
             <a href="/stud_cred_mngmnt">
