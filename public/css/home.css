@@ -7,3 +7,12 @@
     margin-left: 15px;
     text-align: justify;
 }
+
+.transaction-block{
+    display: flex;
+    margin-top: 20px;
+}
+
+.transac-item{
+    padding: 5px;
+}
