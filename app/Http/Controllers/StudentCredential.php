@@ -46,7 +46,20 @@ class StudentCredential extends Controller
 
     public function view($id){
 
-        $student = Student::where('student_id', $id)->first();
+        $student = Student::select(
+            'student_id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'dept_name',
+            'course_name',
+            'admission_year'
+        )->join(
+            'departments', 'departments.department_id', '=', 'students.department_id'
+        )->join(
+            'courses', 'courses.course_id', '=', 'students.course_id'
+        )->where('student_id', $id)->first();
+
         return view('StudentCredential/view_stud', ['student' => $student]);
     }
 }
