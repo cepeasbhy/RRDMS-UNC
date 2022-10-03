@@ -8,7 +8,20 @@ use App\Models\Student;
 class StudentCredential extends Controller
 {
     public function index(){
-        return view('StudentCredential/index');
+        $students = Student::select(
+            'student_id',
+            'first_name',
+            'last_name',
+            'dept_name',
+            'course_name',
+            'admission_year'
+        )->join(
+            'departments', 'departments.department_id', '=', 'students.department_id'
+        )->join(
+            'courses', 'courses.course_id', '=', 'students.course_id'
+        )->get();
+
+        return view('StudentCredential/index', ['students' => $students]);
     }
 
     public function addStudent(){
