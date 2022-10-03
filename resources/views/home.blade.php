@@ -13,7 +13,7 @@
     </div>
     <div class="transaction-block">
         <div class="transac-item">
-            <a href="#">
+            <a href="/stud_cred_mngmnt">
                 <img src="{{asset('img/option1.jpg')}}" width="250px" height="250px">
             </a>
         </div>
