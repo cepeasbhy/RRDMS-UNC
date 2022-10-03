@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="block-header">
-        <h3 class="col-2">Student Credential Management</h3>
+        <h3 style="width: 60%">Student Credential Management</h3>
         <form action="" method="POST">
             <div class="form-item col-4">
                 <input type="text" placeholder="Enter student ID...">
@@ -14,9 +14,9 @@
             <div class="form-item col-1">
                 <input type="submit" value="SEARCH" id="btn-search">
             </div>
-            <div class="form-item col-1">
-                <input type="submit" value="ADD STUDENT" id="btn-add-stud">
-            </div>
+        </form>
+        <form action="/stud_cred_mngmnt/add_student" class="form-item col-1" method="GET">
+            <input type="submit" value="ADD STUDENT" id="btn-add-stud">
         </form>
     </div>
 
