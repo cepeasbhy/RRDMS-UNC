@@ -5,24 +5,32 @@
 @endsection
 
 @section('content')
+
     <div class="block-header">
-        <h3 style="width: 60%">Student Credential Management</h3>
-        <form action="" method="POST">
-            <div class="form-item col-4">
-                <input type="text" placeholder="Enter student ID...">
-            </div>
-            <div class="form-item col-1">
-                <input type="submit" value="SEARCH" id="btn-search">
-            </div>
-        </form>
-        <form action="/stud_cred_mngmnt/add_student" class="form-item col-1" method="GET">
-            <input type="submit" value="ADD STUDENT" id="btn-add-stud">
-        </form>
+        <div class="wrapper">
+            <h3>Student Credential Management</h3>
+        </div>
+        <div class="wrapper">
+            <form action="" class="main-form">
+                <div class="form-item col-3">
+                    <input type="text" placeholder="Enter Student ID...">
+                </div>
+                <div class="form-item">
+                    <input type="submit" value="SEARCH">
+                </div>
+
+                <div class="form-item">
+                    <input type="submit" value="ADD STUDENT" id="btn-add-stud" form="add-stud-link">
+                </div>
+            </form>
+            <form action="/stud_cred_mngmnt/add_student" method="GET" id="add-stud-link"> 
+            </form> 
+        </div>
+        
     </div>
 
     <div class="main-block">
-        <div class="block-title">
-            <h3>LIST OF STUDENTS</h3>
+
         <div class="search-filter">
             <div class="form-item">
                 <label>SORT BY</label>
@@ -48,6 +56,16 @@
             <th>DEPARTMENT</th>
             <th>COURSE</th>
             <th>ACTION</th>
+            @foreach ($students as $student)
+                <tr>
+                    <td>{{$student->student_id}}</td>
+                    <td>{{$student->first_name}}</td>
+                    <td>{{$student->last_name}}</td>
+                    <td>{{$student->dept_name}}</td>
+                    <td>{{$student->course_name}}</td>
+                    <td><input type="submit" value="VIEW"></td>
+                </tr>
+            @endforeach
         </table>
     </div>
 @endsection

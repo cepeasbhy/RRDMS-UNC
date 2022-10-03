@@ -1,7 +1,10 @@
-.block-header, form{
+.block-header, .main-form{
     display: flex;
-    width: 100%;
     align-items: center;
+}
+
+.block-header h3{
+    margin-right: 10px;
 }
 
 header{
@@ -35,4 +38,14 @@ th{
     padding: 5px;
     background-color: #CC3636;
     color: #FFFF;
+}
+
+td{
+    padding: 5px;
+    background-color: #B7C4CF;
+    border-top: 5px solid #FFFF;
+}
+
+.wrapper{
+    padding: 5px;
 }
