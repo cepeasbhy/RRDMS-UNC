@@ -17,7 +17,7 @@
                             <label for="">STUDENT ID:</label>
                         </div>
                         <div class="form-item">
-                            <input type="text" name="studentID" value="{{$student->student_id}}">
+                            <input type="text" name="studentID" value="{{$student->student_id}}" disabled>
                         </div>
                     </div>
                     <div class="form-row">
@@ -25,7 +25,7 @@
                             <label for="">FIRST NAME:</label>
                         </div>
                         <div class="form-item">
-                            <input type="text" name="firstName" value="{{$student->first_name}}">
+                            <input type="text" name="firstName" value="{{$student->first_name}}" disabled>
                         </div>
                     </div>
                     <div class="form-row">
@@ -33,7 +33,7 @@
                             <label for="">LAST NAME:</label>
                         </div>
                         <div class="form-item">
-                            <input type="text" name="lastName" value="{{$student->last_name}}">
+                            <input type="text" name="lastName" value="{{$student->last_name}}" disabled>
                         </div>
                     </div>
                     <div class="form-row">
@@ -41,18 +41,31 @@
                             <label for="">MIDDLE NAME:</label>
                         </div>
                         <div class="form-item">
-                            <input type="text" name="middleName" value="{{$student->middle_name}}">
+                            <input type="text" name="middleName" value="{{$student->middle_name}}" disabled>
                         </div>
                     </div>
-                    <div class="form-row" id="selection">
-        
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label for="">DEPARTMENT:</label>
+                        </div>
+                        <div class="form-item">
+                            <input type="text" name="department" value="{{$student->dept_name}}" disabled>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label for="">COURSE:</label>
+                        </div>
+                        <div class="form-item">
+                            <input type="text" name="course" value="{{$student->course_name}}" disabled>
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="form-item">
                             <label for="">ADMISSION YEAR:</label>
                         </div>
                         <div class="form-item">
-                            <input type="text" name="addmissionYear" value="{{$student->admission_year}}">
+                            <input type="text" name="addmissionYear" value="{{$student->admission_year}}" disabled>
                         </div>
                     </div>
                 </form>
