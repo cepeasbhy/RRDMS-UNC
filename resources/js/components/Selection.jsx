@@ -74,7 +74,7 @@ function Selection() {
         options = type.map((option, index) => <option key={index} value={option.value}>{option.text}</option>);
     }
     return (
-       <div id='example'>
+       <div id='dept-select'>
             <select name="department" onChange={changeSelectOptionHandler}>
                 <option>Choose...</option>
                 <option value="001">Arts and Science</option>
@@ -85,11 +85,13 @@ function Selection() {
                 <option value="006">Engineering and Architecture</option>
                 <option value="007">Nursing</option>
             </select>
+        <div id="course-select">
             <select name="course">
                 {
                     options
                 }
             </select>
+        </div>
        </div>
     );
 }
