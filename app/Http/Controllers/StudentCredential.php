@@ -43,4 +43,10 @@ class StudentCredential extends Controller
 
         return redirect('/stud_cred_mngmnt');
     }
+
+    public function view($id){
+
+        $student = Student::where('student_id', $id)->first();
+        return view('StudentCredential/view_stud', ['student' => $student]);
+    }
 }
