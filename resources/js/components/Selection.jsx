@@ -74,25 +74,36 @@ function Selection() {
         options = type.map((option, index) => <option key={index} value={option.value}>{option.text}</option>);
     }
     return (
-       <div id='dept-select'>
-            <select name="department" onChange={changeSelectOptionHandler}>
-                <option>Choose...</option>
-                <option value="001">Arts and Science</option>
-                <option value="002">Business and Accountancy</option>
-                <option value="003">Computer Studies</option>
-                <option value="004">Criminal Justice Education</option>
-                <option value="005">Education</option>
-                <option value="006">Engineering and Architecture</option>
-                <option value="007">Nursing</option>
-            </select>
-        <div id="course-select">
-            <select name="course">
-                {
-                    options
-                }
-            </select>
+        <div>
+            <div class='form-row'>
+                <div class="form-item">
+                    <label>DEPARTMENT:</label>
+                </div>
+                <div class="form-item">
+                    <select name="department" onChange={changeSelectOptionHandler}>
+                        <option>Choose...</option>
+                        <option value="001">Arts and Science</option>
+                        <option value="002">Business and Accountancy</option>
+                        <option value="003">Computer Studies</option>
+                        <option value="004">Criminal Justice Education</option>
+                        <option value="005">Education</option>
+                        <option value="006">Engineering and Architecture</option>
+                        <option value="007">Nursing</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-item">
+                <label>COURSE</label>
+                </div>
+                <div class="form-item">
+                  <select name="course">
+                    {options}
+                  </select>
+                </div>
+            </div>
         </div>
-       </div>
+       
     );
 }
 
