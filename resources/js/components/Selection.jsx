@@ -96,6 +96,6 @@ function Selection() {
 
 export default Selection;
 
-if (document.getElementById('example')) {
-    ReactDOM.render(<Selection />, document.getElementById('example'));
+if (document.getElementById('selection')) {
+    ReactDOM.render(<Selection />, document.getElementById('selection'));
 }
