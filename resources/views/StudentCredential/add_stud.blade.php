@@ -11,7 +11,8 @@
                 <h4>STUDENT INFORMATION</h4>
             </div>
             <div class="form-wrapper">
-                <form action="">
+                <form action="/stud_cred_mngmnt/add_student" method="POST">
+                    @csrf
                     <div class="form-row">
                         <div class="form-item">
                             <label for="">STUDENT ID:</label>
@@ -52,7 +53,7 @@
                             <label for="">ADMISSION YEAR:</label>
                         </div>
                         <div class="form-item">
-                            <input type="text" name="middleName">
+                            <input type="text" name="addmissionYear">
                         </div>
                     </div>
                     <div class="form-row">
