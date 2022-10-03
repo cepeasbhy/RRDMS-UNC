@@ -63,7 +63,12 @@
                     <td>{{$student->last_name}}</td>
                     <td>{{$student->dept_name}}</td>
                     <td>{{$student->course_name}}</td>
-                    <td><input type="submit" value="VIEW"></td>
+                    <td>
+                        <form action="/stud_cred_mngmnt/view_student/{{$student->student_id}}" method="GET">
+                            @csrf
+                            <input type="submit" value="VIEW">
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </table>
