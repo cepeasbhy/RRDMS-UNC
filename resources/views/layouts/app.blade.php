@@ -12,16 +12,28 @@
     <title>RRDM-UNC</title>
 </head>
 <body>
-    <header class="p-3">
-        <div class="row w-75 mx-auto">
-            <div class="col d-flex align-items-center">
-                <img src="{{asset('/img/unc-logo.png')}}" width="50px" height="50px">
-                <h2 class="ms-2 pt-2">RRDMS-UNC</h2>
+    <header class="mb-4">
+        <nav class="navbar navbar-expand">
+            <div class="container w-75">
+                <div class="navbar-brand d-flex align-items-center">
+                    <img src="{{asset('img/unc-logo.png')}}" width="50px" height="50px">
+                    <div>
+                        <span class="h3 ms-2">UNC-RRDMS</span>
+                    </div>
+                </div>
+                <ul class="navbar-nav list-unstyled">
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-outline-primary" href="/">HOME</a>
+                    </li>
+                    <li class="nav-item ps-2">
+                        <a class="btn btn-sm btn-outline-primary" href="{{route('login')}}">LOGIN</a>
+                    </li>
+                    <li class="nav-item ps-2">
+                        <a class="btn btn-sm btn-outline-primary" href="{{route('register')}}">REGISTER</a>
+                    </li>
+                </ul>
             </div>
-            <div class="col">
-
-            </div>
-        </div>
+        </nav>
     </header>
     <div id="container">
         @yield('content')
