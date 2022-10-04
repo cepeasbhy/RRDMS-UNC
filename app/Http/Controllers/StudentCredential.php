@@ -44,7 +44,7 @@ class StudentCredential extends Controller
         return redirect('/stud_cred_mngmnt');
     }
 
-    public function view($id){
+    public function viewStudent($id){
 
         $student = Student::select(
             'student_id',
@@ -62,4 +62,5 @@ class StudentCredential extends Controller
 
         return view('StudentCredential/view_stud', ['student' => $student]);
     }
+
 }
