@@ -5,38 +5,26 @@
 @endsection
 
 @section('content')
-
-    <div class="block-header">
-        <div class="wrapper">
-            <h3>Student Credential Management</h3>
+    <h3>Student Credential Management</h3>
+    <form action="" class="row">
+        <div class="col-2 w-50">
+            <input class="form-control form-control-sm bg-muted" placeholder="Enter Student ID..." type="text">
         </div>
-        <div class="wrapper">
-            <form action="" class="main-form">
-                <div class="form-item col-3">
-                    <input type="text" placeholder="Enter Student ID...">
-                </div>
-                <div class="form-item">
-                    <input type="submit" value="SEARCH">
-                </div>
-
-                <div class="form-item">
-                    <input type="submit" value="ADD STUDENT" id="btn-add-stud" form="add-stud-link">
-                </div>
-            </form>
-            <form action="/stud_cred_mngmnt/add_student" method="GET" id="add-stud-link"> 
-            </form> 
+        <div class="col">
+            <input class="w-100 btn btn-sm btn-success"type="submit" value="SEARCH">
         </div>
-        
-    </div>
-
+        <div class="col">
+            <input class="w-100 btn btn-sm btn-success" type="submit" value="ADD STUDENT" form="form-link-add">
+        </div>
+    </form>
+    <form action="/stud_cred_mngmnt/add_student" id="form-link-add"></form>
     <div class="main-block">
-
-        <div class="search-filter">
-            <div class="form-item">
+        <div class="d-flex align-items-center">
+            <div class="p-2">
                 <label>SORT BY</label>
             </div>
-            <div class="form-item">
-                <select name="sort" id="">
+            <div class="p-2">
+                <select name="sort" class="form-control form-control-sm">
                     <option value="Student ID">Student ID</option>
                     <option value="FIRST NAME">FIRST NAME</option>
                     <option value="LAST NAME">LAST NAME</option>
@@ -45,8 +33,8 @@
                     <option value="ADMISSION YEAR">ADMISSION YEAR</option>
                 </select>
             </div>
-            <div class="form-item">
-                <input type="submit" value="UPDATE LIST">
+            <div class="p-2">
+                <input type="submit" value="UPDATE LIST" class="btn btn-success btn-sm">
             </div>
         </div>
         <table>
@@ -66,7 +54,7 @@
                     <td>
                         <form action="/stud_cred_mngmnt/view_student/{{$student->student_id}}" method="GET">
                             @csrf
-                            <input type="submit" value="VIEW">
+                            <input type="submit" value="VIEW" class="btn btn-success btn-sm">
                         </form>
                     </td>
                 </tr>

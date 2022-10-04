@@ -75,12 +75,10 @@ function Selection() {
     }
     return (
         <div>
-            <div class='form-row'>
-                <div class="form-item">
-                    <label>DEPARTMENT:</label>
-                </div>
-                <div class="form-item">
-                    <select name="department" onChange={changeSelectOptionHandler}>
+            <div class='form-group row mb-2'>
+                <label class="col-sm-3 col-form-label col-form-label-sm">Department</label>
+                <div class="col-sm-9">
+                    <select class="form-control form-control-sm" name="department" onChange={changeSelectOptionHandler}>
                         <option>Choose...</option>
                         <option value="001">Arts and Science</option>
                         <option value="002">Business and Accountancy</option>
@@ -92,12 +90,10 @@ function Selection() {
                     </select>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-item">
-                <label>COURSE</label>
-                </div>
-                <div class="form-item">
-                  <select name="course">
+            <div class="form-group row mb-2">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Course</label>
+                <div class="col-sm-9">
+                  <select class="form-control form-control-sm" name="course">
                     {options}
                   </select>
                 </div>

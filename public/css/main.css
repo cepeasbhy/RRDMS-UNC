@@ -11,27 +11,7 @@
     margin: auto;
 }
 
-input{
-    border: none;
-    outline: none;
-    padding: 5px;
-    width: 100%;
-    background-color: #B7C4CF;
-    border-radius: 5px;
-}
-
 select{
     padding: 5px;
     border-radius: 5px;
-}
-
-input[type="submit"]{
-    background-color: #38E54D;
-    font-weight: bolder;
-    color: #FFFF;
-}
-
-input[type="submit"]:hover{
-    cursor: pointer;
-    background-color: #367E18;
 }

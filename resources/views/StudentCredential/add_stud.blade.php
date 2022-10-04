@@ -1,70 +1,56 @@
 @extends('layouts.app')
 
-@section('css-link')
-    <link rel="stylesheet" href="{{asset('/css/add_stud.css')}}">
-@endsection
-
 @section('content')
-    <div class="main-block">
-        <div class="block">
-            <div class="block-title">
-                <h4>STUDENT INFORMATION</h4>
+    <div class="row">
+        <div class="col">
+            <div class="border-start border-danger border-4">
+                <h4 class="ms-3">STUDENT INFORMATION</h4>
             </div>
-            <div class="form-wrapper">
+            <div class="ms-2">
                 <form action="/stud_cred_mngmnt/add_student" method="POST">
                     @csrf
-                    <div class="form-row">
-                        <div class="form-item">
-                            <label for="">STUDENT ID:</label>
-                        </div>
-                        <div class="form-item">
-                            <input type="text" name="studentID">
+                    <div class="form-group row mb-2">
+                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Student ID:</label>
+                        <div class="col-sm-9">
+                            <input class="form-control form-control-sm" type="text" name="studentID" required>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-item">
-                            <label for="">FIRST NAME:</label>
-                        </div>
-                        <div class="form-item">
-                            <input type="text" name="firstName">
+                    <div class="form-group row mb-2">
+                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">First Name</label>
+                        <div class="col-sm-9">
+                            <input class="form-control form-control-sm" type="text" name="firstName" required>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-item">
-                            <label for="">LAST NAME:</label>
-                        </div>
-                        <div class="form-item">
-                            <input type="text" name="lastName">
+                    <div class="form-group row mb-2">
+                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Last Name</label>
+                        <div class="col-sm-9">
+                            <input class="form-control form-control-sm" type="text" name="lastName" required>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-item">
-                            <label for="">MIDDLE NAME:</label>
-                        </div>
-                        <div class="form-item">
-                            <input type="text" name="middleName">
+                    <div class="form-group row mb-2">
+                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Middle Name</label>
+                        <div class="col-sm-9">
+                            <input class="form-control form-control-sm" type="text" name="middleName">
                         </div>
                     </div>
-                    <div class="form-row" id="selection">
+                    <div class="form-group row mb-2" id="selection">
         
                     </div>
-                    <div class="form-row">
-                        <div class="form-item">
-                            <label for="">ADMISSION YEAR:</label>
-                        </div>
-                        <div class="form-item">
-                            <input type="text" name="addmissionYear">
+                    <div class="form-group row mb-2">
+                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Admission Year</label>
+                        <div class="col-sm-9">
+                            <input class="form-control form-control-sm" type="text" name="addmissionYear" required>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <input type="submit" value="ADD STUDENT">
+                    <div class="form-group row mb-2">
+                        <input class="btn btn-sm btn-success"type="submit" value="ADD STUDENT">
                     </div>
                 </form>
             </div>
         </div>
-        <div class="block">
-            <div class="block-title">
-                <h4>STUDENT CREDENTIALS</h4>
+        <div class="col">
+            <div class="border-start border-danger border-4">
+                <h4 class="ms-3">STUDENT CREDENTIALS</h4>
             </div>
         </div>
     </div>

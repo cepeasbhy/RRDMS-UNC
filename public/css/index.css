@@ -1,32 +1,5 @@
-.block-header, .main-form{
-    display: flex;
-    align-items: center;
-}
-
-.block-header h3{
-    margin-right: 10px;
-}
-
 header{
     margin-bottom: 10px;
-}
-
-.col-1{width: 25%;}
-.col-2{width: 50%;}
-.col-3{width: 75%;}
-.col-4{width: 100%;}
-
-.form-item{
-    padding: 5px;
-}
-
-.main-block{
-    margin-top: 20px;
-}
-
-.search-filter{
-    display: flex;
-    align-items: center;
 }
 
 table{
@@ -44,8 +17,4 @@ td{
     padding: 5px;
     background-color: #B7C4CF;
     border-top: 5px solid #FFFF;
-}
-
-.wrapper{
-    padding: 5px;
 }
