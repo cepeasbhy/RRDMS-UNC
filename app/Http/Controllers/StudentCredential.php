@@ -44,9 +44,16 @@ class StudentCredential extends Controller
         return redirect('/stud_cred_mngmnt');
     }
 
-    public function viewStudent($id){
+    public function search(){
+        return view('StudentCredential/view_stud', ['student' => $this->findStudent(request('studentID'))]);
+    }
 
-        $student = Student::select(
+    public function viewStudent($id){
+        return view('StudentCredential/view_stud', ['student' => $this->findStudent($id)]);
+    }
+
+    private function findStudent($id){
+        return  $student = Student::select(
             'student_id',
             'first_name',
             'last_name',
@@ -58,9 +65,7 @@ class StudentCredential extends Controller
             'departments', 'departments.department_id', '=', 'students.department_id'
         )->join(
             'courses', 'courses.course_id', '=', 'students.course_id'
-        )->where('student_id', $id)->first();
-
-        return view('StudentCredential/view_stud', ['student' => $student]);
+        )->where('student_id', $id)->firstOrFail();
     }
 
 }

@@ -6,9 +6,10 @@
 
 @section('content')
     <h3>Student Credential Management</h3>
-    <form action="" class="row">
+    <form action="/stud_cred_mngmnt/search" method="post" class="row">
+        @csrf
         <div class="col-2 w-50">
-            <input class="form-control form-control-sm bg-muted" placeholder="Enter Student ID..." type="text">
+            <input class="form-control form-control-sm bg-muted" name="studentID" placeholder="Enter Student ID..." type="text">
         </div>
         <div class="col">
             <input class="w-100 btn btn-sm btn-success"type="submit" value="SEARCH">
