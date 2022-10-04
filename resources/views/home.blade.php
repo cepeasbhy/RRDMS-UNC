@@ -6,21 +6,21 @@
 
 @section('content')
    
-        <div class="title-block">
-            <h2 id="home-title">REGISTRAR RECORS AND DOCUMENT MANAGEMENT SYSTEM</h2>
-        </div>
-    <div class="transaction-block">
-        <div class="transac-item">
+    <div class="container">
+        <h2 class="text-center">REGISTRAR RECORS AND DOCUMENT MANAGEMENT SYSTEM</h2>
+    </div>
+    <div class="row">
+        <div class="col">
             <a href="/stud_cred_mngmnt">
                 <img src="{{asset('img/option1.jpg')}}" width="250px" height="250px">
             </a>
         </div>
-        <div class="transac-item">
+        <div class="col">
             <a href="#">
                 <img src="{{asset('img/option3.jpg')}}" width="250px" height="250px">
             </a>
         </div>
-        <div class="transac-item">
+        <div class="col">
             <a href="#">
                 <img src="{{asset('img/option2.jpg')}}" width="250px" height="250px">
             </a>

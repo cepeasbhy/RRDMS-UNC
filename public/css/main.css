@@ -6,23 +6,9 @@
     font-family: 'Nunito', sans-serif;
 }
 
-header{
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-#header-wrapper, #container{
+#container{
     width: 70%;
     margin: auto;
-}
-
-#header-logo{
-    display: flex;
-    align-items: center;
-}
-
-#word-logo{
-    margin-left: 10px;
 }
 
 input{
