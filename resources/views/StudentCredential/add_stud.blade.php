@@ -30,7 +30,7 @@
                     <div class="form-group row mb-2">
                         <label class="col-sm-3 col-form-label col-form-label-sm" for="">Middle Name</label>
                         <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" name="middleName">
+                            <input class="form-control form-control-sm" type="text" name="middleName" required>
                         </div>
                     </div>
                     <div class="form-group row mb-2" id="selection">
