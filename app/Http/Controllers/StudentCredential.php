@@ -96,4 +96,10 @@ class StudentCredential extends Controller
         return redirect('/stud_cred_mngmnt/view_student/'.$id)->with('msg', 'Student Information Successfully Updated');
     }
 
+    public function destroy($id){
+        Student::where('student_id', $id)->delete();
+
+        return redirect('/stud_cred_mngmnt')->with('msg', 'Student successfully removed from the record');
+    }
+
 }
