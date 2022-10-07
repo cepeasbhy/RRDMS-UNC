@@ -93,7 +93,7 @@ class StudentCredential extends Controller
             'admission_year' => request('admissionYear'),
         ]);
 
-        return redirect('/stud_cred_mngmnt/view_student/'.$id);
+        return redirect('/stud_cred_mngmnt/view_student/'.$id)->with('msg', 'Student Information Successfully Updated');
     }
 
 }
