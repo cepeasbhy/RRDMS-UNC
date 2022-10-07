@@ -20,23 +20,25 @@
     </form>
     <form action="/stud_cred_mngmnt/add_student" id="form-link-add"></form>
     <div class="main-block">
-        <div class="d-flex align-items-center">
-            <div class="p-2">
-                <label>SORT BY</label>
-            </div>
-            <div class="p-2">
-                <select name="sort" class="form-select form-select-sm">
-                    <option value="student_id">Student ID</option>
-                    <option value="first_name">FIRST NAME</option>
-                    <option value="last_name">LAST NAME</option>
-                    <option value="dept_name">DEPARTMENT</option>
-                    <option value="course">COURSE</option>
-                    <option value="admission_year">ADMISSION YEAR</option>
-                </select>
-            </div>
-            <div class="p-2">
-                <input type="submit" value="UPDATE LIST" class="btn btn-success btn-sm">
-            </div>
+        <div class="my-3">
+            <form class="d-flex align-items-center" action="" method="post">
+                <div class="pe-2">
+                    <label>SORT BY</label>
+                </div>
+                <div class="pe-2">
+                    <select name="sort" class="form-select form-select-sm">
+                        <option value="student_id">Student ID</option>
+                        <option value="first_name">FIRST NAME</option>
+                        <option value="last_name">LAST NAME</option>
+                        <option value="dept_name">DEPARTMENT</option>
+                        <option value="course">COURSE</option>
+                        <option value="admission_year">ADMISSION YEAR</option>
+                    </select>
+                </div>
+                <div class="pe-2">
+                    <input type="submit" value="UPDATE LIST" class="btn btn-success btn-sm">
+                </div>
+            </form>
         </div>
         <table>
             <th>STUDENT ID</th>
