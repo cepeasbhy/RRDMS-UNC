@@ -21,7 +21,7 @@
     <form action="/stud_cred_mngmnt/add_student" id="form-link-add"></form>
     <div class="main-block">
         <div class="my-3">
-            <form class="d-flex align-items-center" action="" method="post">
+            <form class="d-flex align-items-center" action="/stud_cred_mngmnt/sort" method="post">
                 <div class="pe-2">
                     <label>SORT BY</label>
                 </div>
