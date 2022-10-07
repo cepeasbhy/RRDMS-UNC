@@ -26,12 +26,12 @@
             </div>
             <div class="p-2">
                 <select name="sort" class="form-control form-control-sm">
-                    <option value="Student ID">Student ID</option>
-                    <option value="FIRST NAME">FIRST NAME</option>
-                    <option value="LAST NAME">LAST NAME</option>
-                    <option value="DEPARTMENT">DEPARTMENT</option>
-                    <option value="COURSE">COURSE</option>
-                    <option value="ADMISSION YEAR">ADMISSION YEAR</option>
+                    <option value="student_id">Student ID</option>
+                    <option value="first_name">FIRST NAME</option>
+                    <option value="last_name">LAST NAME</option>
+                    <option value="dept_name">DEPARTMENT</option>
+                    <option value="course">COURSE</option>
+                    <option value="admission_year">ADMISSION YEAR</option>
                 </select>
             </div>
             <div class="p-2">
