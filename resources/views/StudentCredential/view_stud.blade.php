@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="row">
+        <form class="mb-3" action="/stud_cred_mngmnt" method="get">
+            <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+        </form>
         <div class="col">
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">STUDENT INFORMATION</h4>
@@ -79,7 +82,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="update-form" action="/stud_cred_mngmnt/view_student/{{$student->student_id}}" method="post">
+                        <form id="update-form" action="/stud_cred_mngmnt/view_student/update/{{$student->student_id}}" method="post">
                             @csrf
                             <div class="form-group row mb-2">
                                 <label class="col-sm-3 col-form-label col-form-label-sm" for="">First Name</label>

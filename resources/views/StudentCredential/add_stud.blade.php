@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="row">
+        <form class="mb-3" action="/stud_cred_mngmnt" method="get">
+            <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+        </form>
         <div class="col">
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">STUDENT INFORMATION</h4>
