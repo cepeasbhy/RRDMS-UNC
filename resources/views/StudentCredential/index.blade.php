@@ -22,6 +22,7 @@
     <div class="main-block">
         <div class="my-3">
             <form class="d-flex align-items-center" action="/stud_cred_mngmnt/sort" method="post">
+                @csrf
                 <div class="pe-2">
                     <label>SORT BY</label>
                 </div>
@@ -31,8 +32,7 @@
                         <option value="first_name">FIRST NAME</option>
                         <option value="last_name">LAST NAME</option>
                         <option value="dept_name">DEPARTMENT</option>
-                        <option value="course">COURSE</option>
-                        <option value="admission_year">ADMISSION YEAR</option>
+                        <option value="course_name">COURSE</option>
                     </select>
                 </div>
                 <div class="pe-2">
