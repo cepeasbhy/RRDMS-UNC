@@ -83,4 +83,17 @@ class StudentCredential extends Controller
         )->where('student_id', $id)->firstOrFail();
     }
 
+    public function update($id){
+        Student::where('student_id', $id)->update([
+            'first_name' => request('firstName'),
+            'last_name' => request('lastName'),
+            'middle_name' => request('middleName'),
+            'department_id' => request('department'),
+            'course_id' => request('course'),
+            'admission_year' => request('admissionYear'),
+        ]);
+
+        return redirect('/stud_cred_mngmnt/view_student/'.$id);
+    }
+
 }
