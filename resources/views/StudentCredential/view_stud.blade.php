@@ -6,6 +6,7 @@
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">STUDENT INFORMATION</h4>
             </div>
+            <span class="badge bg-success mb-2">{{session('msg')}}</span>
             <div class="ms-2">
                 <form>
                     @csrf
