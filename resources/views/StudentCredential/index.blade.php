@@ -25,7 +25,7 @@
                 <label>SORT BY</label>
             </div>
             <div class="p-2">
-                <select name="sort" class="form-control form-control-sm">
+                <select name="sort" class="form-select form-select-sm">
                     <option value="student_id">Student ID</option>
                     <option value="first_name">FIRST NAME</option>
                     <option value="last_name">LAST NAME</option>
