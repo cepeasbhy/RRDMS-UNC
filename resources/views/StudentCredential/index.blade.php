@@ -6,6 +6,7 @@
 
 @section('content')
     <h3>Student Credential Management</h3>
+    <span class="badge bg-success mb-2">{{session('msg')}}</span>
     <form action="/stud_cred_mngmnt/search" method="post" class="row">
         @csrf
         <div class="col-2 w-50">
