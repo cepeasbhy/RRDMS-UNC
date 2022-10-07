@@ -14,7 +14,6 @@ class StudentCredential extends Controller
             'last_name',
             'dept_name',
             'course_name',
-            'admission_year'
         )->join(
             'departments', 'departments.department_id', '=', 'students.department_id'
         )->join(
@@ -46,6 +45,22 @@ class StudentCredential extends Controller
 
     public function search(){
         return view('StudentCredential/view_stud', ['student' => $this->findStudent(request('studentID'))]);
+    }
+
+    public function sort(){
+        $students = Student::select(
+            'student_id',
+            'first_name',
+            'last_name',
+            'dept_name',
+            'course_name',
+        )->join(
+            'departments', 'departments.department_id', '=', 'students.department_id'
+        )->join(
+            'courses', 'courses.course_id', '=', 'students.course_id'
+        )->orderBy(request('sort'), 'ASC')->get();
+
+        return view('StudentCredential/index', ['students' => $students]);
     }
 
     public function viewStudent($id){
