@@ -4,17 +4,16 @@ header{
 
 table{
     width: 100%;
-    border-collapse: collapse;
 }
 
 th{
-    padding: 5px;
-    background-color: #CC3636;
+    font-size: 13px;
+    background-color: #CC3636 !important;  
     color: #FFFF;
 }
 
 td{
-    padding: 5px;
-    background-color: #B7C4CF;
+    font-size: 14px;
+    background-color: #B7C4CF !important;
     border-top: 5px solid #FFFF;
 }
