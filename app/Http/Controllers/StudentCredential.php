@@ -42,33 +42,9 @@ class StudentCredential extends Controller
 
         return redirect('/stud_cred_mngmnt');
     }
-
-    public function search(){
-        return view('StudentCredential/view_stud', ['student' => $this->findStudent(request('studentID'))]);
-    }
-
-    public function sort(){
-        $students = Student::select(
-            'student_id',
-            'first_name',
-            'last_name',
-            'dept_name',
-            'course_name',
-        )->join(
-            'departments', 'departments.department_id', '=', 'students.department_id'
-        )->join(
-            'courses', 'courses.course_id', '=', 'students.course_id'
-        )->orderBy(request('sort'), 'ASC')->get();
-
-        return view('StudentCredential/index', ['students' => $students]);
-    }
-
+    
     public function viewStudent($id){
-        return view('StudentCredential/view_stud', ['student' => $this->findStudent($id)]);
-    }
-
-    private function findStudent($id){
-        return  $student = Student::select(
+        $student = Student::select(
             'student_id',
             'first_name',
             'last_name',
@@ -81,6 +57,8 @@ class StudentCredential extends Controller
         )->join(
             'courses', 'courses.course_id', '=', 'students.course_id'
         )->where('student_id', $id)->firstOrFail();
+
+        return view('StudentCredential/view_stud', ['student' => $student]);
     }
 
     public function update($id){
