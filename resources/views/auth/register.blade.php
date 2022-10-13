@@ -17,7 +17,7 @@
                             <div class="col-md-6">
                                 <input id="firstName" type="text" class="form-control @error('firstName') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required>
 
-                                @error('lastName')
+                                @error('firstName')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
