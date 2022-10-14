@@ -27,20 +27,29 @@ class StudentCredential extends Controller
         return view('StudentCredential/add_stud');
     }
 
-    public function create(){
-        $student = new Student();
+    public function create(Request $request){
+        
+        $request -> validate([
+            'student_id' => ['required', 'string', 'unique:students'],
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'middle_name' => ['required', 'string'],
+            'admission_year' => ['required', 'integer', 'min:1948'],
+            'course_id' => ['required', 'string'],
+            'departmen_id' => ['required', 'string'],
+        ]);
 
-        $student->student_id = request('studentID');
-        $student->first_name = request('firstName');
-        $student->last_name = request('lastName');
-        $student->middle_name = request('middleName');
-        $student->department_id = request('department');
-        $student->course_id = request('course');
-        $student->admission_year = request('addmissionYear');
+        Student::create([
+            'student_id' => $request->input('student_id'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'middle_name' => $request->input('middle_name'),
+            'admission_year' => $request->input('admission_year'),
+            'course_id' => $request->input('course_id'),
+            'department_id' => $request->input('department_id')
+        ]);
 
-        $student->save();
-
-        return redirect('/stud_cred_mngmnt');
+        return redirect('/stud_cred_mngmnt')->with('msg', 'Student Successfully Added');
     }
     
     public function viewStudent($id){
@@ -61,14 +70,23 @@ class StudentCredential extends Controller
         return view('StudentCredential/view_stud', ['student' => $student]);
     }
 
-    public function update($id){
+    public function update($id, Request $request){
+        $request -> validate([
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'middle_name' => ['required', 'string'],
+            'admission_year' => ['required', 'integer', 'min:1948'],
+            'course_id' => ['required', 'string'],
+            'department_id' => ['required', 'string'],
+        ]);
+
         Student::where('student_id', $id)->update([
-            'first_name' => request('firstName'),
-            'last_name' => request('lastName'),
-            'middle_name' => request('middleName'),
-            'department_id' => request('department'),
-            'course_id' => request('course'),
-            'admission_year' => request('admissionYear'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'middle_name' => $request->input('middle_name'),
+            'department_id' => $request->input('department_id'),
+            'course_id' => $request->input('course_id'),
+            'admission_year' => $request->input('admission_year'),
         ]);
 
         return redirect('/stud_cred_mngmnt/view_student/'.$id)->with('msg', 'Student Information Successfully Updated');
