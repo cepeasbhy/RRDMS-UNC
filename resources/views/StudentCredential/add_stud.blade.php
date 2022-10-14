@@ -15,25 +15,45 @@
                     <div class="form-group row mb-2">
                         <label class="col-sm-3 col-form-label col-form-label-sm" for="">Student ID:</label>
                         <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" name="studentID" required>
+                            <input class="form-control form-control-sm @error('student_id') is-invalid @enderror" value="{{old('student_id')}}"type="text" name="student_id" required>
+                            @error('student_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row mb-2">
                         <label class="col-sm-3 col-form-label col-form-label-sm" for="">First Name</label>
                         <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" name="firstName" required>
+                            <input class="form-control form-control-sm @error('first_name') is-invalid @enderror" type="text" value="{{old('first_name')}}" name="first_name" required>
+                            @error('first_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row mb-2">
                         <label class="col-sm-3 col-form-label col-form-label-sm" for="">Last Name</label>
                         <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" name="lastName" required>
+                            <input class="form-control form-control-sm @error('last_name') is-invalid @enderror" type="text" value="{{old('last_name')}}" name="last_name" required>
+                            @error('last_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row mb-2">
                         <label class="col-sm-3 col-form-label col-form-label-sm" for="">Middle Name</label>
                         <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" name="middleName" required>
+                            <input class="form-control form-control-sm @error('middle_name') is-invalid @enderror" type="text" value="{{old('middle_name')}}" name="middle_name" required>
+                            @error('middle_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row mb-2" id="selection">
@@ -42,7 +62,12 @@
                     <div class="form-group row mb-2">
                         <label class="col-sm-3 col-form-label col-form-label-sm" for="">Admission Year</label>
                         <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" name="addmissionYear" required>
+                            <input class="form-control form-control-sm @error('admission_year') is-invalid @enderror" type="text" value="{{old('admission_year')}}" name="admission_year" required>
+                            @error('admission_year')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                             @enderror
                         </div>
                     </div>
                     <div class="form-group row mb-2">
