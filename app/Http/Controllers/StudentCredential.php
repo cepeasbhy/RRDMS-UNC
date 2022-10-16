@@ -35,8 +35,8 @@ class StudentCredential extends Controller
             'last_name' => ['required', 'string'],
             'middle_name' => ['required', 'string'],
             'admission_year' => ['required', 'integer', 'min:1948'],
-            'course_id' => ['required', 'string'],
-            'department_id' => ['nullable', 'string'],
+            'course_id' => ['nullable', 'string'],
+            'department_id' => ['required', 'string'],
         ]);
 
         Student::create([
