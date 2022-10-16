@@ -14,9 +14,9 @@ class StudentCredential extends Controller
             'last_name',
             'dept_name',
             'course_name',
-        )->join(
+        )->leftJoin(
             'departments', 'departments.department_id', '=', 'students.department_id'
-        )->join(
+        )->leftJoin(
             'courses', 'courses.course_id', '=', 'students.course_id'
         )->get();
 
@@ -61,9 +61,9 @@ class StudentCredential extends Controller
             'dept_name',
             'course_name',
             'admission_year'
-        )->join(
+        )->leftJoin(
             'departments', 'departments.department_id', '=', 'students.department_id'
-        )->join(
+        )->leftJoin(
             'courses', 'courses.course_id', '=', 'students.course_id'
         )->where('student_id', $id)->firstOrFail();
 
