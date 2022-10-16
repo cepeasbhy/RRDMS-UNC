@@ -55,7 +55,7 @@ function Selection() {
     ];
 
     const doctorate = [
-        {text: 'PhD, Major in Bevhavioral Management', value: '081'},
+        {text: 'PhD, Major in Behavioral Management', value: '081'},
         {text: 'EdD, Major in Educational Management', value: '082'},
     ];
 
