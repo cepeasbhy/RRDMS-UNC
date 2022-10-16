@@ -8,8 +8,8 @@ function Selection() {
         setSelected(event.target.value);
     }
 
-    let type = null;
-    let options = null;
+    let course = null;
+    let courseOptions = null;
 
     const as =[
         {text: 'BS in Biology', value: '011'},
@@ -54,24 +54,44 @@ function Selection() {
         {text: 'BS in Nursing', value: '072'},
     ];
 
+    const doctorate = [
+        {text: 'PhD, Major in Bevhavioral Management', value: '081'},
+        {text: 'EdD, Major in Educational Management', value: '082'},
+    ];
+
+    const masters = [
+        {text: 'Master in Business Administration', value: '091'},
+        {text: 'Master of Arts in Education', value: '092'},
+        {text: 'Master of Arts in English', value: '093'},
+        {text: 'Master of Arts in Filipino', value: '094'},
+        {text: 'Master of Arts in Teaching Mathematics', value: '095'},
+        {text: 'Master in Library and Information Science', value: '096'},
+        {text: 'Master of Science in Environmental Science', value: '097'},
+        {text: 'Master in Public Administration', value: '098'},
+    ];
+
     if(selected == '001'){
-        type = as;
+        course = as;
     }else if(selected == '002'){
-        type = ba;
+        course = ba;
     }else if(selected == '003'){
-        type = cs;
+        course = cs;
     }else if(selected == '004'){
-        type = cje;
+        course = cje;
     }else if(selected == '005'){
-        type = educ;
+        course = educ;
     }else if(selected == '006'){
-        type = ea;
+        course = ea;
     }else if(selected == '007'){
-        type = nurse;
+        course = nurse;
+    }else if(selected == '008'){
+        course = doctorate;
+    }else if(selected == '009'){
+        course = masters;
     }
 
-    if (type) {
-        options = type.map((option, index) => <option key={index} value={option.value}>{option.text}</option>);
+    if (course) {
+        courseOptions = course.map((option, index) => <option key={index} value={option.value}>{option.text}</option>);
     }
     return (
         <div>
@@ -87,6 +107,10 @@ function Selection() {
                         <option value="005">Education</option>
                         <option value="006">Engineering and Architecture</option>
                         <option value="007">Nursing</option>
+                        <option value="008">Doctorate Degree</option>
+                        <option value="009">Masters Degree</option>
+                        <option value="010">Master of Laws</option>
+                        <option value="011">Juris Doctor</option>
                     </select>
                 </div>
             </div>
@@ -94,7 +118,7 @@ function Selection() {
                 <label className="col-sm-3 col-form-label col-form-label-sm">Course</label>
                 <div className="col-sm-9">
                   <select className="form-select form-select-sm" name="course_id" required>
-                    {options}
+                    {courseOptions}
                   </select>
                 </div>
             </div>
