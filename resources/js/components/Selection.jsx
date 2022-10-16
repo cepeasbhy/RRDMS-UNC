@@ -95,9 +95,8 @@ function Selection() {
     }
     return (
         <div>
-            <div className='form-group row mb-2'>
-                <label className="col-sm-3 col-form-label col-form-label-sm">Program</label>
-                <div className="col-sm-9">
+            <div className='form-group mb-2'>
+                <label className="col-form-label col-form-label-sm">Program</label>
                     <select className="form-select form-select-sm" name="department_id" onChange={changeSelectOptionHandler} required>
                         <option>Choose...</option>
                         <option value="001">Arts and Science</option>
@@ -112,15 +111,12 @@ function Selection() {
                         <option value="010">Master of Laws</option>
                         <option value="011">Juris Doctor</option>
                     </select>
-                </div>
             </div>
-            <div className="form-group row mb-2">
-                <label className="col-sm-3 col-form-label col-form-label-sm">Course</label>
-                <div className="col-sm-9">
-                  <select className="form-select form-select-sm" name="course_id">
+            <div className="form-group mb-2">
+                <label className="col-form-label col-form-label-sm">Course</label>
+                <select className="form-select form-select-sm" name="course_id">
                     {courseOptions}
-                  </select>
-                </div>
+                </select>
             </div>
         </div>
     );
