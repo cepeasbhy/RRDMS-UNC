@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="form-group row mb-2">
-                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Department</label>
+                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Program</label>
                         <div class="col-sm-9">
                             <input class="form-control form-control-sm" type="text" value="{{$student->dept_name}}" readonly>
                         </div>

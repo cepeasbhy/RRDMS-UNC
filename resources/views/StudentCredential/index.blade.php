@@ -24,7 +24,7 @@
                 <th>STUDENT ID</th>
                 <th>FIRST NAME</th>
                 <th>LAST NAME</th>
-                <th>DEPARTMENT</th>
+                <th>PROGRAM</th>
                 <th>COURSE</th>
                 <th>ACTION</th>
             </thead>
