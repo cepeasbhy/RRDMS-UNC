@@ -117,7 +117,7 @@ function Selection() {
             <div className="form-group row mb-2">
                 <label className="col-sm-3 col-form-label col-form-label-sm">Course</label>
                 <div className="col-sm-9">
-                  <select className="form-select form-select-sm" name="course_id" required>
+                  <select className="form-select form-select-sm" name="course_id">
                     {courseOptions}
                   </select>
                 </div>
