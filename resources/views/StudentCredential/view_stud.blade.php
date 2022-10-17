@@ -75,7 +75,7 @@
                 @foreach ($credentials as $credential)
                     <div class="col-sm-4 mt-2">
                         <div class="card">
-                            <img class="img-fluid p-2" src="{{url('storage/'.$student->student_id.'/'.$credential->getFilename())}}">
+                            <img class="img-fluid p-1" src="{{url('storage/'.$student->student_id.'/'.$credential->getFilename())}}">
                             <div class="card-body text-center p-0">
                                 <label class="col-form-label col-form-label-sm">{{$credential->getFilename()}}</label>
                             </div>
