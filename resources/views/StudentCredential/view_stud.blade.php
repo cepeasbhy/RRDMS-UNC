@@ -5,56 +5,38 @@
         <form class="mb-3" action="/stud_cred_mngmnt" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
-        <div class="col">
+        <div class="col mb-3">
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">STUDENT INFORMATION</h4>
             </div>
             <span class="badge bg-success mb-2">{{session('msg')}}</span>
-            <div class="ms-2">
-                <form>
-                    <div class="form-group row mb-2">
-                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Student ID:</label>
-                        <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" value="{{$student->student_id}}" readonly>
-                        </div>
+            <div class="ms-2 mb-3">
+                <div class="row align-items-center mb-3">
+                    <img class="col-3 img-fluid rounded-circle" src="http://rrdms.srv/storage/{{$picturePath->document_loc}}">
+                    <div class="col-9">
+                        <span class="h4 fw-bold">{{$student->last_name}}, {{$student->first_name}} {{mb_substr($student->middle_name, 0, 1).'.'}}</span>
+                        <br>
+                        <span>{{$student->student_id}}</span>
+                        <br>
+                        <span>{{$student->course_name}}</span>
                     </div>
-                    <div class="form-group row mb-2">
-                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">First Name</label>
-                        <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" value="{{$student->first_name}}" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-2">
-                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Last Name</label>
-                        <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" value="{{$student->last_name}}" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-2">
-                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Middle Name</label>
-                        <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" value="{{$student->middle_name}}" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-2">
-                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Department</label>
-                        <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" value="{{$student->dept_name}}" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-2">
-                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Course</label>
-                        <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" value="{{$student->course_name}}" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-2">
-                        <label class="col-sm-3 col-form-label col-form-label-sm" for="">Admission Year</label>
-                        <div class="col-sm-9">
-                            <input class="form-control form-control-sm" type="text" value="{{$student->admission_year}}" readonly>
-                        </div>
-                    </div>
-                </form>
+                </div>
+                <div class="mb-2">
+                    <label class="col-form-label col-form-label-sm" for="">Program</label>
+                    <input class="form-control form-control-sm" type="text" value="{{$student->dept_name}}" readonly>
+                </div>
+                <div class="mb-2">
+                    <label class="col-form-label col-form-label-sm" for="">Admisson Year</label>
+                    <input class="form-control form-control-sm" type="text" value="{{$student->admission_year}}" readonly>
+                </div>
+                <div class="mb-2">
+                    <label class="col-form-label col-form-label-sm" for="">Date Filed</label>
+                    <input class="form-control form-control-sm" type="text" value="{{date("Y-m-d",strtotime($student->created_at))}}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="col-form-label col-form-label-sm" for="">Last Updated</label>
+                    <input class="form-control form-control-sm" type="text" value="{{date("Y-m-d",strtotime($student->updated_at))}}" readonly>
+                </div>
             </div>
             <div class="row g-2">
                 <div class="col-6">
