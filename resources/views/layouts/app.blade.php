@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <header class="mb-4">
+    <header class="mb-2">
         <nav class="navbar navbar-expand">
             <div class="container w-75">
                 <div class="navbar-brand d-flex align-items-center">
@@ -29,12 +29,14 @@
                 </div>
                 <ul class="navbar-nav list-unstyled">
                     @guest
+                        <!---
                         <li class="nav-item ps-2">
                             <a class="btn btn-sm btn-outline-primary" href="{{ route('login') }}">LOGIN</a>
                         </li>
                         <li class="nav-item ps-2">
                             <a class="btn btn-sm btn-outline-primary" href="{{ route('register') }}">REGISTER</a>
                         </li>
+                        --->
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
