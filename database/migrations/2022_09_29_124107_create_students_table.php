@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name');
+            $table->integer('archive_status')->default(0);
             $table->integer('admission_year');
             $table->timestamps();
 
