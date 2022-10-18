@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentCredential;
+use App\Http\Controllers\ArchivedRecordsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,7 @@ Route::get('/stud_cred_mngmnt/view_student/{id}',[StudentCredential::class, 'vie
 Route::post('/stud_cred_mngmnt/view_student/update/{id}',[StudentCredential::class, 'update'])->name('updateStudent');
 Route::post('/stud_cred_mngmnt/view_student/delete/{id}',[StudentCredential::class, 'destroy'])->name('deleteStudent');
 Route::post('/stud_cred_mngmnt/add_student', [StudentCredential::class, 'create'])->name('submitStudent');
+
+
+//Archived Records Routes
+Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('ArchivedRecords.index');

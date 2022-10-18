@@ -11,7 +11,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-   
+
    /*
     Constructor for authentication
     public function __construct()
@@ -29,4 +29,5 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
 }
