@@ -71,8 +71,17 @@ class StudentCredential extends Controller
     }
 
     public function saveFile($request, $keyName, $fileName){
+
+        $folderPath = '';
+
+        if($keyName == 'picture'){
+            $folderPath = 'Picture';
+        }else{
+            $folderPath = $request->student_id;
+        }
+
         $docPath = $request->file($keyName)->storeAs(
-            $request->student_id,
+            $folderPath,
             '['.$request->student_id.'] '.$fileName.'.'.$request->file('picture')->getClientOriginalExtension(),
             'public'
         );
@@ -96,19 +105,31 @@ class StudentCredential extends Controller
             'middle_name',
             'dept_name',
             'course_name',
-            'admission_year'
+            'admission_year',
+            'students.created_at',
+            'students.updated_at'
         )->leftJoin(
             'departments', 'departments.department_id', '=', 'students.department_id'
         )->leftJoin(
             'courses', 'courses.course_id', '=', 'students.course_id'
         )->where('student_id', $id)->firstOrFail();
 
+        $picturePath = Credential::select('document_loc')->where(
+            'student_id', $id,
+            )->where(
+            'document_name', 'Picture'
+            )->firstOrFail();
+
 
         $credentials = [];
         if(File::isDirectory(storage_path('app\public\\'.$id))){
             $credentials = File::files(storage_path('app\public\\'.$id));
         }
-        return view('StudentCredential/view_stud', ['student' => $student, 'credentials' => $credentials]);
+        return view('StudentCredential/view_stud', [
+            'student' => $student,
+            'credentials' => $credentials,
+            'picturePath' =>  $picturePath
+        ]);
     }
 
     public function update($id, Request $request){
@@ -134,9 +155,17 @@ class StudentCredential extends Controller
     }
 
     public function destroy($id){
+        $picturePath = Credential::select('document_loc')->where(
+            'student_id', $id,
+            )->where(
+            'document_name', 'Picture'
+            )->firstOrFail();
+
+        File::deleteDirectory(storage_path('app\public\\'.$id));
+        unlink(storage_path('app\public\\'.$picturePath->document_loc));
+        
         Credential::where('student_id', $id)->delete();
         Student::where('student_id', $id)->delete();
-        File::deleteDirectory(storage_path('app\public\\'.$id));
 
         return redirect('/stud_cred_mngmnt')->with('msg', 'Student successfully removed from the record');
     }
