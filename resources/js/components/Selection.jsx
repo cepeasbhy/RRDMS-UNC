@@ -97,8 +97,8 @@ function Selection() {
         <div>
             <div className='form-group mb-2'>
                 <label className="col-form-label col-form-label-sm">Program</label>
-                    <select className="form-select form-select-sm" name="department_id" onChange={changeSelectOptionHandler} required>
-                        <option>Choose...</option>
+                    <select className="form-select form-select-sm " name="department_id" onChange={changeSelectOptionHandler} required>
+                        <option disabled selected>Choose...</option>
                         <option value="001">Arts and Science</option>
                         <option value="002">Business and Accountancy</option>
                         <option value="003">Computer Studies</option>
