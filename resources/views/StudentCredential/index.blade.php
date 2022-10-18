@@ -12,7 +12,7 @@
             <span class="badge bg-success mb-2">{{session('msg')}}</span>
         </div>
         <div class="col-sm-4">
-            <form class="w-100" action="/stud_cred_mngmnt/add_student" method="get">
+            <form class="w-100" action="{{route('addStudent')}}" method="get">
                 <input class="w-100 btn btn-sm btn-success" type="submit" value="ADD STUDENT">
             </form>
         </div>
@@ -37,7 +37,7 @@
                         <td>{{$student->dept_name}}</td>
                         <td>{{$student->course_name}}</td>
                         <td>
-                            <form action="/stud_cred_mngmnt/view_student/{{$student->student_id}}" method="GET">
+                            <form action="{{route('viewStudent',['id' => $student->student_id])}}" method="GET">
                                 @csrf
                                 <input type="submit" value="VIEW" class="btn btn-success btn-sm">
                             </form>

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <form class="mb-3" action="/stud_cred_mngmnt" method="get">
+        <form class="mb-3" action="{{route('StudCredHome')}}" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <div class="col">
@@ -75,7 +75,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="update-form" action="/stud_cred_mngmnt/view_student/update/{{$student->student_id}}" method="post">
+                        <form id="update-form" action="{{route('updateStudent', ['id' => $student->student_id])}}" method="post">
                             @csrf
                             <div class="form-group mb-2">
                                 <label class="col-form-label col-form-label-sm" for="">First Name</label>
@@ -139,7 +139,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <form action="/stud_cred_mngmnt/view_student/delete/{{$student->student_id}}" method="post">
+                    <form action="{{route('deleteStudent', ['id' => $student->student_id])}}" method="post">
                         @csrf
                         <button class="btn btn-sm btn-danger">Proceed</button>
                     </form>

@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="row">
-        <form class="mb-3" action="/stud_cred_mngmnt" method="get">
+        <form class="mb-3" action="{{route('StudCredHome')}}" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
-        <form class="row" action="/stud_cred_mngmnt/add_student" method="POST" enctype="multipart/form-data">
+        <form class="row" action="{{route('submitStudent')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="col-5">
                 <div class="border-start border-danger border-4">

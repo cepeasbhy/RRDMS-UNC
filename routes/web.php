@@ -17,9 +17,9 @@ use App\Http\Controllers\StudentCredential;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/stud_cred_mngmnt',[StudentCredential::class, 'index']);
-Route::get('/stud_cred_mngmnt/add_student',[StudentCredential::class, 'addStudent']);
-Route::get('/stud_cred_mngmnt/view_student/{id}',[StudentCredential::class, 'viewStudent']);
-Route::post('/stud_cred_mngmnt/view_student/update/{id}',[StudentCredential::class, 'update']);
-Route::post('/stud_cred_mngmnt/view_student/delete/{id}',[StudentCredential::class, 'destroy']);
-Route::post('/stud_cred_mngmnt/add_student', [StudentCredential::class, 'create']);
+Route::get('/stud_cred_mngmnt',[StudentCredential::class, 'index'])->name('StudCredHome');
+Route::get('/stud_cred_mngmnt/add_student',[StudentCredential::class, 'addStudent'])->name('addStudent');
+Route::get('/stud_cred_mngmnt/view_student/{id}',[StudentCredential::class, 'viewStudent'])->name('viewStudent');
+Route::post('/stud_cred_mngmnt/view_student/update/{id}',[StudentCredential::class, 'update'])->name('updateStudent');
+Route::post('/stud_cred_mngmnt/view_student/delete/{id}',[StudentCredential::class, 'destroy'])->name('deleteStudent');
+Route::post('/stud_cred_mngmnt/add_student', [StudentCredential::class, 'create'])->name('submitStudent');
