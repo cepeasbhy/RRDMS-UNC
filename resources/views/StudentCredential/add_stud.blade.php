@@ -69,7 +69,7 @@
                 <div class="ms-2">
                         <div class="form-group mb-2">
                             <label class="col-form-label-sm" for="picture">2x2 Picture</label>
-                            <input id="picture" class="form-control form-control-sm" type="file" name="picture">
+                            <input id="picture" class="form-control form-control-sm" type="file" name="picture" required>
                         </div>
                         <div class="form-group row mb-2">
                             <div class="col">
