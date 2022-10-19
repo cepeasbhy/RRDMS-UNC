@@ -1,0 +1,12 @@
+"id";"department_id";"dept_name";"created_at";"updated_at"
+"2";"001";"Arts and Science";NULL;NULL
+"3";"002";"Business and Accountancy";NULL;NULL
+"4";"003";"Computer Studies";NULL;NULL
+"5";"004";"Criminal Justice Education";NULL;NULL
+"6";"005";"Education";NULL;NULL
+"7";"006";"Engineering and Architecture";NULL;NULL
+"8";"007";"Nursing";NULL;NULL
+"9";"008";"Doctorate Degree";NULL;NULL
+"10";"009";"Masters Degree";NULL;NULL
+"11";"010";"Master of Laws";NULL;NULL
+"12";"011";"Juris Doctor";NULL;NULL
