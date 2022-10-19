@@ -27,4 +27,5 @@ Route::post('/stud_cred_mngmnt/add_student', [StudentCredential::class, 'create'
 
 
 //Archived Records Routes
-Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('ArchivedRecords.index');
+Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('index');
+Route::get('/archived_records/add_credential',[ArchivedRecordsController::class, 'addCredential'])->name('add_credential');

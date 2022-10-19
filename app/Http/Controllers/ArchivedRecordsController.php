@@ -20,11 +20,13 @@ class ArchivedRecordsController extends Controller
             'departments', 'departments.department_id', '=', 'students.department_id'
         )->leftJoin(
             'courses', 'courses.course_id', '=', 'students.course_id'
-        )->get();
+        )->where('archive_status', 1)->get();
 
         return view('ArchivedRecords.index', ['students' => $students]);
     }
 
-
+    public function addCredential(){
+        return view('ArchivedRecords.add_credential');
+    }
 
 }

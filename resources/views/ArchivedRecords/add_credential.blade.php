@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <form class="mb-3" action="{{ route('StudCredHome') }}" method="get">
+    <section class="row">
+        <form class="mb-3" action="{{ route('index') }}" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <form class="row" action="{{ route('submitStudent') }}" method="POST" enctype="multipart/form-data">
@@ -14,7 +14,7 @@
                 <div class="ms-2">
                     <div class="form-group mb-2">
                         <label class=" col-form-label col-form-label-sm" for="">Student ID <span
-                                class="text-danger">*</span></label>
+                                class="text-danger">*</span> </label>
                         <input class="form-control form-control-sm @error('student_id') is-invalid @enderror"
                             value="{{ old('student_id') }}"type="text" name="student_id" required>
                         @error('student_id')
@@ -73,7 +73,7 @@
                     <div class="form-group mb-2">
                         <label class="col-form-label-sm" for="picture">2x2 Picture <span
                                 class="text-danger">*</span></label>
-                        <input id="picture" class="form-control form-control-sm" type="file" name="picture">
+                        <input id="picture" class="form-control form-control-sm" type="file" name="picture" required>
                     </div>
 
                 </div>
@@ -141,8 +141,8 @@
                 </div>
             </div>
             <div class="form-group mt-3 mb-5 text-center">
-                <button class="w-50 btn btn-success">ADD STUDENT</button>
+                <button class="w-50 btn btn-success">ARCHIVE CREDENTIAL</button>
             </div>
         </form>
-    </div>
+    </section>
 @endsection
