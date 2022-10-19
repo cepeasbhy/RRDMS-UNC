@@ -1,0 +1,33 @@
+"id";"course_id";"department_id";"course_name";"created_at";"updated_at"
+"2";"011";"001";"BS in Biology";NULL;NULL
+"3";"012";"001";"BA in Psychology";NULL;NULL
+"4";"013";"001";"BS in Political Science";NULL;NULL
+"5";"021";"002";"BS in Accountancy";NULL;NULL
+"6";"022";"002";"BS in Business Administration";NULL;NULL
+"7";"023";"002";"BS in Entrepreneurship";NULL;NULL
+"8";"031";"003";"BS in Information Technology";NULL;NULL
+"9";"032";"003";"BS in Computer Science";NULL;NULL
+"10";"033";"003";"BS in Library and Information Science";NULL;NULL
+"11";"034";"003";"Associate in Computer Technology";NULL;NULL
+"12";"041";"004";"BS in Criminal Justice Education";NULL;NULL
+"13";"051";"005";"Bachelor of Elementary Education";NULL;NULL
+"14";"052";"005";"Bachelor of Secondary Education";NULL;NULL
+"15";"053";"005";"Bachelor of Physical Education";NULL;NULL
+"16";"061";"006";"BS in Architecture";NULL;NULL
+"17";"062";"006";"BS in Civil Engineering";NULL;NULL
+"18";"063";"006";"BS in Computer Engineering";NULL;NULL
+"19";"064";"006";"BS in Electrical Engineering";NULL;NULL
+"20";"065";"006";"BS in Electronics Engineering";NULL;NULL
+"21";"066";"006";"BS in Mechanical Engineering";NULL;NULL
+"24";"071";"007";"Caregiving NCII";NULL;NULL
+"25";"072";"007";"BS in Nursing";NULL;NULL
+"26";"081";"008";"PhD, Major in Behavioral Management";NULL;NULL
+"27";"082";"008";"EdD, Major in Educational Management";NULL;NULL
+"28";"091";"009";"Master in Business Administration";NULL;NULL
+"29";"092";"009";"Master of Arts in Education";NULL;NULL
+"30";"093";"009";"Master of Arts in English";NULL;NULL
+"31";"094";"009";"Master of Arts in Filipino";NULL;NULL
+"32";"095";"009";"Master of Arts in Teaching Mathematics";NULL;NULL
+"33";"096";"009";"Master in Library and Information Science";NULL;NULL
+"34";"097";"009";"Master of Science in Environmental Science";NULL;NULL
+"35";"098";"009";"Master in Public Administration";NULL;NULL

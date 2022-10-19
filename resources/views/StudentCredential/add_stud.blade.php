@@ -83,11 +83,17 @@
                     <h4 class="ms-3">STUDENT CREDENTIALS</h4>
                 </div>
                 <div class="ms-2">
+<<<<<<< HEAD
                     <div class="form-group row mb-2">
                         <div class="col">
                             <label class="col-form-label-sm" for="birthCertificate">Birth Certificate</label>
                             <input id="birthCertificate" class="form-control form-control-sm" type="file"
                                 name="birthCertificate">
+=======
+                        <div class="form-group mb-2">
+                            <label class="col-form-label-sm" for="picture">2x2 Picture</label>
+                            <input id="picture" class="form-control form-control-sm" type="file" name="picture" required>
+>>>>>>> 53cdc14cd071d81a644a926c1c9604bd9f435599
                         </div>
                         <div class="col">
                             <label class="col-form-label-sm" for="marriageCertificate">Marriage Certificate</label>
