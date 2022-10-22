@@ -21,22 +21,22 @@
     <section class="container my-3">
         <table id="archivedRecordsTable" class="table table-striped" style="width: 100%">
             <thead>
-                <th>STUDENT ID</th>
-                <th>FIRST NAME</th>
-                <th>LAST NAME</th>
-                <th>PROGRAM</th>
-                <th>COURSE</th>
-                <th>ACTION</th>
+                <th class="custom-th bg-danger">STUDENT ID</th>
+                <th class="custom-th bg-danger">FIRST NAME</th>
+                <th class="custom-th bg-danger">LAST NAME</th>
+                <th class="custom-th bg-danger">PROGRAM</th>
+                <th class="custom-th bg-danger">COURSE</th>
+                <th class="custom-th bg-danger">ACTION</th>
             </thead>
             <tbody>
                 @foreach ($students as $student)
-                    <tr>
-                        <td>{{ $student->student_id }}</td>
-                        <td>{{ $student->first_name }}</td>
-                        <td>{{ $student->last_name }}</td>
-                        <td>{{ $student->dept_name }}</td>
-                        <td>{{ $student->course_name }}</td>
-                        <td>
+                    <tr class="custom-tr">
+                        <td class="custom-td">{{ $student->first_name }}</td>
+                        <td class="custom-td">{{ $student->last_name }}</td>
+                        <td class="custom-td">{{ $student->dept_name }}</td>
+                        <td class="custom-td">{{ $student->student_id }}</td>
+                        <td class="custom-td">{{ $student->course_name }}</td>
+                        <td class="custom-td">
                             <form action="{{ route('viewStudent', ['id' => $student->student_id]) }}" method="GET">
                                 @csrf
                                 <input type="submit" value="VIEW" class="btn btn-success btn-sm">
@@ -44,7 +44,6 @@
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
         </table>
         <script src="https://code.jquery.com/jquery-3.6.1.min.js"
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

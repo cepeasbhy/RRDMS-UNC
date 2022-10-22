@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 *{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+
     font-family: 'Nunito', sans-serif;
 }
 
@@ -11,7 +9,15 @@
     margin: auto;
 }
 
-select{
-    padding: 5px;
-    border-radius: 5px;
+.custom-th{
+    font-size: 13px;
+    color: #FFFF;
+}
+
+.custom-td{
+    font-size: 14px;
+}
+
+.custom-tr:nth-child(even){
+    background-color: #F5F5F5;
 }
