@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Credential;
+use App\Models\User;
 use Illuminate\Support\Facades\File;
 
 class StudentCredential extends Controller
@@ -20,6 +21,8 @@ class StudentCredential extends Controller
             'departments', 'departments.department_id', '=', 'students.department_id'
         )->leftJoin(
             'courses', 'courses.course_id', '=', 'students.course_id'
+        )->leftJoin(
+            'users', 'users.user_id', '=', 'students.student_id'
         )->get();
 
         return view('StudentCredential/index', ['students' => $students]);
@@ -33,6 +36,7 @@ class StudentCredential extends Controller
         $request -> validate([
             'student_id' => ['required', 'string', 'unique:students'],
             'first_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['required', 'string', 'max:255'],
             'admission_year' => ['required', 'integer', 'min:1948'],
@@ -42,12 +46,18 @@ class StudentCredential extends Controller
 
         Student::create([
             'student_id' => $request->input('student_id'),
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'middle_name' => $request->input('middle_name'),
             'admission_year' => $request->input('admission_year'),
             'course_id' => $request->input('course_id'),
             'department_id' => $request->input('department_id')
+        ]);
+
+        User::create([
+            'user_id' => $request->input('student_id'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'middle_name' => $request->input('middle_name'),
+            'account_role' => 'STUDENT',
+            'email' => $request->input('email'),
         ]);
 
         $this->saveCredentials($request);
@@ -105,6 +115,7 @@ class StudentCredential extends Controller
             'middle_name',
             'dept_name',
             'course_name',
+            'email',
             'admission_year',
             'students.created_at',
             'students.updated_at'
@@ -112,6 +123,8 @@ class StudentCredential extends Controller
             'departments', 'departments.department_id', '=', 'students.department_id'
         )->leftJoin(
             'courses', 'courses.course_id', '=', 'students.course_id'
+        )->leftJoin(
+            'users', 'users.user_id', '=', 'students.student_id'
         )->where('student_id', $id)->firstOrFail();
 
         $picturePath = Credential::select('document_loc')->where(
@@ -134,18 +147,21 @@ class StudentCredential extends Controller
 
     public function update($id, Request $request){
         $request -> validate([
-            'first_name' => ['required', 'string'],
-            'last_name' => ['required', 'string'],
-            'middle_name' => ['required', 'string'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'middle_name' => ['required', 'string', 'max:255'],
             'admission_year' => ['required', 'integer', 'min:1948'],
-            'course_id' => ['nullable', 'string'],
-            'department_id' => ['required', 'string'],
+            'course_id' => ['nullable', 'string', 'max:255'],
+            'department_id' => ['required', 'string', 'max:255'],
         ]);
 
-        Student::where('student_id', $id)->update([
+        User::where('user_id', $id)->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'middle_name' => $request->input('middle_name'),
+        ]);
+
+        Student::where('student_id', $id)->update([
             'department_id' => $request->input('department_id'),
             'course_id' => $request->input('course_id'),
             'admission_year' => $request->input('admission_year'),
@@ -166,6 +182,7 @@ class StudentCredential extends Controller
         
         Credential::where('student_id', $id)->delete();
         Student::where('student_id', $id)->delete();
+        User::where('user_id', $id)->delete();
 
         return redirect('/stud_cred_mngmnt')->with('msg', 'Student successfully removed from the record');
     }
