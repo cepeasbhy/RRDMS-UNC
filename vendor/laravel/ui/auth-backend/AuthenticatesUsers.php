@@ -154,7 +154,7 @@ trait AuthenticatesUsers
      */
     public function username()
     {
-        return 'faculty_id';
+        return 'user_id';
     }
 
     /**
