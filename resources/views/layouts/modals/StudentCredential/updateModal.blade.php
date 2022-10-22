@@ -35,6 +35,17 @@
                             </span>
                         @enderror
                     </div>
+                    <div class="form-group mb-2">
+                        <label class="col-form-label col-form-label-sm" for="">Email<span
+                            class="text-danger">*</label>
+                        <input class="form-control form-control-sm @error('email') is-invalid @enderror"
+                            type="text" value="{{$student->email}}" name="email">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                     <div class="form-group mb-2" id="selection">
 
                     </div>

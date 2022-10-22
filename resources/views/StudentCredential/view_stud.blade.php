@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
+    <div class="row mb-3">
         <form class="mb-3" action="{{route('StudCredHome')}}" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
@@ -20,6 +20,10 @@
                         <br>
                         <span>{{$student->course_name}}</span>
                     </div>
+                </div>
+                <div class="mb-2">
+                    <label class="col-form-label col-form-label-sm" for="">Email</label>
+                    <input class="form-control form-control-sm" type="text" value="{{$student->email}}" readonly>
                 </div>
                 <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Program</label>
@@ -66,6 +70,7 @@
                 @endforeach
             </div>
         </div>
+    </div>
         <!--Modal for Updating Student Information-->
         @extends('layouts.modals.StudentCredential.updateModal')
         <!--Modal for Deleting Student-->
