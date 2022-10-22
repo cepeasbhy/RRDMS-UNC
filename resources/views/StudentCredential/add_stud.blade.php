@@ -69,13 +69,6 @@
                             </span>
                         @enderror
                     </div>
-
-                    <div class="form-group mb-2">
-                        <label class="col-form-label-sm" for="picture">2x2 Picture <span
-                                class="text-danger">*</span></label>
-                        <input id="picture" class="form-control form-control-sm" type="file" name="picture">
-                    </div>
-
                 </div>
             </div>
             <div class="col">
@@ -83,6 +76,11 @@
                     <h4 class="ms-3">STUDENT CREDENTIALS</h4>
                 </div>
                 <div class="ms-2">
+                    <div class="form-group mb-2">
+                        <label class="col-form-label-sm" for="picture">2x2 Picture <span
+                                class="text-danger">*</span></label>
+                        <input id="picture" class="form-control form-control-sm" type="file" name="picture">
+                    </div>
                     <div class="form-group row mb-2">
                         <div class="col">
                             <label class="col-form-label-sm" for="birthCertificate">Birth Certificate</label>
