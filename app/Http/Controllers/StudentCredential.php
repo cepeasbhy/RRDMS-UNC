@@ -32,12 +32,12 @@ class StudentCredential extends Controller
     public function create(Request $request){
         $request -> validate([
             'student_id' => ['required', 'string', 'unique:students'],
-            'first_name' => ['required', 'string'],
-            'last_name' => ['required', 'string'],
-            'middle_name' => ['required', 'string'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'middle_name' => ['required', 'string', 'max:255'],
             'admission_year' => ['required', 'integer', 'min:1948'],
-            'course_id' => ['nullable', 'string'],
-            'department_id' => ['required', 'string'],
+            'course_id' => ['nullable', 'string', 'max:255'],
+            'department_id' => ['required', 'string', 'max:255'],
         ]);
 
         Student::create([
