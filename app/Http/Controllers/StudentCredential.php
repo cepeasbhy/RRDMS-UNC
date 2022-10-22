@@ -151,7 +151,7 @@ class StudentCredential extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable','required', 'string', 'max:255'],
             'admission_year' => ['required', 'integer', 'min:1948'],
-            'course_id' => ['nullable', 'string', 'max:255'],
+            'course_id' => ['required', 'string', 'max:255'],
             'department_id' => ['required', 'string', 'max:255'],
         ]);
 
