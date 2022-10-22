@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Staff;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -46,8 +47,9 @@ class RegisterController extends Controller
             'user_id' => ['required', 'string', 'max:255', 'unique:users'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'middle_name' => ['string', 'max:255'],
+            'middle_name' => ['nullable', 'string', 'max:255'],
             'account_role' => ['required', 'string', 'max:255'],
+            'assigned_dept' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
@@ -61,6 +63,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        
+        Staff::create([
+            'staff_id' => $data['user_id'],
+            'assigned_dept' => $data['assigned_dept']
+        ]);
+
         User::create([
             'user_id' => $data['user_id'],
             'account_role' => $data['account_role'],
