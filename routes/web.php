@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StudentCredential;
+use App\Http\Controllers\StudCredController;
 use App\Http\Controllers\ArchivedRecordsController;
 
 /*
@@ -18,12 +18,12 @@ use App\Http\Controllers\ArchivedRecordsController;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/stud_cred_mngmnt',[StudentCredential::class, 'index'])->name('StudCredHome');
-Route::get('/stud_cred_mngmnt/add_student',[StudentCredential::class, 'addStudent'])->name('addStudent');
-Route::get('/stud_cred_mngmnt/view_student/{id}',[StudentCredential::class, 'viewStudent'])->name('viewStudent');
-Route::post('/stud_cred_mngmnt/view_student/update/{id}',[StudentCredential::class, 'update'])->name('updateStudent');
-Route::post('/stud_cred_mngmnt/view_student/delete/{id}',[StudentCredential::class, 'destroy'])->name('deleteStudent');
-Route::post('/stud_cred_mngmnt/add_student', [StudentCredential::class, 'create'])->name('submitStudent');
+Route::get('/stud_cred_mngmnt',[StudCredController::class, 'index'])->name('StudCredHome');
+Route::get('/stud_cred_mngmnt/add_student',[StudCredController::class, 'addStudent'])->name('addStudent');
+Route::get('/stud_cred_mngmnt/view_student/{id}',[StudCredController::class, 'viewStudent'])->name('viewStudent');
+Route::post('/stud_cred_mngmnt/view_student/update/{id}',[StudCredController::class, 'update'])->name('updateStudent');
+Route::post('/stud_cred_mngmnt/view_student/delete/{id}',[StudCredController::class, 'destroy'])->name('deleteStudent');
+Route::post('/stud_cred_mngmnt/add_student', [StudCredController::class, 'create'])->name('submitStudent');
 
 
 //Archived Records Routes
