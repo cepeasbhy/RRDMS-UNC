@@ -31,10 +31,10 @@
             <tbody>
                 @foreach ($students as $student)
                     <tr class="custom-tr">
+                        <td class="custom-td">{{ $student->student_id }}</td>
                         <td class="custom-td">{{ $student->first_name }}</td>
                         <td class="custom-td">{{ $student->last_name }}</td>
                         <td class="custom-td">{{ $student->dept_name }}</td>
-                        <td class="custom-td">{{ $student->student_id }}</td>
                         <td class="custom-td">{{ $student->course_name }}</td>
                         <td class="custom-td">
                             <form action="{{ route('viewStudent', ['id' => $student->student_id]) }}" method="GET">
