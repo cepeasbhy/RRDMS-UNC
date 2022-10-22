@@ -150,6 +150,7 @@ class StudCredController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable','required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'admission_year' => ['required', 'integer', 'min:1948'],
             'course_id' => ['required', 'string', 'max:255'],
             'department_id' => ['required', 'string', 'max:255'],
@@ -158,6 +159,7 @@ class StudCredController extends Controller
         User::where('user_id', $id)->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
+            'email' =>$request->input('email'),
             'middle_name' => $request->input('middle_name'),
         ]);
 
