@@ -18,9 +18,6 @@ return new class extends Migration
             $table->string('student_id')->unique();
             $table->string('department_id');
             $table->string('course_id')->nullable();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('middle_name')->nullable();
             $table->integer('archive_status')->default(0);
             $table->integer('admission_year');
             $table->timestamps();
