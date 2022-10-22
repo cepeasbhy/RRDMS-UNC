@@ -25,13 +25,6 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -68,14 +61,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        User::create([
             'user_id' => $data['user_id'],
-            'account_role' => ['account_role'],
+            'account_role' => $data['account_role'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'middle_name' => $data['middle_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        return redirect(route('register'))->with('msg', 'User Successfully Registered');
     }
 }
