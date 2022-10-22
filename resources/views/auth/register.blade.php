@@ -74,7 +74,7 @@
                             <label for="middleName" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Middle Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="middleName" type="text" class="form-control form-control-sm @error('middleName') is-invalid @enderror" name="middle_name" value="{{ old('middle_name') }}" required>
+                                <input id="middleName" type="text" class="form-control form-control-sm @error('middleName') is-invalid @enderror" name="middle_name" value="{{ old('middle_name') }}">
 
                                 @error('middleName')
                                     <span class="invalid-feedback" role="alert">
