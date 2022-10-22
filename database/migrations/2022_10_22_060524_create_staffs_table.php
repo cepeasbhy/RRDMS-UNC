@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('staff_id')->unique();
             $table->string('assigned_dept')->nullable();
             $table->timestamps();
+
+            $table->foreign('assigned_dept')->references('department_id')->on('departments');
         });
     }
 
