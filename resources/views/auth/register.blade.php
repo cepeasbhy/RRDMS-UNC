@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label for="accountRole" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Account Type') }}</label>
 
                             <div class="col-md-6">
@@ -31,7 +31,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label for="userID" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('User ID') }}</label>
 
                             <div class="col-md-6">
@@ -44,7 +44,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label for="firstName" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
@@ -57,7 +57,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label for="lastName" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Last Name') }}</label>
 
                             <div class="col-md-6">
@@ -70,7 +70,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label for="middleName" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Middle Name') }}</label>
 
                             <div class="col-md-6">
@@ -83,7 +83,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label for="email" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Assigned Department') }}</label>
 
                             <div class="col-md-6">
@@ -107,7 +107,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label for="email" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
@@ -120,7 +120,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label for="password" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -134,7 +134,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label for="password-confirm" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
@@ -143,8 +143,8 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-danger btn-sm w-50">
                                     {{ __('Register') }}
                                 </button>
                             </div>
