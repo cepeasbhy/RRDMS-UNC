@@ -10,14 +10,13 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
                         <div class="row mb-3">
-                            <label for="faculty_id" class="col-md-4 col-form-label text-md-end">Faculty ID</label>
+                            <label for="user_id" class="col-md-4 col-form-label text-md-end">User ID</label>
 
                             <div class="col-md-6">
-                                <input id="faculty_id" type="text" class="form-control @error('faculty_id') is-invalid @enderror" name="faculty_id" value="{{ old('faculty_id') }}" required>
+                                <input id="user_id" type="text" class="form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ old('user_id') }}" required>
 
-                                @error('faculty_id')
+                                @error('user_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
