@@ -23,7 +23,7 @@ class StudentCredential extends Controller
             'courses', 'courses.course_id', '=', 'students.course_id'
         )->leftJoin(
             'users', 'users.user_id', '=', 'students.student_id'
-        )->get();
+        )->where('archive_status', 0)->get();
 
         return view('StudentCredential/index', ['students' => $students]);
     }
