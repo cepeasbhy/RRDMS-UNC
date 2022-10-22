@@ -54,21 +54,24 @@ function Selection() {
         { text: 'BS in Nursing', value: '072' },
     ];
 
-    const doctorate = [
-        { text: 'PhD, Major in Behavioral Management', value: '081' },
-        { text: 'EdD, Major in Educational Management', value: '082' },
-    ];
 
-    const masters = [
-        { text: 'Master in Business Administration', value: '091' },
-        { text: 'Master of Arts in Education', value: '092' },
-        { text: 'Master of Arts in English', value: '093' },
-        { text: 'Master of Arts in Filipino', value: '094' },
-        { text: 'Master of Arts in Teaching Mathematics', value: '095' },
-        { text: 'Master in Library and Information Science', value: '096' },
-        { text: 'Master of Science in Environmental Science', value: '097' },
-        { text: 'Master in Public Administration', value: '098' },
-    ];
+    const gradStudies = [
+        { text: 'Master in Business Administration', value: '081' },
+        { text: 'Master of Arts in Education', value: '082' },
+        { text: 'Master of Arts in English', value: '083' },
+        { text: 'Master of Arts in Filipino', value: '084' },
+        { text: 'Master of Arts in Teaching Mathematics', value: '085' },
+        { text: 'Master in Library and Information Science', value: '086' },
+        { text: 'Master of Science in Environmental Science', value: '087' },
+        { text: 'Master in Public Administration', value: '088' },
+        { text: 'PhD, Major in Behavioral Management', value: '089' },
+        { text: 'EdD, Major in Educational Management', value: '090' },
+    ]
+
+    const lawOfSchool = [
+        { text: 'Master of Laws', value: '091' },
+        { text: 'Juris Doctor', value: '092' },
+    ]
 
     if (selected == '001') {
         course = as;
@@ -84,10 +87,10 @@ function Selection() {
         course = ea;
     } else if (selected == '007') {
         course = nurse;
-    } else if (selected == '008') {
-        course = doctorate;
+    } else if ( selected == '008') {
+        course = gradStudies;
     } else if (selected == '009') {
-        course = masters;
+        course = lawOfSchool;
     }
 
     if (course) {
@@ -107,10 +110,8 @@ function Selection() {
                     <option value="005">Education</option>
                     <option value="006">Engineering and Architecture</option>
                     <option value="007">Nursing</option>
-                    <option value="008">Doctorate Degree</option>
-                    <option value="009">Masters Degree</option>
-                    <option value="010">Master of Laws</option>
-                    <option value="011">Juris Doctor</option>
+                    <option value="008">Graduate Studies</option>
+                    <option value="009">School of Law</option>
                 </select>
             </div>
             <div className="form-group mb-2">
