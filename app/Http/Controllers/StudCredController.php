@@ -52,4 +52,10 @@ class StudCredController extends Controller
         return redirect('/stud_cred_mngmnt/view_student/'.$studID)->with('msgCred', 'Credential Successfully Removed');
     }
 
+    public function updateCred(DbHelperController $db, Request $request, $studID, $docID){
+        $db->updateCredential($request, $studID, $docID);
+        return redirect('/stud_cred_mngmnt/view_student/'.$studID)->header('Cache-Control',
+        'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Updated');
+    }
+
 }

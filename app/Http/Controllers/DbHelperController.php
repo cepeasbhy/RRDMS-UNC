@@ -59,6 +59,7 @@ class DbHelperController extends Controller
         return Credential::select(
             'document_id',
             'document_name',
+            'input_name',
             'document_loc'
         )->where(
             'student_id', $id,
@@ -186,4 +187,17 @@ class DbHelperController extends Controller
 
         Credential::where('document_id', $id)->delete();
     }
+
+    public function updateCredential($request, $studID, $docID){
+
+        $credential = Credential::where('document_id', $docID)->firstOrFail();
+
+        $request->file($credential->input_name)->storeAs(
+            $studID,
+            '['.$studID.'] '.$credential->document_name.'.'.$request->file($credential->input_name)->getClientOriginalExtension(),
+            'public'
+        );
+
+        Credential::where('document_id', $docID)->touch();
+     }
 }
