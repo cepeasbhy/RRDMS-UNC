@@ -61,9 +61,11 @@
                 @foreach ($credentials as $credential)
                     <div class="col-sm-4 mt-2">
                         <div class="card">
-                            <img class="img-fluid p-1" src="{{url('storage/'.$student->student_id.'/'.$credential->getFilename())}}">
+                            <button class="btn p-0" data-bs-toggle="modal" data-bs-target="{{"#".$credential->document_id}}">
+                                <img class="img-fluid p-1" src="{{url('storage/'.$credential->document_loc)}}">
+                            </button>
                             <div class="card-body text-center p-0">
-                                <label class="col-form-label col-form-label-sm">{{$credential->getFilename()}}</label>
+                                <label class="col-form-label col-form-label-sm">{{$credential->document_name}}</label>
                             </div>
                         </div>
                     </div>
@@ -75,6 +77,8 @@
         @extends('layouts.modals.StudentCredential.updateModal')
         <!--Modal for Deleting Student-->
         @extends('layouts.modals.StudentCredential.deleteModal')
+        <!--Modal for Viewing Credential-->
+        @extends('layouts.modals.StudentCredential.viewCredModal')
 
     @if(Session::has('errors'))
         <script>
