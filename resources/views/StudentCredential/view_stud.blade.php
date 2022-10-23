@@ -79,7 +79,10 @@
         @extends('layouts.modals.StudentCredential.deleteModal')
         <!--Modal for Viewing Credential-->
         @extends('layouts.modals.StudentCredential.viewCredModal')
-
+        <!--Modal for deleting Credential-->
+        @extends('layouts.modals.StudentCredential.deleteCredModal')
+         <!--Modal for deleting Credential-->
+         @extends('layouts.modals.StudentCredential.updateCredModal')
     @if(Session::has('errors'))
         <script>
             window.onload = function(){

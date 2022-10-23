@@ -20,6 +20,8 @@
                     <img class="img-fluid p-1" src="{{url('storage/'.$credential->document_loc)}}">
                 </div>
                 <div class="modal-footer">
+                    <button class="btn btn-small btn-success" data-bs-toggle="modal" data-bs-target="{{'#'.'update-'.$credential->document_id}}">Update</button>
+                    <button class="btn btn-small btn-danger" data-bs-toggle="modal" data-bs-target="{{'#'.'del-'.$credential->document_id}}">Delete</button>
                 </div>
             </div>
         </div>
