@@ -21,3 +21,7 @@
 .custom-tr:nth-child(even){
     background-color: #F5F5F5;
 }
+
+.student-pic:hover{
+    cursor: pointer;
+}

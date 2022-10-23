@@ -26,7 +26,7 @@ class StudCredController extends Controller
     public function viewStudent(DbHelperController $db, $id){
         
         $student = $db->getStudentInfo($id);
-        $picturePath = $db->getStudentPicturePath($id);
+        $picturePath = $db->getStudentPicture($id);
         $credentials = $db->getStudentCredenials($id);
         
         return view('StudentCredential/view_stud', [

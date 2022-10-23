@@ -21,7 +21,9 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-small btn-success" data-bs-toggle="modal" data-bs-target="{{'#'.'update-'.$credential->document_id}}">Update</button>
-                    <button class="btn btn-small btn-danger" data-bs-toggle="modal" data-bs-target="{{'#'.'del-'.$credential->document_id}}">Delete</button>
+                    @if($credential->document_name != 'Picture')
+                        <button class="btn btn-small btn-danger" data-bs-toggle="modal" data-bs-target="{{'#'.'del-'.$credential->document_id}}">Delete</button>
+                    @endif
                 </div>
             </div>
         </div>

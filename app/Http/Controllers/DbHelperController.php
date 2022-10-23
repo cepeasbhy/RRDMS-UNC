@@ -47,8 +47,8 @@ class DbHelperController extends Controller
         )->where('student_id', $id)->firstOrFail();
     }
 
-    public function getStudentPicturePath($id){
-        return Credential::select('document_loc')->where(
+    public function getStudentPicture($id){
+        return Credential::select('document_id','document_loc')->where(
             'student_id', $id,
             )->where(
             'document_name', 'Picture'
@@ -63,8 +63,6 @@ class DbHelperController extends Controller
             'document_loc'
         )->where(
             'student_id', $id,
-        )->where(
-            'document_name', '!=', 'Picture'
         )->get();
     }
 
@@ -192,8 +190,14 @@ class DbHelperController extends Controller
 
         $credential = Credential::where('document_id', $docID)->firstOrFail();
 
+        if($credential->input_name == 'picture'){
+            $folderPath = 'Picture';
+        }else{
+            $folderPath = $studID;
+        }
+
         $request->file($credential->input_name)->storeAs(
-            $studID,
+            $folderPath,
             '['.$studID.'] '.$credential->document_name.'.'.$request->file($credential->input_name)->getClientOriginalExtension(),
             'public'
         );
