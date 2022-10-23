@@ -13,6 +13,7 @@ class Credential extends Model
         'document_id',
         'student_id',
         'document_name',
+        'input_name',
         'document_loc'
     ];
 }

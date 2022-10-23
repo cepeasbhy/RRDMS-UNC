@@ -124,7 +124,7 @@ class DbHelperController extends Controller
 
         $docPath = $request->file($keyName)->storeAs(
             $folderPath,
-            '['.$request->student_id.'] '.$fileName.'.'.$request->file('picture')->getClientOriginalExtension(),
+            '['.$request->student_id.'] '.$fileName.'.'.$request->file($keyName)->getClientOriginalExtension(),
             'public'
         );
 
@@ -133,6 +133,7 @@ class DbHelperController extends Controller
         Credential::create([
             'document_id' => $id,
             'student_id' => $request->input('student_id'),
+            'input_name' => $keyName,
             'document_name' => $fileName,
             'document_loc' => $docPath
         ]);
