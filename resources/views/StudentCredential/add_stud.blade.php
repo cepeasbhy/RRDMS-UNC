@@ -134,9 +134,15 @@
                         <label class="col-form-label-sm" for="tor">Transcript of Record</label>
                         <input id="tor" class="form-control form-control-sm" type="file" name="tor">
                     </div>
-                    <div class="form-group mb-2">
-                        <label class="col-form-label-sm" for="clearance">NBI/Police Clearance</label>
-                        <input id="clearance" class="form-control form-control-sm" type="file" name="clearance">
+                    <div class="form-group row mb-2">
+                        <div class="col">
+                            <label class="col-form-label-sm" for="NbiClearance">NBI Clearance</label>
+                            <input id="NbiClearance" class="form-control form-control-sm" type="file" name="NbiClearance">
+                        </div>
+                        <div class="col">
+                            <label class="col-form-label-sm" for="PoliceClearance">Police Clearance</label>
+                            <input id="PoliceClearance" class="form-control form-control-sm" type="file" name="PoliceClearance">
+                        </div>
                     </div>
                     <div class="form-group mb-2">
                         <label class="col-form-label-sm" for="C1">C1 Official Receipt</label>
