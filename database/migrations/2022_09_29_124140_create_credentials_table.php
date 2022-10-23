@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('document_id')->unique();
             $table->string('student_id');
             $table->string('document_name');
+            $table->string('input_name');
             $table->string('document_loc');
             $table->timestamps();
 
