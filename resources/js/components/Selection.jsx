@@ -100,7 +100,7 @@ function Selection() {
         <div>
             <div className='form-group mb-2'>
                 <label className="col-form-label col-form-label-sm">Program <span
-                    class="text-danger">*</span></label>
+                    className="text-danger">*</span></label>
                 <select className="form-select form-select-sm " name="department_id" onChange={changeSelectOptionHandler} required>
                     <option disabled selected>Choose...</option>
                     <option value="001">Arts and Science</option>
