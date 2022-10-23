@@ -57,6 +57,7 @@
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">STUDENT CREDENTIALS</h4>
             </div>
+            <span class="badge bg-success mb-2">{{session('msgCred')}}</span>
             <div class="row">
                 @foreach ($credentials as $credential)
                     <div class="col-sm-4 mt-2">

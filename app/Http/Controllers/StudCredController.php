@@ -46,4 +46,10 @@ class StudCredController extends Controller
         return redirect('/stud_cred_mngmnt')->with('msg', 'Student successfully removed from the record');
     }
 
+    public function deleteCred(DbHelperController $db, $studID, $docID){
+        $db->deleteCredential($docID);
+
+        return redirect('/stud_cred_mngmnt/view_student/'.$studID)->with('msgCred', 'Credential Successfully Removed');
+    }
+
 }

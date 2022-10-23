@@ -24,6 +24,7 @@ Route::get('/stud_cred_mngmnt/view_student/{id}',[StudCredController::class, 'vi
 Route::post('/stud_cred_mngmnt/view_student/update/{id}',[StudCredController::class, 'update'])->name('updateStudent');
 Route::post('/stud_cred_mngmnt/view_student/delete/{id}',[StudCredController::class, 'destroy'])->name('deleteStudent');
 Route::post('/stud_cred_mngmnt/add_student', [StudCredController::class, 'create'])->name('submitStudent');
+Route::post('/stud_cred_mngmnt/delete_cred/{studID}/{docID}', [StudCredController::class, 'deleteCred'])->name('deleteCred');
 
 
 //Archived Records Routes

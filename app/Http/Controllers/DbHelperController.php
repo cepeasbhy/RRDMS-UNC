@@ -174,4 +174,15 @@ class DbHelperController extends Controller
         Student::where('student_id', $id)->delete();
         User::where('user_id', $id)->delete();
     }
+
+    public function deleteCredential($id){
+
+       $credential = Credential::select(
+            'document_loc'
+        )->where('document_id', $id)->firstOrFail();
+
+        unlink(storage_path('app\public\\'.$credential->document_loc));
+
+        Credential::where('document_id', $id)->delete();
+    }
 }
