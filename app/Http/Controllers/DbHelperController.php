@@ -56,12 +56,15 @@ class DbHelperController extends Controller
     }
 
     public function getStudentCredenials($id){
-
-        if(File::isDirectory(storage_path('app\public\\'.$id))){
-            return File::files(storage_path('app\public\\'.$id));
-        }else{
-            return [];
-        }
+        return Credential::select(
+            'document_id',
+            'document_name',
+            'document_loc'
+        )->where(
+            'student_id', $id,
+        )->where(
+            'document_name', '!=', 'Picture'
+        )->get();
     }
 
     public function insertStudent(Request $request){
