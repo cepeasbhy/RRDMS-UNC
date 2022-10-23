@@ -106,7 +106,7 @@ class DbHelperController extends Controller
         if($request->hasFile('form138')){$this->saveFile($request, 'form138', 'Form 138');}
         if($request->hasFile('copyGrade')){$this->saveFile($request, 'copyGrade', 'Copy of Grades');}
         if($request->hasFile('tor')){$this->saveFile($request, 'tor', 'Transcript of Record');}
-        if($request->hasFile('Nbiclearance')){$this->saveFile($request, 'Nbiclearance', 'NBI Clearance');}
+        if($request->hasFile('NbiClearance')){$this->saveFile($request, 'NbiClearance', 'NBI Clearance');}
         if($request->hasFile('PoliceClearance')){$this->saveFile($request, 'PoliceClearance', 'Police Clearance');}
         if($request->hasFile('C1')){$this->saveFile($request, 'C1', 'C1 Receipt');}
         if($request->hasFile('permitCrossEnroll')){$this->saveFile($request, 'permitCrossEnroll', 'Permit to Cross Enroll');}
