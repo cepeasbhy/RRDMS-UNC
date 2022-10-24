@@ -4,29 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Student;
-use App\Models\Credential;
+use App\Http\Controllers\DbHelperController;
 
 class ArchivedRecordsController extends Controller
 {
-    public function index(){
-        $students = Student::select(
-            'student_id',
-            'first_name',
-            'last_name',
-            'dept_name',
-            'course_name',
-        )->leftJoin(
-            'departments', 'departments.department_id', '=', 'students.department_id'
-        )->leftJoin(
-            'courses', 'courses.course_id', '=', 'students.course_id'
-        )->where('archive_status', 1)->get();
-
+    public function index(DbHelperController $db){
+        $students = $db->getStudents(1);
         return view('ArchivedRecords.index', ['students' => $students]);
     }
 
-    public function addCredential(){
-        return view('ArchivedRecords.add_credential');
+    public function getCredentials(DbHelperController $db){
+        $students = $db->getStudents(0);
+        return view('ArchivedRecords.unarchived_credential',  ['students' => $students]);
+    }
+
+    public function viewRecord(DbHelperController $db, $id){
+
+        $student = $db->getStudentInfo($id);
+        $picturePath = $db->getStudentPicture($id);
+        $credentials = $db->getStudentCredenials($id);
+
+        return view('ArchivedRecords.view_record', [
+            'student' => $student,
+            'credentials' => $credentials,
+            'picturePath' =>  $picturePath
+        ]);
     }
 
 }

@@ -7,15 +7,19 @@
 
 @section('content')
     <section class="my-3 row align-items-center">
-        <div class="col-sm-8">
-            <h3>Archived Records Management</h3>
+        <form class="mb-3" action="{{ route('index') }}" method="get">
+            <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+        </form>
+        <div class="col-sm-8 border-start border-danger border-4">
+            <h3>Unarchived Records</h3>
             <span class="badge bg-success mb-2">{{ session('msg') }}</span>
         </div>
-        <div class="col-sm-4">
+        {{-- TO DO: MAKE A BUTTON OR SOMETHING FOR BULK ARCHIVING OF RECORDS --}}
+        {{-- <div class="col-sm-4">
             <form class="w-100" action="{{ route('show_unarchived_credential') }}" method="get">
                 <input class="w-100 btn btn-sm btn-success" type="submit" value="ARCHIVE A RECORD">
             </form>
-        </div>
+        </div> --}}
     </section>
 
     <section class="container my-3">
@@ -25,7 +29,7 @@
                 <th class="custom-th bg-danger">FIRST NAME</th>
                 <th class="custom-th bg-danger">LAST NAME</th>
                 <th class="custom-th bg-danger">PROGRAM</th>
-                <th class="custom-th bg-danger">COURSE</th>
+                <th class="custom-th bg-danger">ADMISSION YEAR</th>
                 <th class="custom-th bg-danger">ACTION</th>
             </thead>
             <tbody>
@@ -35,9 +39,9 @@
                         <td class="custom-td">{{ $student->first_name }}</td>
                         <td class="custom-td">{{ $student->last_name }}</td>
                         <td class="custom-td">{{ $student->dept_name }}</td>
-                        <td class="custom-td">{{ $student->course_name }}</td>
+                        <td class="custom-td">{{ $student->admission_year }}</td>
                         <td class="custom-td">
-                            <form action="{{ route('viewStudent', ['id' => $student->student_id]) }}" method="GET">
+                            <form action="{{ route('viewRecord', ['id' => $student->student_id]) }}" method="GET">
                                 @csrf
                                 <input type="submit" value="VIEW" class="btn btn-success btn-sm">
                             </form>

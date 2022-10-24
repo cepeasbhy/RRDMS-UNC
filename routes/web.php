@@ -30,4 +30,5 @@ Route::post('/stud_cred_mngmnt/update_cred/{studID}/{docID}', [StudCredControlle
 
 //Archived Records Routes
 Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('index');
-Route::get('/archived_records/add_credential',[ArchivedRecordsController::class, 'addCredential'])->name('add_credential');
+Route::get('/archived_records/show_unarchived_credential',[ArchivedRecordsController::class, 'getCredentials'])->name('show_unarchived_credential');
+Route::get('/archived_records/view_record/{id}',[ArchivedRecordsController::class, 'viewRecord'])->name('viewRecord');

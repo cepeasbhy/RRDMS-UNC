@@ -17,6 +17,7 @@ class DbHelperController extends Controller
             'last_name',
             'dept_name',
             'course_name',
+            'admission_year',
         )->leftJoin(
             'departments', 'departments.department_id', '=', 'students.department_id'
         )->leftJoin(
@@ -169,7 +170,7 @@ class DbHelperController extends Controller
         $picturePath = $this->getStudentPicture($id);
         File::deleteDirectory(storage_path('app\public\\'.$id));
         unlink(storage_path('app\public\\'.$picturePath->document_loc));
-        
+
         Credential::where('student_id', $id)->delete();
         Student::where('student_id', $id)->delete();
         User::where('user_id', $id)->delete();
