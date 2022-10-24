@@ -166,7 +166,7 @@ class DbHelperController extends Controller
 
     public function deleteStudent($id){
 
-        $picturePath = $this->getStudentPicturePath($id);
+        $picturePath = $this->getStudentPicture($id);
         File::deleteDirectory(storage_path('app\public\\'.$id));
         unlink(storage_path('app\public\\'.$picturePath->document_loc));
         
