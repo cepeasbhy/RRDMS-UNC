@@ -12,7 +12,7 @@
             </div>
             {{-- TO DO: Change route to something that will set archiveStatus = 1 --}}
             <div class="modal-footer">
-                <form action="{{ route('deleteStudent', ['id' => $student->student_id]) }}" method="post">
+                <form action="{{ route('singleArchive', ['id' => $student->student_id]) }}" method="post">
                     @csrf
                     <button class="btn btn-sm btn-success">Proceed</button>
                 </form>

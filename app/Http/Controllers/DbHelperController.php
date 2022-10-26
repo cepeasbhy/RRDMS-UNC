@@ -204,5 +204,18 @@ class DbHelperController extends Controller
         );
 
         Credential::where('document_id', $docID)->touch();
-     }
+    }
+
+    public function bulkArchive($admission_year){
+        Student::where('admission_year', $admission_year)->update([
+            'archive_status' => 1
+        ]);
+    }
+
+    public function singleArchive($id){
+        Student::where('student_id', $id)->update([
+            'archive_status' => 1
+        ]);
+    }
+
 }

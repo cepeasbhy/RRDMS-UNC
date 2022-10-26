@@ -41,7 +41,7 @@
                         <td class="custom-td">{{ $student->dept_name }}</td>
                         <td class="custom-td">{{ $student->admission_year }}</td>
                         <td class="custom-td">
-                            <form action="{{ route('viewRecord', ['id' => $student->student_id]) }}" method="GET">
+                            <form action="{{ route('checkRecord', ['id' => $student->student_id]) }}" method="GET">
                                 @csrf
                                 <input type="submit" value="VIEW" class="btn btn-success btn-sm">
                             </form>

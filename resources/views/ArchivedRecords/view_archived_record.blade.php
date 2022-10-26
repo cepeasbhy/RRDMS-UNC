@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row mb-3">
-        <form class="mb-3" action="{{ route('toBeArchived') }}" method="get">
+        <form class="mb-3" action="{{ route('index') }}" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <div class="col">
@@ -51,7 +51,7 @@
             <div class="row g-2">
                 <div class="col-6">
                     <button id="clickButton" class="btn btn-success btn-sm btn-block" style="width: 100%"
-                        data-bs-toggle="modal" data-bs-target="#archive-modal">ARCHIVE</button>
+                        data-bs-toggle="modal" data-bs-target="#update-record-modal">UPDATE</button>
                 </div>
                 <div class="col-6">
                     <button class="btn btn-danger btn-sm btn-block" style="width: 100%" data-bs-toggle="modal"
@@ -88,6 +88,8 @@
     @extends('layouts.modals.ArchivedRecords.archiveCredModal')
     <!--Modal for Deleting Record-->
     @extends('layouts.modals.ArchivedRecords.deleteRecordModal')
+    <!--Modal for Updating Record-->
+    @extends('layouts.modals.ArchivedRecords.updateRecordModal')
     <!--Modal for Viewing Credential-->
     @extends('layouts.modals.StudentCredential.viewCredModal')
     <!--Modal for deleting Credential-->
