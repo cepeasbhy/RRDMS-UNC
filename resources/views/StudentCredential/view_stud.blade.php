@@ -81,7 +81,7 @@
         </div>
     </div>
         <!--Modal for Updating Student Information-->
-        @extends('layouts.modals.StudentCredential.updateStudModal')
+        @extends('layouts.modals.StudentCredential.updateStudModal', ['routeName' => 'updateStudent'])
         <!--Modal for Deleting Student-->
         @extends('layouts.modals.StudentCredential.deleteStudModal')
         <!--Modal for Viewing Credential-->
