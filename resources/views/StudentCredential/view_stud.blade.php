@@ -81,17 +81,17 @@
         </div>
     </div>
         <!--Modal for Updating Student Information-->
-        @extends('layouts.modals.StudentCredential.updateStudModal', ['routeName' => 'updateStudent'])
+        @extends('layouts.modals.updateModal', ['routeName' => 'updateStudent'])
         <!--Modal for Deleting Student-->
-        @extends('layouts.modals.StudentCredential.deleteStudModal')
+        @extends('layouts.modals.deleteModal')
         <!--Modal for Viewing Credential-->
-        @extends('layouts.modals.StudentCredential.viewCredModal')
+        @extends('layouts.modals.viewCredModal')
         <!--Modal for deleting Credential-->
-        @extends('layouts.modals.StudentCredential.deleteCredModal')
+        @extends('layouts.modals.deleteCredModal')
         <!--Modal for updating Credential-->
-        @extends('layouts.modals.StudentCredential.updateCredModal')
+        @extends('layouts.modals.updateCredModal')
         <!--Modal for adding a Credential-->
-        @extends('layouts.modals.StudentCredential.addSingleRecModal')
+        @extends('layouts.modals.addSingleRecModal')
     @if(Session::has('errors'))
         <script>
             window.onload = function(){
