@@ -26,9 +26,10 @@ Route::post('/stud_cred_mngmnt/view_student/delete/{id}',[StudCredController::cl
 Route::post('/stud_cred_mngmnt/add_student', [StudCredController::class, 'create'])->name('submitStudent');
 Route::post('/stud_cred_mngmnt/delete_cred/{studID}/{docID}', [StudCredController::class, 'deleteCred'])->name('deleteCred');
 Route::post('/stud_cred_mngmnt/update_cred/{studID}/{docID}', [StudCredController::class, 'updateCred'])->name('updateCred');
+Route::post('/stud_cred_mngmnt/view_student/add_single_rec', [StudCredController::class, 'addSingleRec'])->name('addSingleRec');
 
 
 //Archived Records Routes
 Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('index');
-Route::get('/archived_records/show_unarchived_credential',[ArchivedRecordsController::class, 'getCredentials'])->name('show_unarchived_credential');
+Route::get('/archived_records/show_unarchived_credential',[ArchivedRecordsController::class, 'getCredentials'])->name('addToArchive');
 Route::get('/archived_records/view_record/{id}',[ArchivedRecordsController::class, 'viewRecord'])->name('viewRecord');

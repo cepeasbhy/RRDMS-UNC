@@ -12,7 +12,7 @@
             <span class="badge bg-success mb-2">{{ session('msg') }}</span>
         </div>
         <div class="col-sm-4">
-            <form class="w-100" action="{{ route('show_unarchived_credential') }}" method="get">
+            <form class="w-100" action="{{ route('addToArchive') }}" method="get">
                 <input class="w-100 btn btn-sm btn-success" type="submit" value="ARCHIVE A RECORD">
             </form>
         </div>

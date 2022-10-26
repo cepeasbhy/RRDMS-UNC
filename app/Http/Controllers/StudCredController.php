@@ -58,4 +58,11 @@ class StudCredController extends Controller
         'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Updated');
     }
 
+    public function addSingleRec(DbHelperController $db, Request $request){
+        $db->saveFile($request, $request->keyName, $request->fileName);
+
+        return redirect('/stud_cred_mngmnt/view_student/'.$request->student_id)->header('Cache-Control',
+        'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Added');
+    }
+
 }
