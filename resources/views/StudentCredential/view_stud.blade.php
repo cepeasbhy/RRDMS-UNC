@@ -74,6 +74,10 @@
                     @endif
                 @endforeach
             </div>
+            <div class="col mt-3 text-center">
+                <button class="btn btn-sm btn-success w-75" data-bs-toggle="modal" 
+                data-bs-target="#add-single-rec">ADD A RECORD</button>
+            </div>
         </div>
     </div>
         <!--Modal for Updating Student Information-->
@@ -84,8 +88,10 @@
         @extends('layouts.modals.StudentCredential.viewCredModal')
         <!--Modal for deleting Credential-->
         @extends('layouts.modals.StudentCredential.deleteCredModal')
-         <!--Modal for deleting Credential-->
-         @extends('layouts.modals.StudentCredential.updateCredModal')
+        <!--Modal for updating Credential-->
+        @extends('layouts.modals.StudentCredential.updateCredModal')
+        <!--Modal for adding a Credential-->
+        @extends('layouts.modals.StudentCredential.addSingleRecModal')
     @if(Session::has('errors'))
         <script>
             window.onload = function(){
