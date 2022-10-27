@@ -83,15 +83,15 @@
         <!--Modal for Updating Student Information-->
         @extends('layouts.modals.updateModal', ['routeName' => 'updateStudent'])
         <!--Modal for Deleting Student-->
-        @extends('layouts.modals.deleteModal')
+        @extends('layouts.modals.deleteModal', ['routeName' => 'deleteStudent', 'word' => 'records'])
         <!--Modal for Viewing Credential-->
         @extends('layouts.modals.viewCredModal')
         <!--Modal for deleting Credential-->
-        @extends('layouts.modals.deleteCredModal')
+        @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCred'])
         <!--Modal for updating Credential-->
-        @extends('layouts.modals.updateCredModal')
+        @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCred'])
         <!--Modal for adding a Credential-->
-        @extends('layouts.modals.addSingleRecModal')
+        @extends('layouts.modals.addSingleRecModal', ['routeName' => 'addSingleRec'])
     @if(Session::has('errors'))
         <script>
             window.onload = function(){

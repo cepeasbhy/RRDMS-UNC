@@ -13,7 +13,7 @@
                         </p>
                     </div>
                     <div class="modal-footer">
-                        <form action="{{route('deleteCred',['studID' => $student->student_id, 'docID' => $credential->document_id])}}" method="post">
+                        <form action="{{route($routeName,['studID' => $student->student_id, 'docID' => $credential->document_id])}}" method="post">
                             @csrf
                             <button class="btn btn-sm btn-danger">Proceed</button>
                         </form>

@@ -7,7 +7,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                   <form id="{{$credential->input_name}}" action="{{route('updateCred',['studID' => $student->student_id, 'docID' => $credential->document_id])}}" method="post" enctype="multipart/form-data">
+                   <form id="{{$credential->input_name}}" action="{{route($routeName,['studID' => $student->student_id, 'docID' => $credential->document_id])}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <label for="{{$credential->input_name}}">Choose a file to be updated with {{$credential->document_name}}</label>
                         <input id="{{$credential->input_name}}" class="form-control form-control-sm" type="file" name="{{$credential->input_name}}">

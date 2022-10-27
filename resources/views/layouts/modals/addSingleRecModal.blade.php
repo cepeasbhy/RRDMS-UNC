@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               <form id="addRecordForm" action="{{route('addSingleRec')}}" method="post" enctype="multipart/form-data">
+               <form id="addRecordForm" action="{{route($routeName)}}" method="post" enctype="multipart/form-data">
                   @csrf
                   <input type="hidden" name="student_id" value="{{$student->student_id}}">
                   <div id="addSingleRec">
