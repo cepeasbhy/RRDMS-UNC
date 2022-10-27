@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-6">
                     <button class="btn btn-danger btn-sm btn-block" style="width: 100%" data-bs-toggle="modal"
-                        data-bs-target="#delete-record-modal">DELETE</button>
+                        data-bs-target="#delete-modal">DELETE</button>
                 </div>
             </div>
         </div>
@@ -87,13 +87,13 @@
     <!--Modal for Archiving Credential-->
     @extends('layouts.modals.ArchivedRecords.archiveCredModal')
     <!--Modal for Deleting Record-->
-    @extends('layouts.modals.ArchivedRecords.deleteRecordModal')
+    @extends('layouts.modals.deleteModal', ['routeName' => 'deleteCredential', 'word' => 'archives'])
     <!--Modal for Viewing Credential-->
-    @extends('layouts.modals.StudentCredential.viewCredModal')
+    @extends('layouts.modals.viewCredModal')
     <!--Modal for deleting Credential-->
-    @extends('layouts.modals.StudentCredential.deleteCredModal')
+    @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCred'])
     <!--Modal for deleting Credential-->
-    @extends('layouts.modals.StudentCredential.updateCredModal')
+    @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCred'])
     @if (Session::has('errors'))
         <script>
             window.onload = function() {
