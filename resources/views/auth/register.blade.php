@@ -12,19 +12,30 @@
                 </div>
                 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-2">
                             <label for="accountRole" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Account Type') }}</label>
 
                             <div class="col-md-6">
                                <select class="form-select form-select-sm @error('accountRole') is-invalid @enderror" name="account_role" id="accountRole" required>
-                                    <option selected>Choose...</option>
+                                    <option value="">Choose...</option>
                                     <option value="ADMIN">Admin</option>
                                     <option value="RECORD_ASSOCIATE">Record Associate</option>
                                     <option value="EVALUATOR">Evaluator</option>
                                </select>
                                 @error('accountRole')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="userID" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Picture') }}</label>
+                            <div class="col-md-6">
+                                <input id="picture" type="file" class="form-control form-control-sm @error('picture') is-invalid @enderror" name="picture" value="{{ old('picture') }}" required>
+                                @error('picture')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -88,7 +99,7 @@
 
                             <div class="col-md-6">
                                 <select class="form-select form-select-sm " name="assigned_dept">
-                                    <option selected>Choose...</option>
+                                    <option value="">Choose...</option>
                                     <option value="001">Arts and Science</option>
                                     <option value="002">Business and Accountancy</option>
                                     <option value="003">Computer Studies</option>
@@ -99,8 +110,14 @@
                                     <option value="008">Graduate Studies</option>
                                     <option value="009">School of Law</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="phoneNumber" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Phone Number') }}</label>
+                            <div class="col-md-6">
+                                <input id="phoneNumber" type="text" class="form-control form-control-sm @error('phoneNumber') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required>
 
-                                @error('middleName')
+                                @error('phoneNumber')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -109,11 +126,10 @@
                         </div>
                         <div class="row mb-2">
                             <label for="email" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Email') }}</label>
-
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control form-control-sm @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
 
-                                @error('middleName')
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Credential;
+use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Support\Facades\File;
 
@@ -53,6 +54,12 @@ class DbHelperController extends Controller
             'student_id', $id,
             )->where(
             'document_name', 'Picture'
+            )->firstOrFail();
+    }
+
+    public function getStaffPicture($id){
+        return Staff::select('picture_path')->where(
+            'staff_id', $id,
             )->firstOrFail();
     }
 

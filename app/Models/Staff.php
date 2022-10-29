@@ -11,6 +11,7 @@ class Staff extends Model
 
     protected $fillable = [
         'staff_id',
-        'assigned_dept'
+        'assigned_dept',
+        'picture_path'
     ];
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudCredController;
 use App\Http\Controllers\ArchivedRecordsController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +37,8 @@ Route::get('/archived_records/view_record/{id}',[ArchivedRecordsController::clas
 Route::post('/archived_records/view_record/solo_archive{id}',[ArchivedRecordsController::class, 'archiveSingleRecord'])->name('singleArchive');
 Route::post('/archived_records/view_record/delete_record{id}',[ArchivedRecordsController::class, 'deleteRecord'])->name('deleteCredential');
 Route::post('/archived_records/view_record/update_record/{id}',[ArchivedRecordsController::class, 'updateRecord'])->name('updateRecord');
+
+//User Account Routes
+Route::get('/account', [AccountController::class, 'index'])->name('accountHome');
+Route::post('/account/update/{id}', [AccountController::class, 'update'])->name('accountUpdate');
 
