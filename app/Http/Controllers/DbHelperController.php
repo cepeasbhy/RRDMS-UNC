@@ -206,16 +206,23 @@ class DbHelperController extends Controller
         Credential::where('document_id', $docID)->touch();
     }
 
-    public function bulkArchive($admission_year){
-        Student::where('admission_year', $admission_year)->update([
-            'archive_status' => 1
-        ]);
-    }
-
     public function singleArchive($id){
+
         Student::where('student_id', $id)->update([
             'archive_status' => 1
         ]);
+
+        $unnecessaryCredentials = Credential::select(
+            'document_loc'
+            )->where('student_id', $id)->whereNotIn('document_name', ['Birth Certificate', 'Form 137', 'Transcript of Records', 'Picture'])->get();
+
+        foreach($unnecessaryCredentials as $creds){
+            unlink(storage_path('app\public\\'.$creds->document_loc));
+        }
+
+        Credential::where('student_id', $id)->whereNotIn('document_name',
+        ['Birth Certificate', 'Picture', 'Form 137', 'Transcript of Records'])->delete();
+
     }
 
 }
