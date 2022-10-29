@@ -87,13 +87,13 @@
     <!--Modal for Archiving Credential-->
     @extends('layouts.modals.ArchivedRecords.archiveCredModal')
     <!--Modal for Deleting Record-->
-    @extends('layouts.modals.deleteModal', ['routeName' => 'deleteCredential', 'word' => 'archives'])
+    @extends('layouts.modals.deleteModal', ['routeName' => 'deleteRecord', 'word' => 'archives'])
     <!--Modal for Updating Record-->
     @extends('layouts.modals.updateModal', ['routeName' => 'updateRecord'])
     <!--Modal for Viewing Credential-->
     @extends('layouts.modals.viewCredModal')
-    <!--Modal for deleting Credential-->
-    @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCred'])
+    <!--Modal for Deleting Credential-->
+    @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCredential'])
     <!--Modal for Updating Credential-->
     @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCredential'])
     @if (Session::has('errors'))

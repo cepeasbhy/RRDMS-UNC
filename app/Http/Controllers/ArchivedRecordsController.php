@@ -66,4 +66,10 @@ class ArchivedRecordsController extends Controller
         'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Updated');
     }
 
+    public function deleteCredential(DbHelperController $db, $studID, $docID){
+        $db->deleteCredential($docID);
+
+        return redirect('/archived_records/view_record/'.$studID)->with('msgCred', 'Credential Successfully Removed');
+    }
+
 }

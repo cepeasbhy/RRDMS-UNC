@@ -87,13 +87,11 @@
     <!--Modal for Archiving Credential-->
     @extends('layouts.modals.ArchivedRecords.archiveCredModal')
     <!--Modal for Deleting Record-->
-    @extends('layouts.modals.deleteModal', ['routeName' => 'deleteCredential', 'word' => 'archives'])
+    @extends('layouts.modals.deleteModal', ['routeName' => 'deleteRecord', 'word' => 'archives'])
     <!--Modal for Viewing Credential-->
     @extends('layouts.modals.viewCredModal')
-    <!--Modal for deleting Credential-->
-    @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCred'])
-    <!--Modal for deleting Credential-->
-    @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCred'])
+    <!--Modal for Deleting Credential-->
+    @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCredential'])
     @if (Session::has('errors'))
         <script>
             window.onload = function() {
