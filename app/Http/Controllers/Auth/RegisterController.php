@@ -50,6 +50,7 @@ class RegisterController extends Controller
             'middle_name' => ['nullable', 'string', 'max:255'],
             'account_role' => ['required', 'string', 'max:255'],
             'assigned_dept' => ['required', 'string', 'max:255'],
+            'phone_number' => ['nullable', 'string', 'max:11'],
             'email' => ['required', 'email', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
@@ -63,10 +64,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
+        $picturePath = $this->saveStaffPicture($data['picture'], $data['user_id']);
+
         Staff::create([
             'staff_id' => $data['user_id'],
-            'assigned_dept' => $data['assigned_dept']
+            'assigned_dept' => $data['assigned_dept'],
+            'picture_path' => $picturePath
         ]);
 
         User::create([
@@ -75,8 +78,20 @@ class RegisterController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'middle_name' => $data['middle_name'],
+            'phone_number' => $data['phone_number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function saveStaffPicture($picture, $userID){
+
+        return $docPath = $picture->storeAs(
+            'staff',
+            '['.$userID.'] Picture'.'.'.$picture->getClientOriginalExtension(),
+            'public'
+        );
+    }
+
+    
 }
