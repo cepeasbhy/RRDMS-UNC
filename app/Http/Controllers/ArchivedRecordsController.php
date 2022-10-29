@@ -60,4 +60,10 @@ class ArchivedRecordsController extends Controller
         return redirect('/archived_records')->with('msg', 'Record Successfully Archived');
     }
 
+    public function updateCredential(DbHelperController $db, Request $request, $studID, $docID){
+        $db->updateCredential($request, $studID, $docID);
+        return redirect('/archived_records/view_record/'.$studID)->header('Cache-Control',
+        'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Updated');
+    }
+
 }

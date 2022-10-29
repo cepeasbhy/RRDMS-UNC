@@ -94,8 +94,8 @@
     @extends('layouts.modals.viewCredModal')
     <!--Modal for deleting Credential-->
     @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCred'])
-    <!--Modal for deleting Credential-->
-    @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCred'])
+    <!--Modal for Updating Credential-->
+    @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCredential'])
     @if (Session::has('errors'))
         <script>
             window.onload = function() {

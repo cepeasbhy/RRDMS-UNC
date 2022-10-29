@@ -37,6 +37,7 @@ Route::get('/archived_records/view_record/{id}',[ArchivedRecordsController::clas
 Route::post('/archived_records/view_record/solo_archive/{id}',[ArchivedRecordsController::class, 'archiveSingleRecord'])->name('singleArchive');
 Route::post('/archived_records/view_record/delete_record/{id}',[ArchivedRecordsController::class, 'deleteRecord'])->name('deleteCredential');
 Route::post('/archived_records/view_record/update_record/{id}',[ArchivedRecordsController::class, 'updateRecord'])->name('updateRecord');
+Route::post('/archived_records/view_record/update_credential/{studID}/{docID}', [ArchivedRecordsController::class, 'updateCredential'])->name('updateCredential');
 
 //User Account Routes
 Route::get('/account', [AccountController::class, 'index'])->name('accountHome');
