@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudCredController;
 use App\Http\Controllers\ArchivedRecordsController;
-
+use App\Http\Controllers\requestRecordsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,15 +18,36 @@ use App\Http\Controllers\ArchivedRecordsController;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/stud_cred_mngmnt',[StudCredController::class, 'index'])->name('StudCredHome');
-Route::get('/stud_cred_mngmnt/add_student',[StudCredController::class, 'addStudent'])->name('addStudent');
-Route::get('/stud_cred_mngmnt/view_student/{id}',[StudCredController::class, 'viewStudent'])->name('viewStudent');
-Route::post('/stud_cred_mngmnt/view_student/update/{id}',[StudCredController::class, 'update'])->name('updateStudent');
-Route::post('/stud_cred_mngmnt/view_student/delete/{id}',[StudCredController::class, 'destroy'])->name('deleteStudent');
+Route::get('/stud_cred_mngmnt', [StudCredController::class, 'index'])->name('StudCredHome');
+Route::get('/stud_cred_mngmnt/add_student', [StudCredController::class, 'addStudent'])->name('addStudent');
+Route::get('/stud_cred_mngmnt/view_student/{id}', [StudCredController::class, 'viewStudent'])->name('viewStudent');
+Route::post('/stud_cred_mngmnt/view_student/update/{id}', [StudCredController::class, 'update'])->name('updateStudent');
+Route::post('/stud_cred_mngmnt/view_student/delete/{id}', [StudCredController::class, 'destroy'])->name('deleteStudent');
 Route::post('/stud_cred_mngmnt/add_student', [StudCredController::class, 'create'])->name('submitStudent');
 Route::post('/stud_cred_mngmnt/delete_cred/{studID}/{docID}', [StudCredController::class, 'deleteCred'])->name('deleteCred');
 
 
 //Archived Records Routes
 Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('index');
-Route::get('/archived_records/add_credential',[ArchivedRecordsController::class, 'addCredential'])->name('add_credential');
+Route::get('/archived_records/add_credential', [ArchivedRecordsController::class, 'addCredential'])->name('add_credential');
+
+//Request Records Routes
+
+Route::get('/request_Records', function () {
+    return view('pages.requestRecords');
+});
+Route::get('/diploma', function () {
+    return view('pages.diploma');
+});
+Route::get('/tor', function () {
+    return view('pages.tor');
+});
+Route::get('/certification', function () {
+    return view('pages.certification');
+});
+Route::get('/authentication', function () {
+    return view('pages.authentication');
+});
+Route::get('/photoCopy', function () {
+    return view('pages.photoCopy');
+});

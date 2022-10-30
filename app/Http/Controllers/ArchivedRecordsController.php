@@ -9,7 +9,8 @@ use App\Models\Credential;
 
 class ArchivedRecordsController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $students = Student::select(
             'student_id',
             'first_name',
@@ -17,16 +18,22 @@ class ArchivedRecordsController extends Controller
             'dept_name',
             'course_name',
         )->leftJoin(
-            'departments', 'departments.department_id', '=', 'students.department_id'
+            'departments',
+            'departments.department_id',
+            '=',
+            'students.department_id'
         )->leftJoin(
-            'courses', 'courses.course_id', '=', 'students.course_id'
+            'courses',
+            'courses.course_id',
+            '=',
+            'students.course_id'
         )->where('archive_status', 1)->get();
 
         return view('ArchivedRecords.index', ['students' => $students]);
     }
 
-    public function addCredential(){
+    public function addCredential()
+    {
         return view('ArchivedRecords.add_credential');
     }
-
 }
