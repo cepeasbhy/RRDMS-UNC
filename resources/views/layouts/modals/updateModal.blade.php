@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="update-form" action="{{route('updateStudent', ['id' => $student->student_id])}}" method="post">
+                <form id="update-form" action="{{route($routeName, ['id' => $student->student_id])}}" method="post">
                     @csrf
                     <div class="form-group mb-2">
                         <label class="col-form-label col-form-label-sm" for="">First Name</label>

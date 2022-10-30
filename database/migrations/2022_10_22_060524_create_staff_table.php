@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('staff_id')->unique();
             $table->string('assigned_dept')->nullable();
+            $table->string('picture_path');
             $table->timestamps();
 
             $table->foreign('assigned_dept')->references('department_id')->on('departments');

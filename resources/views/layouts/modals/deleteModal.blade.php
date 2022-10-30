@@ -7,11 +7,11 @@
             </div>
             <div class="modal-body">
                 <p>
-                    Are you sure you want to remove this student from the records?
+                    Are you sure you want to remove this student from the {{$word}}?
                 </p>
             </div>
             <div class="modal-footer">
-                <form action="{{route('deleteStudent', ['id' => $student->student_id])}}" method="post">
+                <form action="{{route($routeName, ['id' => $student->student_id])}}" method="post">
                     @csrf
                     <button class="btn btn-sm btn-danger">Proceed</button>
                 </form>

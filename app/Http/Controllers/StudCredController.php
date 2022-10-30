@@ -26,7 +26,7 @@ class StudCredController extends Controller
     public function viewStudent(DbHelperController $db, $id){
         
         $student = $db->getStudentInfo($id);
-        $picturePath = $db->getStudentPicturePath($id);
+        $picturePath = $db->getStudentPicture($id);
         $credentials = $db->getStudentCredenials($id);
         
         return view('StudentCredential/view_stud', [
@@ -50,6 +50,19 @@ class StudCredController extends Controller
         $db->deleteCredential($docID);
 
         return redirect('/stud_cred_mngmnt/view_student/'.$studID)->with('msgCred', 'Credential Successfully Removed');
+    }
+
+    public function updateCred(DbHelperController $db, Request $request, $studID, $docID){
+        $db->updateCredential($request, $studID, $docID);
+        return redirect('/stud_cred_mngmnt/view_student/'.$studID)->header('Cache-Control',
+        'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Updated');
+    }
+
+    public function addSingleRec(DbHelperController $db, Request $request){
+        $db->saveFile($request, $request->keyName, $request->fileName);
+
+        return redirect('/stud_cred_mngmnt/view_student/'.$request->student_id)->header('Cache-Control',
+        'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Added');
     }
 
 }

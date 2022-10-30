@@ -12,7 +12,7 @@
             <span class="badge bg-success mb-2">{{session('msg')}}</span>
             <div class="ms-2 mb-3">
                 <div class="row align-items-center mb-3">
-                    <img class="col-3 img-fluid rounded-circle" src="http://rrdms.srv/storage/{{$picturePath->document_loc}}">
+                    <img class="col-3 img-fluid rounded-circle student-pic" data-bs-toggle="modal" data-bs-target="{{"#".$picturePath->document_id}}" src="{{asset('storage/'.$picturePath->document_loc)}}">
                     <div class="col-9">
                         <span class="h4 fw-bold">{{$student->last_name}}, {{$student->first_name}} {{mb_substr($student->middle_name, 0, 1).'.'}}</span>
                         <br>
@@ -60,30 +60,38 @@
             <span class="badge bg-success mb-2">{{session('msgCred')}}</span>
             <div class="row">
                 @foreach ($credentials as $credential)
-                    <div class="col-sm-4 mt-2">
-                        <div class="card">
-                            <button class="btn p-0" data-bs-toggle="modal" data-bs-target="{{"#".$credential->document_id}}">
-                                <img class="img-fluid p-1" src="{{url('storage/'.$credential->document_loc)}}">
-                            </button>
-                            <div class="card-body text-center p-0">
-                                <label class="col-form-label col-form-label-sm">{{$credential->document_name}}</label>
+                    @if ($credential->document_name != 'Picture')
+                        <div class="col-sm-4 mt-2">
+                            <div class="card">
+                                <button class="btn p-0" data-bs-toggle="modal" data-bs-target="{{"#".$credential->document_id}}">
+                                    <img class="img-fluid p-1" src="{{asset('storage/'.$credential->document_loc)}}">
+                                </button>
+                                <div class="card-body text-center p-0">
+                                    <label class="col-form-label col-form-label-sm">{{$credential->document_name}}</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
+            </div>
+            <div class="col mt-3 text-center">
+                <button class="btn btn-sm btn-success w-75" data-bs-toggle="modal" 
+                data-bs-target="#add-single-rec">ADD A RECORD</button>
             </div>
         </div>
     </div>
         <!--Modal for Updating Student Information-->
-        @extends('layouts.modals.StudentCredential.updateModal')
+        @extends('layouts.modals.updateModal', ['routeName' => 'updateStudent'])
         <!--Modal for Deleting Student-->
-        @extends('layouts.modals.StudentCredential.deleteModal')
+        @extends('layouts.modals.deleteModal', ['routeName' => 'deleteStudent', 'word' => 'records'])
         <!--Modal for Viewing Credential-->
-        @extends('layouts.modals.StudentCredential.viewCredModal')
+        @extends('layouts.modals.viewCredModal')
         <!--Modal for deleting Credential-->
-        @extends('layouts.modals.StudentCredential.deleteCredModal')
-         <!--Modal for deleting Credential-->
-         @extends('layouts.modals.StudentCredential.updateCredModal')
+        @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCred'])
+        <!--Modal for updating Credential-->
+        @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCred'])
+        <!--Modal for adding a Credential-->
+        @extends('layouts.modals.addSingleRecModal', ['routeName' => 'addSingleRec'])
     @if(Session::has('errors'))
         <script>
             window.onload = function(){

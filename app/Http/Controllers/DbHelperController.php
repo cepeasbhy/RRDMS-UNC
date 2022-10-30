@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Credential;
+use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Support\Facades\File;
 
@@ -17,6 +18,7 @@ class DbHelperController extends Controller
             'last_name',
             'dept_name',
             'course_name',
+            'admission_year',
         )->leftJoin(
             'departments', 'departments.department_id', '=', 'students.department_id'
         )->leftJoin(
@@ -47,11 +49,17 @@ class DbHelperController extends Controller
         )->where('student_id', $id)->firstOrFail();
     }
 
-    public function getStudentPicturePath($id){
-        return Credential::select('document_loc')->where(
+    public function getStudentPicture($id){
+        return Credential::select('document_id','document_loc')->where(
             'student_id', $id,
             )->where(
             'document_name', 'Picture'
+            )->firstOrFail();
+    }
+
+    public function getStaffPicture($id){
+        return Staff::select('picture_path')->where(
+            'staff_id', $id,
             )->firstOrFail();
     }
 
@@ -59,11 +67,10 @@ class DbHelperController extends Controller
         return Credential::select(
             'document_id',
             'document_name',
+            'input_name',
             'document_loc'
         )->where(
             'student_id', $id,
-        )->where(
-            'document_name', '!=', 'Picture'
         )->get();
     }
 
@@ -167,10 +174,10 @@ class DbHelperController extends Controller
 
     public function deleteStudent($id){
 
-        $picturePath = $this->getStudentPicturePath($id);
+        $picturePath = $this->getStudentPicture($id);
         File::deleteDirectory(storage_path('app\public\\'.$id));
         unlink(storage_path('app\public\\'.$picturePath->document_loc));
-        
+
         Credential::where('student_id', $id)->delete();
         Student::where('student_id', $id)->delete();
         User::where('user_id', $id)->delete();
@@ -186,4 +193,43 @@ class DbHelperController extends Controller
 
         Credential::where('document_id', $id)->delete();
     }
+
+    public function updateCredential($request, $studID, $docID){
+
+        $credential = Credential::where('document_id', $docID)->firstOrFail();
+
+        if($credential->input_name == 'picture'){
+            $folderPath = 'Picture';
+        }else{
+            $folderPath = $studID;
+        }
+
+        $request->file($credential->input_name)->storeAs(
+            $folderPath,
+            '['.$studID.'] '.$credential->document_name.'.'.$request->file($credential->input_name)->getClientOriginalExtension(),
+            'public'
+        );
+
+        Credential::where('document_id', $docID)->touch();
+    }
+
+    public function singleArchive($id){
+
+        Student::where('student_id', $id)->update([
+            'archive_status' => 1
+        ]);
+
+        $unnecessaryCredentials = Credential::select(
+            'document_loc'
+            )->where('student_id', $id)->whereNotIn('document_name', ['Birth Certificate', 'Form 137', 'Transcript of Record', 'Picture'])->get();
+
+        foreach($unnecessaryCredentials as $creds){
+            unlink(storage_path('app\public\\'.$creds->document_loc));
+        }
+
+        Credential::where('student_id', $id)->whereNotIn('document_name',
+        ['Birth Certificate', 'Picture', 'Form 137', 'Transcript of Record'])->delete();
+
+    }
+
 }

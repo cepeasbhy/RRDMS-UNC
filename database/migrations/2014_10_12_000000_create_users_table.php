@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('middle_name')->nullable();
             $table->string('email');
+            $table->string('phone_number')->nullable();
             $table->string('account_role');
             $table->string('password')->default(Hash::make('welcometounc'));
             $table->timestamps();

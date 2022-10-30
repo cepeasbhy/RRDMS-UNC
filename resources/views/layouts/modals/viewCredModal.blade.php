@@ -17,11 +17,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img class="img-fluid p-1" src="{{url('storage/'.$credential->document_loc)}}">
+                    <img class="img-fluid p-1" src="{{asset('storage/'.$credential->document_loc)}}">
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-small btn-success" data-bs-toggle="modal" data-bs-target="{{'#'.'update-'.$credential->document_id}}">Update</button>
-                    <button class="btn btn-small btn-danger" data-bs-toggle="modal" data-bs-target="{{'#'.'del-'.$credential->document_id}}">Delete</button>
+                    @if($credential->document_name != 'Picture')
+                        <button class="btn btn-small btn-danger" data-bs-toggle="modal" data-bs-target="{{'#'.'del-'.$credential->document_id}}">Delete</button>
+                    @endif
                 </div>
             </div>
         </div>

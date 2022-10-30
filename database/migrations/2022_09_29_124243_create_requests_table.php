@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('request_id')->unique();
             $table->string('student_id');
-            $table->string('phone_number');
             $table->string('address');
             $table->integer('status');
             $table->timestamps();
