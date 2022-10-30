@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('student_id');
             $table->string('address');
             $table->date('release_date')->nullable();
-            $table->integer('status')->default('IN PROGRESS');
+            $table->string('status')->default('IN PROGRESS');
             $table->timestamps();
         });
     }
