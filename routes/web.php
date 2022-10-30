@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudCredController;
 use App\Http\Controllers\ArchivedRecordsController;
-
 use App\Http\Controllers\requestRecordsController;
-
 use App\Http\Controllers\AccountController;
 
 
@@ -46,25 +44,9 @@ Route::post('/archived_records/view_record/update_credential/{studID}/{docID}', 
 Route::post('/archived_records/view_record/delete_credential/{studID}/{docID}', [ArchivedRecordsController::class, 'deleteCredential'])->name('deleteCredential');
 
 //Request Records Routes
+Route::get('/request', [requestRecordsController::class, 'index'])->name('StudRequest');
+Route::get('/make_request', [requestRecordsController::class, 'makeRequest'])->name('makeRequest');
 
-Route::get('/request_Records', function () {
-    return view('pages.requestRecords');
-});
-Route::get('/diploma', function () {
-    return view('pages.diploma');
-});
-Route::get('/tor', function () {
-    return view('pages.tor');
-});
-Route::get('/certification', function () {
-    return view('pages.certification');
-});
-Route::get('/authentication', function () {
-    return view('pages.authentication');
-});
-Route::get('/photoCopy', function () {
-    return view('pages.photoCopy');
-});
 
 //User Account Routes
 Route::get('/account', [AccountController::class, 'index'])->name('accountHome');

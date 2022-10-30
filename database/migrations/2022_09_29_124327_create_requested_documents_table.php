@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('requested_documents', function (Blueprint $table) {
             $table->id();
             $table->string('request_id');
-            $table->string('diploma');
-            $table->string('certificate');
-            $table->string('authentication');
-            $table->string('transfer_credentials');
+            $table->json('diploma')->nullable();
+            $table->json('transcript_of_record')->nullable();
+            $table->json('certificate')->nullable();
+            $table->json('copy_of_grades')->nullable();
+            $table->json('authentication')->nullable();
             $table->double('total_fee',8,2);
             $table->timestamps();
 

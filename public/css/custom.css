@@ -25,3 +25,7 @@
 .student-pic:hover{
     cursor: pointer;
 }
+
+.label-sm{
+    font-size: 12px;
+}

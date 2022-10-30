@@ -2,14 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DbHelperController;
+use Illuminate\Support\Facades\Auth;
 
-class requestRecords extends Controller
+class requestRecordsController extends Controller
 {
-    public function index()
+    public function __construct()
     {
+        $this->middleware('auth');
+    }
 
-        return view('pages.requestRecords');
+    public function index(){
+        return view('RequestRecord/index');
+    }
+
+    public function makeRequest(DbHelperController $db){
+        $student = $db->getStudentInfo(Auth::user()->user_id);
+        $picturePath = $db->getStudentPicture(Auth::user()->user_id);
+        
+        return view('RequestRecord/request', [
+            'student' => $student,
+            'picturePath' => $picturePath
+        ]);
     }
 }
