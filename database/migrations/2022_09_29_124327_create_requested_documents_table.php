@@ -21,6 +21,7 @@ return new class extends Migration
             $table->json('certificate')->nullable();
             $table->json('copy_of_grades')->nullable();
             $table->json('authentication')->nullable();
+            $table->json('photocopy')->nullable();
             $table->double('total_fee',8,2);
             $table->timestamps();
 

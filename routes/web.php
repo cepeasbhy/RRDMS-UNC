@@ -45,8 +45,8 @@ Route::post('/archived_records/view_record/delete_credential/{studID}/{docID}', 
 
 //Request Records Routes
 Route::get('/request', [requestRecordsController::class, 'index'])->name('StudRequest');
-Route::get('/make_request', [requestRecordsController::class, 'makeRequest'])->name('makeRequest');
-
+Route::get('/request/make_request', [requestRecordsController::class, 'makeRequest'])->name('makeRequest');
+Route::post('/request/submit_request', [requestRecordsController::class, 'submitRequest'])->name('submitRequest');
 
 //User Account Routes
 Route::get('/account', [AccountController::class, 'index'])->name('accountHome');

@@ -26,4 +26,8 @@ class requestRecordsController extends Controller
             'picturePath' => $picturePath
         ]);
     }
+
+    public function submitRequest(Request $request, DbHelperController $db){
+        $db->insertRequest($request, Auth::user()->user_id);
+    }
 }
