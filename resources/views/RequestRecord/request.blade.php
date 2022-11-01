@@ -30,7 +30,7 @@
                             <h4 class="ms-2">Diploma</h4>
                         </div>
                         <div class="row">
-                            <div class="col ms-3">
+                            <div class="col-8 ms-3">
                                 <span>Type of Diploma</span>
                                 <div class="form-group">
                                     <input id="diploma" class="form-check-input" type="checkbox" name="diploma[]" value="Bachelor/Law Degree" onchange="enableButton()">
@@ -99,6 +99,43 @@
                                     <div class="form-group">
                                         <label >Others, pls. specify</label>
                                         <input name="tor[other_purpose]" class="form-control form-control-sm" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="border-start border-danger border-4 mb-2">
+                            <h4 class="ms-2">Copy of Grades</h4>
+                        </div>
+                        <div class="alert alert-info p-1 mb-1">
+                            <span style="font-size: 12px">Copy of Grades cost ₱110.00</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-1">
+                                <input class="form-check-input" type="checkbox" name="reqCopyGrade" value="true" onchange="enableButton()">
+                                <label >Request Copy of Grades</label>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label >Number of Copies</label>
+                                <input name="copyGrades[copies]" class="form-control form-control-sm" type="number">
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label >Semester</label>
+                                        <select class="form-select form-select-sm" name="copyGrades[semester]" id="">
+                                            <option value="">Choose</option>
+                                            <option value="1">1st Semester</option>
+                                            <option value="2">2nd Semester</option>
+                                            <option value="3">Summer</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label >School Year</label>
+                                        <input name="copyGrades[schoolYear]" class="form-control form-control-sm" type="text" placeholder="e.g. 2019-2020">
                                     </div>
                                 </div>
                             </div>
@@ -344,44 +381,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col">
-                        <div class="border-start border-danger border-4 mb-2">
-                            <h4 class="ms-2">Copy of Grades</h4>
-                        </div>
-                        <div class="alert alert-info p-1 mb-1">
-                            <span style="font-size: 12px">Copy of Grades cost ₱110.00</span>
-                        </div>
-                        <div class="col">
-                            <div class="form-group mb-1">
-                                <input class="form-check-input" type="checkbox" name="reqCopyGrade" value="true" onchange="enableButton()">
-                                <label >Request Copy of Grades</label>
-                            </div>
-                            <div class="form-group mb-2">
-                                <label >Number of Copies</label>
-                                <input name="copyGrades[copies]" class="form-control form-control-sm" type="number">
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label >Semester</label>
-                                        <select class="form-select form-select-sm" name="copyGrades[semester]" id="">
-                                            <option value="">Choose</option>
-                                            <option value="1">1st Semester</option>
-                                            <option value="2">2nd Semester</option>
-                                            <option value="3">Summer</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label >School Year</label>
-                                        <input name="copyGrades[schoolYear]" class="form-control form-control-sm" type="text" placeholder="e.g. 2019-2020">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
+                    <div class="col-4">
                         <div class="border-start border-danger border-4 mb-2">
                             <h4 class="ms-2">Authentication</h4>
                         </div>
@@ -403,7 +403,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-4">
                         <div class="border-start border-danger border-4 mb-2">
                             <h4 class="ms-2">Photocopy</h4>
                         </div>

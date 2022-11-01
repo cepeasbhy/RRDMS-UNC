@@ -236,15 +236,23 @@ class DbHelperController extends Controller
 
     public function insertRequest($request, $studentID){
         $certificates = null;
+        $copyGrades = null;
+        $tor = null;
         $diploma = $this->checkNull($request, 'diploma');
-        $tor = $this->checkNull($request, 'tor');
         $authentication = $this->checkNull($request, 'authentication');
         $photocopy = $this->checkNull($request, 'photocopy');
-        $copyGrades = $this->checkNull($request, 'copyGrades');
         $requestID = 'REQ'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
 
         if($request->input('certificate') != null){
             $certificates = $this -> createJsonCertificate($request);
+        }
+
+        if($request->input('reqCopyGrade') != null){
+            $copyGrades = $request->input('copyGrades');
+        }
+
+        if($request->input('reqTOR') != null){
+            $tor = $request->input('tor');
         }
 
         ModelsRequest::create([
