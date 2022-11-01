@@ -1,12 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<body class="login-background">
 <div class="mt-5">
     <div class="row justify-content-center">
         <div class="col-6">
+            <div class="col mb-3 d-flex justify-content-center">
+                <img src="{{asset('/img/unc-logo.png')}}" height="100%" width="100px">
+            </div>
+            <div class="col mb-4">
+                <h3 class="text-center">Registrar Records and Document Management System</h3>
+            </div>
             <div class="card">
-                <div class="card-header">{{ __('ACCOUNT LOGIN') }}</div>
+                <div class="card-header fw-bold">ACCOUNT LOGIN</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -38,7 +43,7 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-8">
-                                <button type="submit" class="btn btn-danger fw-bold" style="width:100%">
+                                <button type="submit" class="btn btn-danger fw-bold btn-sm w-100">
                                     {{ __('Login') }}
                                 </button>
                             </div>
