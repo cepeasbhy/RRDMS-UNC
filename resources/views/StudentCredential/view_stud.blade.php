@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row mb-3">
+    <div class="row mb-3 mt-3">
         <form class="mb-3" action="{{route('StudCredHome')}}" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>

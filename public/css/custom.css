@@ -9,6 +9,12 @@
     margin: auto;
 }
 
+.login-background{
+    background-image: url('/img/background-img.jpg');
+    background-size: cover;
+    height: 100%;
+}
+
 .custom-th{
     font-size: 13px;
     color: #FFFF;

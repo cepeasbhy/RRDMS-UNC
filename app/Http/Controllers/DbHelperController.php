@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Credential;
+use App\Models\Request as ModelsRequest;
+use App\Models\RequestedDocument;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Support\Facades\File;
@@ -230,6 +232,59 @@ class DbHelperController extends Controller
         Credential::where('student_id', $id)->whereNotIn('document_name',
         ['Birth Certificate', 'Picture', 'Form 137', 'Transcript of Record'])->delete();
 
+    }
+
+    public function insertRequest($request, $studentID){
+        $certificates = null;
+        $diploma = $this->checkNull($request, 'diploma');
+        $tor = $this->checkNull($request, 'tor');
+        $authentication = $this->checkNull($request, 'authentication');
+        $photocopy = $this->checkNull($request, 'photocopy');
+        $copyGrades = $this->checkNull($request, 'copyGrades');
+        $requestID = 'REQ'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
+
+        if($request->input('certificate') != null){
+            $certificates = $this -> createJsonCertificate($request);
+        }
+
+        ModelsRequest::create([
+            'request_id' => $requestID,
+            'student_id' => $studentID,
+        ]);
+
+        RequestedDocument::create([
+            'student_id' => $studentID,
+            'request_id' => $requestID,
+            'diploma' => $diploma,
+            'transcript_of_record' => $tor,
+            'certificate' => $certificates,
+            'authentication' => $authentication,
+            'photocopy' => $photocopy,
+            'copy_of_grades' =>$copyGrades,
+            'total_fee' => 0 //This is just for a test
+        ]);
+    }
+
+    public function checkNull(Request $request, $keyName){
+        if($request->input($keyName) == null){
+            return null;
+        }else{
+            return $request->input($keyName);
+        }
+    }
+
+    public function createJsonCertificate(Request $request){
+        $certificates = $request->input('certificate');
+        $numCopies = array_filter($request->input('numCopies'));
+
+        $jsonCertificates = [];
+    
+        foreach($certificates as $certificate){
+            $json = array($certificate => $numCopies[$certificate]);
+            array_push($jsonCertificates, $json );
+        }
+
+        return $jsonCertificates;
     }
 
 }
