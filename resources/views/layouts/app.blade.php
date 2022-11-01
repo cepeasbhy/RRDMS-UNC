@@ -19,6 +19,9 @@
     <div id="container">
         @yield('content')
     </div>
+    <div id="request-container">
+        @yield('request-content')
+    </div>
 </body>
 
 </html>

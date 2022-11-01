@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @extends('layouts.header')
 
-@section('content')
+@section('request-content')
     <div class="container mb-3">
         <div class="row mb-3">
             <div class="border-start border-danger border-4 mb-2">
