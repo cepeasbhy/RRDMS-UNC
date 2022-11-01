@@ -16,7 +16,7 @@
             </a>
         </div>
         <div class="col">
-            <a href="/request_Records">
+            <a href="/request">
                 <img src="{{ asset('img/option2.jpg') }}" width="250px" height="250px">
             </a>
         </div>

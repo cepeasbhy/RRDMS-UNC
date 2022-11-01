@@ -35,11 +35,11 @@ Route::post('/stud_cred_mngmnt/view_student/add_single_rec', [StudCredController
 //Archived Records Routes
 Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('index');
 Route::get('/archived_records/add_credential', [ArchivedRecordsController::class, 'addCredential'])->name('add_credential');
-Route::get('/archived_records/show_unarchived_credential',[ArchivedRecordsController::class, 'getCredentials'])->name('toBeArchived');
-Route::get('/archived_records/view_record/{id}',[ArchivedRecordsController::class, 'viewRecord'])->name('checkRecord');
-Route::post('/archived_records/view_record/solo_archive/{id}',[ArchivedRecordsController::class, 'archiveSingleRecord'])->name('singleArchive');
-Route::post('/archived_records/view_record/delete_record/{id}',[ArchivedRecordsController::class, 'deleteRecord'])->name('deleteRecord');
-Route::post('/archived_records/view_record/update_record/{id}',[ArchivedRecordsController::class, 'updateRecord'])->name('updateRecord');
+Route::get('/archived_records/show_unarchived_credential', [ArchivedRecordsController::class, 'getCredentials'])->name('toBeArchived');
+Route::get('/archived_records/view_record/{id}', [ArchivedRecordsController::class, 'viewRecord'])->name('checkRecord');
+Route::post('/archived_records/view_record/solo_archive/{id}', [ArchivedRecordsController::class, 'archiveSingleRecord'])->name('singleArchive');
+Route::post('/archived_records/view_record/delete_record/{id}', [ArchivedRecordsController::class, 'deleteRecord'])->name('deleteRecord');
+Route::post('/archived_records/view_record/update_record/{id}', [ArchivedRecordsController::class, 'updateRecord'])->name('updateRecord');
 Route::post('/archived_records/view_record/update_credential/{studID}/{docID}', [ArchivedRecordsController::class, 'updateCredential'])->name('updateCredential');
 Route::post('/archived_records/view_record/delete_credential/{studID}/{docID}', [ArchivedRecordsController::class, 'deleteCredential'])->name('deleteCredential');
 
@@ -51,5 +51,3 @@ Route::get('/make_request', [requestRecordsController::class, 'makeRequest'])->n
 //User Account Routes
 Route::get('/account', [AccountController::class, 'index'])->name('accountHome');
 Route::post('/account/update/{id}', [AccountController::class, 'update'])->name('accountUpdate');
-
-
