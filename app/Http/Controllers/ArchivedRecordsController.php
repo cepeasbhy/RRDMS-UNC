@@ -49,7 +49,7 @@ class ArchivedRecordsController extends Controller
 
     public function deleteRecord(DbHelperController $db, $studID)
     {
-        $db->deleteStudent($studID);
+        $db->deleteStudent($studID, true);
         return redirect('/archived_records')->with('msgCred', 'Record Successfully Removed');
     }
 

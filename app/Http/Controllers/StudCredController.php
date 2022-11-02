@@ -42,7 +42,7 @@ class StudCredController extends Controller
     }
 
     public function destroy(DbHelperController $db, $id){
-        $db->deleteStudent($id);
+        $db->deleteStudent($id, false);
         return redirect('/stud_cred_mngmnt')->with('msg', 'Student successfully removed from the record');
     }
 

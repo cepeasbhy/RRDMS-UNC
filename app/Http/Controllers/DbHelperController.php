@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archive;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Credential;
@@ -174,11 +175,15 @@ class DbHelperController extends Controller
         ]);
     }
 
-    public function deleteStudent($id){
+    public function deleteStudent($id, $isFromArchive){
 
         $picturePath = $this->getStudentPicture($id);
         File::deleteDirectory(storage_path('app\public\\'.$id));
         unlink(storage_path('app\public\\'.$picturePath->document_loc));
+
+        if($isFromArchive){
+            Archive::where('student_id', $id)->delete();
+        }
 
         Credential::where('student_id', $id)->delete();
         Student::where('student_id', $id)->delete();
@@ -217,8 +222,15 @@ class DbHelperController extends Controller
 
     public function singleArchive($id){
 
+        $archiveID = 'ARCHIVE'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
+
         Student::where('student_id', $id)->update([
             'archive_status' => 1
+        ]);
+
+        Archive::create([
+            'student_id' => $id,
+            'archiving_id' => $archiveID
         ]);
 
         $unnecessaryCredentials = Credential::select(
