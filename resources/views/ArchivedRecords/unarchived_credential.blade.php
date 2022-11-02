@@ -54,9 +54,16 @@
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
         <script type="text/javascript">
-            $(document).ready(function() {
-
-                $('#archivedRecordsTable').DataTable();
+           $(document).ready(function() {
+                $('#archivedRecordsTable').DataTable({
+                    "language": {
+                        "lengthMenu": "Display _MENU_ records per page",
+                        "zeroRecords": "No records available",
+                        "info": "Showing page _PAGE_ of _PAGES_",
+                        "infoEmpty": "No records available",
+                        "infoFiltered": "(filtered from _MAX_ total records)"
+                    }
+                });
             });
         </script>
     </section>
