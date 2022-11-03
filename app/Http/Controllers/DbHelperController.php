@@ -235,14 +235,19 @@ class DbHelperController extends Controller
 
         $unnecessaryCredentials = Credential::select(
             'document_loc'
-            )->where('student_id', $id)->whereNotIn('document_name', ['Birth Certificate', 'Form 137', 'Transcript of Record', 'Picture'])->get();
+            )->where('student_id', $id)->whereNotIn('document_name',[
+                'Birth Certificate',
+                'Form 137',
+                'Transcript of Record',
+                'Form 9',
+                'Picture'])->get();
 
         foreach($unnecessaryCredentials as $creds){
             unlink(storage_path('app\public\\'.$creds->document_loc));
         }
 
         Credential::where('student_id', $id)->whereNotIn('document_name',
-        ['Birth Certificate', 'Picture', 'Form 137', 'Transcript of Record'])->delete();
+        ['Birth Certificate', 'Picture', 'Form 137', 'Form 9', 'Transcript of Record'])->delete();
 
     }
 
