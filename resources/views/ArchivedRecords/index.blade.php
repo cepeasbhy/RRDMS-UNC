@@ -8,11 +8,11 @@
 
 @section('content')
     <section class="my-3 row align-items-center">
-        <div class="col-sm-8">
+        <div class="col-sm-6">
             <h3>Archived Records Management</h3>
             <span class="badge bg-success mb-2">{{ session('msg') }}</span>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <form class="w-100" action="{{ route('toBeArchived') }}" method="get">
                 <input class="w-100 btn btn-sm btn-success" type="submit" value="ARCHIVE A RECORD">
             </form>

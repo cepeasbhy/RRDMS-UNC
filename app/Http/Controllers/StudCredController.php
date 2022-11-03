@@ -11,14 +11,15 @@ class StudCredController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index(DbHelperController $db){
         $students = $db->getStudents(0);
         return view('StudentCredential/index', ['students' => $students]);
     }
 
-    public function addStudent(){
-        return view('StudentCredential/add_stud');
+    public function addStudent(DbHelperController $db){
+        $staff = $db->getStaffInfo();
+        return view('StudentCredential/add_stud',['staff' => $staff]);
     }
 
     public function create(Request $request, DbHelperController $db){
@@ -33,11 +34,13 @@ class StudCredController extends Controller
         $student = $db->getStudentInfo($id);
         $picturePath = $db->getStudentPicture($id);
         $credentials = $db->getStudentCredenials($id);
+        $staff = $db->getStaffInfo();
         
         return view('StudentCredential/view_stud', [
             'student' => $student,
             'credentials' => $credentials,
-            'picturePath' =>  $picturePath
+            'picturePath' =>  $picturePath,
+            'staff' => $staff
         ]);
     }
 

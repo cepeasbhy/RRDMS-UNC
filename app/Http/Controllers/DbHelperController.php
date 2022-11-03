@@ -11,11 +11,12 @@ use App\Models\RequestedDocument;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class DbHelperController extends Controller
 {
     public function getStudents($archiveStatus){
-        return Student::select(
+        $students = Student::select(
             'student_id',
             'first_name',
             'last_name',
@@ -28,7 +29,29 @@ class DbHelperController extends Controller
             'courses', 'courses.course_id', '=', 'students.course_id'
         )->leftJoin(
             'users', 'users.user_id', '=', 'students.student_id'
-        )->where('archive_status', $archiveStatus)->get();
+        )->where('archive_status', $archiveStatus);
+
+        if(Auth::user()->account_role != 'CIC'){
+            return $students->get();
+        }else{
+            $staff = $this->getStaffInfo();
+            return $students->where('departments.department_id', $staff->assigned_dept)->get();
+        }
+    }
+
+    public function getStaffInfo(){
+        return Staff::select(
+            'staff_id',
+            'assigned_dept',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'email',
+            'phone_number',
+            'assigned_dept'
+        )->leftJoin(
+            'users', 'users.user_id', '=', 'staff.staff_id'
+        )->where('user_id', Auth::user()->user_id)->firstOrFail();
     }
 
     public function getStudentInfo($id){
