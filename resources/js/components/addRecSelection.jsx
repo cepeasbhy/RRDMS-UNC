@@ -26,6 +26,9 @@ function AddRec(){
         case "honorDismisal":
             fileName = "Honorable Dismisal";
             break;
+        case "form9":
+            fileName = "Form 9";
+            break;
         case "form137":
             fileName = "Form 137";
             break;
@@ -67,6 +70,7 @@ function AddRec(){
                     <option value="marriageCertificate">Marriage Certificate</option>
                     <option value="goodMoralCharacter">Certificate of Good Moral Character</option>
                     <option value="honorDismisal">Honorable Dismisal</option>
+                    <option value="form9">Form 9</option>
                     <option value="form137">Form 137</option>
                     <option value="form138">Form 138</option>
                     <option value="copyGrade">Copy of Grades</option>
