@@ -9,7 +9,6 @@
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">STUDENT INFORMATION</h4>
             </div>
-            <span class="badge bg-success mb-2">{{session('msg')}}</span>
             <div class="ms-2 mb-3">
                 <div class="row align-items-center mb-3">
                     <img class="col-3 img-fluid rounded-circle student-pic" data-bs-toggle="modal" data-bs-target="{{"#".$picturePath->document_id}}" src="{{asset('storage/'.$picturePath->document_loc)}}">
@@ -44,8 +43,11 @@
             </div>
             <div class="row g-2">
                 <div class="col-6">
-                    <button id="clickButton" class="btn btn-success btn-sm btn-block" 
-                    style="width: 100%" data-bs-toggle="modal" data-bs-target="#update-modal">PUT BACK TO ARCHIVE</button>
+                    <form action="{{route('returnToArchive', ['id' => $requestID])}}" method="post">
+                        @csrf
+                        <button class="btn btn-success btn-sm btn-block" 
+                        style="width: 100%">PUT BACK TO ARCHIVE</button>
+                    </form>
                 </div>
             </div>
         </div>

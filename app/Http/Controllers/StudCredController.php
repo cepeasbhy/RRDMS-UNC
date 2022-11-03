@@ -97,7 +97,13 @@ class StudCredController extends Controller
             'student' => $student,
             'credentials' => $credentials,
             'picturePath' =>  $picturePath,
+            'requestID' => $id
         ]);
+    }
+
+    public function returnToArchive(DbHelperController $db, $id){
+        $db->returnToArchive($id);
+        return redirect('/stud_cred_mngmnt/request_archive')->with('msg', 'Archive Successfully Returned');
     }
 
 }

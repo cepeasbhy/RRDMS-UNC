@@ -379,7 +379,18 @@ class DbHelperController extends Controller
     }
 
     public function getRequestedArchiveInfo($id){
-        return Archive::where('archive_id', $id)->firstOrFail();
+        $requestedArchived = RequestedArchive::select('archive_id')->where('request_id', $id)->firstOrFail();
+        return Archive::where('archive_id', $requestedArchived->archive_id)->firstOrFail();
+    }
+
+    public function returnToArchive($id){
+        $archive = $this->getRequestedArchiveInfo($id);
+
+        Archive::where('archive_id', $archive->archive_id)->update([
+            'available_status' => 1
+        ]);
+
+        RequestedArchive::where('request_id', $id)->delete();
     }
 
 }

@@ -15,6 +15,7 @@
                     Archives Requesting
                 </h4>
             </div>
+            <span class="badge bg-success mb-2">{{session('msg')}}</span>
         </div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -87,10 +88,10 @@
                                         @endif
                                     </td>
                                     <td class="custom-td">
-                                        @if ($requestedArchive->status != 0)
+                                        @if ($requestedArchive->status == 0)
                                             Not Available
                                         @else
-                                            <form action="{{route('viewRequestedArchive', ['id' => $requestedArchive->archive_id])}}" method="post">
+                                            <form action="{{route('viewRequestedArchive', ['id' => $requestedArchive->request_id])}}" method="post">
                                                 @csrf
                                                 <button class="btn btn-sm btn-success">VIEW</button>
                                             </form>

@@ -27,6 +27,7 @@ Route::get('/stud_cred_mngmnt/view_student/{id}', [StudCredController::class, 'v
 Route::get('/stud_cred_mngmnt/request_archive', [StudCredController::class, 'requestArchive'])->name('requestArchive');
 Route::post('/stud_cred_mngmnt/request_archive/make_request/{id}', [StudCredController::class, 'makeRequestArchive'])->name('makeRequestArchive');
 Route::post('/stud_cred_mngmnt/request_archive/view_requested_archive/{id}', [StudCredController::class, 'viewRequestedArchive'])->name('viewRequestedArchive');
+Route::post('/stud_cred_mngmnt/request_archive//view_requested_archive/return_archive/{id}', [StudCredController::class, 'returnToArchive'])->name('returnToArchive');
 Route::post('/stud_cred_mngmnt/view_student/update/{id}', [StudCredController::class, 'update'])->name('updateStudent');
 Route::post('/stud_cred_mngmnt/view_student/delete/{id}', [StudCredController::class, 'destroy'])->name('deleteStudent');
 Route::post('/stud_cred_mngmnt/add_student', [StudCredController::class, 'create'])->name('submitStudent');
