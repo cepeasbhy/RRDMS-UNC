@@ -93,7 +93,7 @@
     <!--Modal for Deleting Record-->
     @extends('layouts.modals.deleteModal', ['routeName' => 'deleteRecord', 'word' => 'archives'])
     <!--Modal for Viewing Credential-->
-    @extends('layouts.modals.viewCredModal')
+    @extends('layouts.modals.viewCredModal', ['fromRequestedView' => false])
     <!--Modal for Deleting Credential-->
     @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCredential'])
     <!--Modal for adding a Credential-->

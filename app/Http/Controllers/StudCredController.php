@@ -75,8 +75,29 @@ class StudCredController extends Controller
     }
 
     public function requestArchive(DbHelperController $db){
+        $requestedArchives = $db->getRequestedArchives();
         $archives = $db->getArchives();
-        return view('StudentCredential/request_archives', ['archives' => $archives]);
+        return view('StudentCredential/request_archives', [
+            'archives' => $archives,
+            'requestedArchives' => $requestedArchives
+        ]);
+    }
+
+    public function makeRequestArchive(DbHelperController $db, $id){
+        $db->submitArchiveRequest($id);
+        return redirect('/stud_cred_mngmnt/request_archive')->with('msg', 'Successfully Submitted Request');
+    }
+
+    public function viewRequestedArchive(DbHelperController $db, $id){
+        $requestedArchive = $db->getRequestedArchiveInfo($id);
+        $student = $db->getStudentInfo($requestedArchive->student_id);
+        $picturePath = $db->getStudentPicture($requestedArchive->student_id);
+        $credentials = $db->getStudentCredenials($requestedArchive->student_id);
+        return view('StudentCredential/view_requested_archive', [
+            'student' => $student,
+            'credentials' => $credentials,
+            'picturePath' =>  $picturePath,
+        ]);
     }
 
 }

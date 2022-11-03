@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@extends('layouts.header')
 
 @section('css-link')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
@@ -7,6 +6,9 @@
 
 @section('content')
     <div class="row mt-3">
+        <form class="mb-3" action="{{route('StudCredHome')}}" method="get">
+            <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+        </form>
         <div class="col mb-2">
             <div class="border-start border-danger border-4">
                 <h4 class="ms-2">
@@ -46,7 +48,7 @@
                                     <td class="custom-td">{{ $archive->first_name}}</td>
                                     <td class="custom-td">{{ $archive->last_name}}</td>
                                     <td class="custom-td">
-                                        <form action="{{route('makeRequestArchive', ['id' => $archive->archiving_id])}}" method="post">
+                                        <form action="{{route('makeRequestArchive', ['id' => $archive->archive_id])}}" method="post">
                                             @csrf
                                             <button class="btn btn-sm btn-danger">REQUEST</button>
                                         </form>
@@ -61,15 +63,42 @@
                 <div class="mt-3">
                     <table class="table myRequest">
                         <thead>
+                            <th class="custom-th bg-danger">Request ID</th>
                             <th class="custom-th bg-danger">Archive ID</th>
-                            <th class="custom-th bg-danger">Student ID</th>
-                            <th class="custom-th bg-danger">First Name</th>
-                            <th class="custom-th bg-danger">Last Name</th>
+                            <th class="custom-th bg-danger">Staff ID</th>
+                            <th class="custom-th bg-danger">Request Date</th>
                             <th class="custom-th bg-danger">Status</th>
                             <th class="custom-th bg-danger">Action</th>
                         </thead>
                         <tbody>
-    
+                            @foreach ($requestedArchives as $requestedArchive)
+                                <tr class="custom-tr">
+                                    <td class="custom-td">{{$requestedArchive->request_id}}</td>
+                                    <td class="custom-td">{{$requestedArchive->archive_id}}</td>
+                                    <td class="custom-td">{{$requestedArchive->staff_id}}</td>
+                                    <td class="custom-td">
+                                        {{date("Y-m-d",strtotime($requestedArchive->created_at))}}
+                                    </td>
+                                    <td class="custom-td">
+                                        @if ($requestedArchive->status == 0)
+                                            <span class="badge bg-secondary">-PENDING-</span>
+                                        @else
+                                            <span class="badge bg-success">-APPROVED-</span>
+                                        @endif
+                                    </td>
+                                    <td class="custom-td">
+                                        @if ($requestedArchive->status != 0)
+                                            Not Available
+                                        @else
+                                            <form action="{{route('viewRequestedArchive', ['id' => $requestedArchive->archive_id])}}" method="post">
+                                                @csrf
+                                                <button class="btn btn-sm btn-success">VIEW</button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                                
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

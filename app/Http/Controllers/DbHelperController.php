@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Credential;
 use App\Models\Request as ModelsRequest;
+use App\Models\RequestedArchive;
 use App\Models\RequestedDocument;
 use App\Models\Staff;
 use App\Models\User;
+use App\Models\ReuquestedArchive;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 
@@ -271,7 +273,7 @@ class DbHelperController extends Controller
 
         Archive::create([
             'student_id' => $id,
-            'archiving_id' => $archiveID
+            'archive_id' => $archiveID
         ]);
 
         $unnecessaryCredentials = Credential::select(
@@ -351,6 +353,33 @@ class DbHelperController extends Controller
         }
 
         return $jsonCertificates;
+    }
+
+    public function submitArchiveRequest($id){
+        
+        $requestID = 'REQ'.'-'.random_int(0, 1000)+random_int(0, 1000);
+
+        RequestedArchive::create([
+            'request_id' => $requestID,
+            'archive_id' => $id,
+            'staff_id' => Auth::user()->user_id
+        ]);
+        
+        Archive::where('archive_id', $id)->update([
+            'available_status' => 0
+        ]);
+    }
+
+    public function getRequestedArchives(){
+            if(Auth::user()->account_role != 'CIC'){
+                return RequestedArchive::all();
+            }else{
+                return RequestedArchive::where('staff_id', Auth::user()->user_id)->get();
+            }
+    }
+
+    public function getRequestedArchiveInfo($id){
+        return Archive::where('archive_id', $id)->firstOrFail();
     }
 
 }

@@ -95,7 +95,7 @@
     <!--Modal for Updating Record-->
     @extends('layouts.modals.updateModal', ['routeName' => 'updateRecord'])
     <!--Modal for Viewing Credential-->
-    @extends('layouts.modals.viewCredModal')
+    @extends('layouts.modals.viewCredModal', ['fromRequestedView' => false])
     <!--Modal for Deleting Credential-->
     @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCredential'])
     <!--Modal for Updating Credential-->

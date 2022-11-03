@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row mb-3 mt-3">
-        <form class="mb-3" action="{{route('StudCredHome')}}" method="get">
+        <form class="mb-3" action="{{route('requestArchive')}}" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <div class="col">
@@ -45,11 +45,7 @@
             <div class="row g-2">
                 <div class="col-6">
                     <button id="clickButton" class="btn btn-success btn-sm btn-block" 
-                    style="width: 100%" data-bs-toggle="modal" data-bs-target="#update-modal">UPDATE</button>
-                </div>
-                <div class="col-6">
-                    <button class="btn btn-danger btn-sm btn-block" 
-                    style="width: 100%" data-bs-toggle="modal" data-bs-target="#delete-modal">DELETE</button>
+                    style="width: 100%" data-bs-toggle="modal" data-bs-target="#update-modal">PUT BACK TO ARCHIVE</button>
                 </div>
             </div>
         </div>
@@ -57,7 +53,6 @@
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">STUDENT CREDENTIALS</h4>
             </div>
-            <span class="badge bg-success mb-2">{{session('msgCred')}}</span>
             <div class="row">
                 @foreach ($credentials as $credential)
                     @if ($credential->document_name != 'Picture')
@@ -74,29 +69,8 @@
                     @endif
                 @endforeach
             </div>
-            <div class="col mt-3 text-center">
-                <button class="btn btn-sm btn-success w-75" data-bs-toggle="modal" 
-                data-bs-target="#add-single-rec">ADD A RECORD</button>
-            </div>
         </div>
     </div>
-        <!--Modal for Updating Student Information-->
-        @extends('layouts.modals.updateModal', ['routeName' => 'updateStudent', 'staff' => $staff])
-        <!--Modal for Deleting Student-->
-        @extends('layouts.modals.deleteModal', ['routeName' => 'deleteStudent', 'word' => 'records'])
-        <!--Modal for Viewing Credential-->
-        @extends('layouts.modals.viewCredModal', ['fromRequestedView' => false])
-        <!--Modal for deleting Credential-->
-        @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCred'])
-        <!--Modal for updating Credential-->
-        @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCred'])
-        <!--Modal for adding a Credential-->
-        @extends('layouts.modals.addSingleRecModal', ['routeName' => 'addSingleRec'])
-    @if(Session::has('errors'))
-        <script>
-            window.onload = function(){
-                document.getElementById('clickButton').click();
-            }
-        </script>
-    @endif
+    <!--Modal for Viewing Credential-->
+     @extends('layouts.modals.viewCredModal', ['fromRequestedView' => true])
 @endsection
