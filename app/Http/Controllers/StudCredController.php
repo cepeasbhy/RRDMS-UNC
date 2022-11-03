@@ -7,6 +7,11 @@ use App\Http\Controllers\DbHelperController;
 
 class StudCredController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(DbHelperController $db){
         $students = $db->getStudents(0);
         return view('StudentCredential/index', ['students' => $students]);
