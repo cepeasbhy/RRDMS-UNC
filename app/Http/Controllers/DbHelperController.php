@@ -225,6 +225,8 @@ class DbHelperController extends Controller
         unlink(storage_path('app\public\\'.$picturePath->document_loc));
 
         if($isFromArchive){
+            $archive = Archive::select('archive_id')->where('student_id', $id)->firstOrFail();
+            RequestedArchive::where('archive_id', $archive->archive_id)->delete();
             Archive::where('student_id', $id)->delete();
         }
 
