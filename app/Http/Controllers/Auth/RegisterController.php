@@ -49,7 +49,7 @@ class RegisterController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable', 'string', 'max:255'],
             'account_role' => ['required', 'string', 'max:255'],
-            'assigned_dept' => ['required', 'string', 'max:255'],
+            'assigned_dept' => ['nullable', 'string', 'max:255'],
             'phone_number' => ['nullable', 'string', 'max:11'],
             'email' => ['required', 'email', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed']
