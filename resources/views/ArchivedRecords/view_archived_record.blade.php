@@ -82,6 +82,10 @@
                     @endif
                 @endforeach
             </div>
+            <div class="col mt-3 text-center">
+                <button class="btn btn-sm btn-success w-75" data-bs-toggle="modal" 
+                data-bs-target="#add-single-rec">ADD A RECORD</button>
+            </div>
         </div>
     </div>
     <!--Modal for Archiving Credential-->
@@ -96,6 +100,9 @@
     @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCredential'])
     <!--Modal for Updating Credential-->
     @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCredential'])
+    <!--Modal for adding a Credential-->
+    @extends('layouts.modals.addSingleRecModal', ['routeName' => 'addSingleRecArchive'])
+    
     @if (Session::has('errors'))
         <script>
             window.onload = function() {
