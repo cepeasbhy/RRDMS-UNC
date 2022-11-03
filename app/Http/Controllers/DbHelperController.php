@@ -220,13 +220,17 @@ class DbHelperController extends Controller
 
     public function deleteStudent($id, $isFromArchive){
 
-        $picturePath = $this->getStudentPicture($id);
+        /*$picturePath = $this->getStudentPicture($id);
         File::deleteDirectory(storage_path('app\public\\'.$id));
-        unlink(storage_path('app\public\\'.$picturePath->document_loc));
+        unlink(storage_path('app\public\\'.$picturePath->document_loc));*/
 
         if($isFromArchive){
-            $archive = Archive::select('archive_id')->where('student_id', $id)->firstOrFail();
-            RequestedArchive::where('archive_id', $archive->archive_id)->delete();
+            $archive = Archive::select('archive_id')->where('student_id', $id)->first();
+
+            if($archive != null){
+                RequestedArchive::where('archive_id', $archive->archive_id)->delete();
+            }
+
             Archive::where('student_id', $id)->delete();
         }
 
