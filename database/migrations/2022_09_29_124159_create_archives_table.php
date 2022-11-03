@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
-            $table->string('archiving_id')->unique();
+            $table->string('archive_id')->unique();
             $table->string('student_id');
+            $table->integer('available_status')->default(1);
             $table->timestamps();
 
             $table->foreign('student_id')->references('student_id')->on('students');
