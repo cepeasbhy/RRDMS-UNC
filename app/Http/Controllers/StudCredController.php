@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\DbHelperController;
+use Illuminate\Support\Facades\Auth;
 
 class StudCredController extends Controller
 {
@@ -18,7 +19,7 @@ class StudCredController extends Controller
     }
 
     public function addStudent(DbHelperController $db){
-        $staff = $db->getStaffInfo();
+        $staff = $db->getStaffInfo(Auth::user()->user_id);
         return view('StudentCredential/add_stud',['staff' => $staff]);
     }
 
@@ -34,7 +35,7 @@ class StudCredController extends Controller
         $student = $db->getStudentInfo($id);
         $picturePath = $db->getStudentPicture($id);
         $credentials = $db->getStudentCredenials($id);
-        $staff = $db->getStaffInfo();
+        $staff = $db->getStaffInfo(Auth::user()->user_id);
         
         return view('StudentCredential/view_stud', [
             'student' => $student,
@@ -71,6 +72,11 @@ class StudCredController extends Controller
 
         return redirect('/stud_cred_mngmnt/view_student/'.$request->student_id)->header('Cache-Control',
         'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Added');
+    }
+
+    public function requestArchive(DbHelperController $db){
+        $archives = $db->getArchives();
+        return view('StudentCredential/request_archives', ['archives' => $archives]);
     }
 
 }

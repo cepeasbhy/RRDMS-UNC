@@ -34,12 +34,30 @@ class DbHelperController extends Controller
         if(Auth::user()->account_role != 'CIC'){
             return $students->get();
         }else{
-            $staff = $this->getStaffInfo();
+            $staff = $this->getStaffInfo(Auth::user()->user_id);
             return $students->where('departments.department_id', $staff->assigned_dept)->get();
         }
     }
 
-    public function getStaffInfo(){
+    public function getArchives(){
+        $staff = $this->getStaffInfo(Auth::user()->user_id);
+
+        return Archive::select(
+            'archive_id',
+            'archives.student_id',
+            'department_id',
+            'first_name',
+            'last_name'
+        )->leftJoin(
+            'students', 'students.student_id', '=', 'archives.student_id'
+        )->leftJoin(
+            'users', 'users.user_id', '=', 'archives.student_id'
+        )->where(
+            'department_id', $staff->assigned_dept
+        )->where('available_status', 1)->get();
+    }
+
+    public function getStaffInfo($id){
         return Staff::select(
             'staff_id',
             'assigned_dept',
@@ -51,7 +69,7 @@ class DbHelperController extends Controller
             'assigned_dept'
         )->leftJoin(
             'users', 'users.user_id', '=', 'staff.staff_id'
-        )->where('user_id', Auth::user()->user_id)->firstOrFail();
+        )->where('user_id', $id)->firstOrFail();
     }
 
     public function getStudentInfo($id){
