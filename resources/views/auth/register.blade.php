@@ -22,7 +22,7 @@
                                     <option value="">Choose...</option>
                                     <option value="ADMIN">Admin</option>
                                     <option value="RECORD_ASSOCIATE">Record Associate</option>
-                                    <option value="EVALUATOR">Evaluator</option>
+                                    <option value="CIC">College In Charge</option>
                                </select>
                                 @error('accountRole')
                                     <span class="invalid-feedback" role="alert">
