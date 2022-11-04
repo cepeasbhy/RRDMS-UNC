@@ -189,7 +189,7 @@ class DbHelperController extends Controller
         $credController->uploadStudentCredentials($request);
     }
 
-    public function updateStudent(Request $request, $id){
+    public function updateStudent(Request $request, $id, $isFromArchive){
         $request -> validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -212,6 +212,13 @@ class DbHelperController extends Controller
             'course_id' => $request->input('course_id'),
             'admission_year' => $request->input('admission_year'),
         ]);
+
+        if($isFromArchive){
+            Archive::where('student_id', $id)->update([
+                'department_id' => $request->input('department_id'),
+                'course_id' => $request->input('course_id'),
+            ]);
+        }
     }
 
     public function deleteStudent($studentID, $isFromArchive){

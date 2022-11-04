@@ -51,7 +51,7 @@ class ArchivedRecordsController extends Controller
 
     public function updateRecord($id, Request $request, DbHelperController $db)
     {
-        $db->updateStudent($request, $id);
+        $db->updateStudent($request, $id, true);
         return redirect('/archived_records/view_record/' . $id)->with('msg', 'Record Successfully Updated');
     }
 

@@ -43,7 +43,7 @@ class StudCredController extends Controller
     }
 
     public function update($id, Request $request, DbHelperController $db){
-        $db->updateStudent($request, $id);
+        $db->updateStudent($request, $id, false);
         return redirect('/stud_cred_mngmnt/view_student/'.$id)->with('msg', 'Student Information Successfully Updated');
     }
 
