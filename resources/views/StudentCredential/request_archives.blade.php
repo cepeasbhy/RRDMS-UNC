@@ -88,7 +88,7 @@
                                         @endif
                                     </td>
                                     <td class="custom-td">
-                                        @if ($requestedArchive->status == 0)
+                                        @if ($requestedArchive->status != 0)
                                             Not Available
                                         @else
                                             <form action="{{route('viewRequestedArchive', ['id' => $requestedArchive->request_id])}}" method="post">

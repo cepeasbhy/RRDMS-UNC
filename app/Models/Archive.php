@@ -11,6 +11,8 @@ class Archive extends Model
 
     protected $fillable = [
         'student_id',
-        'archive_id'
+        'archive_id',
+        'department_id',
+        'course_id'
     ];
 }

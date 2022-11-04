@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\DbHelperController;
+use App\Http\Controllers\CredentialController;
 use Illuminate\Support\Facades\Auth;
 
 class StudCredController extends Controller
@@ -14,7 +15,7 @@ class StudCredController extends Controller
     }
 
     public function index(DbHelperController $db){
-        $students = $db->getStudents(0);
+        $students = $db->getUnarchivedRecords();
         return view('StudentCredential/index', ['students' => $students]);
     }
 
@@ -25,22 +26,18 @@ class StudCredController extends Controller
 
     public function create(Request $request, DbHelperController $db){
         $db->insertStudent($request);
-        $db->uploadStudentCredentials($request);
-
         return redirect('/stud_cred_mngmnt')->with('msg', 'Student Successfully Added');
     }
  
     public function viewStudent(DbHelperController $db, $id){
         
         $student = $db->getStudentInfo($id);
-        $picturePath = $db->getStudentPicture($id);
-        $credentials = $db->getStudentCredenials($id);
         $staff = $db->getStaffInfo(Auth::user()->user_id);
         
         return view('StudentCredential/view_stud', [
-            'student' => $student,
-            'credentials' => $credentials,
-            'picturePath' =>  $picturePath,
+            'student' => $student['studentInfo'],
+            'credentials' => $student['credentials'],
+            'picturePath' =>  $student['picturePath'],
             'staff' => $staff
         ]);
     }
@@ -55,20 +52,19 @@ class StudCredController extends Controller
         return redirect('/stud_cred_mngmnt')->with('msg', 'Student successfully removed from the record');
     }
 
-    public function deleteCred(DbHelperController $db, $studID, $docID){
-        $db->deleteCredential($docID);
-
+    public function deleteCred(CredentialController $credController, $studID, $docID){
+        $credController->deleteCredential($docID);
         return redirect('/stud_cred_mngmnt/view_student/'.$studID)->with('msgCred', 'Credential Successfully Removed');
     }
 
-    public function updateCred(DbHelperController $db, Request $request, $studID, $docID){
-        $db->updateCredential($request, $studID, $docID);
+    public function updateCred(CredentialController $credController, Request $request, $studID, $docID){
+        $credController->updateCredential($request, $studID, $docID);
         return redirect('/stud_cred_mngmnt/view_student/'.$studID)->header('Cache-Control',
         'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Updated');
     }
 
-    public function addSingleRec(DbHelperController $db, Request $request){
-        $db->saveFile($request, $request->keyName, $request->fileName);
+    public function addSingleRec(CredentialController $credController, Request $request){
+        $credController->saveCredential($request, $request->keyName, $request->fileName);
 
         return redirect('/stud_cred_mngmnt/view_student/'.$request->student_id)->header('Cache-Control',
         'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Added');
@@ -88,16 +84,15 @@ class StudCredController extends Controller
         return redirect('/stud_cred_mngmnt/request_archive')->with('msg', 'Successfully Submitted Request');
     }
 
-    public function viewRequestedArchive(DbHelperController $db, $id){
-        $requestedArchive = $db->getRequestedArchiveInfo($id);
-        $student = $db->getStudentInfo($requestedArchive->student_id);
-        $picturePath = $db->getStudentPicture($requestedArchive->student_id);
-        $credentials = $db->getStudentCredenials($requestedArchive->student_id);
+    public function viewRequestedArchive(DbHelperController $db, $requestID){
+        $requestedArchive = $db->getRequestedArchiveInfo($requestID);
+        $student = $db->getArchivedStudentInfo($requestedArchive->student_id);
+
         return view('StudentCredential/view_requested_archive', [
-            'student' => $student,
-            'credentials' => $credentials,
-            'picturePath' =>  $picturePath,
-            'requestID' => $id
+            'student' => $student['studentInfo'],
+            'credentials' => $student['credentials'],
+            'picturePath' =>  $student['picturePath'],
+            'requestID' => $requestID
         ]);
     }
 

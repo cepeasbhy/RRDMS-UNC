@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('student_id')->unique();
             $table->string('department_id');
-            $table->string('course_id')->nullable();
+            $table->string('course_id');
             $table->integer('archive_status')->default(0);
             $table->integer('admission_year');
             $table->timestamps();

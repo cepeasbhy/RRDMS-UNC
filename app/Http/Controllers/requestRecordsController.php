@@ -19,11 +19,10 @@ class requestRecordsController extends Controller
 
     public function makeRequest(DbHelperController $db){
         $student = $db->getStudentInfo(Auth::user()->user_id);
-        $picturePath = $db->getStudentPicture(Auth::user()->user_id);
         
         return view('RequestRecord/request', [
-            'student' => $student,
-            'picturePath' => $picturePath
+            'student' => $student['studentInfo'],
+            'picturePath' =>$student['picturePath']
         ]);
     }
 

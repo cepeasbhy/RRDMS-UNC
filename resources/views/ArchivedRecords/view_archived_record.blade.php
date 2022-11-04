@@ -25,6 +25,10 @@
                     </div>
                 </div>
                 <div class="mb-2">
+                    <label class="col-form-label col-form-label-sm" for="">Archive ID</label>
+                    <input class="form-control form-control-sm" type="text" value="{{ $student->archive_id }}" readonly>
+                </div>
+                <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Email</label>
                     <input class="form-control form-control-sm" type="text" value="{{ $student->email }}" readonly>
                 </div>
@@ -38,9 +42,14 @@
                         readonly>
                 </div>
                 <div class="mb-2">
+                    <label class="col-form-label col-form-label-sm" for="">Date Archived</label>
+                    <input class="form-control form-control-sm" type="text"
+                        value="{{ date('Y-m-d', strtotime($student->date_archived)) }}" readonly>
+                </div>
+                <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Date Filed</label>
                     <input class="form-control form-control-sm" type="text"
-                        value="{{ date('Y-m-d', strtotime($student->created_at)) }}" readonly>
+                        value="{{ date('Y-m-d', strtotime($student->date_filed)) }}" readonly>
                 </div>
                 <div class="mb-3">
                     <label class="col-form-label col-form-label-sm" for="">Last Updated</label>

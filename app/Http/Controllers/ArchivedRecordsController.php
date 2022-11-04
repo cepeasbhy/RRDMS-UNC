@@ -6,44 +6,40 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DbHelperController;
 use App\Models\Student;
-use Illuminate\Support\Facades\Log;
 
 class ArchivedRecordsController extends Controller
 {
     public function index(DbHelperController $db)
     {
-        $students = $db->getStudents(1);
+        $students = $db->getArchives();
         return view('ArchivedRecords.index', ['students' => $students]);
     }
 
     public function getCredentials(DbHelperController $db)
     {
-        $students = $db->getStudents(0);
+        $students = $db->getUnarchivedRecords();
         return view('ArchivedRecords.unarchived_credential',  ['students' => $students]);
     }
 
-    public function viewRecord(DbHelperController $db, $id)
+    public function viewRecord(DbHelperController $db, $studentID)
     {
-
-        $student = $db->getStudentInfo($id);
-        $picturePath = $db->getStudentPicture($id);
-        $credentials = $db->getStudentCredenials($id);
-
-
-        $fromIndexPage = Student::select('archive_status')->where('student_id', $id)->firstOrFail();
+        $fromIndexPage = Student::select('archive_status'
+        )->where('student_id', $studentID)->firstOrFail();
 
         if (substr($fromIndexPage, -2, 1) == 0) {
+            $student = $db->getStudentInfo($studentID);
             return view('ArchivedRecords.view_record', [
-                'student' => $student,
-                'credentials' => $credentials,
-                'picturePath' =>  $picturePath
+                'student' => $student['studentInfo'],
+                'credentials' => $student['credentials'],
+                'picturePath' =>  $student['picturePath'],
             ]);
         }
 
+        $archivedStudent = $db->getArchivedStudentInfo($studentID);
         return view('ArchivedRecords.view_archived_record', [
-            'student' => $student,
-            'credentials' => $credentials,
-            'picturePath' =>  $picturePath
+            'student' => $archivedStudent['studentInfo'],
+            'credentials' => $archivedStudent['credentials'],
+            'picturePath' =>  $archivedStudent['picturePath'],
         ]);
     }
 
@@ -65,25 +61,25 @@ class ArchivedRecordsController extends Controller
         return redirect('/archived_records')->with('msg', 'Record Successfully Archived');
     }
 
-    public function addSingleRec(DbHelperController $db, Request $request){
-        $db->saveFile($request, $request->keyName, $request->fileName);
+    public function addSingleRec(CredentialController $credController, Request $request){
+        $credController->saveCredential($request, $request->keyName, $request->fileName);
 
         return redirect('/archived_records/view_record/'.$request->student_id)->header('Cache-Control',
         'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Added');
     }
 
-    public function updateCredential(DbHelperController $db, Request $request, $studID, $docID)
+    public function updateCredential(CredentialController $credController, Request $request, $studID, $docID)
     {
-        $db->updateCredential($request, $studID, $docID);
+        $credController->updateCredential($request, $studID, $docID);
         return redirect('/archived_records/view_record/' . $studID)->header(
             'Cache-Control',
             'no-store, no-cache, must-revalidate'
         )->with('msgCred', 'Credential Successfully Updated');
     }
 
-    public function deleteCredential(DbHelperController $db, $studID, $docID)
+    public function deleteCredential(CredentialController $credController, $studID, $docID)
     {
-        $db->deleteCredential($docID);
+        $credController->deleteCredential($docID);
 
         return redirect('/archived_records/view_record/' . $studID)->with('msgCred', 'Credential Successfully Removed');
     }

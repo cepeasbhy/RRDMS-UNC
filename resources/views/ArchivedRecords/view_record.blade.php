@@ -96,6 +96,8 @@
     @extends('layouts.modals.viewCredModal', ['fromRequestedView' => false])
     <!--Modal for Deleting Credential-->
     @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCredential'])
+    <!--Modal for updating Credential-->
+    @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCredential'])
     <!--Modal for adding a Credential-->
     @extends('layouts.modals.addSingleRecModal', ['routeName' => 'addSingleRecArchive'])
 
