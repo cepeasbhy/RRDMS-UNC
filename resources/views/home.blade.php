@@ -11,14 +11,14 @@
                 <img src="{{ asset('img/option1.jpg') }}" width="250px" height="250px">
             </a>
         </div>
-        @if (Auth::user()->account_role == 'RECORD_ASSOCIATE')
+        @if (Auth::user()->account_role == 'rec_assoc')
             <div class="col-4">
                 <a href="/archived_records">
                     <img src="{{ asset('img/option3.jpg') }}" width="250px" height="250px">
                 </a>
             </div>
         @endif
-        @if (Auth::user()->account_role == 'CIC')
+        @if (Auth::user()->account_role == 'cic')
             <div class="col-4">
                 <a href="/request">
                     <img src="{{ asset('img/option2.jpg') }}" width="250px" height="250px">

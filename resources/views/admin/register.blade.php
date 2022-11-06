@@ -20,9 +20,9 @@
                             <div class="col-md-6">
                                <select class="form-select form-select-sm @error('accountRole') is-invalid @enderror" name="account_role" id="accountRole" required>
                                     <option value="">Choose...</option>
-                                    <option value="ADMIN">Admin</option>
-                                    <option value="RECORD_ASSOCIATE">Record Associate</option>
-                                    <option value="CIC">College In Charge</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="rec_assoc">Record Associate</option>
+                                    <option value="cic">College In Charge</option>
                                </select>
                                 @error('accountRole')
                                     <span class="invalid-feedback" role="alert">
