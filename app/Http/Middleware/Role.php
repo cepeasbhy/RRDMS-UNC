@@ -20,7 +20,7 @@ class Role
         if(Auth::user()->account_role == $role){
             return $next($request);
         }else{
-            return redirect()->route('login');
+            return redirect()->back();
         }
         
     }
