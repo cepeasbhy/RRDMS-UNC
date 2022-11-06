@@ -5,6 +5,7 @@ use App\Http\Controllers\StudCredController;
 use App\Http\Controllers\ArchivedRecordsController;
 use App\Http\Controllers\requestRecordsController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -20,6 +21,10 @@ use App\Http\Controllers\AccountController;
 
 Auth::routes();
 
+//Admin Routes
+Route::get('/admin', [AdminController::class, 'index'])->name('adminHome');
+
+//Student Credential Management Routes
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/stud_cred_mngmnt', [StudCredController::class, 'index'])->name('StudCredHome');
 Route::get('/stud_cred_mngmnt/add_student', [StudCredController::class, 'addStudent'])->name('addStudent');
