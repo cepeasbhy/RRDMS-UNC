@@ -33,7 +33,7 @@ class DbHelperController extends Controller
             'users', 'users.user_id', '=', 'students.student_id'
         )->where('archive_status', 0);
 
-        if(Auth::user()->account_role != 'CIC'){
+        if(Auth::user()->account_role != 'cic'){
             return $students->get();
         }else{
             $staff = $this->getStaffInfo(Auth::user()->user_id);
