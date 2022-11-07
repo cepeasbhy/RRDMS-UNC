@@ -4,29 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\DbHelperController;
+use App\Http\Controllers\CredentialController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
-{
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+{   
     public function index(DbHelperController $db){
-
-        if(Auth::user()->account_role == 'STUDENT'){
-            $picturePath = $db->getStudentPicture(Auth::user()->user_id);
-            $columName = 'document_loc';
+    
+        if(Auth::user()->account_role == 'student'){
+            $userInfo = $db->getStudentInfo(Auth::user()->user_id);
+            $picturePath = $userInfo['picturePath'];
+            $columnName = 'document_loc';
         }else{
             $picturePath = $db->getStaffPicture(Auth::user()->user_id);
-            $columName = 'picture_path';
+            $columnName = 'picture_path';
         }   
         
         return view('AccountViews/accountHome', [
-            'picturePath' => $picturePath,
-            'columnName' => $columName
+            'picturePath' =>  $picturePath,
+            'columnName' => $columnName
         ]);
     }
 

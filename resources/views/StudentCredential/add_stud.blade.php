@@ -66,7 +66,7 @@
                             </span>
                         @enderror
                     </div>
-                    @if (Auth::user()->account_role == 'RECORD_ASSOCIATE')
+                    @if (Auth::user()->account_role == 'rec_assoc')
                         <div id="selection"></div>
                     @else
                         <div class="form-group mb-2">

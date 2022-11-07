@@ -2,7 +2,6 @@
 @extends('layouts.header')
 
 @section('css-link')
-    <link rel="stylesheet" href="{{ asset('/css/index.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 @endsection
 

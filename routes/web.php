@@ -22,13 +22,12 @@ use App\Http\Middleware\Role;
 Auth::routes();
 
 //Admin Routes
-Route::group(['middleware' => 'role:admin'], function(){
+Route::group(['middleware' => 'role:admin', 'prevent-back-history'], function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('adminHome');
-    Route::get('/register', [AdminController::class, 'register'])->name('register');
 });
 
 //Student Credential Management Routes
-Route::group(['middleware' => 'role:cic'], function(){
+Route::group(['middleware' => 'role:staff', 'prevent-back-history'], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/stud_cred_mngmnt', [StudCredController::class, 'index'])->name('StudCredHome');
     Route::get('/stud_cred_mngmnt/add_student', [StudCredController::class, 'addStudent'])->name('addStudent');
@@ -46,7 +45,7 @@ Route::group(['middleware' => 'role:cic'], function(){
 });
 
 //Archived Records Routes
-Route::group(['middleware' => 'role:rec_assoc'], function(){
+Route::group(['middleware' => 'role:rec_assoc', 'prevent-back-history'], function(){
     Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('index');
     Route::get('/archived_records/add_credential', [ArchivedRecordsController::class, 'addCredential'])->name('add_credential');
     Route::get('/archived_records/show_unarchived_credential', [ArchivedRecordsController::class, 'getCredentials'])->name('toBeArchived');
@@ -61,7 +60,7 @@ Route::group(['middleware' => 'role:rec_assoc'], function(){
 
 
 //Request Records Routes
-Route::group(['middleware' => 'role:student'], function(){
+Route::group(['middleware' => 'role:student', 'prevent-back-history'], function(){
     Route::get('/request', [requestRecordsController::class, 'index'])->name('StudRequest');
     Route::get('/request/make_request', [requestRecordsController::class, 'makeRequest'])->name('makeRequest');
     Route::post('/request/submit_request', [requestRecordsController::class, 'submitRequest'])->name('submitRequest');
@@ -69,7 +68,7 @@ Route::group(['middleware' => 'role:student'], function(){
 
 
 //User Account Routes
-Route::middleware('auth')->group(function(){
+Route::middleware('auth', 'prevent-back-history')->group(function(){
     Route::get('/account', [AccountController::class, 'index'])->name('accountHome');
     Route::post('/account/update/{id}', [AccountController::class, 'update'])->name('accountUpdate');
 });

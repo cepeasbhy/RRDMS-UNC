@@ -2,7 +2,15 @@
     <nav class="navbar navbar-expand">
         <div class="container w-75">
             <div class="navbar-brand d-flex align-items-center">
-                <a href="/">
+                <a 
+                @if(Auth::user()->account_role == 'admin')
+                    href="{{route('adminHome')}}"
+                @elseif(Auth::user()->account_role == 'student')
+                    href="{{route('StudRequest')}}"
+                @else
+                    href="{{route('home')}}"
+                @endif
+                >
                     <img src="{{ asset('img/unc-logo.png') }}" width="50px" height="50px">
                 </a>
                 <div>

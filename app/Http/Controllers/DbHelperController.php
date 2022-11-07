@@ -58,7 +58,7 @@ class DbHelperController extends Controller
             'users', 'users.user_id', '=', 'archives.student_id'
         );
 
-        if(Auth::user()->account_role != 'CIC'){
+        if(Auth::user()->account_role != 'cic'){
             return $archivedRecords->get();
         }else{
             $staff = $this->getStaffInfo(Auth::user()->user_id);
@@ -181,7 +181,7 @@ class DbHelperController extends Controller
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'middle_name' => $request->input('middle_name'),
-            'account_role' => 'STUDENT',
+            'account_role' => 'student',
             'email' => $request->input('email'),
         ]);
 
@@ -341,7 +341,7 @@ class DbHelperController extends Controller
     }
 
     public function getRequestedArchives(){
-            if(Auth::user()->account_role != 'CIC'){
+            if(Auth::user()->account_role != 'cic'){
                 return RequestedArchive::all();
             }else{
                 return RequestedArchive::where('staff_id', Auth::user()->user_id)->get();
