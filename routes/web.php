@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudCredController;
 use App\Http\Controllers\ArchivedRecordsController;
-use App\Http\Controllers\requestRecordsController;
+use App\Http\Controllers\StudRequestController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
-use App\Http\Middleware\Role;
+use App\Http\Controllers\CicReqRecordManagmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,11 +59,16 @@ Route::group(['middleware' => 'role:rec_assoc', 'prevent-back-history'], functio
 });
 
 
+Route::group(['middleware' => 'role:cic', 'prevent-back-history'], function(){
+    Route::get('/cic/request', [CicReqRecordManagmentController::class, 'index'])->name('cic.request');
+});
+
+
 //Request Records Routes
 Route::group(['middleware' => 'role:student', 'prevent-back-history'], function(){
-    Route::get('/request', [requestRecordsController::class, 'index'])->name('StudRequest');
-    Route::get('/request/make_request', [requestRecordsController::class, 'makeRequest'])->name('makeRequest');
-    Route::post('/request/submit_request', [requestRecordsController::class, 'submitRequest'])->name('submitRequest');
+    Route::get('/request', [StudRequestController::class, 'index'])->name('stud.request');
+    Route::get('/request/make_request', [StudRequestController::class, 'makeRequest'])->name('stud.makeRequest');
+    Route::post('/request/submit_request', [StudRequestController::class, 'submitRequest'])->name('stud.submitRequest');
 });
 
 

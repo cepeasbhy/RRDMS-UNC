@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
                 case 'admin':
                     return redirect()->route('adminHome');
                 case 'student':
-                    return redirect()->route('StudRequest');
+                    return redirect()->route('stud.request');
                 default:
                     return redirect()->route('home');
             }   

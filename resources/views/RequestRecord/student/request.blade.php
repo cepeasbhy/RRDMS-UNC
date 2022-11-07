@@ -22,7 +22,7 @@
             <div class="border-start border-danger border-4 mb-3">
                 <h4 class="ms-1 my-auto">REQUEST RECORDS</h4>
             </div>
-            <form action="{{route('submitRequest')}}" method="post">
+            <form action="{{route('stud.submitRequest')}}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col">

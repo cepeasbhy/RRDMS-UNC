@@ -19,7 +19,7 @@
                             <button class="btn btn-success btn-sm w-100" form="searchRequest">SEARCH REQUEST</button>
                         </div>
                         <div class="col-5">
-                            <a href="{{route('makeRequest')}}" class="btn btn-danger btn-sm w-100">REQUEST</a>
+                            <a href="{{route('stud.makeRequest')}}" class="btn btn-danger btn-sm w-100">REQUEST</a>
                         </div>
                     </div>
                 </div>

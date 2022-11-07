@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\DbHelperController;
 use Illuminate\Support\Facades\Auth;
 
-class requestRecordsController extends Controller
+class StudRequestController extends Controller
 {
     public function __construct()
     {
@@ -14,13 +14,13 @@ class requestRecordsController extends Controller
     }
 
     public function index(){
-        return view('RequestRecord/index');
+        return view('RequestRecord/Student/index');
     }
 
     public function makeRequest(DbHelperController $db){
         $student = $db->getStudentInfo(Auth::user()->user_id);
         
-        return view('RequestRecord/request', [
+        return view('RequestRecord/Student/request', [
             'student' => $student['studentInfo'],
             'picturePath' =>$student['picturePath']
         ]);

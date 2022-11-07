@@ -20,7 +20,7 @@
         @endif
         @if (Auth::user()->account_role == 'cic')
             <div class="col-4">
-                <a href="/request">
+                <a href="{{route('cic.request')}}">
                     <img src="{{ asset('img/option2.jpg') }}" width="250px" height="250px">
                 </a>
             </div>

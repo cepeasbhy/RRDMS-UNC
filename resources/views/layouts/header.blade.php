@@ -6,7 +6,7 @@
                 @if(Auth::user()->account_role == 'admin')
                     href="{{route('adminHome')}}"
                 @elseif(Auth::user()->account_role == 'student')
-                    href="{{route('StudRequest')}}"
+                    href="{{route('stud.request')}}"
                 @else
                     href="{{route('home')}}"
                 @endif
