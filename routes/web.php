@@ -49,6 +49,7 @@ Route::group(['middleware' => 'role:rec_assoc', 'prevent-back-history'], functio
     Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('index');
     Route::get('/archived_records/add_credential', [ArchivedRecordsController::class, 'addCredential'])->name('add_credential');
     Route::get('/archived_records/show_unarchived_credential', [ArchivedRecordsController::class, 'getCredentials'])->name('toBeArchived');
+    Route::get('/archived_records/show_requested_records', [ArchivedRecordsController::class, 'getRequestedArchives'])->name('getRequests');
     Route::get('/archived_records/view_record/{id}', [ArchivedRecordsController::class, 'viewRecord'])->name('checkRecord');
     Route::post('/archived_records/view_record/add_single_rec', [ArchivedRecordsController::class, 'addSingleRec'])->name('addSingleRecArchive');
     Route::post('/archived_records/view_record/solo_archive/{id}', [ArchivedRecordsController::class, 'archiveSingleRecord'])->name('singleArchive');

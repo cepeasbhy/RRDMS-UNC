@@ -16,6 +16,11 @@
                 <input class="w-100 btn btn-sm btn-success" type="submit" value="ARCHIVE A RECORD">
             </form>
         </div>
+        <div class="col-sm-3">
+            <form class="w-100" action="{{ route('getRequests') }}" method="get">
+                <input class="w-100 btn btn-sm btn-danger" type="submit" value="VIEW REQUESTS">
+            </form>
+        </div>
     </section>
 
     <section class="container my-3">

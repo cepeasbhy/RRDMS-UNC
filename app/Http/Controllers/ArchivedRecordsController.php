@@ -13,7 +13,7 @@ class ArchivedRecordsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index(DbHelperController $db)
     {
         $students = $db->getArchives();
@@ -24,6 +24,15 @@ class ArchivedRecordsController extends Controller
     {
         $students = $db->getUnarchivedRecords();
         return view('ArchivedRecords.unarchived_credential',  ['students' => $students]);
+    }
+
+    public function getRequestedArchives(DbHelperController $db){
+        $requestedArchives = $db->getRequestedArchives();
+        $archives = $db->getArchives();
+        return view('ArchivedRecords.requested_archived_records', [
+            'archives' => $archives,
+            'requestedArchives' => $requestedArchives
+        ]);
     }
 
     public function viewRecord(DbHelperController $db, $studentID)
