@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row mb-3 mt-3">
-        <form class="mb-3" action="{{route('requestArchive')}}" method="get">
+        <form class="mb-3" action="{{ route('requestArchive') }}" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <div class="col">
@@ -11,13 +11,16 @@
             </div>
             <div class="ms-2 mb-3">
                 <div class="row align-items-center mb-3">
-                    <img class="col-3 img-fluid rounded-circle student-pic" data-bs-toggle="modal" data-bs-target="{{"#".$picturePath->document_id}}" src="{{asset('storage/'.$picturePath->document_loc)}}">
+                    <img class="col-3 img-fluid rounded-circle student-pic" data-bs-toggle="modal"
+                        data-bs-target="{{ '#' . $picturePath->document_id }}"
+                        src="{{ asset('storage/' . $picturePath->document_loc) }}">
                     <div class="col-9">
-                        <span class="h4 fw-bold">{{$student->last_name}}, {{$student->first_name}} {{mb_substr($student->middle_name, 0, 1).'.'}}</span>
+                        <span class="h4 fw-bold">{{ $student->last_name }}, {{ $student->first_name }}
+                            {{ mb_substr($student->middle_name, 0, 1) . '.' }}</span>
                         <br>
-                        <span>{{$student->student_id}}</span>
+                        <span>{{ $student->student_id }}</span>
                         <br>
-                        <span>{{$student->course_name}}</span>
+                        <span>{{ $student->course_name }}</span>
                     </div>
                 </div>
                 <div class="mb-2">
@@ -26,15 +29,16 @@
                 </div>
                 <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Email</label>
-                    <input class="form-control form-control-sm" type="text" value="{{$student->email}}" readonly>
+                    <input class="form-control form-control-sm" type="text" value="{{ $student->email }}" readonly>
                 </div>
                 <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Program</label>
-                    <input class="form-control form-control-sm" type="text" value="{{$student->dept_name}}" readonly>
+                    <input class="form-control form-control-sm" type="text" value="{{ $student->dept_name }}" readonly>
                 </div>
                 <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Admisson Year</label>
-                    <input class="form-control form-control-sm" type="text" value="{{$student->admission_year}}" readonly>
+                    <input class="form-control form-control-sm" type="text" value="{{ $student->admission_year }}"
+                        readonly>
                 </div>
                 <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Date Archived</label>
@@ -54,10 +58,9 @@
             </div>
             <div class="row g-2">
                 <div class="col-6">
-                    <form action="{{route('returnToArchive', ['id' => $requestID])}}" method="post">
+                    <form action="{{ route('returnToArchive', ['id' => $requestID]) }}" method="post">
                         @csrf
-                        <button class="btn btn-success btn-sm btn-block" 
-                        style="width: 100%">PUT BACK TO ARCHIVE</button>
+                        <button class="btn btn-success btn-sm btn-block" style="width: 100%">PUT BACK TO ARCHIVE</button>
                     </form>
                 </div>
             </div>
@@ -71,11 +74,13 @@
                     @if ($credential->document_name != 'Picture')
                         <div class="col-sm-4 mt-2">
                             <div class="card">
-                                <button class="btn p-0" data-bs-toggle="modal" data-bs-target="{{"#".$credential->document_id}}">
-                                    <img class="img-fluid p-1" src="{{asset('storage/'.$credential->document_loc)}}">
+                                <button class="btn p-0" data-bs-toggle="modal"
+                                    data-bs-target="{{ '#' . $credential->document_id }}">
+                                    <img class="img-fluid p-1" src="{{ asset('storage/' . $credential->document_loc) }}">
                                 </button>
                                 <div class="card-body text-center p-0">
-                                    <label class="col-form-label col-form-label-sm">{{$credential->document_name}}</label>
+                                    <label
+                                        class="col-form-label col-form-label-sm">{{ $credential->document_name }}</label>
                                 </div>
                             </div>
                         </div>
@@ -85,5 +90,5 @@
         </div>
     </div>
     <!--Modal for Viewing Credential-->
-     @extends('layouts.modals.viewCredModal', ['fromRequestedView' => true])
+    @extends('layouts.modals.viewCredModal', ['fromRequestedView' => true])
 @endsection

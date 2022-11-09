@@ -2,14 +2,13 @@
 
 @section('content')
     <div class="row mb-3 mt-3">
-        <form class="mb-3" action="{{ route('toBeArchived') }}" method="get">
+        <form class="mb-3" action="{{ route('getRequests') }}" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <div class="col">
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">STUDENT INFORMATION</h4>
             </div>
-            <span class="badge bg-success mb-2">{{ session('msg') }}</span>
             <div class="ms-2 mb-3">
                 <div class="row align-items-center mb-3">
                     <img class="col-3 img-fluid rounded-circle student-pic" data-bs-toggle="modal"
@@ -25,6 +24,10 @@
                     </div>
                 </div>
                 <div class="mb-2">
+                    <label class="col-form-label col-form-label-sm" for="">Archive ID</label>
+                    <input class="form-control form-control-sm" type="text" value="{{ $student->archive_id }}" readonly>
+                </div>
+                <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Email</label>
                     <input class="form-control form-control-sm" type="text" value="{{ $student->email }}" readonly>
                 </div>
@@ -38,9 +41,14 @@
                         readonly>
                 </div>
                 <div class="mb-2">
+                    <label class="col-form-label col-form-label-sm" for="">Date Archived</label>
+                    <input class="form-control form-control-sm" type="text"
+                        value="{{ date('Y-m-d', strtotime($student->date_archived)) }}" readonly>
+                </div>
+                <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Date Filed</label>
                     <input class="form-control form-control-sm" type="text"
-                        value="{{ date('Y-m-d', strtotime($student->created_at)) }}" readonly>
+                        value="{{ date('Y-m-d', strtotime($student->date_filed)) }}" readonly>
                 </div>
                 <div class="mb-3">
                     <label class="col-form-label col-form-label-sm" for="">Last Updated</label>
@@ -48,22 +56,23 @@
                         value="{{ date('Y-m-d', strtotime($student->updated_at)) }}" readonly>
                 </div>
             </div>
-            <div class="row g-2">
+            <section class="row g-2">
                 <div class="col-6">
-                    <button id="clickButton" class="btn btn-success btn-sm btn-block" style="width: 100%"
-                        data-bs-toggle="modal" data-bs-target="#archive-modal">ARCHIVE</button>
+                    <form action="{{ route('acceptRequestFromLogs', ['requestID' => $requestID]) }}" method="post">
+                        @csrf
+                        <button class="btn btn-success btn-sm btn-block" style="width: 100%">ACCEPT REQUEST</button>
+                    </form>
                 </div>
                 <div class="col-6">
                     <button class="btn btn-danger btn-sm btn-block" style="width: 100%" data-bs-toggle="modal"
-                        data-bs-target="#delete-modal">DELETE</button>
+                        data-bs-target="#delete-request-modal">DELETE</button>
                 </div>
-            </div>
+            </section>
         </div>
         <div class="col mb-2">
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">STUDENT CREDENTIALS</h4>
             </div>
-            <span class="badge bg-success mb-2">{{ session('msgCred') }}</span>
             <div class="row">
                 @foreach ($credentials as $credential)
                     @if ($credential->document_name != 'Picture')
@@ -71,7 +80,7 @@
                             <div class="card">
                                 <button class="btn p-0" data-bs-toggle="modal"
                                     data-bs-target="{{ '#' . $credential->document_id }}">
-                                    <img class="img-fluid p-1" src="{{ url('storage/' . $credential->document_loc) }}">
+                                    <img class="img-fluid p-1" src="{{ asset('storage/' . $credential->document_loc) }}">
                                 </button>
                                 <div class="card-body text-center p-0">
                                     <label
@@ -82,30 +91,10 @@
                     @endif
                 @endforeach
             </div>
-            <div class="col mt-3 text-center">
-                <button class="btn btn-sm btn-success w-75" data-bs-toggle="modal" data-bs-target="#add-single-rec">ADD A
-                    RECORD</button>
-            </div>
         </div>
     </div>
-    <!--Modal for Archiving Credential-->
-    @extends('layouts.modals.ArchivedRecords.archiveCredModal')
-    <!--Modal for Deleting Record-->
-    @extends('layouts.modals.deleteModal', ['routeName' => 'deleteRecord', 'word' => 'archives'])
     <!--Modal for Viewing Credential-->
-    @extends('layouts.modals.viewCredModal', ['fromRequestedView' => false])
-    <!--Modal for Deleting Credential-->
-    @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCredential'])
-    <!--Modal for updating Credential-->
-    @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCredential'])
-    <!--Modal for adding a Credential-->
-    @extends('layouts.modals.addSingleRecModal', ['routeName' => 'addSingleRecArchive'])
-
-    @if (Session::has('errors'))
-        <script>
-            window.onload = function() {
-                document.getElementById('clickButton').click();
-            }
-        </script>
-    @endif
+    @extends('layouts.modals.viewCredModal', ['fromRequestedView' => true])
+    <!--Modal for Deleting Record-->
+    @extends('layouts.modals.ArchivedRecords.delete_request_modal', ['routeName' => 'deleteRequest'])
 @endsection

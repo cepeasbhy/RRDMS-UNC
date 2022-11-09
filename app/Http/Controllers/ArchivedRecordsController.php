@@ -57,10 +57,34 @@ class ArchivedRecordsController extends Controller
         ]);
     }
 
+    public function viewRequestedArchive(DbHelperController $db, $requestID){
+        $requestedArchive = $db->getRequestedArchiveInfo($requestID);
+        $student = $db->getArchivedStudentInfo($requestedArchive->student_id);
+
+        return view('ArchivedRecords.view_requested_record', [
+            'student' => $student['studentInfo'],
+            'credentials' => $student['credentials'],
+            'picturePath' =>  $student['picturePath'],
+            'requestID' => $requestID
+        ]);
+    }
+
     public function deleteRecord(DbHelperController $db, $studID)
     {
         $db->deleteStudent($studID, true);
-        return redirect('/archived_records')->with('msgCred', 'Record Successfully Removed');
+        return redirect('/archived_records')->with('msgCred', 'Successfully Removed');
+    }
+
+    public function deleteRequests(DbHelperController $db, $requestID)
+    {
+        $db->deleteRequestedArchive($requestID);
+        return redirect('/archived_records/show_requested_records')->with('msgCred', 'Request have been Declined');
+    }
+
+    public function acceptRequest(DbHelperController $db, $requestID)
+    {
+        $db->accpetRequestedArchive($requestID);
+        return redirect('/archived_records/show_requested_records')->with('msgCred', 'Request have been Accepted');
     }
 
     public function updateRecord($id, Request $request, DbHelperController $db)

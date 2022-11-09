@@ -42,7 +42,7 @@ class DbHelperController extends Controller
     }
 
     public function getArchives(){
-        
+
         $archivedRecords = Archive::select(
             'archive_id',
             'archives.student_id',
@@ -316,7 +316,7 @@ class DbHelperController extends Controller
         $numCopies = array_filter($request->input('numCopies'));
 
         $jsonCertificates = [];
-    
+
         foreach($certificates as $certificate){
             $json = array($certificate => $numCopies[$certificate]);
             array_push($jsonCertificates, $json );
@@ -326,7 +326,7 @@ class DbHelperController extends Controller
     }
 
     public function submitArchiveRequest($id){
-        
+
         $requestID = 'REQ'.'-'.random_int(0, 1000)+random_int(0, 1000);
 
         RequestedArchive::create([
@@ -334,10 +334,18 @@ class DbHelperController extends Controller
             'archive_id' => $id,
             'staff_id' => Auth::user()->user_id
         ]);
-        
+
         Archive::where('archive_id', $id)->update([
             'available_status' => 0
         ]);
+    }
+
+    public function deleteRequestedArchive($requestID){
+        RequestedArchive::where('request_id', $requestID)->delete();
+    }
+
+    public function accpetRequestedArchive($requestID){
+        RequestedArchive::where('request_id', $requestID)->update(['status' => 1]);
     }
 
     public function getRequestedArchives(){

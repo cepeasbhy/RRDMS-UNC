@@ -51,6 +51,9 @@ Route::group(['middleware' => 'role:rec_assoc', 'prevent-back-history'], functio
     Route::get('/archived_records/show_unarchived_credential', [ArchivedRecordsController::class, 'getCredentials'])->name('toBeArchived');
     Route::get('/archived_records/show_requested_records', [ArchivedRecordsController::class, 'getRequestedArchives'])->name('getRequests');
     Route::get('/archived_records/view_record/{id}', [ArchivedRecordsController::class, 'viewRecord'])->name('checkRecord');
+    Route::post('/archived_records/show_requested_records/{id}', [ArchivedRecordsController::class, 'viewRequestedArchive'])->name('viewRequestedRecord');
+    Route::post('/archived_records/show_requested_records/accept/{requestID}', [ArchivedRecordsController::class, 'acceptRequest'])->name('acceptRequestFromLogs');
+    Route::post('/archived_records/show_requested_records/delete/{requestID}', [ArchivedRecordsController::class, 'deleteRequests'])->name('deleteRequest');
     Route::post('/archived_records/view_record/add_single_rec', [ArchivedRecordsController::class, 'addSingleRec'])->name('addSingleRecArchive');
     Route::post('/archived_records/view_record/solo_archive/{id}', [ArchivedRecordsController::class, 'archiveSingleRecord'])->name('singleArchive');
     Route::post('/archived_records/view_record/delete_record/{id}', [ArchivedRecordsController::class, 'deleteRecord'])->name('deleteRecord');
