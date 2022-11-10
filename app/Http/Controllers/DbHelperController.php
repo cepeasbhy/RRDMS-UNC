@@ -341,7 +341,13 @@ class DbHelperController extends Controller
     }
 
     public function deleteRequestedArchive($requestID){
-        RequestedArchive::where('request_id', $requestID)->delete();
+        $archive = $this->getRequestedArchiveInfo($requestID);
+        
+        RequestedArchive::select()->where('request_id', $requestID)->delete();
+
+        Archive::where('archive_id', $archive->archive_id)->update([
+            'available_status' => 1
+        ]);
     }
 
     public function accpetRequestedArchive($requestID){
