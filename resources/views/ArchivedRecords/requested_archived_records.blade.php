@@ -39,7 +39,6 @@
                             <th class="custom-th bg-danger">Archive ID</th>
                             <th class="custom-th bg-danger">Staff ID</th>
                             <th class="custom-th bg-danger">Request Date</th>
-                            <th class="custom-th bg-danger">Status</th>
                             <th class="custom-th bg-danger">Action</th>
                         </thead>
                         <tbody>
@@ -53,23 +52,12 @@
                                             {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                         </td>
                                         <td class="custom-td">
-                                            @if ($requestedArchive->status == 0)
-                                                <span class="badge bg-secondary">-PENDING-</span>
-                                            @else
-                                                <span class="badge bg-success">-APPROVED-</span>
-                                            @endif
-                                        </td>
-                                        <td class="custom-td">
-                                            @if ($requestedArchive->status != 0)
-                                                Not Available
-                                            @else
-                                                <form
-                                                    action="{{ route('viewRequestedRecord', ['id' => $requestedArchive->request_id]) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <button class="btn btn-sm btn-success">VIEW</button>
-                                                </form>
-                                            @endif
+                                            <form
+                                                action="{{ route('viewRequestedRecord', ['id' => $requestedArchive->request_id]) }}"
+                                                method="post">
+                                                @csrf
+                                                <button class="btn btn-sm btn-success">VIEW</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endif
@@ -85,7 +73,6 @@
                             <th class="custom-th bg-danger">Archive ID</th>
                             <th class="custom-th bg-danger">Staff ID</th>
                             <th class="custom-th bg-danger">Request Date</th>
-                            <th class="custom-th bg-danger">Status</th>
                             <th class="custom-th bg-danger">Action</th>
                         </thead>
                         <tbody>
@@ -99,23 +86,12 @@
                                             {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                         </td>
                                         <td class="custom-td">
-                                            @if ($requestedArchive->status == 0)
-                                                <span class="badge bg-secondary">-PENDING-</span>
-                                            @else
-                                                <span class="badge bg-success">-APPROVED-</span>
-                                            @endif
-                                        </td>
-                                        <td class="custom-td">
-                                            @if ($requestedArchive->status != 0)
-                                                Not Available
-                                            @else
-                                                <form
-                                                    action="{{ route('viewRequestedRecord', ['id' => $requestedArchive->request_id]) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <button class="btn btn-sm btn-success">VIEW</button>
-                                                </form>
-                                            @endif
+                                            <form
+                                                action="{{ route('viewRequestedRecord', ['id' => $requestedArchive->request_id]) }}"
+                                                method="post">
+                                                @csrf
+                                                <button class="btn btn-sm btn-success">VIEW</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endif
