@@ -65,7 +65,7 @@
     </div>
     @extends('layouts.modals.changePassModal')
 
-    @if($errors->any() || Session::has('errorMsg'))
+    @if($errors->any())
         <script>
             window.onload = function(){
                 document.getElementById('clickButton').click();
