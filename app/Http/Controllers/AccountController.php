@@ -52,7 +52,7 @@ class AccountController extends Controller
 
         $request->validate([
             'old_password' => ['required', 'max:255', 'string', 'current_password'],
-            'new_password' => ['required', 'confirmed', 'max:255', 'string', 'different:old_password']
+            'new_password' => ['required', 'confirmed', 'min:8','max:255', 'string', 'different:old_password']
         ]);
 
         User::where('user_id', Auth::user()->user_id)->update([
