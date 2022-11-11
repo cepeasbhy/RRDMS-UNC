@@ -57,12 +57,14 @@
                 </div>
             </div>
             <section class="row g-2">
-                <div class="col-6">
-                    <form action="{{ route('acceptRequestFromLogs', ['requestID' => $requestID]) }}" method="post">
-                        @csrf
-                        <button class="btn btn-success btn-sm btn-block" style="width: 100%">ACCEPT REQUEST</button>
-                    </form>
-                </div>
+                @if($requestInfo->status == 0)
+                    <div class="col-6">
+                        <form action="{{ route('acceptRequestFromLogs', ['requestID' => $requestID]) }}" method="post">
+                            @csrf
+                            <button class="btn btn-success btn-sm btn-block" style="width: 100%">ACCEPT REQUEST</button>
+                        </form>
+                    </div>
+                @endif
                 <div class="col-6">
                     <button class="btn btn-danger btn-sm btn-block" style="width: 100%" data-bs-toggle="modal"
                         data-bs-target="#delete-request-modal">DELETE</button>

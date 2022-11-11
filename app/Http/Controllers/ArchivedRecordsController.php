@@ -62,6 +62,7 @@ class ArchivedRecordsController extends Controller
         $student = $db->getArchivedStudentInfo($requestedArchive['requestedArchived']->student_id);
 
         return view('ArchivedRecords.view_requested_record', [
+            'requestInfo' => $requestedArchive['requestInfo'],
             'student' => $student['studentInfo'],
             'credentials' => $student['credentials'],
             'picturePath' =>  $student['picturePath'],
