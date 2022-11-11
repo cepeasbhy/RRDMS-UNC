@@ -59,7 +59,7 @@ class ArchivedRecordsController extends Controller
 
     public function viewRequestedArchive(DbHelperController $db, $requestID){
         $requestedArchive = $db->getRequestedArchiveInfo($requestID);
-        $student = $db->getArchivedStudentInfo($requestedArchive->student_id);
+        $student = $db->getArchivedStudentInfo($requestedArchive['requestedArchived']->student_id);
 
         return view('ArchivedRecords.view_requested_record', [
             'student' => $student['studentInfo'],
