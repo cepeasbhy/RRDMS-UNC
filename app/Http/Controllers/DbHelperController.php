@@ -37,7 +37,7 @@ class DbHelperController extends Controller
             return $students->get();
         }else{
             $staff = $this->getStaffInfo(Auth::user()->user_id);
-            return $students->where('departments.department_id', $staff->assigned_dept)->get();
+            return $students->where('departments.department_id', $staff['staffInfo']->assigned_dept)->get();
         }
     }
 
@@ -63,13 +63,13 @@ class DbHelperController extends Controller
         }else{
             $staff = $this->getStaffInfo(Auth::user()->user_id);
             return $archivedRecords->where(
-                        'archives.department_id', $staff->assigned_dept
+                        'archives.department_id', $staff['staffInfo']->assigned_dept
                     )->where('available_status', 1)->get();
         }
     }
 
-    public function getStaffInfo($userID){
-        return Staff::select(
+    public function getStaffInfo($staffID){
+        $staffInfo = Staff::select(
             'staff_id',
             'assigned_dept',
             'first_name',
@@ -77,10 +77,20 @@ class DbHelperController extends Controller
             'middle_name',
             'email',
             'phone_number',
-            'assigned_dept'
+            'assigned_dept',
+            'dept_name'
         )->leftJoin(
             'users', 'users.user_id', '=', 'staff.staff_id'
-        )->where('user_id', $userID)->firstOrFail();
+        )->leftJoin(
+            'departments', 'department_id', '=', 'staff.assigned_dept'
+        )->where('user_id', $staffID)->firstOrFail();
+
+        $staffPicture = $this->getStaffPicture($staffID);
+
+        return[
+            'staffInfo' => $staffInfo,
+            'staffPicture' => $staffPicture
+        ];
     }
 
     public function getStudentInfo($studentID){
@@ -151,9 +161,9 @@ class DbHelperController extends Controller
         ];
     }
 
-    public function getStaffPicture($id){
+    public function getStaffPicture($staffID){
         return Staff::select('picture_path')->where(
-            'staff_id', $id,
+            'staff_id', $staffID,
             )->firstOrFail();
     }
 

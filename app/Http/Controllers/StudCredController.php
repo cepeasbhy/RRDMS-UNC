@@ -21,7 +21,7 @@ class StudCredController extends Controller
 
     public function addStudent(DbHelperController $db){
         $staff = $db->getStaffInfo(Auth::user()->user_id);
-        return view('StudentCredential/add_stud',['staff' => $staff]);
+        return view('StudentCredential/add_stud',['staff' => $staff['staffInfo']]);
     }
 
     public function create(Request $request, DbHelperController $db){
@@ -38,7 +38,7 @@ class StudCredController extends Controller
             'student' => $student['studentInfo'],
             'credentials' => $student['credentials'],
             'picturePath' =>  $student['picturePath'],
-            'staff' => $staff
+            'staff' => $staff['staffInfo']
         ]);
     }
 

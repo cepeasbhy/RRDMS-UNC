@@ -16,6 +16,20 @@
                             <span class="h4 fw-bold">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
                             <br>
                             <span>{{Auth::user()->user_id}}</span>
+                            <br>
+                            @if (Auth::user()->account_role != 'student')
+                                @if (Auth::user()->account_role == 'cic')
+                                    <span>College In Charge</span>
+                                    <br>
+                                    <span>{{$staffInfo['dept_name']}}</span>
+                                @elseif(Auth::user()->account_role == 'rec_assoc')
+                                    <span>Records Associate</span>
+                                @else()
+                                    <span>Registrar</span>
+                                @endif
+                            @else
+                                <span>Student</span>
+                            @endif
                         </div>
                     </div>
                     <div class="mb-3">
@@ -34,19 +48,28 @@
                                 <label class="col-form-label col-form-label-sm" for="phone_number">Phone Number</label>
                                 <input id="phone_number" name="phoneNumber" class="form-control form-control-sm @error('phoneNumber') is-invalid @enderror" type="text" value="{{Auth::user()->phone_number}}">
                                 @error('phoneNumber')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </form>
                         <div class="mb-3 row gap-3">
                             <button class="col btn btn-success btn-sm" form="accountUpdateForm">Update Information</button>
-                            <button class="col btn btn-danger btn-sm">Update Password</button>
+                            <button id="clickButton" class="col btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#change-pass-modal">Change Password</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @extends('layouts.modals.changePassModal')
+
+    @if($errors->any() || Session::has('errorMsg'))
+        <script>
+            window.onload = function(){
+                document.getElementById('clickButton').click();
+            }
+        </script>
+    @endif
 @endsection

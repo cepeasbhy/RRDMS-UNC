@@ -71,7 +71,7 @@ class CredentialController extends Controller
         if($keyName == 'picture'){
             $folderPath = 'Picture';
         }else{
-            $folderPath = $request->student_id;
+            $folderPath = 'credentials/'.$request->student_id;
         }
 
         $docPath = $request->file($keyName)->storeAs(
@@ -95,7 +95,7 @@ class CredentialController extends Controller
     public function deleteAllStudCreds($studentID){
 
         $picturePath = $this->getStudentPicture($studentID);
-        File::deleteDirectory(storage_path('app\public\\'.$studentID));
+        File::deleteDirectory(storage_path('app\public\credentials\\'.$studentID));
         unlink(storage_path('app\public\\'.$picturePath->document_loc));
         Credential::where('student_id', $studentID)->delete();
     }
@@ -118,7 +118,7 @@ class CredentialController extends Controller
         if($credential->input_name == 'picture'){
             $folderPath = 'Picture';
         }else{
-            $folderPath = $studID;
+            $folderPath = 'credentials/'.$studID;
         }
 
         $newPath = $request->file($credential->input_name)->storeAs(
