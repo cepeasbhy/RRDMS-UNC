@@ -161,6 +161,30 @@ class DbHelperController extends Controller
         ];
     }
 
+    public function getCountDepartment(){
+        $asCount = Student::where('department_id', '001')->count();
+        $cbaCount = Student::where('department_id', '002')->count();
+        $csCount = Student::where('department_id', '003')->count();
+        $cjeCount = Student::where('department_id', '004')->count();
+        $educCount = Student::where('department_id', '005')->count();
+        $eaCount = Student::where('department_id', '006')->count();
+        $nursingCount = Student::where('department_id', '007')->count();
+        $gradCount = Student::where('department_id', '008')->count();
+        $lawCount = Student::where('department_id', '009')->count();
+
+        return([
+            'asCount' => $asCount,
+            'cbaCount' => $cbaCount,
+            'csCount' => $csCount,
+            'cjeCount' => $cjeCount,
+            'educCount' => $educCount,
+            'eaCount' =>  $eaCount,
+            'nursingCount' => $nursingCount,
+            'gradCount' => $gradCount,
+            'lawCount' => $lawCount
+        ]);
+    }
+
     public function getStaffPicture($staffID){
         return Staff::select('picture_path')->where(
             'staff_id', $staffID,
