@@ -11,11 +11,36 @@ use App\Models\RequestedDocument;
 use App\Models\Staff;
 use App\Models\User;
 use App\Http\Controllers\CredentialController;
-
+use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 
 class DbHelperController extends Controller
 {
+    public function getDeptRecords($deptID){
+        $deptName = Department::select('dept_name')->where('department_id', $deptID)->firstOrFail();
+
+        $deptRecords = Student::select(
+            'student_id',
+            'first_name',
+            'last_name',
+            'dept_name',
+            'course_name',
+            'admission_year',
+        )->leftJoin(
+            'departments', 'departments.department_id', '=', 'students.department_id'
+        )->leftJoin(
+            'courses', 'courses.course_id', '=', 'students.course_id'
+        )->leftJoin(
+            'users', 'users.user_id', '=', 'students.student_id'
+        )->where('students.department_id', $deptID)->get();
+
+
+        return([
+            'deptName' => $deptName,
+            'deptRecords' => $deptRecords
+        ]);
+    }
+
     public function getUnarchivedRecords(){
 
         $students = Student::select(

@@ -4,7 +4,7 @@
             <div class="navbar-brand d-flex align-items-center">
                 <a 
                 @if(Auth::user()->account_role == 'admin')
-                    href="{{route('adminHome')}}"
+                    href="{{route('admin.home')}}"
                 @elseif(Auth::user()->account_role == 'student')
                     href="{{route('stud.request')}}"
                 @else

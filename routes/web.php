@@ -23,7 +23,11 @@ Auth::routes();
 
 //Admin Routes
 Route::group(['middleware' => 'role:admin', 'prevent-back-history'], function(){
-    Route::get('/admin', [AdminController::class, 'index'])->name('adminHome');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.home');
+    Route::get('/admin/view_department/{deptID}', [AdminController::class, 'viewDepartment'])->name('admin.viewDepartment');
+    Route::get('/admin/view_student/{deptID}/{studentID}', [AdminController::class, 'viewStudent'])->name('admin.viewStudent');
+    Route::get('/admin/export_graduates', [AdminController::class, 'exportGraduates'])->name('admin.exportGraduates');
+    Route::get('/admin/export_stud_list', [AdminController::class, 'exportStudList'])->name('admin.exportStudList');
 });
 
 //Student Credential Management Routes
