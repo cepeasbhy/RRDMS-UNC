@@ -22,7 +22,7 @@ use App\Http\Controllers\CicReqRecordManagmentController;
 Auth::routes();
 
 //Admin Routes
-Route::group(['middleware' => 'role:admin', 'prevent-back-history'], function(){
+Route::group(['middleware' => ['role:admin', 'prevent-back-history']], function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.home');
     Route::get('/admin/view_department/{deptID}', [AdminController::class, 'viewDepartment'])->name('admin.viewDepartment');
     Route::get('/admin/view_student/{deptID}/{studentID}', [AdminController::class, 'viewStudent'])->name('admin.viewStudent');
@@ -31,7 +31,7 @@ Route::group(['middleware' => 'role:admin', 'prevent-back-history'], function(){
 });
 
 //Student Credential Management Routes
-Route::group(['middleware' => 'role:staff', 'prevent-back-history'], function(){
+Route::group(['middleware' => ['role:staff', 'prevent-back-history']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/stud_cred_mngmnt', [StudCredController::class, 'index'])->name('StudCredHome');
     Route::get('/stud_cred_mngmnt/add_student', [StudCredController::class, 'addStudent'])->name('addStudent');
@@ -49,7 +49,7 @@ Route::group(['middleware' => 'role:staff', 'prevent-back-history'], function(){
 });
 
 //Archived Records Routes
-Route::group(['middleware' => 'role:rec_assoc', 'prevent-back-history'], function(){
+Route::group(['middleware' => ['role:rec_assoc', 'prevent-back-history']], function(){
     Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('index');
     Route::get('/archived_records/add_credential', [ArchivedRecordsController::class, 'addCredential'])->name('add_credential');
     Route::get('/archived_records/show_unarchived_credential', [ArchivedRecordsController::class, 'getCredentials'])->name('toBeArchived');
@@ -67,16 +67,18 @@ Route::group(['middleware' => 'role:rec_assoc', 'prevent-back-history'], functio
 });
 
 
-Route::group(['middleware' => 'role:cic', 'prevent-back-history'], function(){
+Route::group(['middleware' => ['role:cic', 'prevent-back-history']], function(){
     Route::get('/cic/request', [CicReqRecordManagmentController::class, 'index'])->name('cic.request');
 });
 
 
 //Request Records Routes
-Route::group(['middleware' => 'role:student', 'prevent-back-history'], function(){
+Route::group(['middleware' => ['role:student', 'prevent-back-history']], function(){
     Route::get('/request', [StudRequestController::class, 'index'])->name('stud.request');
+    Route::get('/request/first_time_login', [StudRequestController::class, 'forceChangePass'])->name('stud.forceChangePass');
     Route::get('/request/make_request', [StudRequestController::class, 'makeRequest'])->name('stud.makeRequest');
     Route::post('/request/submit_request', [StudRequestController::class, 'submitRequest'])->name('stud.submitRequest');
+    Route::post('/request/first_time_login/submit', [AccountController::class, 'changePassFirstTimeLogin'])->name('stud.forceChangePassSubmit');
 });
 
 

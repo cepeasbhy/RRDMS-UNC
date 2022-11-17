@@ -51,14 +51,32 @@ class AccountController extends Controller
     public function changePassword(Request $request){
 
         $request->validate([
-            'old_password' => ['required', 'max:255', 'string', 'current_password'],
+            'old_password' => ['required', 'max:255', 'min:8', 'string', 'current_password'],
             'new_password' => ['required', 'confirmed', 'min:8','max:255', 'string', 'different:old_password']
         ]);
 
         User::where('user_id', Auth::user()->user_id)->update([
-            'password' => Hash::make($request->new_password)
+            'password' => Hash::make($request->new_password),
+            'change_pass_at' => now()
         ]);
 
         return back()->with('msg', 'Password Successfully Changed!');
+    }
+
+    public function changePassFirstTimeLogin(Request $request){
+        $request->validate([
+            'password' => ['required', 'confirmed', 'min:8', 'max:255', 'string'],
+        ]);
+
+        if(Hash::check($request->password, Auth::user()->password)){
+            return redirect()->route('stud.forceChangePass')->with('msg', 'You cannot use your old password');
+        }
+
+        User::where('user_id', Auth::user()->user_id)->update([
+            'password' => Hash::make($request->password),
+            'change_pass_at' => now()
+        ]);
+
+        return redirect()->route('stud.request');
     }
 }
