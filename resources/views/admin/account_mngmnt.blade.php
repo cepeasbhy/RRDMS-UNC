@@ -16,9 +16,8 @@
                     <h3 class="ms-2">
                         Account Management
                     </h3>
-                    <span class="badge bg-success mb-2">{{session('msg')}}</span>
                 </div>
-                <span class="badge bg-success mb-2">{{ session('msg') }}</span>
+                <span class="badge bg-success mb-2 mt-2">{{ session('msg') }}</span>
             </div>
         </div>
         <div class="col-sm-3">

@@ -12,7 +12,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <form action="" method="post">
+                    <form action="{{route('admin.deleteStaffAccount', ['userID' => $accountInfo['accountInfo']->staff_id])}}" method="post">
                         @csrf
                         <button class="btn btn-sm btn-danger">Proceed</button>
                     </form>

@@ -160,6 +160,17 @@ class AccountController extends Controller
             'assigned_dept' => $request->input('assignedDept')
         ]);
 
-        return back()->with('msg', 'Account Successfully Updates');
+        return back()->with('msg', 'Account Successfully Updated');
+    }
+
+    public function admindeleteStaffAccount($userID){
+        $db = new DbHelperController;
+        $staffPicture = $db->getStaffPicture($userID);
+
+        unlink(storage_path('app\public\\'.$staffPicture->picture_path));
+        Staff::where('staff_id', $userID)->delete();
+        User::where('user_id', $userID)->delete();
+
+        return redirect()->route('admin.viewAccounts')->with('msg', 'Account Successfully Deleted');
     }
 }
