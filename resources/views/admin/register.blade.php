@@ -95,7 +95,7 @@
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="email" class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Assigned Department') }}</label>
+                            <label  class="col-md-4 col-form-label col-form-label-sm text-md-end">{{ __('Assigned Department') }}</label>
 
                             <div class="col-md-6">
                                 <select class="form-select form-select-sm " name="assigned_dept">

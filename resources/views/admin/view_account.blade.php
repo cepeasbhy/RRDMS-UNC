@@ -10,6 +10,7 @@
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">ACCOUNT INFORMATION</h4>
             </div>
+            <span class="badge bg-success mb-2">{{session('msg')}}</span>
             <div class="ms-3 mt-3">
                 <div class="mb-3">
                     <div class="row align-items-center mb-3">
@@ -68,15 +69,15 @@
             </div>
         </div>
     </div>
-    @if ($accountInfo['accountInfo']->account_role != 'student')
-        @extends('layouts.modals.updateAccountModal')
-        @extends('layouts.modals.deleteAccountModal')
-        @if($errors->any())
-            <script>
-                window.onload = function(){
-                    document.getElementById('clickButton').click();
-                }
-            </script>
-        @endif
+
+    @extends('layouts.modals.deleteAccountModal')
+    @extends('layouts.modals.updateAccountModal')
+
+    @if($errors->any())
+        <script>
+            window.onload = function(){
+                document.getElementById('clickButton').click();
+            }
+        </script>
     @endif
 @endsection

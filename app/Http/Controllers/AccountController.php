@@ -135,4 +135,31 @@ class AccountController extends Controller
             ];
         }   
     }
+
+    public function adminUpdateStaffAccount(Request $request, $userID){
+        $request->validate([
+            'firstName' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'middleName' => ['nullable', 'string', 'max:255'],
+            'accountRole' => ['required', 'string', 'max:255'],
+            'assignedDept' => ['nullable', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'phoneNumber' => ['required', 'string', 'max:11', 'min:11']
+        ]);
+
+        User::where('user_id', $userID)->update([
+            'first_name' =>$request->input('firstName'),
+            'middle_name' =>$request->input('middleName'),
+            'last_name' =>$request->input('lastName'),
+            'email' => $request->input('email'),
+            'phone_number' => $request->input('phoneNumber'),
+            'account_role' => $request->input('accountRole')
+        ]);
+
+        Staff::where('staff_id', $userID)->update([
+            'assigned_dept' => $request->input('assignedDept')
+        ]);
+
+        return back()->with('msg', 'Account Successfully Updates');
+    }
 }
