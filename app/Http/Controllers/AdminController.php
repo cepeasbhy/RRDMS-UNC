@@ -48,8 +48,9 @@ class AdminController extends Controller
         ]);
     }
 
-    public function viewAccountInfo(){
-        return view('/admin/view_account');
+    public function viewAccountInfo(AccountController $account, $role, $userID){
+        $accountInfo = $account->getAccountInfo($role, $userID);
+        return view('/admin/view_account', ['accountInfo' => $accountInfo]);
     }
 
     public function exportGraduates(){

@@ -114,14 +114,15 @@ class AccountController extends Controller
         )->get();
     }
 
-    public function getAccountInfo(DbHelperController $db, $role, $userID){
+    public function getAccountInfo($role, $userID){
+        $db = new DbHelperController;
+
         if($role == 'student'){
             $studentInfo = $db->getStudentInfo($userID);
             
             return [
-                'studentInfo' => $studentInfo['studentInfo'],
-                'picturePath' =>  $studentInfo['picturePath'],
-                'columnName' => 'document_loc'
+                'accountInfo' => $studentInfo['studentInfo'],
+                'picturePath' =>  $studentInfo['picturePath']->document_loc,
             ];
 
         }else{
@@ -129,9 +130,8 @@ class AccountController extends Controller
             $picturePath = $staff['staffPicture'];
 
             return [
-                'staffInfo' => $staff['staffInfo'],
-                'picturePath' =>  $picturePath,
-                'columnName' => 'picture_path'
+                'accountInfo' => $staff['staffInfo'],
+                'picturePath' =>  $picturePath->picture_path,
             ];
         }   
     }
