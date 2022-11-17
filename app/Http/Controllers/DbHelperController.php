@@ -132,6 +132,7 @@ class DbHelperController extends Controller
                 'dept_name',
                 'course_name',
                 'email',
+                'status',
                 'admission_year',
                 'students.created_at',
                 'students.updated_at'
@@ -165,6 +166,7 @@ class DbHelperController extends Controller
                 'dept_name',
                 'course_name',
                 'email',
+                'status',
                 'admission_year',
                 'archives.created_at AS date_archived',
                 'students.created_at AS date_filed',
@@ -257,6 +259,7 @@ class DbHelperController extends Controller
             'admission_year' => ['required', 'integer', 'min:1948'],
             'course_id' => ['required', 'string', 'max:255'],
             'department_id' => ['required', 'string', 'max:255'],
+            'status' => ['required', 'integer', 'min:0','max:2'],
         ]);
 
         User::where('user_id', $id)->update([
@@ -270,6 +273,7 @@ class DbHelperController extends Controller
             'department_id' => $request->input('department_id'),
             'course_id' => $request->input('course_id'),
             'admission_year' => $request->input('admission_year'),
+            'status' => $request->input('status')
         ]);
 
         if($isFromArchive){

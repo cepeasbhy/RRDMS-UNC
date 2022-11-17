@@ -34,6 +34,19 @@
                     <input class="form-control form-control-sm" type="text" value="{{$student->admission_year}}" readonly>
                 </div>
                 <div class="mb-2">
+                    <label class="col-form-label col-form-label-sm" for="">Status</label>
+                    @switch($student->status)
+                        @case(0)
+                            <input class="form-control form-control-sm" type="text" value="INACTIVE" readonly>
+                            @break
+                        @case(1)
+                            <input class="form-control form-control-sm" type="text" value="ACTIVE" readonly>
+                            @break
+                        @default
+                            <input class="form-control form-control-sm" type="text" value="GRADUATED" readonly>
+                    @endswitch
+                </div>
+                <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Date Filed</label>
                     <input class="form-control form-control-sm" type="text" value="{{date("Y-m-d",strtotime($student->created_at))}}" readonly>
                 </div>
