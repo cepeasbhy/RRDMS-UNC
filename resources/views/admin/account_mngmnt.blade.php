@@ -66,7 +66,9 @@
                                         @default
                                             <td class="custom-td">Records Associate</td>
                                     @endswitch
-                                    <td class="custom-td"><a class="btn btn-success btn-sm">VIEW</a></td>
+                                    <td class="custom-td"><a href="{{route('admin.viewAccountInfo',
+                                    ['role' => 'staff', 'userID' => $staffAccount->staff_id])}}"
+                                    class="btn btn-success btn-sm">VIEW</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -92,7 +94,9 @@
                                     <td class="custom-td">{{$studentAccount->last_name}}</td>
                                     <td class="custom-td">{{$studentAccount->dept_name}}</td>
                                     <td class="custom-td">{{$studentAccount->course_name}}</td>
-                                    <td class="custom-td"><a class="btn btn-success btn-sm">VIEW</a></td>
+                                    <td class="custom-td"><a href="{{route('admin.viewAccountInfo',
+                                    ['role' => 'student', 'userID' => $studentAccount->student_id])}}"
+                                    class="btn btn-success btn-sm">VIEW</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

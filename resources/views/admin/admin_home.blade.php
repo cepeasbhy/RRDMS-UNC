@@ -9,7 +9,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <a class="btn btn-success btn-small w-100" href="{{route('viewAccounts')}}" rel="noopener noreferrer">ACCOUNT MANAGEMENT</a>
+                    <a class="btn btn-success btn-small w-100" href="{{route('admin.viewAccounts')}}" rel="noopener noreferrer">ACCOUNT MANAGEMENT</a>
                 </div>
                 <div class="col">
                     <a class="btn btn-success btn-small w-100" href="{{route('admin.exportGraduates')}}" rel="noopener noreferrer">EXPORT LIST OF GRADUATES</a>

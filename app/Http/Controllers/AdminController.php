@@ -41,11 +41,15 @@ class AdminController extends Controller
     public function viewAccounts(AccountController $account){
         $staffAccounts = $account->getStaffAccounts();
         $studentAccounts = $account->getStudentAccounts();
-        
+
         return view('admin/account_mngmnt', [
             'staffAccounts' => $staffAccounts,
             'studentAccounts' => $studentAccounts
         ]);
+    }
+
+    public function viewAccountInfo(){
+        return view('/admin/view_account');
     }
 
     public function exportGraduates(){

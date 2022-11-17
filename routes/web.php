@@ -25,7 +25,8 @@ Auth::routes();
 Route::group(['middleware' => ['role:admin', 'prevent-back-history']], function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.home');
     Route::get('/admin/view_department/{deptID}', [AdminController::class, 'viewDepartment'])->name('admin.viewDepartment');
-    Route::get('/admin/account_mngmnt', [AdminController::class, 'viewAccounts'])->name('viewAccounts');
+    Route::get('/admin/account_mngmnt', [AdminController::class, 'viewAccounts'])->name('admin.viewAccounts');
+    Route::get('/admin/view_accnt_info/{role}/{userID}', [AdminController::class, 'viewAccountInfo'])->name('admin.viewAccountInfo');
     Route::get('/admin/view_student/{deptID}/{studentID}', [AdminController::class, 'viewStudent'])->name('admin.viewStudent');
     Route::get('/admin/export_graduates', [AdminController::class, 'exportGraduates'])->name('admin.exportGraduates');
     Route::get('/admin/export_stud_list', [AdminController::class, 'exportStudList'])->name('admin.exportStudList');

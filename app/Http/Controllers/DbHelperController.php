@@ -103,7 +103,8 @@ class DbHelperController extends Controller
             'email',
             'phone_number',
             'assigned_dept',
-            'dept_name'
+            'dept_name',
+            'account_role'
         )->leftJoin(
             'users', 'users.user_id', '=', 'staff.staff_id'
         )->leftJoin(
@@ -133,6 +134,7 @@ class DbHelperController extends Controller
                 'course_name',
                 'email',
                 'status',
+                'account_role',
                 'admission_year',
                 'students.created_at',
                 'students.updated_at'

@@ -113,4 +113,26 @@ class AccountController extends Controller
             'courses', 'courses.course_id', '=', 'students.course_id'
         )->get();
     }
+
+    public function getAccountInfo(DbHelperController $db, $role, $userID){
+        if($role == 'student'){
+            $studentInfo = $db->getStudentInfo($userID);
+            
+            return [
+                'studentInfo' => $studentInfo['studentInfo'],
+                'picturePath' =>  $studentInfo['picturePath'],
+                'columnName' => 'document_loc'
+            ];
+
+        }else{
+            $staff = $db->getStaffInfo($userID);
+            $picturePath = $staff['staffPicture'];
+
+            return [
+                'staffInfo' => $staff['staffInfo'],
+                'picturePath' =>  $picturePath,
+                'columnName' => 'picture_path'
+            ];
+        }   
+    }
 }
