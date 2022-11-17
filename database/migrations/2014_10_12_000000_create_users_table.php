@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone_number')->nullable();
             $table->string('account_role');
+            $table->dateTime('change_pass_at')->nullable();
             $table->string('password')->default(Hash::make('welcometounc'));
             $table->timestamps();
         });
