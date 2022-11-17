@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\DbHelperController;
 
 class AdminController extends Controller
@@ -36,6 +35,16 @@ class AdminController extends Controller
             'student' => $student['studentInfo'],
             'credentials' => $student['credentials'],
             'picturePath' =>  $student['picturePath'],
+        ]);
+    }
+
+    public function viewAccounts(AccountController $account){
+        $staffAccounts = $account->getStaffAccounts();
+        $studentAccounts = $account->getStudentAccounts();
+        
+        return view('admin/account_mngmnt', [
+            'staffAccounts' => $staffAccounts,
+            'studentAccounts' => $studentAccounts
         ]);
     }
 

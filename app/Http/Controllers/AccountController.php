@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\DbHelperController;
-use App\Http\Controllers\CredentialController;
+use App\Models\Staff;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -78,5 +79,38 @@ class AccountController extends Controller
         ]);
 
         return redirect()->route('stud.request');
+    }
+
+    public function getStaffAccounts(){
+        return Staff::select(
+            'staff_id',
+            'first_name',
+            'last_name',
+            'dept_name',
+            'account_role'
+        )->where(
+            'account_role', '!=', 'admin'
+        )->leftJoin(
+            'users', 'users.user_id', '=', 'staff.staff_id'
+        )->leftJoin(
+            'departments', 'departments.department_id', '=', 'staff.assigned_dept'
+        )->get();
+    }
+
+
+    public function getStudentAccounts(){
+        return Student::select(
+            'student_id',
+            'first_name',
+            'last_name',
+            'dept_name',
+            'course_name'
+        )->leftJoin(
+            'users', 'users.user_id', '=', 'students.student_id'
+        )->leftJoin(
+            'departments', 'departments.department_id', '=', 'students.department_id'
+        )->leftJoin(
+            'courses', 'courses.course_id', '=', 'students.course_id'
+        )->get();
     }
 }
