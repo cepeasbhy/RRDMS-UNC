@@ -22,7 +22,7 @@ class RedirectIfAuthenticated
        if(Auth::check()){
             switch(Auth::user()->account_role){
                 case 'admin':
-                    return redirect()->route('adminHome');
+                    return redirect()->route('admin.home');
                 case 'student':
                     return redirect()->route('stud.request');
                 default:
