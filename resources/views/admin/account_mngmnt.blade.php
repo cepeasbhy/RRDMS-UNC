@@ -63,6 +63,9 @@
                                         @case('cic')
                                             <td class="custom-td">College in Charge</td>
                                             @break
+                                        @case('admin')
+                                            <td class="custom-td">Registrar</td>
+                                            @break
                                         @default
                                             <td class="custom-td">Records Associate</td>
                                     @endswitch

@@ -30,6 +30,9 @@
                                 @case('rec_assoc')
                                     <input class="form-control form-control-sm" type="text" value="Records Associate" readonly>
                                     @break
+                                @case('admin')
+                                    <input class="form-control form-control-sm" type="text" value="Registrar" readonly>
+                                    @break
                                 @default
                                     <input class="form-control form-control-sm" type="text" value="Student" readonly>
                             @endswitch
@@ -62,7 +65,9 @@
                     @if ($accountInfo['accountInfo']->account_role != 'student')
                         <div class=" form-group mb-3 row gap-3">
                             <button id="clickButton" class="col btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#admin-update-account">Update Information</button>
-                            <button class="col btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#admin-delete-account">Delete Account</button>
+                            @if($accountInfo['accountInfo']->account_role != 'admin')
+                                <button class="col btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#admin-delete-account">Delete Account</button>
+                            @endif
                         </div>
                     @endif
                 </div>

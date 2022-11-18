@@ -88,8 +88,6 @@ class AccountController extends Controller
             'last_name',
             'dept_name',
             'account_role'
-        )->where(
-            'account_role', '!=', 'admin'
         )->leftJoin(
             'users', 'users.user_id', '=', 'staff.staff_id'
         )->leftJoin(
