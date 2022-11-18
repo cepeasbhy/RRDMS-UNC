@@ -31,6 +31,7 @@ Route::group(['middleware' => ['role:admin', 'prevent-back-history']], function(
     Route::get('/admin/export_graduates', [AdminController::class, 'exportGraduates'])->name('admin.exportGraduates');
     Route::get('/admin/export_stud_list', [AdminController::class, 'exportStudList'])->name('admin.exportStudList');
     Route::post('/admin/update_staff_account/{userID}', [AccountController::class, 'adminUpdateStaffAccount'])->name('admin.updateStaffAccount');
+    Route::post('/admin/update_account_picture/{userID}', [AccountController::class, 'updateAccountPicture'])->name('admin.updateAccountPicture');
     Route::post('/admin/delete_staff_account/{userID}', [AccountController::class, 'admindeleteStaffAccount'])->name('admin.deleteStaffAccount');
 });
 

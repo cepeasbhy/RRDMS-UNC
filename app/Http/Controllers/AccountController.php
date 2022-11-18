@@ -171,4 +171,23 @@ class AccountController extends Controller
 
         return redirect()->route('admin.viewAccounts')->with('msg', 'Account Successfully Deleted');
     }
+
+    public function updateAccountPicture(Request $request, $userID){
+        $db = new DbHelperController;
+
+        $staff = $db->getStaffPicture($userID);
+        unlink(storage_path('app\public\\'.$staff->picture_path));
+
+        $newPath = $request->file('picture')->storeAs(
+            'staff',
+            '['.$userID.'] Picture'.'.'.$request->file('picture')->getClientOriginalExtension(),
+            'public'
+        );
+
+        Staff::where('staff_id', $userID)->update([
+            'picture_path' => $newPath
+        ]);
+
+        return back()->with('msg', 'Account Picture Successfully Updated');
+    }
 }

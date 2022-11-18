@@ -1,8 +1,7 @@
 @extends('layouts.app')
-@extends('layouts.header')
 
 @section('content')
-    <div class="row w-50">
+    <div class="row w-50 my-3">
         <div class="col">
             <div class="mb-3">
                 <a class="btn btn-success btn-sm" href="{{route('admin.viewAccounts')}}"><i class="bi bi-arrow-bar-left"></i> BACK</a>
@@ -14,7 +13,8 @@
             <div class="ms-3 mt-3">
                 <div class="mb-3">
                     <div class="row align-items-center mb-3">
-                        <img class="col-3 img-fluid rounded-circle student-pic" src="{{asset('storage/'.$accountInfo['picturePath'])}}">
+                        <img class="col-3 img-fluid rounded-circle student-pic" data-bs-toggle="modal" data-bs-target="#view-account-picture"
+                        src="{{asset('storage/'.$accountInfo['picturePath'])}}">
                         <div class="col-9">
                             <h4>{{$accountInfo['accountInfo']->last_name}}, {{$accountInfo['accountInfo']->first_name}}</h4>
                             <label>{{$accountInfo['accountInfo']->student_id}} {{$accountInfo['accountInfo']->staff_id}}</label>
@@ -77,6 +77,8 @@
 
     @extends('layouts.modals.deleteAccountModal')
     @extends('layouts.modals.updateAccountModal')
+    @extends('layouts.modals.viewAccountPictureModal')
+    @extends('layouts.modals.updateAccountPictureModal')
 
     @if($errors->any())
         <script>
