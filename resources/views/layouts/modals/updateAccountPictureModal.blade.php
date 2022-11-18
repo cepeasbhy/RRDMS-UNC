@@ -14,12 +14,10 @@
                 </form>
                 </div>
                 <div class="modal-footer">
-                    @if($accountInfo['accountInfo']->account_role != 'student')
-                        <button class="btn btn-sm btn-danger" form="picture">Proceed</button>
-                        <button class="btn btn-sm btn-success" data-bs-dismiss="modal">
-                            Cancel
-                        </button>
-                    @endif
+                    <button class="btn btn-sm btn-danger" form="picture">Proceed</button>
+                    <button class="btn btn-sm btn-success" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
                 </div>
             </div>
         </div>
