@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('middle_name')->nullable();
             $table->string('email');
             $table->string('phone_number')->nullable();
+            $table->string('address')->nullable();
             $table->string('account_role');
             $table->dateTime('change_pass_at')->nullable();
             $table->string('password')->default(Hash::make('welcometounc'));

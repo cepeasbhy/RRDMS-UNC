@@ -53,6 +53,17 @@
                                     </span>
                                 @enderror
                             </div>
+                            @if(Auth::user()->account_role == 'student')
+                                <div class="form-group mb-3">
+                                    <label class="col-form-label col-form-label-sm" for="phone_number">Address</label>
+                                    <input id="address" name="address" class="form-control form-control-sm @error('address') is-invalid @enderror" type="text" value="{{Auth::user()->address}}">
+                                    @error('address')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            @endif
                         </form>
                         <div class="mb-3 row gap-3">
                             <button class="col btn btn-success btn-sm" form="accountUpdateForm">Update Information</button>

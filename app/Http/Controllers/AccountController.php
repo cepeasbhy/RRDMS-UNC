@@ -37,11 +37,13 @@ class AccountController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([
+            'address' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
             'phoneNumber' => ['required', 'string', 'max:11', 'min:11']
         ]);
 
         User::where('user_id', $id)->update([
+            'address' => $request->input('address'),
             'email' => $request->input('email'),
             'phone_number' => $request->input('phoneNumber')
         ]);
@@ -57,24 +59,30 @@ class AccountController extends Controller
         ]);
 
         User::where('user_id', Auth::user()->user_id)->update([
-            'password' => Hash::make($request->new_password),
+            'password' => Hash::make($request->input('new_password')),
             'change_pass_at' => now()
         ]);
 
         return back()->with('msg', 'Password Successfully Changed!');
     }
 
-    public function changePassFirstTimeLogin(Request $request){
+    public function finishAccountSetup(Request $request){
         $request->validate([
+            'email' => ['required', 'email', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'phoneNumber' => ['required', 'max:11', 'min:11'],
             'password' => ['required', 'confirmed', 'min:8', 'max:255', 'string'],
         ]);
 
         if(Hash::check($request->password, Auth::user()->password)){
-            return redirect()->route('stud.forceChangePass')->with('msg', 'You cannot use your old password');
+            return redirect()->route('stud.firstSetup')->with('msg', 'You cannot use your old password');
         }
 
         User::where('user_id', Auth::user()->user_id)->update([
-            'password' => Hash::make($request->password),
+            'address' => $request->input('address'),
+            'email' => $request->input('email'),
+            'phone_number' => $request->input('phoneNumber'),
+            'password' => Hash::make($request->input('password')),
             'change_pass_at' => now()
         ]);
 

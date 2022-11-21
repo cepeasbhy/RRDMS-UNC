@@ -15,7 +15,7 @@ class StudRequestController extends Controller
 
     public function index(){
         if(is_null(Auth::user()->change_pass_at)){
-            return redirect()->route('stud.forceChangePass');
+            return redirect()->route('stud.firstSetup');
         }
         return view('RequestRecord/Student/index');
     }
@@ -23,7 +23,7 @@ class StudRequestController extends Controller
     public function makeRequest(DbHelperController $db){
 
         if(is_null(Auth::user()->change_pass_at)){
-            return redirect()->route('stud.forceChangePass');
+            return redirect()->route('stud.firstSetup');
         }
 
         $student = $db->getStudentInfo(Auth::user()->user_id);
@@ -38,7 +38,7 @@ class StudRequestController extends Controller
         $db->insertRequest($request, Auth::user()->user_id);
     }
 
-    public function forceChangePass(){
+    public function studAccountSetup(){
         if(!is_null(Auth::user()->change_pass_at)){
             return redirect()->route('stud.request');
         }
