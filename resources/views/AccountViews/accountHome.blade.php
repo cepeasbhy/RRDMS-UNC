@@ -76,7 +76,7 @@
     </div>
     @extends('layouts.modals.changePassModal')
 
-    @if($errors->any())
+    @if($errors->has('old_password') || $errors->has('new_password'))
         <script>
             window.onload = function(){
                 document.getElementById('clickButton').click();
