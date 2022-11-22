@@ -14,17 +14,10 @@ class StudRequestController extends Controller
     }
 
     public function index(){
-        if(is_null(Auth::user()->change_pass_at)){
-            return redirect()->route('stud.firstSetup');
-        }
         return view('RequestRecord/Student/index');
     }
 
     public function makeRequest(DbHelperController $db){
-
-        if(is_null(Auth::user()->change_pass_at)){
-            return redirect()->route('stud.firstSetup');
-        }
 
         $student = $db->getStudentInfo(Auth::user()->user_id);
         

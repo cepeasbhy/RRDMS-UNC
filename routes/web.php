@@ -79,10 +79,13 @@ Route::group(['middleware' => ['role:cic', 'prevent-back-history']], function(){
 
 //Request Records Routes
 Route::group(['middleware' => ['role:student', 'prevent-back-history']], function(){
-    Route::get('/request', [StudRequestController::class, 'index'])->name('stud.request');
+    Route::group(['middleware' => 'first-time-login'], function(){
+        Route::get('/request', [StudRequestController::class, 'index'])->name('stud.request');
+        Route::get('/request/make_request', [StudRequestController::class, 'makeRequest'])->name('stud.makeRequest');
+        Route::post('/request/submit_request', [StudRequestController::class, 'submitRequest'])->name('stud.submitRequest');
+    });
+
     Route::get('/request/first_time_login', [StudRequestController::class, 'studAccountSetup'])->name('stud.firstSetup');
-    Route::get('/request/make_request', [StudRequestController::class, 'makeRequest'])->name('stud.makeRequest');
-    Route::post('/request/submit_request', [StudRequestController::class, 'submitRequest'])->name('stud.submitRequest');
     Route::post('/request/first_time_login/submit', [AccountController::class, 'finishAccountSetup'])->name('stud.finishSetup');
 });
 
