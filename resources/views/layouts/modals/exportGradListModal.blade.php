@@ -21,10 +21,10 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-sm btn-danger" form="exportGradList">EXPORT</button>
+                <button class="btn btn-sm btn-danger" form="exportGradList">Export</button>
                 <form action="{{route('admin.exportAllGraduates')}}" method="post">
                     @csrf
-                    <button class="btn btn-sm btn-secondary">EXPORT ALL</button>
+                    <button class="btn btn-sm btn-secondary">Export All</button>
                 </form>
                 <button class="btn btn-sm btn-success" data-bs-dismiss="modal">Cancel</button>
             </div>

@@ -12,6 +12,16 @@
 
                     </div>
                     <div class="form-group mb-2">
+                        <label class="col-form-label col-form-label-sm" for="">Status<span
+                            class="text-danger">*</label>
+                        <select name="status" class="form-select form-select-sm">
+                            <option value="">Choose...</option>
+                            <option value="0">INACTIVE</option>
+                            <option value="1">ACTIVE</option>
+                            <option value="2">GRADUATED</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
                         <label class="col-form-label col-form-label-sm">Admission Year
                             <span
                             class="text-danger">*</span>
