@@ -16,7 +16,7 @@
                             <span
                             class="text-danger">*</span>
                         </label>
-                        <input class="form-control form-control-sm" type="text" required>
+                        <input name="admissionYear" class="form-control form-control-sm" type="text" required>
                     </div>
                 </form>
             </div>

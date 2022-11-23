@@ -26,15 +26,15 @@
                             <span
                             class="text-danger">*</span>
                         </label>
-                        <input class="form-control form-control-sm" type="text" required>
+                        <input name="admissionYear" class="form-control form-control-sm" type="text" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-sm btn-danger" form="exportStudList">EXPORT</button>
+                <button class="btn btn-sm btn-danger" form="exportStudList">Export</button>
                 <form action="{{route('admin.exportAllStud')}}" method="post">
                     @csrf
-                    <button class="btn btn-sm btn-secondary">EXPORT ALL</button>
+                    <button class="btn btn-sm btn-secondary">Export All</button>
                 </form>
                 <button class="btn btn-sm btn-success" data-bs-dismiss="modal">Cancel</button>
             </div>
