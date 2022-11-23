@@ -354,9 +354,16 @@ class DbHelperController extends Controller
             $tor = $request->input('tor');
         }
 
+        $studentDeptCourse = Student::select(
+            'department_id',
+            'course_id'
+        )->where('student_id', $studentID)->first();
+
         ModelsRequest::create([
             'request_id' => $requestID,
             'student_id' => $studentID,
+            'course_id' => $studentDeptCourse->course_id,
+            'department_id' => $studentDeptCourse->department_id
         ]);
 
         RequestedDocument::create([

@@ -17,9 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('request_id')->unique();
             $table->string('student_id');
+            $table->string('department_id');
+            $table->string('course_id');
             $table->date('release_date')->nullable();
             $table->string('status')->default('IN PROGRESS');
             $table->timestamps();
+
+            $table->foreign('department_id')->references('department_id')->on('departments');
+            $table->foreign('course_id')->references('course_id')->on('courses');
         });
     }
 

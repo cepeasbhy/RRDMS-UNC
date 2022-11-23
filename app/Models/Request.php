@@ -12,7 +12,8 @@ class Request extends Model
     protected $fillable = [
         'request_id',
         'student_id',
-        'address',
+        'course_id',
+        'department_id',
         'release_date',
         'status'
     ];
