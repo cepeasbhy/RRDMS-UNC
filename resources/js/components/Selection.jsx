@@ -126,6 +126,7 @@ function Selection() {
 
 export default Selection;
 
-if (document.getElementById('selection')) {
-    ReactDOM.render(<Selection />, document.getElementById('selection'));
+for (let i = 0; i < document.getElementsByClassName("selection").length; i++) {
+    console.log(i);
+    ReactDOM.render(<Selection />, document.getElementsByClassName("selection")[i]);
 }

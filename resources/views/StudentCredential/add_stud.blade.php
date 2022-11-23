@@ -67,7 +67,7 @@
                         @enderror
                     </div>
                     @if (Auth::user()->account_role == 'rec_assoc')
-                        <div id="selection"></div>
+                        <div class="selection"></div>
                     @else
                         <div class="form-group mb-2">
                             <input type="hidden" name="department_id" value="{{$staff->assigned_dept}}">

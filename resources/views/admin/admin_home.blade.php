@@ -12,10 +12,10 @@
                     <a class="btn btn-success btn-small w-100" href="{{route('admin.viewAccounts')}}" rel="noopener noreferrer">ACCOUNT MANAGEMENT</a>
                 </div>
                 <div class="col">
-                    <a class="btn btn-success btn-small w-100" href="{{route('admin.exportGraduates')}}" rel="noopener noreferrer">EXPORT LIST OF GRADUATES</a>
+                    <button class="btn btn-success btn-small" data-bs-toggle="modal" data-bs-target="#admin-export-grad">EXPORT LIST OF GRADUATES</button>
                 </div>
                 <div class="col">
-                    <a class="btn btn-success btn-small w-100" href="{{route('admin.exportStudList')}}" rel="noopener noreferrer">EXPORT LIST OF STUDENTS</a>
+                    <button class="btn btn-success btn-small" data-bs-toggle="modal" data-bs-target="#admin-export-stud">EXPORT LIST OF STUDENTS</button>
                 </div>
             </div>
         </div>
@@ -159,4 +159,6 @@
             </div>
         </div>
     </div>
+    @extends('layouts.modals.exportStudListModal')
+    @extends('layouts.modals.exportGradListModal')
 @endsection
