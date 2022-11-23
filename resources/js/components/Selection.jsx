@@ -102,7 +102,7 @@ function Selection() {
                 <label className="col-form-label col-form-label-sm">Program <span
                     className="text-danger">*</span></label>
                 <select className="form-select form-select-sm " name="department_id" onChange={changeSelectOptionHandler} required>
-                    <option disabled selected>Choose...</option>
+                    <option value="" selected>Choose...</option>
                     <option value="001">Arts and Science</option>
                     <option value="002">Business and Accountancy</option>
                     <option value="003">Computer Studies</option>
@@ -126,6 +126,7 @@ function Selection() {
 
 export default Selection;
 
-if (document.getElementById('selection')) {
-    ReactDOM.render(<Selection />, document.getElementById('selection'));
+for (let i = 0; i < document.getElementsByClassName("selection").length; i++) {
+    console.log(i);
+    ReactDOM.render(<Selection />, document.getElementsByClassName("selection")[i]);
 }

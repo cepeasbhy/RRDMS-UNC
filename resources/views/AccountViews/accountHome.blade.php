@@ -1,14 +1,18 @@
 @extends('layouts.app')
-@extends('layouts.header')
 
 @section('content')
     <div class="row w-50">
+        <div class="row mt-3 mb-2">
+            <div class="col">
+                 <button class="btn btn-success btn-sm" onclick="history.back()"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+            </div>
+        </div>
         <div class="col">
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">ACCOUNT INFORMATION</h4>
             </div>
             <span class="badge bg-success mb-2">{{session('msg')}}</span>
-            <div class="ms-3 mt-3">
+            <div class="ms-3">
                 <div class="mb-3">
                     <div class="row align-items-center mb-3">
                         <img class="col-3 img-fluid rounded-circle student-pic" src="{{asset('storage/'.$picturePath->$columnName)}}">

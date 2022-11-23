@@ -53,11 +53,19 @@ class AdminController extends Controller
         return view('/admin/view_account', ['accountInfo' => $accountInfo]);
     }
 
-    public function exportGraduates(){
-        return view('admin/export_graduates');
+    public function exportGradList(){
+        return view('maintenance');
+    }
+
+    public function exportAllGraduates(){
+        return view('maintenance');
     }
 
     public function exportStudList(){
-        return view('admin/export_stud_list');
+        return view('maintenance');
+    }
+
+    public function exportAllStudents(){
+        return view('maintenance');
     }
 }
