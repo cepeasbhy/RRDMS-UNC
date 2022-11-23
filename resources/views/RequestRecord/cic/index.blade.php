@@ -7,9 +7,6 @@
 
 @section('content')
     <section class="row mt-3">
-        <form class="mb-3" action="{{ route('StudCredHome') }}" method="get">
-            <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
-        </form>
         <div class="col mb-2">
             <div class="border-start border-danger border-4">
                 <h4 class="ms-2">
@@ -40,25 +37,35 @@
                             <th class="custom-th bg-danger">First Name</th>
                             <th class="custom-th bg-danger">Last Name</th>
                             <th class="custom-th bg-danger">Course</th>
+                            <th class="custom-th bg-danger">Status</th>
                             <th class="custom-th bg-danger">Action</th>
                         </thead>
                         <tbody>
-                            @foreach ($requestedDocuments as $requestedDocuments)
-                                <tr class="custom-tr">
-                                    <td class="custom-td">{{ $requestedDocuments->request_id }}</td>
-                                    <td class="custom-td">{{ $requestedDocuments->student_id }}</td>
-                                    <td class="custom-td">{{ $studentInfo->first_name }}</td>
-                                    <td class="custom-td">{{ $studentInfo->last_name }}</td>
-                                    <td class="custom-td">{{ $studentInfo->course }}</td>
-                                    {{-- <td class="custom-td">
-                                        <form
-                                            action="{{ route('makeRequestrequestedDocuments', ['id' => $requestedDocuments->requestedDocuments_id]) }}"
-                                            method="post">
-                                            @csrf
-                                            <button class="btn btn-sm btn-danger">VIEW</button>
-                                        </form>
-                                    </td> --}}
-                                </tr>
+                            @foreach ($requestedDocuments as $documentDetails)
+                                @if ($documentDetails->release_date == null)
+                                    <tr class="custom-tr">
+                                        <td class="custom-td">{{ $documentDetails->request_id }}</td>
+                                        <td class="custom-td">{{ $documentDetails->student_id }}</td>
+                                        <td class="custom-td">{{ $documentDetails->first_name }}</td>
+                                        <td class="custom-td">{{ $documentDetails->last_name }}</td>
+                                        <td class="custom-td">{{ $documentDetails->course_name }}</td>
+                                        <td class="custom-td">
+                                            @if ($documentDetails->release_date == null)
+                                                <span class="badge bg-secondary">-PENDING-</span>
+                                            @else
+                                                <span class="badge bg-success">-APPROVED-</span>
+                                            @endif
+                                        </td>
+                                        <td class="custom-td">
+                                            <form
+                                                action="{{ route('cic.viewRequest', ['request_id' => $documentDetails->request_id]) }}"
+                                                method="post">
+                                                @csrf
+                                                <button class="btn btn-sm btn-success">VIEW</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -74,37 +81,36 @@
                             <th class="custom-th bg-danger">Last Name</th>
                             <th class="custom-th bg-danger">Release Date</th>
                             <th class="custom-th bg-danger">Course</th>
+                            <th class="custom-th bg-danger">Status</th>
                             <th class="custom-th bg-danger">Action</th>
                         </thead>
                         <tbody>
-                            @foreach ($requestedDocuments as $requestedDocuments)
-                                <tr class="custom-tr">
-                                    <td class="custom-td">{{ $requestedDocuments->request_id }}</td>
-                                    <td class="custom-td">{{ $requestedDocuments->student_id }}</td>
-                                    <td class="custom-td">{{ $studentInfo->first_name }}</td>
-                                    <td class="custom-td">{{ $studentInfo->last_name }}</td>
-                                    <td class="custom-td">{{ $requestedDocuments->release_date }}</td>
-                                    <td class="custom-td">{{ $studentInfo->course }}</td>
-                                    {{-- <td class="custom-td">
-                                        @if ($requestedDocuments->status == 0)
-                                            <span class="badge bg-secondary">-PENDING-</span>
-                                        @else
-                                            <span class="badge bg-success">-APPROVED-</span>
-                                        @endif
-                                    </td> --}}
-                                    <td class="custom-td">
-                                        @if ($requestedDocuments->status == 0)
-                                            Not Available
-                                        @else
+                            @foreach ($requestedDocuments as $documentDetails)
+                                @if ($documentDetails->release_date != null)
+                                    <tr class="custom-tr">
+                                        <td class="custom-td">{{ $documentDetails->request_id }}</td>
+                                        <td class="custom-td">{{ $documentDetails->student_id }}</td>
+                                        <td class="custom-td">{{ $documentDetails->first_name }}</td>
+                                        <td class="custom-td">{{ $documentDetails->last_name }}</td>
+                                        <td class="custom-td">{{ $documentDetails->release_date }}</td>
+                                        <td class="custom-td">{{ $documentDetails->course_name }}</td>
+                                        <td class="custom-td">
+                                            @if ($documentDetails->release_date == null)
+                                                <span class="badge bg-secondary">-PENDING-</span>
+                                            @else
+                                                <span class="badge bg-success">-APPROVED-</span>
+                                            @endif
+                                        </td>
+                                        <td class="custom-td">
                                             <form
-                                                action="{{ route('viewrequestedDocuments', ['id' => $requestedDocuments->request_id]) }}"
+                                                action="{{ route('cic.viewRequest', ['request_id' => $documentDetails->request_id]) }}"
                                                 method="post">
                                                 @csrf
                                                 <button class="btn btn-sm btn-success">VIEW</button>
                                             </form>
-                                        @endif
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

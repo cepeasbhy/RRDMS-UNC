@@ -15,18 +15,24 @@ class CicReqRecordManagmentController extends Controller
         return view('RequestRecord/cic/index');
     }
 
+    public function viewRequest(DbHelperController $db, $requestID){
+        $requestedDocument = $db->getRequesteeInfo($requestID);
+        $student = $db->getStudentInfo($requestedDocument['studentInfo']->student_id);
+
+        return view('RequestRecord/cic/view_request_details', [
+            'student' => $student['studentInfo'],
+            'credentials' => $student['credentials'],
+            'picturePath' =>  $student['picturePath'],
+            'requestID' => $requestID,
+            'requestedDocumentDetails' => $requestedDocument['requestedDocumentDetails']
+        ]);
+    }
+
     public function studentRequestsLog(DbHelperController $db){
 
-        //TO BE FIXED
         $requestedDocuments = $db->getRequestedDocuments();
-        $studentID;
-        foreach($requestedDocuments as $obj){
-            $studentID = $obj->student_id;
-        }
-        $studentInfo = $db->getStudentInfo($studentID);
         return view('RequestRecord/cic/index', [
             'requestedDocuments' => $requestedDocuments,
-            'studentInfo' => $studentInfo
         ]);
     }
 }

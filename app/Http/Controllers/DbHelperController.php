@@ -459,15 +459,35 @@ class DbHelperController extends Controller
     }
 
     public function getRequestedDocuments(){
-        //TO BE FIXED
+
         return ModelsRequest::select(
             'request_id',
             'requests.student_id',
+            'first_name',
+            'last_name',
+            'course_name',
             'release_date'
+        )->leftJoin(
+            'users', 'users.user_id', '=', 'requests.student_id'
+        )->leftJoin(
+            'courses', 'courses.course_id', '=', 'requests.course_id'
         )->leftJoin(
             'students', 'students.student_id', '=', 'requests.student_id'
         )->get();
 
+    }
+
+    public function getRequesteeInfo($id){
+        $requestInfo = ModelsRequest::select('student_id', 'request_id')->where('request_id', $id)->firstOrFail();
+        $studentInfo = Student::where('student_id', $requestInfo->student_id)->firstOrFail();
+
+        $requestedDocumentDetails = RequestedDocument::where('request_id', $requestInfo->request_id)->firstOrFail();
+
+        return [
+            'requestInfo' => $requestInfo,
+            'studentInfo' => $studentInfo,
+            'requestedDocumentDetails' => $requestedDocumentDetails
+        ];
     }
 
 }

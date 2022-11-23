@@ -76,6 +76,7 @@ Route::group(['middleware' => ['role:rec_assoc', 'prevent-back-history']], funct
 //College in Charge
 Route::group(['middleware' => ['role:cic', 'prevent-back-history']], function(){
     Route::get('/cic/request', [CicReqRecordManagmentController::class, 'studentRequestsLog'])->name('cic.request');
+    Route::post('/cic/request/view/{request_id}', [CicReqRecordManagmentController::class, 'viewRequest'])->name('cic.viewRequest');
 });
 
 
