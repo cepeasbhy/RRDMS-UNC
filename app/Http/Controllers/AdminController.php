@@ -66,6 +66,6 @@ class AdminController extends Controller
     }
 
     public function exportAllStudents(){
-        return view('maintainance');
+        return view('maintenance');
     }
 }

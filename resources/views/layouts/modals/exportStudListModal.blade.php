@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="exportGradList" action="{{route('admin.exportGraduates')}}" method="post">
+                <form id="exportStudList" action="{{route('admin.exportStudList')}}" method="post">
                     @csrf
                     <div class="selection">
 
@@ -21,8 +21,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-sm btn-danger" form="exportList">EXPORT</button>
-                <form action="" method="post">
+                <button class="btn btn-sm btn-danger" form="exportStudList">EXPORT</button>
+                <form action="{{route('admin.exportAllStud')}}" method="post">
+                    @csrf
                     <button class="btn btn-sm btn-secondary">EXPORT ALL</button>
                 </form>
                 <button class="btn btn-sm btn-success" data-bs-dismiss="modal">Cancel</button>
