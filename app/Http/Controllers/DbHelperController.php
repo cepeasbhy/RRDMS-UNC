@@ -411,7 +411,7 @@ class DbHelperController extends Controller
 
     public function deleteRequestedArchive($requestID){
         $archive = $this->getRequestedArchiveInfo($requestID);
-        
+
         RequestedArchive::select()->where('request_id', $archive['requestInfo']->request_id)->delete();
 
         Archive::where('archive_id', $archive['requestedArchived']->archive_id)->update([
@@ -449,6 +449,18 @@ class DbHelperController extends Controller
         ]);
 
         RequestedArchive::where('request_id', $id)->delete();
+    }
+
+    public function getRequestedDocuments(){
+        //TO BE FIXED
+        return ModelsRequest::select(
+            'request_id',
+            'requests.student_id',
+            'release_date'
+        )->leftJoin(
+            'students', 'students.student_id', '=', 'requests.student_id'
+        )->get();
+
     }
 
 }

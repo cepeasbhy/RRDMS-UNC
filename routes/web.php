@@ -71,9 +71,9 @@ Route::group(['middleware' => ['role:rec_assoc', 'prevent-back-history']], funct
     Route::post('/archived_records/view_record/delete_credential/{studID}/{docID}', [ArchivedRecordsController::class, 'deleteCredential'])->name('deleteCredential');
 });
 
-
+//College in Charge
 Route::group(['middleware' => ['role:cic', 'prevent-back-history']], function(){
-    Route::get('/cic/request', [CicReqRecordManagmentController::class, 'index'])->name('cic.request');
+    Route::get('/cic/request', [CicReqRecordManagmentController::class, 'studentRequestsLog'])->name('cic.request');
 });
 
 
