@@ -30,6 +30,7 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <i class="bi bi-person-circle"></i>
                             {{ Auth::user()->first_name }}
                         </a>
 
@@ -37,9 +38,12 @@
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                <i class="bi bi-box-arrow-right"></i> {{ __('Logout') }}
                             </a>
-                            <a class="dropdown-item" href="{{route('accountHome')}}">Manage Account</a>
+                            <a class="dropdown-item" href="{{route('accountHome')}}">
+                                <i class="bi bi-gear-fill"></i> 
+                                Manage Account
+                            </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
