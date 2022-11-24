@@ -28,10 +28,10 @@ Route::group(['middleware' => ['role:admin', 'prevent-back-history']], function(
     Route::get('/admin/account_mngmnt', [AdminController::class, 'viewAccounts'])->name('admin.viewAccounts');
     Route::get('/admin/view_accnt_info/{role}/{userID}', [AdminController::class, 'viewAccountInfo'])->name('admin.viewAccountInfo');
     Route::get('/admin/view_student/{deptID}/{studentID}', [AdminController::class, 'viewStudent'])->name('admin.viewStudent');
-    Route::post('/admin/export_graduates', [AdminController::class, 'exportGradList'])->name('admin.exportGraduates');
-    Route::post('/admin/export_stud_list', [AdminController::class, 'exportStudList'])->name('admin.exportStudList');
-    Route::post('/admin/export_graduates_all', [AdminController::class, 'exportAllGraduates'])->name('admin.exportAllGraduates');
-    Route::post('/admin/export_students_all', [AdminController::class, 'exportAllStudents'])->name('admin.exportAllStud');
+    Route::get('/admin/export_graduates', [AdminController::class, 'exportGradList'])->name('admin.exportGraduates');
+    Route::get('/admin/export_stud_list', [AdminController::class, 'exportStudList'])->name('admin.exportStudList');
+    Route::get('/admin/export_graduates_all', [AdminController::class, 'exportAllGraduates'])->name('admin.exportAllGraduates');
+    Route::get('/admin/export_students_all', [AdminController::class, 'exportAllStudents'])->name('admin.exportAllStud');
     Route::post('/admin/update_staff_account/{userID}', [AccountController::class, 'adminUpdateStaffAccount'])->name('admin.updateStaffAccount');
     Route::post('/admin/update_account_picture/{userID}', [AccountController::class, 'updateAccountPicture'])->name('admin.updateAccountPicture');
     Route::post('/admin/delete_staff_account/{userID}', [AccountController::class, 'admindeleteStaffAccount'])->name('admin.deleteStaffAccount');
