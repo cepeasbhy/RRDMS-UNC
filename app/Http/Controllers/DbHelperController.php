@@ -352,9 +352,9 @@ class DbHelperController extends Controller
 
         if($request->input('certificate') != null){
             $certificates = $this -> createJsonCertificate($request);
-            foreach ($request->input('numCopies') as $certs => $quantity){
-                if($quantity > 0){
-                    $certFees += (int)$quantity * 110;
+            foreach($certificates as $certificate){
+                foreach($certificate as $certName => $copies){
+                    $certFees += $copies*110;
                 }
             }
         }
