@@ -108,18 +108,31 @@
         Total Fee: {{ $requestedDocumentDetails->total_fee }}
     </div>
 
-
-
-
 </div>
 
 </div>
 
 <div class="col mt-5 text-center">
-<button class="btn btn-sm btn-success me-3">ACCEPT REQUEST</button>
-<button class="btn btn-sm btn-danger">REJECT REQUEST</button>
+
+@if ($requestInfo->status == 'IN PROGRESS')
+    <button class="btn btn-success btn-sm " data-bs-toggle="modal" data-bs-target="#accept-request-modal">ACCEPT
+        REQUEST</button>
+    <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">REJECT
+        REQUEST</button>
+@endif
+
+@if ($requestInfo->status == 'SET FOR RELEASE')
+    <button class="btn btn-success btn-sm " data-bs-toggle="modal"
+        data-bs-target="#accept-request-modal">COMPLETE
+        REQUEST</button>
+@endif
+
 </div>
 
 </div>
 <script src="{{ asset('js/main.js') }}"></script>
+<!--Modal for Rejecting Request-->
+@extends('layouts.modals.delete_student_request', ['routeName' => 'cic.rejectRequest', 'request_id' => $requestedDocumentDetails, 'request_status' => $requestInfo])
+<!--Modal for Accepting Request-->
+@extends('layouts.modals.accept_student_request', ['routeName' => 'cic.acceptRequest', 'request_id' => $requestedDocumentDetails, 'request_status' => $requestInfo])
 @endsection

@@ -342,16 +342,39 @@ class DbHelperController extends Controller
         $photocopy = $this->checkNull($request, 'photocopy');
         $requestID = 'REQ'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
 
+        $certFees = 0;
+        $copyOfGradeFees = 0;
+        $torFees = 0;
+
+        $diplomaFees = Self::computeDiplomaFees($request);
+        $authenticationFees = Self::computeAuthenticationFees($request);
+        $photocopyFees = Self::computePhotocopyFees($request);
+
         if($request->input('certificate') != null){
             $certificates = $this -> createJsonCertificate($request);
+            foreach ($request->input('numCopies') as $certs => $quantity){
+                if($quantity > 0){
+                    $certFees += (int)$quantity * 110;
+                }
+            }
         }
 
         if($request->input('reqCopyGrade') != null){
             $copyGrades = $request->input('copyGrades');
+            foreach ($request->input('copyGrades') as $grades => $copies){
+                if($grades == "copies" && $copies > 0){
+                    $copyOfGradeFees += (int)$copies * 110;
+                }
+            }
         }
 
         if($request->input('reqTOR') != null){
             $tor = $request->input('tor');
+            foreach ($request->input('tor') as $torRequest => $copies){
+                if($torRequest == "copies" && $copies > 0){
+                    $torFees += (int)$copies * 110;
+                }
+            }
         }
 
         $studentDeptCourse = Student::select(
@@ -375,7 +398,7 @@ class DbHelperController extends Controller
             'authentication' => $authentication,
             'photocopy' => $photocopy,
             'copy_of_grades' =>$copyGrades,
-            'total_fee' => 0 //This is just for a test
+            'total_fee' => ($certFees + $copyOfGradeFees + $torFees + $diplomaFees + $authenticationFees + $photocopyFees)
         ]);
     }
 
@@ -466,7 +489,8 @@ class DbHelperController extends Controller
             'first_name',
             'last_name',
             'course_name',
-            'release_date'
+            'release_date',
+            'requests.status'
         )->leftJoin(
             'users', 'users.user_id', '=', 'requests.student_id'
         )->leftJoin(
@@ -478,7 +502,7 @@ class DbHelperController extends Controller
     }
 
     public function getRequesteeInfo($id){
-        $requestInfo = ModelsRequest::select('student_id', 'request_id')->where('request_id', $id)->firstOrFail();
+        $requestInfo = ModelsRequest::select('student_id', 'request_id', 'status')->where('request_id', $id)->firstOrFail();
         $studentInfo = Student::where('student_id', $requestInfo->student_id)->firstOrFail();
 
         $requestedDocumentDetails = RequestedDocument::where('request_id', $requestInfo->request_id)->firstOrFail();
@@ -488,6 +512,94 @@ class DbHelperController extends Controller
             'studentInfo' => $studentInfo,
             'requestedDocumentDetails' => $requestedDocumentDetails
         ];
+    }
+
+    public function rejectStudentRequest($denialReason ,$requestID){
+        ModelsRequest::where('request_id', $requestID)->update([
+            'status' => 'DENIED',
+            'reason_for_rejection' => $denialReason
+        ]);
+    }
+
+    public function acceptStudentRequest($requestID, $releaseDate){
+        ModelsRequest::where('request_id', $requestID)->update([
+            'status' => 'SET FOR RELEASE',
+            'release_date' => $releaseDate
+        ]);
+    }
+
+    public function completeStudentRequest($requestID){
+        ModelsRequest::where('request_id', $requestID)->update([
+            'status' => 'COMPLETED',
+        ]);
+    }
+
+    public function computeDiplomaFees($request){
+        $totalDiplomaFees = 0;
+        if($request->input('diploma') != null){
+            foreach($request->input('diploma') as $diploma){
+                if($diploma == 'Bachelor/Law Degree'){
+                    $totalDiplomaFees += 516;
+                }
+                if($diploma == 'Masteral Degree'){
+                    $totalDiplomaFees += 729;
+                }
+                if($diploma == 'TESDA'){
+                    $totalDiplomaFees += 302;
+                }
+                if($diploma == 'Caregiving'){
+                    $totalDiplomaFees += 250;
+                }
+            }
+        }
+
+        return $totalDiplomaFees;
+    }
+
+    public function computeAuthenticationFees($request){
+        $authFees = 0;
+        if($request->input('authentication') != null){
+            foreach($request->input('authentication') as $auth){
+                if($auth == 'Transcript of Record'){
+                    $authFees += 89.50;
+                }
+                if($auth == 'Diploma'){
+                    $authFees += 89.50;
+                }
+                if($auth == 'Certificate'){
+                    $authFees += 89.50;
+                }
+            }
+        }
+
+        return $authFees;
+    }
+
+    public function computePhotocopyFees($request){
+        $photocopyFees = 0;
+        $photocopyCount = 0;
+        if($request->input('photocopy') != null){
+            foreach($request->input('photocopy') as $photocopy){
+                if($photocopy == 'Transcript of Record'){
+                    $photocopyCount += 1;
+                }
+                if($photocopy == 'Diploma'){
+                    $photocopyCount += 1;
+                }
+                if($photocopy == 'Certificate'){
+                    $photocopyCount += 1;
+                }
+
+                if($photocopy == 'ordinary'){
+                    $photocopyFees = $photocopyCount * 1.20;
+                }
+                else if($photocopy == 'colored'){
+                    $photocopyFees = $photocopyCount * 20;
+                }
+            }
+        }
+
+        return $photocopyFees;
     }
 
 }

@@ -24,7 +24,8 @@ class CicReqRecordManagmentController extends Controller
             'credentials' => $student['credentials'],
             'picturePath' =>  $student['picturePath'],
             'requestID' => $requestID,
-            'requestedDocumentDetails' => $requestedDocument['requestedDocumentDetails']
+            'requestedDocumentDetails' => $requestedDocument['requestedDocumentDetails'],
+            'requestInfo' => $requestedDocument['requestInfo']
         ]);
     }
 
@@ -35,4 +36,20 @@ class CicReqRecordManagmentController extends Controller
             'requestedDocuments' => $requestedDocuments,
         ]);
     }
+
+    public function rejectRequest(Request $request, DbHelperController $db, $requestID){
+        $db->rejectStudentRequest($request->input('denyReason'), $requestID);
+        return redirect('/cic/request')->with('msgCred', 'Request Has Been Rejected.');
+    }
+
+    public function acceptRequest(Request $request, DbHelperController $db, $requestID){
+        $db->acceptStudentRequest($requestID, $request->input('releaseDate'));
+        return redirect('/cic/request')->with('msgCred', 'Request Has Been Accepted.');
+    }
+
+    public function completeRequest(DbHelperController $db, $requestID){
+        $db->completeStudentRequest($requestID);
+        return redirect('/cic/request')->with('msgCred', 'Request Has Been Completed.');
+    }
+
 }

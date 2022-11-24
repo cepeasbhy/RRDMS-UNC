@@ -77,6 +77,9 @@ Route::group(['middleware' => ['role:rec_assoc', 'prevent-back-history']], funct
 Route::group(['middleware' => ['role:cic', 'prevent-back-history']], function(){
     Route::get('/cic/request', [CicReqRecordManagmentController::class, 'studentRequestsLog'])->name('cic.request');
     Route::post('/cic/request/view/{request_id}', [CicReqRecordManagmentController::class, 'viewRequest'])->name('cic.viewRequest');
+    Route::post('/cic/request/view/reject/{request_id}', [CicReqRecordManagmentController::class, 'rejectRequest'])->name('cic.rejectRequest');
+    Route::post('/cic/request/view/accept/{request_id}', [CicReqRecordManagmentController::class, 'acceptRequest'])->name('cic.acceptRequest');
+    Route::post('/cic/request/view/complete/{request_id}', [CicReqRecordManagmentController::class, 'completeRequest'])->name('cic.completeTransaction');
 });
 
 
