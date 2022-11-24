@@ -10,10 +10,8 @@
                     @csrf
                     <div class="form-group mb-2">
                         <label class="col-form-label col-form-label-sm">Department
-                            <span
-                            class="text-danger">*</span>
                         </label>
-                        <select class="form-select form-select-sm " name="department_id" required>
+                        <select class="form-select form-select-sm " name="department_id">
                             <option value="">Choose...</option>
                             <option value="001">Arts and Science</option>
                             <option value="002">Business and Accountancy</option>

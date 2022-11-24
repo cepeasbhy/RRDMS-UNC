@@ -58,11 +58,17 @@ class AdminController extends Controller
 
     public function exportGradList(Request $request){
         $fileName = $this->getFileName($request->input('department_id'), 'GRADUATES_LIST');
-        return Excel::download(new ExportStudList(
-            isGraduated: true,
-            isEpoxrtAll: false,
-            request: $request
-        ), $fileName);
+
+        if(is_null($request->input('department_id')) && is_null($request->input('admissionYear')) &&
+        is_null($request->input('admissionYear'))){
+            return redirect()->route('admin.home')->with('msg', 'No data provided for exporting');
+        }else{
+            return Excel::download(new ExportStudList(
+                isGraduated: true,
+                isEpoxrtAll: false,
+                request: $request
+            ), $fileName);
+        }
     }
 
     public function exportAllGraduates(Request $request){
@@ -76,11 +82,16 @@ class AdminController extends Controller
     public function exportStudList(Request $request){
         $fileName = $this->getFileName($request->input('department_id'), 'STUDENT_LIST');
 
-        return Excel::download(new ExportStudList(
-            isGraduated: false,
-            isEpoxrtAll: false,
-            request: $request
-        ), $fileName);
+        if(is_null($request->input('department_id')) && is_null($request->input('admissionYear')) &&
+        is_null($request->input('admissionYear'))){
+            return redirect()->route('admin.home')->with('msg', 'No data provided for exporting');
+        }else{
+            return Excel::download(new ExportStudList(
+                isGraduated: false,
+                isEpoxrtAll: false,
+                request: $request
+            ), $fileName);
+        }
     }
 
     public function exportAllStudents(Request $request){
@@ -109,8 +120,10 @@ class AdminController extends Controller
                 return $partName.'[Nursing].xlsx';
             case '008':
                 return $partName.'[Graduate Studies].xlsx';
+            case '009':
+                return $partName.'[School of Law].xlsx';
             default:
-                return $partName.'[School of Law Studies].xlsx';
+                return $partName.'.xlsx';
         }
     }
 }

@@ -45,9 +45,14 @@ class ExportStudList implements FromCollection, ShouldAutoSize, WithHeadings
             'departments', 'departments.department_id', '=', 'students.department_id'
         )->leftJoin(
             'courses', 'courses.course_id', '=', 'students.course_id'
-        )->where(
-            'students.department_id', $request->input('department_id')
         );
+
+
+        if(!is_null($request->input('department_id'))){
+            $studentCollection->where(
+                'students.department_id', $request->input('department_id')
+            );
+        }
         
         if(!is_null($request->input('admissionYear'))){
             $studentCollection->where(
