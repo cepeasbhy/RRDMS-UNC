@@ -7,7 +7,7 @@
             <div class="border-start border-danger border-4 mb-2">
                 <h4 class="ms-1 my-auto">ADMIN TOOLS</h4>
                 <span class="badge bg-danger mb-2">{{ session('errorMsg') }}</span>
-                <span class="badge bg-danger mb-2">{{ session('successMsg') }}</span>
+                <span class="badge bg-success mb-2">{{ session('successMsg') }}</span>
             </div>
             <div class="row">
                 <div class="col">
