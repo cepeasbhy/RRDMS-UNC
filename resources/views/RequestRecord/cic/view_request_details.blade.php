@@ -34,6 +34,7 @@
                     <thead>
                         <th class="custom-th bg-danger">Document Name</th>
                         <th class="custom-th bg-danger">Quantity</th>
+                        <th class="custom-th bg-danger">Subtotal</th>
                     </thead>
                     <tbody>
                         @if ($requestedDocumentDetails->certificate != null)
@@ -42,6 +43,12 @@
                                     <tr class="custom-tr">
                                         <td class="custom-td">{{ $key }} </td>
                                         <td class="custom-td">{{ $value }}</td>
+                                        @if ($value == 1)
+                                            <td class="custom-td"> 110</td>
+                                        @else
+                                            <td class="custom-td">{{ $value * 110 }} </td>
+                                        @endif
+
                                     </tr>
                                 @endforeach
                             @endforeach
@@ -53,34 +60,37 @@
                                         {{ $diploma }}
                                     </td>
                                     <td class="custom-td"> 1</td>
+                                    @if ($diploma == 'Bachelor/Law Degree')
+                                        <td class="custom-td"> 516</td>
+                                    @elseif ($diploma == 'Masteral Degree')
+                                        <td class="custom-td"> 729</td>
+                                    @elseif ($diploma == 'TESDA')
+                                        <td class="custom-td"> 302</td>
+                                    @elseif ($diploma == 'Caregiving')
+                                        <td class="custom-td"> 250</td>
+                                    @endif
                                 @endforeach
                             </tr>
                         @endif
                         @if ($requestedDocumentDetails->transcript_of_record != null)
-                            <tr class="custom-tr">
-                                <td class="custom-td">
-                                    Transcript of Record
-                                </td>
-                                <td class="custom-td">
-                                    @foreach ($requestedDocumentDetails->transcript_of_record as $records)
-                                        {{ $records }}
-                                    @break
-                                @endforeach
-                            </td>
-                        </tr>
+                            @foreach ($requestedDocumentDetails->transcript_of_record as $records)
+                                <tr class="custom-tr">
+                                    <td class="custom-td"> Transcript of Record </td>
+                                    <td class="custom-td"> {{ $records }} </td>
+                                    <td class="custom-td"> {{ $records * 110 }} </td>
+                                </tr>
+                            @break
+                        @endforeach
                     @endif
                     @if ($requestedDocumentDetails->copy_of_grades != null)
-                        <tr class="custom-tr">
-                            <td class="custom-td">
-                                Copy of Grades
-                            </td>
-                            <td class="custom-td">
-                                @foreach ($requestedDocumentDetails->copy_of_grades as $grades)
-                                    {{ $grades }}
-                                @break
-                            @endforeach
-                        </td>
-                    </tr>
+                        @foreach ($requestedDocumentDetails->copy_of_grades as $grades)
+                            <tr class="custom-tr">
+                                <td class="custom-td"> Copy of Grades </td>
+                                <td class="custom-td"> {{ $grades }} </td>
+                                <td class="custom-td"> {{ $grades * 110 }} </td>
+                            </tr>
+                        @break
+                    @endforeach
                 @endif
                 @if ($requestedDocumentDetails->authentication != null)
                     <tr class="custom-tr">
@@ -89,6 +99,7 @@
                                 {{ $authentication }}
                             </td>
                             <td class="custom-td"> 1</td>
+                            <td class="custom-td"> 89.50</td>
                         @endforeach
                     </tr>
                 @endif
@@ -97,6 +108,11 @@
                         @foreach ($requestedDocumentDetails->photocopy as $copies)
                             <td class="custom-td">{{ $copies }}</td>
                             <td class="custom-td">1</td>
+                            @if ($requestedDocumentDetails->photocopy['photocopyType'] == 'colored')
+                                <td class="custom-td">20</td>
+                            @else
+                                <td class="custom-td">1.20</td>
+                            @endif
                         @break
                     @endforeach
                 </tr>

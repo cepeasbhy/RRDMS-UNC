@@ -452,6 +452,7 @@ class DbHelperController extends Controller
             'copy_of_grades' =>$copyGrades,
             'total_fee' => ($certFees + $copyOfGradeFees + $torFees + $diplomaFees + $authenticationFees + $photocopyFees)
         ]);
+
     }
 
     public function checkNull(Request $request, $keyName){
@@ -562,7 +563,7 @@ class DbHelperController extends Controller
         return [
             'requestInfo' => $requestInfo,
             'studentInfo' => $studentInfo,
-            'requestedDocumentDetails' => $requestedDocumentDetails
+            'requestedDocumentDetails' => $requestedDocumentDetails,
         ];
     }
 
