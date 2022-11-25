@@ -4,9 +4,15 @@
 @section('request-content')
     <div class="container mb-3">
         <div class="row mb-3">
-            <form class="mb-3" action="{{ route('cic.request') }}" method="get">
-                <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
-            </form>
+            @if (Auth::user()->account_role == 'cic')
+                <form class="mb-3" action="{{ route('cic.request') }}" method="get">
+                    <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+                </form>
+            @elseif (Auth::user()->account_role == 'student')
+                <form class="mb-3" action="{{ route('stud.request') }}" method="get">
+                    <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+                </form>
+            @endif
             <div class="border-start border-danger border-4 mb-2">
                 <h4 class="ms-1 my-auto">STUDENT INFORMATION</h4>
             </div>
@@ -130,16 +136,21 @@
 
 <div class="col mt-5 text-center">
 
-@if ($requestInfo->status == 'IN PROGRESS')
+@if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'cic')
     <button class="btn btn-success btn-sm " data-bs-toggle="modal" data-bs-target="#accept-request-modal">ACCEPT
         REQUEST</button>
     <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">REJECT
         REQUEST</button>
 @endif
 
-@if ($requestInfo->status == 'SET FOR RELEASE')
+@if ($requestInfo->status == 'SET FOR RELEASE' && Auth::user()->account_role == 'cic')
     <button class="btn btn-success btn-sm " data-bs-toggle="modal"
         data-bs-target="#accept-request-modal">COMPLETE
+        REQUEST</button>
+@endif
+
+@if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'student')
+    <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">CANCEL
         REQUEST</button>
 @endif
 

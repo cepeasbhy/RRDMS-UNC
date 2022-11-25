@@ -18,7 +18,6 @@ class CicReqRecordManagmentController extends Controller
     public function viewRequest(DbHelperController $db, $requestID){
         $requestedDocument = $db->getRequesteeInfo($requestID);
         $student = $db->getStudentInfo($requestedDocument['studentInfo']->student_id);
-        $recordPrices = $db->getRecordPrices();
         return view('RequestRecord/cic/view_request_details', [
             'student' => $student['studentInfo'],
             'credentials' => $student['credentials'],
@@ -26,7 +25,6 @@ class CicReqRecordManagmentController extends Controller
             'requestID' => $requestID,
             'requestedDocumentDetails' => $requestedDocument['requestedDocumentDetails'],
             'requestInfo' => $requestedDocument['requestInfo'],
-            'recordPrices' =>$recordPrices
         ]);
     }
 

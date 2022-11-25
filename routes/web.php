@@ -90,6 +90,8 @@ Route::group(['middleware' => ['role:student', 'prevent-back-history']], functio
     Route::group(['middleware' => 'first-time-login'], function(){
         Route::get('/request', [StudRequestController::class, 'index'])->name('stud.request');
         Route::get('/request/make_request', [StudRequestController::class, 'makeRequest'])->name('stud.makeRequest');
+        Route::post('/request/view/{request_id}', [StudRequestController::class, 'viewStudentRequest'])->name('stud.viewRequest');
+        Route::post('/request/view/cancel/{request_id}', [StudRequestController::class, 'cancelRequest'])->name('stud.cancelRequest');
         Route::post('/request/submit_request', [StudRequestController::class, 'submitRequest'])->name('stud.submitRequest');
     });
 

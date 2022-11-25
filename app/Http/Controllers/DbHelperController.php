@@ -587,6 +587,11 @@ class DbHelperController extends Controller
         ]);
     }
 
+    public function cancelStudentRequest($requestID){
+        RequestedDocument::where('request_id', $requestID)->delete();
+        ModelsRequest::where('request_id', $requestID)->delete();
+    }
+
     public function computeDiplomaFees($request){
         $totalDiplomaFees = 0;
         if($request->input('diploma') != null){
