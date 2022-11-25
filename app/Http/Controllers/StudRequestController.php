@@ -13,17 +13,20 @@ class StudRequestController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index(DbHelperController $db){
+
+        
         return view('RequestRecord/Student/index');
     }
 
     public function makeRequest(DbHelperController $db){
-
+        $recordPrices = $db->getRecordPrices();
         $student = $db->getStudentInfo(Auth::user()->user_id);
         
         return view('RequestRecord/Student/request', [
             'student' => $student['studentInfo'],
-            'picturePath' =>$student['picturePath']
+            'picturePath' =>$student['picturePath'],
+            'recordPrices' => $recordPrices
         ]);
     }
 
