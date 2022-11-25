@@ -361,20 +361,12 @@ class DbHelperController extends Controller
 
         if($request->input('reqCopyGrade') != null){
             $copyGrades = $request->input('copyGrades');
-            foreach ($request->input('copyGrades') as $grades => $copies){
-                if($grades == "copies" && $copies > 0){
-                    $copyOfGradeFees += (int)$copies * 110;
-                }
-            }
+            $copyOfGradeFees = $copyGrades['copies']*110;
         }
 
         if($request->input('reqTOR') != null){
             $tor = $request->input('tor');
-            foreach ($request->input('tor') as $torRequest => $copies){
-                if($torRequest == "copies" && $copies > 0){
-                    $torFees += (int)$copies * 110;
-                }
-            }
+            $torFees = $tor['copies']*110;
         }
 
         $studentDeptCourse = Student::select(
