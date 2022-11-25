@@ -12,6 +12,7 @@ use App\Models\Staff;
 use App\Models\User;
 use App\Http\Controllers\CredentialController;
 use App\Models\Department;
+use App\Models\RecordPrice;
 use Illuminate\Support\Facades\Auth;
 
 class DbHelperController extends Controller
@@ -331,6 +332,65 @@ class DbHelperController extends Controller
         $credController = new CredentialController;
         $credController->archiveCredentials($studentID);
 
+    }
+
+    public function getRecordPrices(){
+        $bachelorLawDegreePrice = RecordPrice::select('price')->where('description', 'Bachelor/Law Degree')->firstOrFail();
+        $masteralDegreePrice = RecordPrice::select('price')->where('description', 'Masteral Degree')->firstOrFail();
+        $tesdaDegreePrice = RecordPrice::select('price')->where('description', 'TESDA')->firstOrFail();
+        $caregivingDegreePrice = RecordPrice::select('price')->where('description', 'Caregiving')->firstOrFail();
+        $torPrice = RecordPrice::select('price')->where('description', 'Transcript of Record')->firstOrFail();
+        $copyGradePrice = RecordPrice::select('price')->where('description', 'Copy of Grades')->firstOrFail();
+        $certPrice = RecordPrice::select('price')->where('description', 'Certificate')->firstOrFail();
+        $authPrice = RecordPrice::select('price')->where('description', 'Authentication')->firstOrFail();
+        $photoOrdinaryPrice = RecordPrice::select('price')->where('description', 'Photocopy (Ordinary)')->firstOrFail();
+        $photoColoredPrice = RecordPrice::select('price')->where('description', 'Photocopy (Colored)')->firstOrFail();
+
+        return([
+            'bachelorLawDegreePrice' => $bachelorLawDegreePrice,
+            'masteralDegreePrice' => $masteralDegreePrice,
+            'tesdaDegreePrice' => $tesdaDegreePrice,
+            'caregivingDegreePrice' => $caregivingDegreePrice,
+            'torPrice' => $torPrice,
+            'copyGradePrice' => $copyGradePrice,
+            'certPrice' => $certPrice,
+            'authPrice' => $authPrice,
+            'photoOrdinaryPrice' => $photoOrdinaryPrice,
+            'photoColoredPrice' => $photoColoredPrice
+        ]);
+    }
+
+
+    public function updatePrices(Request $request){
+        RecordPrice::where('description', 'Bachelor/Law Degree'
+        )->update(['price' => $request->input('bachelorLawDegreePrice')]);
+
+        RecordPrice::where('description', 'Masteral Degree'
+        )->update(['price' => $request->input('masteralDegreePrice')]);
+
+        RecordPrice::where('description', 'TESDA'
+        )->update(['price' => $request->input('tesdaPrice')]);
+
+        RecordPrice::where('description', 'Caregiving'
+        )->update(['price' => $request->input('caregivingPrice')]);
+
+        RecordPrice::where('description', 'Transcript of Record'
+        )->update(['price' => $request->input('torPrice')]);
+
+        RecordPrice::where('description', 'Copy of Grades'
+        )->update(['price' => $request->input('copyGradePrice')]);
+
+        RecordPrice::where('description', 'Certificate'
+        )->update(['price' => $request->input('certPrice')]);
+
+        RecordPrice::where('description', 'Authentication'
+        )->update(['price' => $request->input('authPrice')]);
+
+        RecordPrice::where('description', 'Photocopy (Ordinary)'
+        )->update(['price' => $request->input('photoOrdindaryPrice')]);
+
+        RecordPrice::where('description', 'Photocopy (Colored)'
+        )->update(['price' => $request->input('photoColoredPrice')]);
     }
 
     public function insertRequest($request, $studentID){

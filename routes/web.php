@@ -35,6 +35,8 @@ Route::group(['middleware' => ['role:admin', 'prevent-back-history']], function(
     Route::post('/admin/update_staff_account/{userID}', [AccountController::class, 'adminUpdateStaffAccount'])->name('admin.updateStaffAccount');
     Route::post('/admin/update_account_picture/{userID}', [AccountController::class, 'updateAccountPicture'])->name('admin.updateAccountPicture');
     Route::post('/admin/delete_staff_account/{userID}', [AccountController::class, 'admindeleteStaffAccount'])->name('admin.deleteStaffAccount');
+    Route::post('/admin/update_price', [AdminController::class, 'updatePrices'])->name('admin.updatePrice');
+
 });
 
 //Student Credential Management Routes

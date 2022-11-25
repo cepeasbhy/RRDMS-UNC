@@ -6,7 +6,8 @@
         <div class="row">
             <div class="border-start border-danger border-4 mb-2">
                 <h4 class="ms-1 my-auto">ADMIN TOOLS</h4>
-                <span class="badge bg-danger mb-2">{{ session('msg') }}</span>
+                <span class="badge bg-danger mb-2">{{ session('errorMsg') }}</span>
+                <span class="badge bg-danger mb-2">{{ session('successMsg') }}</span>
             </div>
             <div class="row">
                 <div class="col">
@@ -17,6 +18,9 @@
                 </div>
                 <div class="col">
                     <button class="btn btn-success btn-small" data-bs-toggle="modal" data-bs-target="#admin-export-stud">EXPORT LIST OF STUDENTS</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-success btn-small" data-bs-toggle="modal" data-bs-target="#admin-rec-prices">MANAGE RECORD PRICES</button>
                 </div>
             </div>
         </div>
@@ -162,4 +166,5 @@
     </div>
     @extends('layouts.modals.exportStudListModal')
     @extends('layouts.modals.exportGradListModal')
+    @extends('layouts.modals.recPricesModal')
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ExportStudList;
 use App\Http\Controllers\DbHelperController;
+use App\Models\RecordPrice;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -16,7 +17,12 @@ class AdminController extends Controller
 
     public function index(DbHelperController $db){
         $deptCount = $db->getCountDepartment();
-        return view('admin/admin_home', ['deptCount' => $deptCount]);
+        $recordPrices = $db->getRecordPrices();
+        
+        return view('admin/admin_home', [
+            'deptCount' => $deptCount,
+            'recordPrices' => $recordPrices
+        ]);
     }
 
     public function viewDepartment(DbHelperController $db, $deptID){
@@ -61,7 +67,7 @@ class AdminController extends Controller
 
         if(is_null($request->input('department_id')) && is_null($request->input('admissionYear')) &&
         is_null($request->input('admissionYear'))){
-            return redirect()->route('admin.home')->with('msg', 'No data provided for exporting');
+            return redirect()->route('admin.home')->with('errorMsg', 'No data provided for exporting');
         }else{
             return Excel::download(new ExportStudList(
                 isGraduated: true,
@@ -84,7 +90,7 @@ class AdminController extends Controller
 
         if(is_null($request->input('department_id')) && is_null($request->input('admissionYear')) &&
         is_null($request->input('admissionYear'))){
-            return redirect()->route('admin.home')->with('msg', 'No data provided for exporting');
+            return redirect()->route('admin.home')->with('errorMsg', 'No data provided for exporting');
         }else{
             return Excel::download(new ExportStudList(
                 isGraduated: false,
@@ -125,5 +131,11 @@ class AdminController extends Controller
             default:
                 return $partName.'.xlsx';
         }
+    }
+
+    public function updatePrices(Request $request, DbHelperController $db){
+        $db->updatePrices($request);
+
+        return redirect()->route('admin.home')->with('successMsg', 'Prices Successfully Updated');
     }
 }
