@@ -11,57 +11,28 @@ class CredentialController extends Controller
 {
     public function uploadStudentCredentials(Request $request)
     {
-        if ($request->hasFile('picture')){
-            $this->saveCredential($request, 'picture', 'Picture');
-        }
+        $descriptions = [
+            'Picture' => 'picture',
+            'Birth Certificate' => 'birthCertificate',
+            'Marriage Certificate' => 'marriageCertificate',
+            'Certificate of Good Moral Character' => 'goodMoralCharacter',
+            'Honorable Dismisal' => 'honorDismisal',
+            'Form 137' => 'form137',
+            'Form 138' => 'form138',
+            'Copy of Grades' => 'copyGrade',
+            'Transcript of Record' => 'tor',
+            'NBI Clearance' => 'NbiClearance',
+            'Police Clearance' => 'PoliceClearance',
+            'C1 Receipt' => 'C1',
+            'Permit to Cross Enroll' => 'permitCrossEnroll'
+        ];
 
-        if ($request->hasFile('birthCertificate')){
-            $this->saveCredential($request, 'birthCertificate', 'Birth Certificate');
+        foreach($descriptions as $fileName => $keyName){
+            if ($request->hasFile($keyName)){
+                $this->saveCredential($request, $keyName, $fileName);
+            }
         }
-
-        if ($request->hasFile('marriageCertificate')){
-            $this->saveCredential($request, 'marriageCertificate', 'Marriage Certificate');
-        }
-
-        if ($request->hasFile('goodMoralCharacter')){
-            $this->saveCredential($request, 'goodMoralCharacter', 'Certificate of Good Moral Character');
-        }
-
-        if ($request->hasFile('honorDismisal')){
-            $this->saveCredential($request, 'honorDismisal', 'Honorable Dismisal');
-        }
-
-        if ($request->hasFile('form137')){
-            $this->saveCredential($request, 'form137', 'Form 137');
-        }
-
-        if ($request->hasFile('form138')){
-            $this->saveCredential($request, 'form138', 'Form 138');
-        }
-
-        if ($request->hasFile('copyGrade')){
-            $this->saveCredential($request, 'copyGrade', 'Copy of Grades');
-        }
-
-        if ($request->hasFile('tor')){
-            $this->saveCredential($request, 'tor', 'Transcript of Record');
-        }
-
-        if ($request->hasFile('NbiClearance')){
-            $this->saveCredential($request, 'NbiClearance', 'NBI Clearance');
-        }
-
-        if ($request->hasFile('PoliceClearance')){
-            $this->saveCredential($request, 'PoliceClearance', 'Police Clearance');
-        }
-
-        if ($request->hasFile('C1')){
-            $this->saveCredential($request, 'C1', 'C1 Receipt');
-        }
-
-        if ($request->hasFile('permitCrossEnroll')){
-            $this->saveCredential($request, 'permitCrossEnroll', 'Permit to Cross Enroll');
-        }
+       
     }
 
     public function saveCredential($request, $keyName, $fileName){
