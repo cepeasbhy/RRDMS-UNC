@@ -347,50 +347,41 @@ class DbHelperController extends Controller
         $photoColoredPrice = RecordPrice::select('price')->where('description', 'Photocopy (Colored)')->firstOrFail();
 
         return([
-            'bachelorLawDegreePrice' => $bachelorLawDegreePrice,
-            'masteralDegreePrice' => $masteralDegreePrice,
-            'tesdaDegreePrice' => $tesdaDegreePrice,
-            'caregivingDegreePrice' => $caregivingDegreePrice,
-            'torPrice' => $torPrice,
-            'copyGradePrice' => $copyGradePrice,
-            'certPrice' => $certPrice,
-            'authPrice' => $authPrice,
-            'photoOrdinaryPrice' => $photoOrdinaryPrice,
-            'photoColoredPrice' => $photoColoredPrice
+            'bachelorLawDegreePrice' => $bachelorLawDegreePrice->price,
+            'masteralDegreePrice' => $masteralDegreePrice->price,
+            'tesdaDegreePrice' => $tesdaDegreePrice->price,
+            'caregivingDegreePrice' => $caregivingDegreePrice->price,
+            'torPrice' => $torPrice->price,
+            'copyGradePrice' => $copyGradePrice->price,
+            'certPrice' => $certPrice->price,
+            'authPrice' => $authPrice->price,
+            'photoOrdinaryPrice' => $photoOrdinaryPrice->price,
+            'photoColoredPrice' => $photoColoredPrice->price
         ]);
     }
 
 
     public function updatePrices(Request $request){
-        RecordPrice::where('description', 'Bachelor/Law Degree'
-        )->update(['price' => $request->input('bachelorLawDegreePrice')]);
 
-        RecordPrice::where('description', 'Masteral Degree'
-        )->update(['price' => $request->input('masteralDegreePrice')]);
+        $descriptions = [
+            'Bachelor/Law Degree' => 'bachelorLawDegreePrice',
+            'Masteral Degree' => 'masteralDegreePrice',
+            'TESDA' => 'tesdaPrice',
+            'Caregiving' => 'caregivingPrice', 
+            'Transcript of Record' => 'torPrice',
+            'Copy of Grades' => 'copyGradePrice',
+            'Certificate' => 'certPrice',
+            'Authentication' => 'authPrice',
+            'Photocopy (Ordinary)' => 'photoOrdindaryPrice',
+            'Photocopy (Colored)' => 'photoColoredPrice'
 
-        RecordPrice::where('description', 'TESDA'
-        )->update(['price' => $request->input('tesdaPrice')]);
+        ];
 
-        RecordPrice::where('description', 'Caregiving'
-        )->update(['price' => $request->input('caregivingPrice')]);
-
-        RecordPrice::where('description', 'Transcript of Record'
-        )->update(['price' => $request->input('torPrice')]);
-
-        RecordPrice::where('description', 'Copy of Grades'
-        )->update(['price' => $request->input('copyGradePrice')]);
-
-        RecordPrice::where('description', 'Certificate'
-        )->update(['price' => $request->input('certPrice')]);
-
-        RecordPrice::where('description', 'Authentication'
-        )->update(['price' => $request->input('authPrice')]);
-
-        RecordPrice::where('description', 'Photocopy (Ordinary)'
-        )->update(['price' => $request->input('photoOrdindaryPrice')]);
-
-        RecordPrice::where('description', 'Photocopy (Colored)'
-        )->update(['price' => $request->input('photoColoredPrice')]);
+        foreach($descriptions as $description => $inputName){
+            RecordPrice::where('description', $description
+            )->update(['price' => $request->input($inputName)]);
+    
+        }
     }
 
     public function insertRequest($request, $studentID){
@@ -406,27 +397,28 @@ class DbHelperController extends Controller
         $copyOfGradeFees = 0;
         $torFees = 0;
 
-        $diplomaFees = Self::computeDiplomaFees($request);
-        $authenticationFees = Self::computeAuthenticationFees($request);
-        $photocopyFees = Self::computePhotocopyFees($request);
-
+        $recordPrices = Self::getRecordPrices();
+        $diplomaFees = Self::computeDiplomaFees($request, $recordPrices);
+        $authenticationFees = Self::computeAuthenticationFees($request, $recordPrices);
+        $photocopyFees = Self::computePhotocopyFees($request, $recordPrices);
+        
         if($request->input('certificate') != null){
             $certificates = $this -> createJsonCertificate($request);
             foreach($certificates as $certificate){
                 foreach($certificate as $certName => $copies){
-                    $certFees += $copies*110;
+                    $certFees += $copies*$recordPrices['certPrice'];
                 }
             }
         }
 
         if($request->input('reqCopyGrade') != null){
             $copyGrades = $request->input('copyGrades');
-            $copyOfGradeFees = $copyGrades['copies']*110;
+            $copyOfGradeFees = $copyGrades['copies']*$recordPrices['copyGradePrice'];
         }
 
         if($request->input('reqTOR') != null){
             $tor = $request->input('tor');
-            $torFees = $tor['copies']*110;
+            $torFees = $tor['copies']*$recordPrices['torPrice'];
         }
 
         $studentDeptCourse = Student::select(
@@ -592,21 +584,21 @@ class DbHelperController extends Controller
         ModelsRequest::where('request_id', $requestID)->delete();
     }
 
-    public function computeDiplomaFees($request){
+    public function computeDiplomaFees($request, $recordPrices){
         $totalDiplomaFees = 0;
         if($request->input('diploma') != null){
             foreach($request->input('diploma') as $diploma){
                 if($diploma == 'Bachelor/Law Degree'){
-                    $totalDiplomaFees += 516;
+                    $totalDiplomaFees += $recordPrices['bachelorLawDegreePrice'];
                 }
                 if($diploma == 'Masteral Degree'){
-                    $totalDiplomaFees += 729;
+                    $totalDiplomaFees += $recordPrices['masteralDegreePrice'];
                 }
                 if($diploma == 'TESDA'){
-                    $totalDiplomaFees += 302;
+                    $totalDiplomaFees += $recordPrices['tesdaDegreePrice'];
                 }
                 if($diploma == 'Caregiving'){
-                    $totalDiplomaFees += 250;
+                    $totalDiplomaFees += $recordPrices['caregivingDegreePrice'];
                 }
             }
         }
@@ -614,26 +606,16 @@ class DbHelperController extends Controller
         return $totalDiplomaFees;
     }
 
-    public function computeAuthenticationFees($request){
+    public function computeAuthenticationFees($request, $recordPrices){
         $authFees = 0;
         if($request->input('authentication') != null){
-            foreach($request->input('authentication') as $auth){
-                if($auth == 'Transcript of Record'){
-                    $authFees += 89.50;
-                }
-                if($auth == 'Diploma'){
-                    $authFees += 89.50;
-                }
-                if($auth == 'Certificate'){
-                    $authFees += 89.50;
-                }
-            }
+            $authFees = count($request->input('authentication'))*$recordPrices['authPrice'];
         }
 
         return $authFees;
     }
 
-    public function computePhotocopyFees($request){
+    public function computePhotocopyFees($request, $recordPrices){
         $photocopyFees = 0;
         $photocopyCount = 0;
         if($request->input('photocopy') != null){
@@ -649,10 +631,10 @@ class DbHelperController extends Controller
                 }
 
                 if($photocopy == 'ordinary'){
-                    $photocopyFees = $photocopyCount * 1.20;
+                    $photocopyFees = $photocopyCount * $recordPrices['photoOrdinaryPrice'];
                 }
                 else if($photocopy == 'colored'){
-                    $photocopyFees = $photocopyCount * 20;
+                    $photocopyFees = $photocopyCount * $recordPrices['photoColoredPrice'];
                 }
             }
         }

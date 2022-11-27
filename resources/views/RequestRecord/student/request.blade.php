@@ -58,16 +58,16 @@
                             <div class="col">
                                 <span>Price</span>
                                 <div class="price">
-                                    <label>₱{{ number_format($recordPrices['bachelorLawDegreePrice']->price, 2, '.') }}</label>
+                                    <label>₱{{ number_format($recordPrices['bachelorLawDegreePrice'], 2, '.') }}</label>
                                 </div>
                                 <div class="price">
-                                    <label>₱{{ number_format($recordPrices['masteralDegreePrice']->price, 2, '.') }}</label>
+                                    <label>₱{{ number_format($recordPrices['masteralDegreePrice'], 2, '.') }}</label>
                                 </div>
                                 <div class="price">
-                                    <label>₱{{ number_format($recordPrices['tesdaDegreePrice']->price, 2, '.') }}</label>
+                                    <label>₱{{ number_format($recordPrices['tesdaDegreePrice'], 2, '.') }}</label>
                                 </div>
                                 <div class="price">
-                                    <label>₱{{ number_format($recordPrices['caregivingDegreePrice']->price, 2, '.') }}</label>
+                                    <label>₱{{ number_format($recordPrices['caregivingDegreePrice'], 2, '.') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="alert alert-info p-1 mb-1">
                             <span style="font-size: 12px">Transcript of Record cost
-                                ₱{{ number_format($recordPrices['torPrice']->price, 2, '.') }}</span>
+                                ₱{{ number_format($recordPrices['torPrice'], 2, '.') }}</span>
                         </div>
                         <div class="col">
                             <div class="form-group mb-1">
@@ -119,7 +119,7 @@
                         </div>
                         <div class="alert alert-info p-1 mb-1">
                             <span style="font-size: 12px">Copy of Grades cost
-                                ₱{{ number_format($recordPrices['copyGradePrice']->price, 2, '.') }}</span>
+                                ₱{{ number_format($recordPrices['copyGradePrice'], 2, '.') }}</span>
                         </div>
                         <div class="col">
                             <div class="form-group mb-1">
@@ -161,7 +161,7 @@
                     </div>
                     <div class="alert alert-info p-1 mb-1 w-25">
                         <span class="label-sm">Certificate cost
-                            ₱{{ number_format($recordPrices['certPrice']->price, 2, '.') }} each</span>
+                            ₱{{ number_format($recordPrices['certPrice'], 2, '.') }} each</span>
                     </div>
                     <div class="row ms-2">
                         <div class="col">
@@ -448,7 +448,7 @@
                         </div>
                         <div class="alert alert-info p-1 mb-1">
                             <span class="label-sm">Authentication cost
-                                ₱{{ number_format($recordPrices['authPrice']->price, 2, '.') }} each</span>
+                                ₱{{ number_format($recordPrices['authPrice'], 2, '.') }} each</span>
                         </div>
                         <div class="row ms-2">
                             <div class="form-group">
@@ -505,10 +505,10 @@
                                 <div class="col">
                                     <span>Price</span>
                                     <div class="price">
-                                        <label>₱{{ number_format($recordPrices['photoOrdinaryPrice']->price, 2, '.') }}</label>
+                                        <label>₱{{ number_format($recordPrices['photoOrdinaryPrice'], 2, '.') }}</label>
                                     </div>
                                     <div class="price">
-                                        <label>₱{{ number_format($recordPrices['photoColoredPrice']->price, 2, '.') }}</label>
+                                        <label>₱{{ number_format($recordPrices['photoColoredPrice'], 2, '.') }}</label>
                                     </div>
 
                                 </div>

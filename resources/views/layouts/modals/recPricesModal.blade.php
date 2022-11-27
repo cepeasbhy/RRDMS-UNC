@@ -10,43 +10,43 @@
                     @csrf
                     <div class="form-group">
                         <label class="col-form-label col-form-label-sm">Bachelor/Law Degree Price</label>
-                        <input class="form-control form-control-sm" type="number" name="bachelorLawDegreePrice" required value="{{$recordPrices['bachelorLawDegreePrice']->price}}" step=".01">
+                        <input class="form-control form-control-sm" type="number" name="bachelorLawDegreePrice" required value="{{$recordPrices['bachelorLawDegreePrice']}}" step=".01">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-sm">Masteral Degree Price</label>
-                        <input class="form-control form-control-sm" type="number" name="masteralDegreePrice" required value="{{$recordPrices['masteralDegreePrice']->price}}" step=".01">
+                        <input class="form-control form-control-sm" type="number" name="masteralDegreePrice" required value="{{$recordPrices['masteralDegreePrice']}}" step=".01">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-sm">TESDA Diploma Price</label>
-                        <input class="form-control form-control-sm" type="number" name="tesdaPrice" required value="{{$recordPrices['tesdaDegreePrice']->price}}" step=".01">
+                        <input class="form-control form-control-sm" type="number" name="tesdaPrice" required value="{{$recordPrices['tesdaDegreePrice']}}" step=".01">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-sm">Caregiving Diploma Price</label>
-                        <input class="form-control form-control-sm" type="number" name="caregivingPrice" required value="{{$recordPrices['caregivingDegreePrice']->price}}" step=".01">
+                        <input class="form-control form-control-sm" type="number" name="caregivingPrice" required value="{{$recordPrices['caregivingDegreePrice']}}" step=".01">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-sm">Transcript of Record Price</label>
-                        <input class="form-control form-control-sm" type="number" name="torPrice" required value="{{$recordPrices['torPrice']->price}}" step=".01">
+                        <input class="form-control form-control-sm" type="number" name="torPrice" required value="{{$recordPrices['torPrice']}}" step=".01">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-sm">Copy of Grades Price</label>
-                        <input class="form-control form-control-sm" type="number" name="copyGradePrice" required value="{{$recordPrices['copyGradePrice']->price}}" step=".01">
+                        <input class="form-control form-control-sm" type="number" name="copyGradePrice" required value="{{$recordPrices['copyGradePrice']}}" step=".01">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-sm">Certificate Price</label>
-                        <input class="form-control form-control-sm" type="number" name="certPrice" required value="{{$recordPrices['certPrice']->price}}" step=".01">
+                        <input class="form-control form-control-sm" type="number" name="certPrice" required value="{{$recordPrices['certPrice']}}" step=".01">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-sm">Authentication Price</label>
-                        <input class="form-control form-control-sm" type="number" name="authPrice" required value="{{$recordPrices['authPrice']->price}}" step=".01">
+                        <input class="form-control form-control-sm" type="number" name="authPrice" required value="{{$recordPrices['authPrice']}}" step=".01">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-sm">Photocopy (Ordinary) Price</label>
-                        <input class="form-control form-control-sm" type="number" name="photoOrdindaryPrice" required value="{{$recordPrices['photoOrdinaryPrice']->price}}" step=".01">
+                        <input class="form-control form-control-sm" type="number" name="photoOrdindaryPrice" required value="{{$recordPrices['photoOrdinaryPrice']}}" step=".01">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-sm">Photocopy (Colored) Price</label>
-                        <input class="form-control form-control-sm" type="number" name="photoColoredPrice" required value="{{$recordPrices['photoColoredPrice']->price}}" step=".01">
+                        <input class="form-control form-control-sm" type="number" name="photoColoredPrice" required value="{{$recordPrices['photoColoredPrice']}}" step=".01">
                     </div>
 
                 </form>
