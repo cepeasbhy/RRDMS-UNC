@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row mb-3 mt-3">
-        <form class="mb-3" action="{{ route('getRequests') }}" method="get">
+        <form class="mb-3" action="{{ route('viewRequestDetails', ['requestID' => $requestID]) }}" method="get">
             <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <div class="col">
@@ -69,20 +69,6 @@
                         value="{{ date('Y-m-d', strtotime($student->updated_at)) }}" readonly>
                 </div>
             </div>
-            <section class="row g-2">
-                @if($requestInfo->status == 0)
-                    <div class="col-6">
-                        <form action="{{ route('acceptRequestFromLogs', ['requestID' => $requestID]) }}" method="post">
-                            @csrf
-                            <button class="btn btn-success btn-sm btn-block" style="width: 100%">ACCEPT REQUEST</button>
-                        </form>
-                    </div>
-                @endif
-                <div class="col-6">
-                    <button class="btn btn-danger btn-sm btn-block" style="width: 100%" data-bs-toggle="modal"
-                        data-bs-target="#delete-request-modal">DELETE</button>
-                </div>
-            </section>
         </div>
         <div class="col mb-2">
             <div class="border-start border-danger border-4">
@@ -110,6 +96,4 @@
     </div>
     <!--Modal for Viewing Credential-->
     @extends('layouts.modals.viewCredModal', ['fromRequestedView' => true])
-    <!--Modal for Deleting Record-->
-    @extends('layouts.modals.ArchivedRecords.delete_request_modal', ['routeName' => 'deleteRequest'])
 @endsection

@@ -52,12 +52,8 @@
                                             {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                         </td>
                                         <td class="custom-td">
-                                            <form
-                                                action="{{ route('viewRequestedRecord', ['id' => $requestedArchive->request_id]) }}"
-                                                method="post">
-                                                @csrf
-                                                <button class="btn btn-sm btn-success">VIEW</button>
-                                            </form>
+                                           <a   class="btn btn-success btn-sm"
+                                                href="{{route('viewRequestDetails', ['requestID' => $requestedArchive->request_id])}}">VIEW</a>
                                         </td>
                                     </tr>
                                 @endif
@@ -86,12 +82,8 @@
                                             {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                         </td>
                                         <td class="custom-td">
-                                            <form
-                                                action="{{ route('viewRequestedRecord', ['id' => $requestedArchive->request_id]) }}"
-                                                method="post">
-                                                @csrf
-                                                <button class="btn btn-sm btn-success">VIEW</button>
-                                            </form>
+                                            <a   class="btn btn-success btn-sm"
+                                                href="{{route('viewRequestDetails', ['requestID' => $requestedArchive->request_id])}}">VIEW</a>
                                         </td>
                                     </tr>
                                 @endif

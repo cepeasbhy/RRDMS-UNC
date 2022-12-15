@@ -11,7 +11,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <form action="{{ route($routeName, ['requestID' => $requestID]) }}" method="post">
+                <form action="{{ route($routeName, ['requestID' => $requestInfo->request_id]) }}" method="post">
                     @csrf
                     <button class="btn btn-sm btn-danger">Proceed</button>
                 </form>

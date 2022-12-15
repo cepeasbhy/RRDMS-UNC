@@ -57,6 +57,20 @@ class ArchivedRecordsController extends Controller
         ]);
     }
 
+    public function viewRequestDetails(DbHelperController $db, $requestID){
+        $requestedArchive = $db->getRequestedArchiveInfo($requestID);
+        $student = $db->getArchivedStudentInfo($requestedArchive['requestedArchived']->student_id);
+        $staff = $db->getStaffInfo($requestedArchive['requestInfo']->staff_id);
+
+        return view('ArchivedRecords.view_request_details', [
+            'requestInfo' => $requestedArchive['requestInfo'],
+            'staff' => $staff['staffInfo'],
+            'student' => $student['studentInfo'],
+            'picturePath' =>  $student['picturePath'],
+            'staffPicture' =>  $staff['staffPicture']
+        ]);
+    }
+
     public function viewRequestedArchive(DbHelperController $db, $requestID){
         $requestedArchive = $db->getRequestedArchiveInfo($requestID);
         $student = $db->getArchivedStudentInfo($requestedArchive['requestedArchived']->student_id);

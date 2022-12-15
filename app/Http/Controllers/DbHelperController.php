@@ -103,7 +103,6 @@ class DbHelperController extends Controller
             'middle_name',
             'email',
             'phone_number',
-            'assigned_dept',
             'dept_name',
             'account_role'
         )->leftJoin(
