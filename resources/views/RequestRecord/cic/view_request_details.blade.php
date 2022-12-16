@@ -16,18 +16,37 @@
             <div class="border-start border-danger border-4 mb-2">
                 <h4 class="ms-1 my-auto">STUDENT INFORMATION</h4>
             </div>
-            <div class="row align-items-center mb-3 w-50 ms-2">
-                <img class="col-3 img-fluid rounded-circle student-pic"
-                    src="{{ asset('storage/' . $picturePath->document_loc) }}">
-                <div class="col-9">
-                    <span class="h4 fw-bold">{{ $student->last_name }}, {{ $student->first_name }}
-                        {{ mb_substr($student->middle_name, 0, 1) . '.' }}</span>
-                    <br>
-                    <span>{{ $student->student_id }}</span>
-                    <br>
-                    <span>{{ $student->course_name }}</span>
-                    <br>
-                    <span>Request ID: {{ $requestedDocumentDetails->request_id }}</span>
+            <div class="row">
+                <div class="col-5">
+                    <div class="row align-items-center mb-3 ms-2">
+                        <img class="col-3 img-fluid rounded-circle student-pic"
+                            src="{{ asset('storage/' . $picturePath->document_loc) }}">
+                        <div class="col-9">
+                            <span class="h4 fw-bold">{{ $student->last_name }}, {{ $student->first_name }}
+                                {{ mb_substr($student->middle_name, 0, 1) . '.' }}</span>
+                            <br>
+                            <span>{{ $student->student_id }}</span>
+                            <br>
+                            <span>{{ $student->course_name }}</span>
+                            <br>
+                            <span>{{ $student->dept_name }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group mb-1">
+                       <label>Contact Number</label>
+                       <input class="form-control form-control-sm" type="text" value="{{$student->phone_number}}" readonly>
+                    </div>
+                    <div class="form-group mb-1">
+                        <label>Email</label>
+                        <input class="form-control form-control-sm" type="text" value="{{$student->email}}" readonly>
+                    </div>
+                    <div class="form-group mb-1">
+                        <label>Address</label>
+                        <textarea class="form-control form-control-sm" style="resize: none" readonly
+                        >{{trim($student->address)}}</textarea>
+                    </div>
                 </div>
             </div>
         </div>

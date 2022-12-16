@@ -8,7 +8,7 @@
 @section('content')
     <section class="row mt-3">
         <div class="row justify-content-center">
-            <div class="col mb-2">
+            <div class="col-3 mb-2">
                 <div class="border-start border-danger border-4">
                     <h4 class="ms-2">
                         Request History
@@ -16,7 +16,7 @@
                 </div>
                 <span class="badge bg-success mb-2">{{ session('msg') }}</span>
             </div>
-            <div class="col-10">
+            <div class="col-9">
                 <div class="row mb-3 justify-content-end">
                     <div class="col-6">
                         <div class="row">
