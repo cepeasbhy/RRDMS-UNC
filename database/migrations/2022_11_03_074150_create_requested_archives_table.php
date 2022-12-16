@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('staff_id');
             $table->string('archive_id');
             $table->integer('status')->default(0);
+            $table->string('reason_for_rejection')->nullable();
             $table->timestamps();
 
             $table->foreign('staff_id')->references('staff_id')->on('staff');

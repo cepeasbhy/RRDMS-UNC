@@ -12,6 +12,7 @@ class RequestedArchive extends Model
     protected $fillable = [
         'request_id',
         'staff_id',
-        'archive_id'
+        'archive_id',
+        'reason_for_rejection'
     ];
 }
