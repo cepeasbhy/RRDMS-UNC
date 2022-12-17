@@ -84,6 +84,25 @@ class StudCredController extends Controller
         return redirect('/stud_cred_mngmnt/request_archive')->with('msg', 'Successfully Submitted Request');
     }
 
+    public function viewRequestDetails(DbHelperController $db, $requestID){
+        $requestedArchive = $db->getRequestedArchiveInfo($requestID);
+        $student = $db->getArchivedStudentInfo($requestedArchive['requestedArchived']->student_id);
+        $staff = $db->getStaffInfo($requestedArchive['requestInfo']->staff_id);
+
+        return view('StudentCredential.view_request_details', [
+            'requestInfo' => $requestedArchive['requestInfo'],
+            'staff' => $staff['staffInfo'],
+            'student' => $student['studentInfo'],
+            'picturePath' =>  $student['picturePath'],
+            'staffPicture' =>  $staff['staffPicture']
+        ]);
+    }
+
+    public function cancelRequestedArchive(DbHelperController $db, $requestID){
+        $db->deleteRequestedArchive($requestID);
+        return redirect('/stud_cred_mngmnt/request_archive')->with('msg', 'Request has been cancelled');
+    }
+
     public function viewRequestedArchive(DbHelperController $db, $requestID){
         $requestedArchive = $db->getRequestedArchiveInfo($requestID);
         $student = $db->getArchivedStudentInfo($requestedArchive['requestedArchived']->student_id);

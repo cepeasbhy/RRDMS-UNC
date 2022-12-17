@@ -493,6 +493,13 @@ class DbHelperController extends Controller
         ]);
     }
 
+    public function rejectRequestedArchive($requestID, Request $request){
+        RequestedArchive::where('request_id', $requestID)->update([
+            'reason_for_rejection' => $request->input('reason'),
+            'status' => 2
+        ]);
+    }
+
     public function accpetRequestedArchive($requestID){
         RequestedArchive::where('request_id', $requestID)->update(['status' => 1]);
     }

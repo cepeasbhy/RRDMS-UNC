@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('css-link')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-@endsection
-
 @section('content')
     <div class="row mt-4">
         <form class="mb-3" action="{{ route('getRequests') }}" method="get">
@@ -66,6 +62,13 @@
                         <label>Date Requested</label>
                         <input class="form-control form-control-sm" value="{{date('Y-m-d', strtotime($requestInfo->created_at))}}"type="text" readonly>
                     </div>
+                    @if($requestInfo->status == 2)
+                        <div class="form-group mb-2">
+                            <label>Reason for Rejecting</label>
+                            <textarea class="form-control form-control-sm" style="resize: none" readonly
+                            >{{$requestInfo->reason_for_rejection}}</textarea>
+                        </div>
+                    @endif
                 </div>
                 <div class="row">
                     <div class="col-4">
@@ -76,22 +79,22 @@
                         </form>
                     </div>
                     @if($requestInfo->status == 0)
-                    <div class="col-4">
-                        <form action="{{ route('acceptRequestFromLogs', ['requestID' => $requestInfo->request_id]) }}" method="post">
-                            @csrf
-                            <button class="btn btn-success btn-sm w-100">APPROVE</button>
-                        </form>
-                    </div>
+                        <div class="col-4">
+                            <form action="{{ route('acceptRequestFromLogs', ['requestID' => $requestInfo->request_id]) }}" method="post">
+                                @csrf
+                                <button class="btn btn-success btn-sm w-100">APPROVE</button>
+                            </form>
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-danger btn-sm w-100" data-bs-toggle="modal"
+                                data-bs-target="#reject-request-modal">REJECT</button>
+                        </div>
                     @endif
-                    <div class="col-4">
-                        <button class="btn btn-danger btn-sm w-100" data-bs-toggle="modal"
-                            data-bs-target="#delete-request-modal">DELETE</button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-     <!--Modal for Deleting Record-->
-     @extends('layouts.modals.ArchivedRecords.delete_request_modal', ['routeName' => 'deleteRequest'])
+     <!--Modal for Rejecting Request-->
+     @extends('layouts.modals.ArchivedRecords.reject_request_modal', ['routeName' => 'rejectRequest'])
 @endsection

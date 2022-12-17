@@ -24,14 +24,22 @@
                     Archives</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="requests-tab" data-bs-toggle="tab" data-bs-target="#user-request"
-                    type="button" role="tab" aria-controls="user-request" aria-selected="false">Your Request</button>
+                <button class="nav-link" id="pending-requests-tab" data-bs-toggle="tab" data-bs-target="#pending-requests"
+                    type="button" role="tab" aria-controls="pending-requests-tab" aria-selected="false">Pending Requests</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="approved-requests-tab" data-bs-toggle="tab" data-bs-target="#approved-requests"
+                    type="button" role="tab" aria-controls="approved-requests-tab" aria-selected="false">Approved Requests</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="rejected-requests-tab" data-bs-toggle="tab" data-bs-target="#rejected-requests"
+                    type="button" role="tab" aria-controls="rejected-requests-tab" aria-selected="false">Rejected Requests</button>
             </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="make-request" role="tabpanel" aria-labelledby="make-request-tab">
                 <div class="mt-3">
-                    <table class="table myTable">
+                    <table class="table makeRequestTable">
                         <thead>
                             <th class="custom-th bg-danger">Archive ID</th>
                             <th class="custom-th bg-danger">Student ID</th>
@@ -59,46 +67,94 @@
                     </table>
                 </div>
             </div>
-            <div class="tab-pane fade show" id="user-request" role="tabpanel" aria-labelledby="requests-tab">
+            <div class="tab-pane fade show" id="pending-requests" role="tabpanel" aria-labelledby="pending-requests-tab">
                 <div class="mt-3">
-                    <table class="table myRequest">
+                    <table class="table pendingRequestsTable">
                         <thead>
                             <th class="custom-th bg-danger">Request ID</th>
                             <th class="custom-th bg-danger">Archive ID</th>
                             <th class="custom-th bg-danger">Staff ID</th>
                             <th class="custom-th bg-danger">Request Date</th>
-                            <th class="custom-th bg-danger">Status</th>
                             <th class="custom-th bg-danger">Action</th>
                         </thead>
                         <tbody>
                             @foreach ($requestedArchives as $requestedArchive)
-                                <tr class="custom-tr">
-                                    <td class="custom-td">{{ $requestedArchive->request_id }}</td>
-                                    <td class="custom-td">{{ $requestedArchive->archive_id }}</td>
-                                    <td class="custom-td">{{ $requestedArchive->staff_id }}</td>
-                                    <td class="custom-td">
-                                        {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
-                                    </td>
-                                    <td class="custom-td">
-                                        @if ($requestedArchive->status == 0)
-                                            <span class="badge bg-secondary">-PENDING-</span>
-                                        @else
-                                            <span class="badge bg-success">-APPROVED-</span>
-                                        @endif
-                                    </td>
-                                    <td class="custom-td">
-                                        @if ($requestedArchive->status == 0)
-                                            Not Available
-                                        @else
-                                            <form
-                                                action="{{ route('viewRequestedArchive', ['id' => $requestedArchive->request_id]) }}"
-                                                method="post">
-                                                @csrf
-                                                <button class="btn btn-sm btn-success">VIEW</button>
-                                            </form>
-                                        @endif
-                                    </td>
-                                </tr>
+                                @if($requestedArchive->status == 0)
+                                    <tr class="custom-tr">
+                                        <td class="custom-td">{{ $requestedArchive->request_id }}</td>
+                                        <td class="custom-td">{{ $requestedArchive->archive_id }}</td>
+                                        <td class="custom-td">{{ $requestedArchive->staff_id }}</td>
+                                        <td class="custom-td">
+                                            {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
+                                        </td>
+                                        <td>
+                                        <a class="btn btn-success btn-sm"
+                                        href="{{route('viewPendingRequestDetails', ['requestID' => $requestedArchive->request_id])}}">View Request</a>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade show" id="approved-requests" role="tabpanel" aria-labelledby="approved-requests-tab">
+                <div class="mt-3">
+                    <table class="table approvedRequestsTable">
+                        <thead>
+                            <th class="custom-th bg-danger">Request ID</th>
+                            <th class="custom-th bg-danger">Archive ID</th>
+                            <th class="custom-th bg-danger">Staff ID</th>
+                            <th class="custom-th bg-danger">Request Date</th>
+                            <th class="custom-th bg-danger">Action</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($requestedArchives as $requestedArchive)
+                                @if($requestedArchive->status == 1)
+                                    <tr class="custom-tr">
+                                        <td class="custom-td">{{ $requestedArchive->request_id }}</td>
+                                        <td class="custom-td">{{ $requestedArchive->archive_id }}</td>
+                                        <td class="custom-td">{{ $requestedArchive->staff_id }}</td>
+                                        <td class="custom-td">
+                                            {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
+                                        </td>
+                                        <td>
+                                        <a class="btn btn-success btn-sm"
+                                        href="{{route('viewRequestedArchive', ['id' => $requestedArchive->request_id])}}">View Record</a>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade show" id="rejected-requests" role="tabpanel" aria-labelledby="rejected-requests-tab">
+                <div class="mt-3">
+                    <table class="table rejectedRequestsTable">
+                        <thead>
+                            <th class="custom-th bg-danger">Request ID</th>
+                            <th class="custom-th bg-danger">Archive ID</th>
+                            <th class="custom-th bg-danger">Staff ID</th>
+                            <th class="custom-th bg-danger">Request Date</th>
+                            <th class="custom-th bg-danger">Action</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($requestedArchives as $requestedArchive)
+                                @if($requestedArchive->status == 2)
+                                    <tr class="custom-tr">
+                                        <td class="custom-td">{{ $requestedArchive->request_id }}</td>
+                                        <td class="custom-td">{{ $requestedArchive->archive_id }}</td>
+                                        <td class="custom-td">{{ $requestedArchive->staff_id }}</td>
+                                        <td class="custom-td">
+                                            {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
+                                        </td>
+                                        <td>
+                                        <a class="btn btn-success btn-sm"
+                                        href="{{route('viewPendingRequestDetails', ['requestID' => $requestedArchive->request_id])}}">View Request</a>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -112,7 +168,7 @@
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.myTable').DataTable({
+            $('.makeRequestTable').DataTable({
                 "language": {
                     "lengthMenu": "Display _MENU_ records per page",
                     "zeroRecords": "No Records Available",
@@ -124,12 +180,34 @@
         });
 
         $(document).ready(function() {
-            $('.myRequest').DataTable({
+            $('.pendingRequestsTable').DataTable({
                 "language": {
                     "lengthMenu": "Display _MENU_ records per page",
-                    "zeroRecords": "No Requests Available",
+                    "zeroRecords": "No pending requests available",
                     "info": "Showing page _PAGE_ of _PAGES_",
-                    "infoEmpty": "No requests available",
+                    "infoEmpty": "No pending requests available",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('.approvedRequestsTable').DataTable({
+                "language": {
+                    "lengthMenu": "Display _MENU_ records per page",
+                    "zeroRecords": "No approved requests available",
+                    "info": "Showing page _PAGE_ of _PAGES_",
+                    "infoEmpty": "No approved requests available",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('.rejectedRequestsTable').DataTable({
+                "language": {
+                    "lengthMenu": "Display _MENU_ records per page",
+                    "zeroRecords": "No rejected requests available",
+                    "info": "Showing page _PAGE_ of _PAGES_",
+                    "infoEmpty": "No rejected requests available",
                     "infoFiltered": "(filtered from _MAX_ total records)"
                 }
             });

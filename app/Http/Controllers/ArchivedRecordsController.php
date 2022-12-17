@@ -93,13 +93,18 @@ class ArchivedRecordsController extends Controller
     public function deleteRequests(DbHelperController $db, $requestID)
     {
         $db->deleteRequestedArchive($requestID);
-        return redirect('/archived_records/show_requested_records')->with('msgCred', 'Request have been Declined');
+        return redirect('/archived_records/show_requested_records')->with('msg', 'Request successfully deleted');
+    }
+
+    public function rejectRequest(DbHelperController $db, $requestID, Request $request){
+        $db->rejectRequestedArchive($requestID, $request);
+        return redirect('/archived_records/show_requested_records')->with('msg', 'Request has been rejected');
     }
 
     public function acceptRequest(DbHelperController $db, $requestID)
     {
         $db->accpetRequestedArchive($requestID);
-        return redirect('/archived_records/show_requested_records')->with('msgCred', 'Request have been Accepted');
+        return redirect('/archived_records/show_requested_records')->with('msg', 'Request has been Accepted');
     }
 
     public function updateRecord($id, Request $request, DbHelperController $db)

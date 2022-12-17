@@ -46,8 +46,10 @@ Route::group(['middleware' => ['role:staff', 'prevent-back-history']], function(
     Route::get('/stud_cred_mngmnt/add_student', [StudCredController::class, 'addStudent'])->name('addStudent');
     Route::get('/stud_cred_mngmnt/view_student/{id}', [StudCredController::class, 'viewStudent'])->name('viewStudent');
     Route::get('/stud_cred_mngmnt/request_archive', [StudCredController::class, 'requestArchive'])->name('requestArchive');
+    Route::get('/stud_cred_mngmnt/view_request/{requestID}', [StudCredController::class, 'viewRequestDetails'])->name('viewPendingRequestDetails');
+    Route::get('/stud_cred_mngmnt/request_archive/view_requested_archive/{id}', [StudCredController::class, 'viewRequestedArchive'])->name('viewRequestedArchive');
     Route::post('/stud_cred_mngmnt/request_archive/make_request/{id}', [StudCredController::class, 'makeRequestArchive'])->name('makeRequestArchive');
-    Route::post('/stud_cred_mngmnt/request_archive/view_requested_archive/{id}', [StudCredController::class, 'viewRequestedArchive'])->name('viewRequestedArchive');
+    Route::post('/stud_cred_mngmnt/request_archive/cancel_request/{requestID}', [StudCredController::class, 'cancelRequestedArchive'])->name('cancelRequestedArchive');
     Route::post('/stud_cred_mngmnt/request_archive//view_requested_archive/return_archive/{id}', [StudCredController::class, 'returnToArchive'])->name('returnToArchive');
     Route::post('/stud_cred_mngmnt/view_student/update/{id}', [StudCredController::class, 'update'])->name('updateStudent');
     Route::post('/stud_cred_mngmnt/view_student/delete/{id}', [StudCredController::class, 'destroy'])->name('deleteStudent');
@@ -68,6 +70,7 @@ Route::group(['middleware' => ['role:rec_assoc', 'prevent-back-history']], funct
     Route::post('/archived_records/show_requested_records/{id}', [ArchivedRecordsController::class, 'viewRequestedArchive'])->name('viewRequestedRecord');
     Route::post('/archived_records/show_requested_records/accept/{requestID}', [ArchivedRecordsController::class, 'acceptRequest'])->name('acceptRequestFromLogs');
     Route::post('/archived_records/show_requested_records/delete/{requestID}', [ArchivedRecordsController::class, 'deleteRequests'])->name('deleteRequest');
+    Route::post('/archived_records/show_requested_records/reject/{requestID}', [ArchivedRecordsController::class, 'rejectRequest'])->name('rejectRequest');
     Route::post('/archived_records/view_record/add_single_rec', [ArchivedRecordsController::class, 'addSingleRec'])->name('addSingleRecArchive');
     Route::post('/archived_records/view_record/solo_archive/{id}', [ArchivedRecordsController::class, 'archiveSingleRecord'])->name('singleArchive');
     Route::post('/archived_records/view_record/delete_record/{id}', [ArchivedRecordsController::class, 'deleteRecord'])->name('deleteRecord');
