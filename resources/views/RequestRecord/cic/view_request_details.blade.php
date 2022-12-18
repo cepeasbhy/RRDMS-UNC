@@ -51,100 +51,178 @@
             </div>
         </div>
         <div class="row">
-            <div class="border-start border-danger border-4 mb-3">
-                <h4 class="ms-1 my-auto">REQUEST DETAILS</h4>
-            </div>
-            <div class="col ms-3">
-                <table class="table">
-                    <thead>
-                        <th class="custom-th bg-danger">Document Name</th>
-                        <th class="custom-th bg-danger">Quantity</th>
-                        <th class="custom-th bg-danger">Subtotal</th>
-                    </thead>
-                    <tbody>
-                        @if ($requestedDocumentDetails->certificate != null)
-                            @foreach ($requestedDocumentDetails->certificate as $certs)
-                                @foreach ($certs as $key => $value)
-                                    <tr class="custom-tr">
-                                        <td class="custom-td">{{ $key }} </td>
-                                        <td class="custom-td">{{ $value }}</td>
-                                        @if ($value == 1)
-                                            <td class="custom-td"> 110</td>
-                                        @else
-                                            <td class="custom-td">{{ $value * 110 }} </td>
-                                        @endif
+           <div class="border-start border-danger border-4 mb-3">
+                <h4 class="my-auto">REQUEST DETAILS</h4>
+           </div>
+           <div class="row mb-3">
+                @if ($requestedDocumentDetails->diploma != null)
+                    <div class="col-4 mb-3">
+                        <div class="row">
+                            <h6 class="ms-1 fw-bold">DIPLOMA</h6>
+                        </div>
+                        <div class="row">
+                            @foreach ($requestedDocumentDetails->diploma as $diploma)
+                                <span class="ms-3">{{$diploma}}</span>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
 
-                                    </tr>
+                @if ($requestedDocumentDetails->transcript_of_record != null)
+                    <div class="col-4 mb-3">
+                        <div class="row">
+                            <h6 class="ms-1 fw-bold">TRANSCRIPT OF RECORD</h6>
+                        </div>
+                        <div class="row ms-3">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span>No. of Copies:</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>{{$requestedDocumentDetails->transcript_of_record['copies']}}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span>Purpose:</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span>Other Purpose:</span>
+                                    </div>
+                                    <div class="col">
+                                        @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
+                                            <span>NOT STATED</span>
+                                        @else
+                                            <span>{{$requestedDocumentDetails->transcript_of_record['other_purpose']}}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                
+                @if ($requestedDocumentDetails->certificate != null)
+                    <div class="col-4 mb-3">
+                        <div class="row">
+                            <h6 class="ms-1 fw-bold">CERTIFICATES</h6>
+                        </div>
+                        <div class="row ms-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <span class="fw-bold">DESCRIPTION</span>
+                                </div>
+                                <div class="col">
+                                    <span class="fw-bold">COPIES</span>
+                                </div>
+                            </div>
+                            @foreach ($requestedDocumentDetails->certificate as $certificate)
+                                @foreach($certificate as $certName => $copies)
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <span style="font-size: 13px">{{$certName}}</span>
+                                        </div>
+                                        <div class="col">
+                                            <span style="font-size: 13px">{{$copies}}</span>
+                                        </div>
+                                    </div>
                                 @endforeach
                             @endforeach
-                        @endif
-                        @if ($requestedDocumentDetails->diploma != null)
-                            <tr class="custom-tr">
-                                @foreach ($requestedDocumentDetails->diploma as $diploma)
-                                    <td class="custom-td">
-                                        {{ $diploma }}
-                                    </td>
-                                    <td class="custom-td"> 1</td>
-                                    @if ($diploma == 'Bachelor/Law Degree')
-                                        <td class="custom-td"> 516</td>
-                                    @elseif ($diploma == 'Masteral Degree')
-                                        <td class="custom-td"> 729</td>
-                                    @elseif ($diploma == 'TESDA')
-                                        <td class="custom-td"> 302</td>
-                                    @elseif ($diploma == 'Caregiving')
-                                        <td class="custom-td"> 250</td>
-                                    @endif
-                                @endforeach
-                            </tr>
-                        @endif
-                        @if ($requestedDocumentDetails->transcript_of_record != null)
-                            @foreach ($requestedDocumentDetails->transcript_of_record as $records)
-                                <tr class="custom-tr">
-                                    <td class="custom-td"> Transcript of Record </td>
-                                    <td class="custom-td"> {{ $records }} </td>
-                                    <td class="custom-td"> {{ $records * 110 }} </td>
-                                </tr>
-                            @break
-                        @endforeach
-                    @endif
-                    @if ($requestedDocumentDetails->copy_of_grades != null)
-                        @foreach ($requestedDocumentDetails->copy_of_grades as $grades)
-                            <tr class="custom-tr">
-                                <td class="custom-td"> Copy of Grades </td>
-                                <td class="custom-td"> {{ $grades }} </td>
-                                <td class="custom-td"> {{ $grades * 110 }} </td>
-                            </tr>
-                        @break
-                    @endforeach
+                        </div>
+                    </div>
                 @endif
-                @if ($requestedDocumentDetails->authentication != null)
-                    <tr class="custom-tr">
-                        @foreach ($requestedDocumentDetails->authentication as $authentication)
-                            <td class="custom-td">
-                                {{ $authentication }}
-                            </td>
-                            <td class="custom-td"> 1</td>
-                            <td class="custom-td"> 89.50</td>
-                        @endforeach
-                    </tr>
-                @endif
-                @if ($requestedDocumentDetails->photocopy != null)
-                    <tr class="custom-tr">
-                        @foreach ($requestedDocumentDetails->photocopy as $copies)
-                            <td class="custom-td">{{ $copies }}</td>
-                            <td class="custom-td">1</td>
-                            @if ($requestedDocumentDetails->photocopy['photocopyType'] == 'colored')
-                                <td class="custom-td">20</td>
-                            @else
-                                <td class="custom-td">1.20</td>
-                            @endif
-                        @break
-                    @endforeach
-                </tr>
-            @endif
-        </tbody>
-    </table>
 
+                @if ($requestedDocumentDetails->copy_of_grades != null)
+                    <div class="col-4 mb-3">
+                        <div class="row">
+                            <h6 class="ms-1 fw-bold">COPY OF GRADES</h6>
+                        </div>
+                        <div class="row ms-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <span>No. of Copies:</span>
+                                </div>
+                                <div class="col">
+                                    <span>{{$requestedDocumentDetails->copy_of_grades['copies']}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <span>School Year:</span>
+                                </div>
+                                <div class="col">
+                                    <span>{{$requestedDocumentDetails->copy_of_grades['schoolYear']}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <span>Semester:</span>
+                                </div>
+                                <div class="col">
+                                    @switch($requestedDocumentDetails->copy_of_grades['semester'])
+                                        @case(1)
+                                            <span>1st Semester</span>
+                                            @break
+                                        @case(2)
+                                            <span>2nd Semester</span>
+                                            @break
+                                        @default
+                                            <span>Summer Semester</span>
+                                    @endswitch
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                
+                @if ($requestedDocumentDetails->authentication != null)
+                    <div class="col-4 mb-3">
+                        <div class="row">
+                            <h6 class="ms-1 fw-bold">AUTHENTICATION</h6>
+                        </div>
+                        <div class="row ms-3">
+                            @foreach ($requestedDocumentDetails->authentication as $auth)
+                                <span>{{$auth}}</span>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+                
+                @if ($requestedDocumentDetails->photocopy != null)
+                    <div class="col-4 mb-3">
+                        <div class="row">
+                            <h6 class="ms-1 fw-bold">PHOTOCOPY</h6>
+                        </div>
+                        <div class="row ms-3">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="row">
+                                        <span class="fw-bold">DESCRIPTION</span>
+                                    </div>
+                                    <div class="row">
+                                        @foreach ($requestedDocumentDetails->photocopy as $photocopy)
+                                            @if ($photocopy != 'ordinary' && $photocopy != 'colored')
+                                                <span class="ms-3" style="font-size: 14px">{{$photocopy}}</span>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="fw-bold">TYPE: {{strtoupper($requestedDocumentDetails->photocopy['photocopyType'])}}</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                @endif 
+           </div>
+        </div>
     <div class=" text-xl text-danger">
         Total Fee: {{ $requestedDocumentDetails->total_fee }}
     </div>
@@ -153,26 +231,25 @@
 
 </div>
 
-<div class="col mt-5 text-center">
+<div class="col mt-5 text-center mb-3">
 
-@if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'cic')
-    <button class="btn btn-success btn-sm " data-bs-toggle="modal" data-bs-target="#accept-request-modal">ACCEPT
-        REQUEST</button>
-    <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">REJECT
-        REQUEST</button>
-@endif
+    @if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'cic')
+        <button class="btn btn-success btn-sm " data-bs-toggle="modal" data-bs-target="#accept-request-modal">ACCEPT
+            REQUEST</button>
+        <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">REJECT
+            REQUEST</button>
+    @endif
 
-@if ($requestInfo->status == 'SET FOR RELEASE' && Auth::user()->account_role == 'cic')
-    <button class="btn btn-success btn-sm " data-bs-toggle="modal"
-        data-bs-target="#accept-request-modal">COMPLETE
-        REQUEST</button>
-@endif
+    @if ($requestInfo->status == 'SET FOR RELEASE' && Auth::user()->account_role == 'cic')
+        <button class="btn btn-success btn-sm " data-bs-toggle="modal"
+            data-bs-target="#accept-request-modal">COMPLETE
+            REQUEST</button>
+    @endif
 
-@if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'student')
-    <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">CANCEL
-        REQUEST</button>
-@endif
-
+    @if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'student')
+        <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">CANCEL
+            REQUEST</button>
+    @endif
 </div>
 
 </div>
