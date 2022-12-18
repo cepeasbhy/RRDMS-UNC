@@ -53,7 +53,7 @@
                         </thead>
                         <tbody>
                             @foreach ($requestedDocuments as $documentDetails)
-                                @if ($documentDetails->release_date == null && $documentDetails->status == 'IN PROGRESS')
+                                @if ($documentDetails->status == 'IN PROGRESS')
                                     <tr class="custom-tr">
                                         <td class="custom-td">{{ $documentDetails->request_id }}</td>
                                         <td class="custom-td">{{ $documentDetails->student_id }}</td>
@@ -96,7 +96,7 @@
                         </thead>
                         <tbody>
                             @foreach ($requestedDocuments as $documentDetails)
-                                @if ($documentDetails->release_date != null && $documentDetails->status == 'SET FOR RELEASE')
+                                @if ($documentDetails->status == 'SET FOR RELEASE')
                                     <tr class="custom-tr">
                                         <td class="custom-td">{{ $documentDetails->request_id }}</td>
                                         <td class="custom-td">{{ $documentDetails->student_id }}</td>
@@ -140,7 +140,7 @@
                         </thead>
                         <tbody>
                             @foreach ($requestedDocuments as $documentDetails)
-                                @if ($documentDetails->release_date == null && $documentDetails->status == 'DENIED')
+                                @if ($documentDetails->status == 'DENIED')
                                     <tr class="custom-tr">
                                         <td class="custom-td">{{ $documentDetails->request_id }}</td>
                                         <td class="custom-td">{{ $documentDetails->student_id }}</td>
@@ -184,7 +184,7 @@
                         </thead>
                         <tbody>
                             @foreach ($requestedDocuments as $documentDetails)
-                                @if ($documentDetails->release_date != null && $documentDetails->status == 'COMPLETED')
+                                @if ($documentDetails->status == 'COMPLETED')
                                     <tr class="custom-tr">
                                         <td class="custom-td">{{ $documentDetails->request_id }}</td>
                                         <td class="custom-td">{{ $documentDetails->student_id }}</td>

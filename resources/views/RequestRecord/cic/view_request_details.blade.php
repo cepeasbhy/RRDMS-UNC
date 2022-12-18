@@ -14,7 +14,7 @@
                 </form>
             @endif
             <div class="border-start border-danger border-4 mb-2">
-                <h4 class="ms-1 my-auto">STUDENT INFORMATION</h4>
+                <h4 class="ms-1 my-auto">REQUESTER INFORMATION</h4>
             </div>
             <div class="row">
                 <div class="col-5">
@@ -31,6 +31,29 @@
                             <br>
                             <span>{{ $student->dept_name }}</span>
                         </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <div class="form-group mb-1">
+                            <label>Request ID</label>
+                            <input class="form-control form-control-sm" type="text" value="{{$requestInfo->request_id}}" readonly>
+                        </div>
+                        <div class="form-group mb-1">
+                            <label>Release Date</label>
+                            @if ($requestInfo->release_date != null)
+                                <input class="form-control form-control-sm" type="text" value="{{$requestInfo->release_date}}" readonly>
+                            @else
+                                <input class="form-control form-control-sm" type="text" value="NOT FOR RELEASE" readonly>
+                            @endif
+                        </div>
+                        @if ($requestInfo->reason_for_rejection != null)
+                            <div class="form-group mb-1">
+                                <label>Reason for Rejection</label>
+                                <textarea class="form-control form-control-sm" style="resize: none" readonly
+                                >{{trim($requestInfo->reason_for_rejection)}}</textarea>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-4">
@@ -52,7 +75,7 @@
         </div>
         <div class="row">
            <div class="border-start border-danger border-4 mb-3">
-                <h4 class="my-auto">REQUEST DETAILS</h4>
+                <h4 class="my-auto">REQUESTED DOCUMENTS</h4>
            </div>
            <div class="row mb-3">
                 @if ($requestedDocumentDetails->diploma != null)

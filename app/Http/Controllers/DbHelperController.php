@@ -553,7 +553,7 @@ class DbHelperController extends Controller
     }
 
     public function getRequesteeInfo($id){
-        $requestInfo = ModelsRequest::select('student_id', 'request_id', 'status')->where('request_id', $id)->firstOrFail();
+        $requestInfo = ModelsRequest::where('request_id', $id)->firstOrFail();
         $studentInfo = Student::where('student_id', $requestInfo->student_id)->firstOrFail();
 
         $requestedDocumentDetails = RequestedDocument::where('request_id', $requestInfo->request_id)->firstOrFail();
