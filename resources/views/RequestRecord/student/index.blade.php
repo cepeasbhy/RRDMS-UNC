@@ -17,14 +17,11 @@
                 <span class="badge bg-success mb-2">{{ session('msg') }}</span>
             </div>
             <div class="col-9">
-                <div class="row mb-3 justify-content-end">
+                <div class="row mb-3">
                     <div class="col-6">
                         <div class="row">
                             <div class="col-7">
-                                <button class="btn btn-success btn-sm w-100" form="searchRequest">SEARCH REQUEST</button>
-                            </div>
-                            <div class="col-5">
-                                <a href="{{ route('stud.makeRequest') }}" class="btn btn-danger btn-sm w-100">REQUEST</a>
+                                <a href="{{ route('stud.makeRequest') }}" class="btn btn-danger btn-sm w-100">MAKE REQUEST</a>
                             </div>
                         </div>
                     </div>
