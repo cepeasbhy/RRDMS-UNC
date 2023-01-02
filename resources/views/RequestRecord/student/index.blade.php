@@ -241,9 +241,9 @@
             $('.pendingRequestTable').DataTable({
                 "language": {
                     "lengthMenu": "Display _MENU_ records per page",
-                    "zeroRecords": "No Records Available",
+                    "zeroRecords": "No Requests Available",
                     "info": "Showing page _PAGE_ of _PAGES_",
-                    "infoEmpty": "No records available",
+                    "infoEmpty": "No request available",
                     "infoFiltered": "(filtered from _MAX_ total records)"
                 }
             });
@@ -265,9 +265,9 @@
             $('.deniedRequestTable').DataTable({
                 "language": {
                     "lengthMenu": "Display _MENU_ records per page",
-                    "zeroRecords": "No Records Available",
+                    "zeroRecords": "No Requests Available",
                     "info": "Showing page _PAGE_ of _PAGES_",
-                    "infoEmpty": "No records available",
+                    "infoEmpty": "No requests available",
                     "infoFiltered": "(filtered from _MAX_ total records)"
                 }
             });
@@ -277,9 +277,9 @@
             $('.completedRequestTable').DataTable({
                 "language": {
                     "lengthMenu": "Display _MENU_ records per page",
-                    "zeroRecords": "No Records Available",
+                    "zeroRecords": "No Requests Available",
                     "info": "Showing page _PAGE_ of _PAGES_",
-                    "infoEmpty": "No records available",
+                    "infoEmpty": "No requests available",
                     "infoFiltered": "(filtered from _MAX_ total records)"
                 }
             });
