@@ -384,41 +384,54 @@ class DbHelperController extends Controller
     }
 
     public function insertRequest($request, $studentID){
+        $recordPrices = Self::getRecordPrices();
         $certificates = null;
         $copyGrades = null;
         $tor = null;
-        $diploma = $this->checkNull($request, 'diploma');
-        $authentication = $this->checkNull($request, 'authentication');
-        $photocopy = $this->checkNull($request, 'photocopy');
         $requestID = 'REQ'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
 
         $certFees = 0;
         $copyOfGradeFees = 0;
         $torFees = 0;
-
-        $recordPrices = Self::getRecordPrices();
         $diplomaFees = Self::computeDiplomaFees($request, $recordPrices);
-        $authenticationFees = Self::computeAuthenticationFees($request, $recordPrices);
-        $photocopyFees = Self::computePhotocopyFees($request, $recordPrices);
-        
+
+        $totalCertCopies = 0;
+        $totalDiplomaCopies = $request->input('diploma') ? count($request->input('diploma')):null;
+        $totalTorCopies = 0;
+
         if($request->input('certificate') != null){
             $certificates = $this -> createJsonCertificate($request);
             foreach($certificates as $certificate){
                 foreach($certificate as $certName => $copies){
                     $certFees += $copies*$recordPrices['certPrice'];
+                    $totalCertCopies += $copies;
                 }
             }
+
+            $json = array('TOTAL PRICE' => $certFees);
+            array_push($certificates, $json);
         }
 
         if($request->input('reqCopyGrade') != null){
             $copyGrades = $request->input('copyGrades');
             $copyOfGradeFees = $copyGrades['copies']*$recordPrices['copyGradePrice'];
+
+            $json = array('price' => $copyOfGradeFees);
+            array_push($copyGrades, $json);
         }
 
         if($request->input('reqTOR') != null){
             $tor = $request->input('tor');
             $torFees = $tor['copies']*$recordPrices['torPrice'];
+            $totalTorCopies = $tor['copies'];
+
+            $json = array('price' => $torFees);
+            array_push($tor, $json);
         }
+
+        $diplomas = $this->createJsonDilpoma($request, $recordPrices);
+        $authentication = $this->createJsonAuth($request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies);
+        $photocopy = $this->createJsonPhotoCopy($request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies);
 
         $studentDeptCourse = Student::select(
             'department_id',
@@ -435,15 +448,158 @@ class DbHelperController extends Controller
         RequestedDocument::create([
             'student_id' => $studentID,
             'request_id' => $requestID,
-            'diploma' => $diploma,
+            'diploma' => $diplomas,
             'transcript_of_record' => $tor,
             'certificate' => $certificates,
-            'authentication' => $authentication,
-            'photocopy' => $photocopy,
+            'authentication' => $authentication['jsonAuth'],
+            'photocopy' => $photocopy['jsonPhotoCopy'],
             'copy_of_grades' =>$copyGrades,
-            'total_fee' => ($certFees + $copyOfGradeFees + $torFees + $diplomaFees + $authenticationFees + $photocopyFees)
+            'total_fee' => ($certFees + $copyOfGradeFees + $torFees + $diplomaFees + $authentication['authFees'] + $photocopy['photoCopyFees'])
         ]);
 
+    }
+
+    public function createJsonPhotoCopy(Request $request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies){
+        $jsonPhotoCopy = [];
+        $photoCopies = $this->checkNull($request, 'photocopy');
+        $photocopyFees = 0;
+        $basePrice = 0;
+
+        if($photoCopies != null){
+            if($photoCopies['photocopyType'] == "colored"){
+                $basePrice = $recordPrices['photoColoredPrice'];
+            }else{
+                $basePrice = $recordPrices['photoOrdinaryPrice'];
+            }
+
+            foreach($photoCopies as $photoCopy){
+                if($photoCopy == 'Transcript of Record'){
+                    $photocopyFees += $basePrice*$totalTorCopies;
+                    $json = array('description' => $photoCopy,
+                                  'value' => $basePrice*$totalTorCopies
+                                 );
+                    array_push($jsonPhotoCopy, $json);
+                }
+                
+                if($photoCopy == 'Diploma'){
+                    $photocopyFees += $basePrice*$totalDiplomaCopies;
+                    $json = array('description' => $photoCopy, 
+                                  'value' => $basePrice*$totalDiplomaCopies
+                                 );
+                    array_push($jsonPhotoCopy, $json);
+                }
+    
+                if($photoCopy == 'Certificate'){
+                    $photocopyFees += $basePrice*$totalCertCopies;
+                    $json = array('description' => $photoCopy,
+                                  'value' => $basePrice*$totalCertCopies
+                                 );
+                    array_push($jsonPhotoCopy, $json);
+                }
+            }
+
+            $json = array('description' => 'Photocopy Type', 'value' => $photoCopies['photocopyType']);
+            array_push($jsonPhotoCopy, $json);
+
+            $json = array('description' => 'TOTAL PRICE', 'value' => $photocopyFees);
+            array_push($jsonPhotoCopy, $json);
+
+            return['jsonPhotoCopy' => $jsonPhotoCopy, 'photoCopyFees' => $photocopyFees];
+
+        }
+
+        return['jsonPhotoCopy' => null, 'photoCopyFees' => 0];
+    }
+
+    public function createJsonAuth(Request $request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies){
+        $jsonAuth = [];
+        $authentications = $this->checkNull($request, 'authentication');
+        $authFees = 0;
+
+        if($authentications != null){
+            foreach($authentications as $authentication){
+                if($authentication == 'Transcript of Record'){
+                    $authFees += $recordPrices['authPrice']*$totalTorCopies;
+                    $json = array('description' => $authentication,
+                                  'price' => $recordPrices['authPrice']*$totalTorCopies
+                                 );
+                    array_push($jsonAuth, $json);
+                }
+                
+                if($authentication == 'Diploma'){
+                    $authFees += $recordPrices['authPrice']*$totalDiplomaCopies;
+                    $json = array('description' => $authentication, 
+                                  'price' => $recordPrices['authPrice']*$totalDiplomaCopies
+                                 );
+                    array_push($jsonAuth, $json);
+                }
+    
+                if($authentication == 'Certificate'){
+                    $authFees += $recordPrices['authPrice']*$totalCertCopies;
+                    $json = array('description' => $authentication,
+                                  'price' => $recordPrices['authPrice']*$totalCertCopies
+                                 );
+                    array_push($jsonAuth, $json);
+                }
+            }
+
+            $json = array('description' => 'TOTAL PRICE', 'price' => $authFees);
+            array_push($jsonAuth, $json);
+
+            return ['jsonAuth' => $jsonAuth, 'authFees' => $authFees];
+        }
+
+        return ['jsonAuth' => null, 'authFees' => $authFees];
+    }
+
+    public function createJsonDilpoma(Request $request, $recordPrices,){
+
+        $jsonDiploma = [];
+        $diplomas = $this->checkNull($request, 'diploma');
+        $totalPrice = 0;
+
+        if($diplomas != null){
+            foreach($diplomas as $diploma){
+                if($diploma == 'Bachelor/Law Degree'){
+                    $totalPrice += $recordPrices['bachelorLawDegreePrice'];
+                    $json = array('description' => $diploma, 
+                                  'price' => $recordPrices['bachelorLawDegreePrice']
+                                 );
+                    array_push($jsonDiploma, $json);
+                }
+                
+                if($diploma == 'Masteral Degree'){
+                    $totalPrice += $recordPrices['masteralDegreePrice'];
+                    $json = array('description' => $diploma, 
+                                  'price' => $recordPrices['masteralDegreePrice']
+                                 );
+                    array_push($jsonDiploma, $json);
+                }
+    
+                if($diploma == 'TESDA'){
+                    $totalPrice += $recordPrices['tesdaDegreePrice'];
+                    $json = array('description' => $diploma, 
+                                  'price' => $recordPrices['tesdaDegreePrice']
+                                 );
+                    array_push($jsonDiploma, $json);
+                }
+    
+                if($diploma == 'Caregiving'){
+                    $totalPrice += $recordPrices['caregivingDegreePrice'];
+                    $json = array('description' => $diploma, 
+                                  'price' => $recordPrices['caregivingDegreePrice']
+                                 );
+                    array_push($jsonDiploma, $json);
+                }
+            }
+
+            $json = array('description' => 'TOTAL PRICE', 'price' => $totalPrice);
+            array_push($jsonDiploma, $json);
+
+            return $jsonDiploma;
+        }
+
+        return null;
     }
 
     public function checkNull(Request $request, $keyName){
@@ -611,41 +767,4 @@ class DbHelperController extends Controller
 
         return $totalDiplomaFees;
     }
-
-    public function computeAuthenticationFees($request, $recordPrices){
-        $authFees = 0;
-        if($request->input('authentication') != null){
-            $authFees = count($request->input('authentication'))*$recordPrices['authPrice'];
-        }
-
-        return $authFees;
-    }
-
-    public function computePhotocopyFees($request, $recordPrices){
-        $photocopyFees = 0;
-        $photocopyCount = 0;
-        if($request->input('photocopy') != null){
-            foreach($request->input('photocopy') as $photocopy){
-                if($photocopy == 'Transcript of Record'){
-                    $photocopyCount += 1;
-                }
-                if($photocopy == 'Diploma'){
-                    $photocopyCount += 1;
-                }
-                if($photocopy == 'Certificate'){
-                    $photocopyCount += 1;
-                }
-
-                if($photocopy == 'ordinary'){
-                    $photocopyFees = $photocopyCount * $recordPrices['photoOrdinaryPrice'];
-                }
-                else if($photocopy == 'colored'){
-                    $photocopyFees = $photocopyCount * $recordPrices['photoColoredPrice'];
-                }
-            }
-        }
-
-        return $photocopyFees;
-    }
-
 }

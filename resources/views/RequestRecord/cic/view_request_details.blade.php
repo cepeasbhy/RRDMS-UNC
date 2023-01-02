@@ -2,7 +2,7 @@
 @extends('layouts.header')
 
 @section('request-content')
-    <div class="container mb-3">
+    <div class="container mb-2">
         <div class="row mb-3">
             @if (Auth::user()->account_role == 'cic')
                 <form class="mb-3" action="{{ route('cic.request') }}" method="get">
@@ -77,15 +77,38 @@
            <div class="border-start border-danger border-4 mb-3">
                 <h4 class="my-auto">REQUESTED DOCUMENTS</h4>
            </div>
-           <div class="row mb-3">
+           <div class="row mb-0">
                 @if ($requestedDocumentDetails->diploma != null)
                     <div class="col-4 mb-3">
                         <div class="row">
                             <h6 class="ms-1 fw-bold">DIPLOMA</h6>
                         </div>
-                        <div class="row">
+                        <div class="row ms-2">
+                            <div class="row">
+                                <div class="col-7">
+                                    <span class="fw-bold">DESCRIPTION</span>
+                                </div>
+                                <div class="col">
+                                    <span class="fw-bold">PRICE</span>
+                                </div>
+                            </div>
                             @foreach ($requestedDocumentDetails->diploma as $diploma)
-                                <span class="ms-3">{{$diploma}}</span>
+                            <div class="row">
+                                <div class="col-7">
+                                    @if($diploma['description'] == "TOTAL PRICE")
+                                        <span class="fw-bold" style="font-size: 13px">{{$diploma['description']}}</span>
+                                    @else
+                                        <span style="font-size: 13px">{{$diploma['description']}}</span>
+                                    @endif
+                                </div>
+                                <div class="col">
+                                    @if($diploma['description'] == "TOTAL PRICE")
+                                        <span class="fw-bold" style="font-size: 13px">₱{{number_format($diploma['price'], 2)}}</span>
+                                    @else
+                                        <span style="font-size: 13px">₱{{number_format($diploma['price'], 2)}}</span>
+                                    @endif
+                                </div>
+                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -99,31 +122,39 @@
                         <div class="row ms-3">
                             <div class="col">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <span>No. of Copies:</span>
+                                    <div class="col-5">
+                                        <span style="font-size: 13px">No. of Copies:</span>
                                     </div>
                                     <div class="col">
-                                        <span>{{$requestedDocumentDetails->transcript_of_record['copies']}}</span>
+                                        <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['copies']}}</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
-                                        <span>Purpose:</span>
+                                    <div class="col-5">
+                                        <span style="font-size: 13px">Purpose:</span>
                                     </div>
                                     <div class="col">
-                                        <span>{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
+                                        <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
-                                        <span>Other Purpose:</span>
+                                    <div class="col-5">
+                                        <span style="font-size: 13px">Other Purpose:</span>
                                     </div>
                                     <div class="col">
                                         @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
-                                            <span>NOT STATED</span>
+                                            <span style="font-size: 13px">NOT STATED</span>
                                         @else
-                                            <span>{{$requestedDocumentDetails->transcript_of_record['other_purpose']}}</span>
+                                            <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['other_purpose']}}</span>
                                         @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="fw-bold" style="font-size: 13px">TOTAL PRICE:</span>
+                                    </div>
+                                    <div class="col">
+                                        <span class="fw-bold" style="font-size: 13px">₱{{number_format($requestedDocumentDetails->transcript_of_record[0]['price'], 2)}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -146,13 +177,21 @@
                                 </div>
                             </div>
                             @foreach ($requestedDocumentDetails->certificate as $certificate)
-                                @foreach($certificate as $certName => $copies)
+                                @foreach($certificate as $description => $value)
                                     <div class="row">
                                         <div class="col-7">
-                                            <span style="font-size: 13px">{{$certName}}</span>
+                                            @if ($description == "TOTAL PRICE")
+                                                <span class="fw-bold" style="font-size: 13px">{{$description}}</span>
+                                            @else
+                                                <span style="font-size: 13px">{{$description}}</span>
+                                            @endif
                                         </div>
                                         <div class="col">
-                                            <span style="font-size: 13px">{{$copies}}</span>
+                                            @if ($description == "TOTAL PRICE")
+                                                <span class="fw-bold" style="font-size: 13px">₱{{number_format($value, 2)}}</span>
+                                            @else
+                                                <span style="font-size: 13px">{{$value}}</span>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
@@ -168,36 +207,44 @@
                         </div>
                         <div class="row ms-3">
                             <div class="row">
-                                <div class="col-6">
-                                    <span>No. of Copies:</span>
+                                <div class="col-5">
+                                    <span style="font-size: 13px">No. of Copies:</span>
                                 </div>
                                 <div class="col">
-                                    <span>{{$requestedDocumentDetails->copy_of_grades['copies']}}</span>
+                                    <span style="font-size: 13px">{{$requestedDocumentDetails->copy_of_grades['copies']}}</span>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-6">
-                                    <span>School Year:</span>
+                                <div class="col-5">
+                                    <span style="font-size: 13px">School Year:</span>
                                 </div>
                                 <div class="col">
-                                    <span>{{$requestedDocumentDetails->copy_of_grades['schoolYear']}}</span>
+                                    <span style="font-size: 13px">{{$requestedDocumentDetails->copy_of_grades['schoolYear']}}</span>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-6">
-                                    <span>Semester:</span>
+                                <div class="col-5">
+                                    <span style="font-size: 13px">Semester:</span>
                                 </div>
                                 <div class="col">
                                     @switch($requestedDocumentDetails->copy_of_grades['semester'])
                                         @case(1)
-                                            <span>1st Semester</span>
+                                            <span style="font-size: 13px">1st Semester</span>
                                             @break
                                         @case(2)
-                                            <span>2nd Semester</span>
+                                            <span style="font-size: 13px">2nd Semester</span>
                                             @break
                                         @default
-                                            <span>Summer Semester</span>
+                                            <span style="font-size: 13px">Summer Semester</span>
                                     @endswitch
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <span class="fw-bold" style="font-size: 13px">TOTAL PRICE:</span>
+                                </div>
+                                <div class="col">
+                                    <span class="fw-bold" style="font-size: 13px">₱{{number_format($requestedDocumentDetails->copy_of_grades[0]['price'],2)}}</span>
                                 </div>
                             </div>
                         </div>
@@ -209,9 +256,32 @@
                         <div class="row">
                             <h6 class="ms-1 fw-bold">AUTHENTICATION</h6>
                         </div>
-                        <div class="row ms-3">
+                        <div class="row ms-2">
+                            <div class="row">
+                                <div class="col-7">
+                                    <span class="fw-bold">DESCRIPTION</span>
+                                </div>
+                                <div class="col">
+                                    <span class="fw-bold">PRICE</span>
+                                </div>
+                            </div>
                             @foreach ($requestedDocumentDetails->authentication as $auth)
-                                <span>{{$auth}}</span>
+                                <div class="row">
+                                    <div class="col-7">
+                                        @if($auth['description'] == "TOTAL PRICE")
+                                            <span class="fw-bold" style="font-size: 13px">{{$auth['description']}}</span>
+                                        @else
+                                            <span style="font-size: 13px">{{$auth['description']}}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col">
+                                        @if($auth['description'] == "TOTAL PRICE")
+                                            <span class="fw-bold" style="font-size: 13px">₱{{number_format($auth['price'], 2)}}</span>
+                                        @else
+                                            <span style="font-size: 13px">₱{{number_format($auth['price'], 2)}}</span>
+                                        @endif
+                                    </div>
+                                </div>
                             @endforeach
                         </div>
                     </div>
@@ -222,63 +292,73 @@
                         <div class="row">
                             <h6 class="ms-1 fw-bold">PHOTOCOPY</h6>
                         </div>
-                        <div class="row ms-3">
+                        <div class="row ms-2">
                             <div class="row">
                                 <div class="col-7">
-                                    <div class="row">
-                                        <span class="fw-bold">DESCRIPTION</span>
-                                    </div>
-                                    <div class="row">
-                                        @foreach ($requestedDocumentDetails->photocopy as $photocopy)
-                                            @if ($photocopy != 'ordinary' && $photocopy != 'colored')
-                                                <span class="ms-3" style="font-size: 14px">{{$photocopy}}</span>
-                                            @endif
-                                        @endforeach
-                                    </div>
+                                    <span class="fw-bold">DESCRIPTION</span>
+                                </div>
+                                <div class="col">
+                                    <span class="fw-bold">PRICE</span>
                                 </div>
                             </div>
-                            <div class="row">
-                                <span class="fw-bold">TYPE: {{strtoupper($requestedDocumentDetails->photocopy['photocopyType'])}}</span>
+                            @foreach ($requestedDocumentDetails->photocopy as $photoCopy)
+                                <div class="row">
+                                    <div class="col-7">
+                                        @if($photoCopy['description'] == "TOTAL PRICE")
+                                            <span class="fw-bold" style="font-size: 13px">{{$photoCopy['description']}}</span>
+                                        @else
+                                            <span style="font-size: 13px">{{$photoCopy['description']}}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col">
+                                        @if($photoCopy['description'] != 'Photocopy Type')
+                                            @if($photoCopy['description'] == "TOTAL PRICE")
+                                                <span class="fw-bold" style="font-size: 13px">₱{{number_format($photoCopy['value'],2)}}</span>
+                                            @else
+                                                <span style="font-size: 13px">₱{{number_format($photoCopy['value'],2)}}</span>
+                                            @endif
+                                        @else
+                                            <span style="font-size: 13px">{{strtoupper($photoCopy['value'])}}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                             </div>
-                            
                         </div>
                     </div>
                 @endif 
            </div>
+           <div class="ms-3">
+                <span class="text-danger fw-bold" style="font-size: 20px">Total Fee: ₱{{ number_format($requestedDocumentDetails->total_fee, 2)}}</span>
+           </div>
         </div>
-    <div class=" text-xl text-danger">
-        Total Fee: {{ $requestedDocumentDetails->total_fee }}
     </div>
 
-</div>
+    <div class="col mt-5 text-center mb-3">
 
-</div>
+        @if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'cic')
+            <button class="btn btn-success btn-sm " data-bs-toggle="modal" data-bs-target="#accept-request-modal">ACCEPT
+                REQUEST</button>
+            <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">REJECT
+                REQUEST</button>
+        @endif
 
-<div class="col mt-5 text-center mb-3">
+        @if ($requestInfo->status == 'SET FOR RELEASE' && Auth::user()->account_role == 'cic')
+            <button class="btn btn-success btn-sm " data-bs-toggle="modal"
+                data-bs-target="#accept-request-modal">COMPLETE
+                REQUEST</button>
+        @endif
 
-    @if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'cic')
-        <button class="btn btn-success btn-sm " data-bs-toggle="modal" data-bs-target="#accept-request-modal">ACCEPT
-            REQUEST</button>
-        <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">REJECT
-            REQUEST</button>
-    @endif
+        @if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'student')
+            <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">CANCEL
+                REQUEST</button>
+        @endif
+    </div>
 
-    @if ($requestInfo->status == 'SET FOR RELEASE' && Auth::user()->account_role == 'cic')
-        <button class="btn btn-success btn-sm " data-bs-toggle="modal"
-            data-bs-target="#accept-request-modal">COMPLETE
-            REQUEST</button>
-    @endif
-
-    @if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'student')
-        <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">CANCEL
-            REQUEST</button>
-    @endif
-</div>
-
-</div>
-<script src="{{ asset('js/main.js') }}"></script>
-<!--Modal for Rejecting Request-->
-@extends('layouts.modals.delete_student_request', ['routeName' => 'cic.rejectRequest', 'request_id' => $requestedDocumentDetails, 'request_status' => $requestInfo])
-<!--Modal for Accepting Request-->
-@extends('layouts.modals.accept_student_request', ['routeName' => 'cic.acceptRequest', 'request_id' => $requestedDocumentDetails, 'request_status' => $requestInfo])
+    <script src="{{ asset('js/main.js') }}"></script>
+    <!--Modal for Rejecting Request-->
+    @extends('layouts.modals.delete_student_request', ['routeName' => 'cic.rejectRequest', 'request_id' => $requestedDocumentDetails, 'request_status' => $requestInfo])
+    <!--Modal for Accepting Request-->
+    @extends('layouts.modals.accept_student_request', ['routeName' => 'cic.acceptRequest', 'request_id' => $requestedDocumentDetails, 'request_status' => $requestInfo])
 @endsection
