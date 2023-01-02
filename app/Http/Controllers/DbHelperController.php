@@ -690,7 +690,7 @@ class DbHelperController extends Controller
 
     public function getRequestedDocuments(){
 
-        return ModelsRequest::select(
+        $requestedDocument = ModelsRequest::select(
             'request_id',
             'requests.student_id',
             'first_name',
@@ -704,8 +704,14 @@ class DbHelperController extends Controller
             'courses', 'courses.course_id', '=', 'requests.course_id'
         )->leftJoin(
             'students', 'students.student_id', '=', 'requests.student_id'
-        )->get();
+        );
 
+        if(Auth::user()->account_role == 'student'){
+            return $requestedDocument->where('requests.student_id', Auth::user()->user_id)->get();
+        }else{
+            $staff = $this->getStaffInfo(Auth::user()->user_id);
+            return $requestedDocument->where('requests.department_id', $staff['staffInfo']->assigned_dept)->get();
+        }
     }
 
     public function getRequesteeInfo($id){
