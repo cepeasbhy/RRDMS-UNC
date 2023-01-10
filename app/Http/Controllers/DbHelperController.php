@@ -104,7 +104,8 @@ class DbHelperController extends Controller
             'email',
             'phone_number',
             'dept_name',
-            'account_role'
+            'account_role',
+            'activated_status'
         )->leftJoin(
             'users', 'users.user_id', '=', 'staff.staff_id'
         )->leftJoin(
@@ -137,6 +138,7 @@ class DbHelperController extends Controller
                 'email',
                 'status',
                 'account_role',
+                'activated_status',
                 'admission_year',
                 'students.created_at',
                 'students.updated_at'
@@ -772,5 +774,9 @@ class DbHelperController extends Controller
         }
 
         return $totalDiplomaFees;
+    }
+
+    public function setAccountActiveStatus($userID, $activeStatus){
+        User::where('user_id', $userID)->update(['activated_status' => $activeStatus]);
     }
 }

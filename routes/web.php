@@ -22,7 +22,7 @@ use App\Http\Controllers\CicReqRecordManagmentController;
 Auth::routes();
 
 //Admin Routes
-Route::group(['middleware' => ['role:admin', 'prevent-back-history']], function(){
+Route::group(['middleware' => ['role:admin', 'prevent-back-history', 'redirect-deactivated-account']], function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.home');
     Route::get('/admin/view_department/{deptID}', [AdminController::class, 'viewDepartment'])->name('admin.viewDepartment');
     Route::get('/admin/account_mngmnt', [AdminController::class, 'viewAccounts'])->name('admin.viewAccounts');
@@ -35,12 +35,12 @@ Route::group(['middleware' => ['role:admin', 'prevent-back-history']], function(
     Route::post('/admin/update_staff_account/{userID}', [AccountController::class, 'adminUpdateStaffAccount'])->name('admin.updateStaffAccount');
     Route::post('/admin/update_account_picture/{userID}', [AccountController::class, 'updateAccountPicture'])->name('admin.updateAccountPicture');
     Route::post('/admin/delete_staff_account/{userID}', [AccountController::class, 'admindeleteStaffAccount'])->name('admin.deleteStaffAccount');
+    Route::post('/admin/set_active_status/{userID}/{activeStatus}', [AccountController::class, 'setAccountActiveStatus'])->name('admin.setAccontActiveStatus');
     Route::post('/admin/update_price', [AdminController::class, 'updatePrices'])->name('admin.updatePrice');
-
 });
 
 //Student Credential Management Routes
-Route::group(['middleware' => ['role:staff', 'prevent-back-history']], function(){
+Route::group(['middleware' => ['role:staff', 'prevent-back-history', 'redirect-deactivated-account']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/stud_cred_mngmnt', [StudCredController::class, 'index'])->name('StudCredHome');
     Route::get('/stud_cred_mngmnt/add_student', [StudCredController::class, 'addStudent'])->name('addStudent');
@@ -60,7 +60,7 @@ Route::group(['middleware' => ['role:staff', 'prevent-back-history']], function(
 });
 
 //Archived Records Routes
-Route::group(['middleware' => ['role:rec_assoc', 'prevent-back-history']], function(){
+Route::group(['middleware' => ['role:rec_assoc', 'prevent-back-history', 'redirect-deactivated-account']], function(){
     Route::get('/archived_records', [ArchivedRecordsController::class, 'index'])->name('index');
     Route::get('/archived_records/add_credential', [ArchivedRecordsController::class, 'addCredential'])->name('add_credential');
     Route::get('/archived_records/show_unarchived_credential', [ArchivedRecordsController::class, 'getCredentials'])->name('toBeArchived');
@@ -90,7 +90,7 @@ Route::group(['middleware' => ['role:cic', 'prevent-back-history']], function(){
 
 
 //Request Records Routes
-Route::group(['middleware' => ['role:student', 'prevent-back-history']], function(){
+Route::group(['middleware' => ['role:student', 'prevent-back-history', 'redirect-deactivated-account']], function(){
     Route::group(['middleware' => 'first-time-login'], function(){
         Route::get('/request', [StudRequestController::class, 'index'])->name('stud.request');
         Route::get('/request/make_request', [StudRequestController::class, 'makeRequest'])->name('stud.makeRequest');
@@ -110,3 +110,5 @@ Route::middleware('auth', 'prevent-back-history')->group(function(){
     Route::post('/account/update/{id}', [AccountController::class, 'update'])->name('accountUpdate');
     Route::post('/account/change_pass', [AccountController::class, 'changePassword'])->name('changePassword');
 });
+
+Route::get('/account_deactivated', [AccountController::class, 'viewDeactivatedPage'])->name('deactivated')->middleware('auth');

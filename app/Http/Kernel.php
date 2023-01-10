@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\Role::class,
         'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
         'first-time-login' => \App\Http\Middleware\FirstTimeLogin::class,
+        'redirect-deactivated-account' => \App\Http\Middleware\redirectAccountActiveStatus::class,
     ];
 }

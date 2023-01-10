@@ -198,4 +198,23 @@ class AccountController extends Controller
 
         return back()->with('msg', 'Account Picture Successfully Updated');
     }
+
+    public function setAccountActiveStatus(DbHelperController $db, $userID, $activeStatus){
+        $db->setAccountActiveStatus($userID, $activeStatus);
+
+        if($activeStatus == 0){
+            return back()->with('msg', 'Account has been deactivated');
+        }
+
+        return back()->with('msg', 'Account has been reactivated');
+    }
+
+    public function viewDeactivatedPage(){
+
+        if(Auth::user()->activated_status == 1){
+            return abort(404);
+        }
+
+        return view('deactivated');
+    }
 }

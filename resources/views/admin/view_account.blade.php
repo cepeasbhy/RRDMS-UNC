@@ -62,14 +62,19 @@
                             <input class="form-control form-control-sm" type="text" value="{{$accountInfo['accountInfo']->email}}" readonly>
                         </div>
                     </div>
-                    @if ($accountInfo['accountInfo']->account_role != 'student')
-                        <div class=" form-group mb-3 row gap-3">
-                            <button id="clickButton" class="col btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#admin-update-account">Update Information</button>
-                            @if($accountInfo['accountInfo']->account_role != 'admin')
-                                <button class="col btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#admin-delete-account">Delete Account</button>
-                            @endif
-                        </div>
+                    <div class=" form-group mb-3 row gap-3">
+                    @if($accountInfo['accountInfo']->activated_status == 1)
+                        <button class="col btn btn-secondary btn-small" data-bs-toggle="modal" data-bs-target="#deactivate-status-modal">Deactivate Account</button>
+                    @else
+                        <button class="col btn btn-secondary btn-small" data-bs-toggle="modal" data-bs-target="#activate-status-modal">Reactivate Account</button>
                     @endif
+                    @if ($accountInfo['accountInfo']->account_role != 'student')
+                        <button id="clickButton" class="col btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#admin-update-account">Update Information</button>
+                        @if($accountInfo['accountInfo']->account_role != 'admin')
+                            <button class="col btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#admin-delete-account">Delete Account</button>
+                        @endif
+                    @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,6 +84,8 @@
     @extends('layouts.modals.updateAccountModal')
     @extends('layouts.modals.viewAccountPictureModal')
     @extends('layouts.modals.updateAccountPictureModal')
+    @extends('layouts.modals.setAccountActive')
+    @extends('layouts.modals.setAccountInactive')
 
     @if($errors->any())
         <script>
