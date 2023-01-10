@@ -105,7 +105,7 @@ Route::group(['middleware' => ['role:student', 'prevent-back-history', 'redirect
 
 
 //User Account Routes
-Route::middleware('auth', 'prevent-back-history')->group(function(){
+Route::middleware('auth', 'prevent-back-history', 'redirect-deactivated-account')->group(function(){
     Route::get('/account', [AccountController::class, 'index'])->name('accountHome');
     Route::post('/account/update/{id}', [AccountController::class, 'update'])->name('accountUpdate');
     Route::post('/account/change_pass', [AccountController::class, 'changePassword'])->name('changePassword');
