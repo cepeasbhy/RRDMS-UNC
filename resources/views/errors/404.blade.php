@@ -12,7 +12,7 @@
                     you have entered the correct URL? Try going back to previous page.
                 </h6>
                 <div class="col">
-                    <a class="btn btn-sm btn-outline-success" href="/login">Go Back</a>
+                    <a class="btn btn-sm btn-outline-success" href="/login">Go Back Home</a>
                 </div>
             </div>
         </div>
