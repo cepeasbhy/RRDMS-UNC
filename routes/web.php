@@ -80,7 +80,7 @@ Route::group(['middleware' => ['role:rec_assoc', 'prevent-back-history', 'redire
 });
 
 //College in Charge
-Route::group(['middleware' => ['role:cic', 'prevent-back-history']], function(){
+Route::group(['middleware' => ['role:cic', 'prevent-back-history', 'redirect-deactivated-account']], function(){
     Route::get('/cic/request', [CicReqRecordManagmentController::class, 'studentRequestsLog'])->name('cic.request');
     Route::post('/cic/request/view/{request_id}', [CicReqRecordManagmentController::class, 'viewRequest'])->name('cic.viewRequest');
     Route::post('/cic/request/view/reject/{request_id}', [CicReqRecordManagmentController::class, 'rejectRequest'])->name('cic.rejectRequest');
