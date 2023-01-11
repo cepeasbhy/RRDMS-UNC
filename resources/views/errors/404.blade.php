@@ -12,17 +12,7 @@
                     you have entered the correct URL? Try going back to previous page.
                 </h6>
                 <div class="col">
-                    <a class="btn btn-sm btn-outline-success"
-                        @if(Auth::user()->account_role == 'admin')
-                            href="{{route('admin.home')}}"
-                        @elseif(Auth::user()->account_role == 'student')
-                            href="{{route('stud.request')}}"
-                        @else
-                            href="{{route('home')}}"
-                        @endif
-                    >
-                        Go Back Home
-                    </a>
+                    <a class="btn btn-sm btn-outline-success" href="/login">Go Back</a>
                 </div>
             </div>
         </div>
