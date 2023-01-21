@@ -516,6 +516,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="text-center">
+                    <h6 class="fw-bold">NON-DISCLOSURE/CONFIDENTIALITY AGREEMENTS</h6>
+                    <p style="font-size: 12px">
+                        The parties agree to comply with, and have adequate measures in place to ensure that its directors, officers, employees, and Representatives comply at all times with: (a) the 
+                        provisions and obligations contained in Republic Act No. 10173 or the “Data Privacy Act of the Philippines” and its implementing rules and regulations, and (b) other
+                        applicable data privacy laws and regulations, as may be promulgated and/or amended from time to time. By agreeing to execute and enter into this Agreement, the parties
+                        agree that any information exchanged between them may be collected, processed, shared and used but only for purposes relevant to the Transaction. Each of the parties
+                        agrees to hold the other free and harmless from any costs or liability arising from its failure to comply with the requirements of the Data Privacy Act of the Philippines.
+                    </p>
+                </div>
                 <div class="form-group text-center">
                     <button id="submitSelected"class="btn btn-success" disabled>SUBMIT REQUEST</button>
                 </div>
