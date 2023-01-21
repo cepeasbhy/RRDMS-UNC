@@ -9,7 +9,7 @@
                 </h3>
                 <h6>
                     Uh oh! We can't seem to find the page you are looking for. Are you sure
-                    you have entered the correct URL? Try going back to previous page.
+                    you have entered the correct URL?
                 </h6>
                 <div class="col">
                     <a class="btn btn-sm btn-outline-success" href="/login">Go Back Home</a>
