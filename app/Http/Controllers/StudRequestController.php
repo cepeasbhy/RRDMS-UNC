@@ -76,12 +76,5 @@ class StudRequestController extends Controller
         ])->setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
 
         return $pdf->download('Request.pdf');
-
-        // return view('RequestRecord/Student/request_pdf',[
-        //         'student' => $student['studentInfo'],
-        //         'credentials' => $student['credentials'],
-        //         'requestedDocumentDetails' => $studentRequest['requestedDocumentDetails'],
-        //         'requestInfo' => $studentRequest['requestInfo']
-        // ]);
     }
 }
