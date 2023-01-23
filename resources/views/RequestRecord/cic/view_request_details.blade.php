@@ -354,6 +354,10 @@
             <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#delete-request-modal">CANCEL
                 REQUEST</button>
         @endif
+
+        @if (Auth::user()->account_role == 'student')
+            <a class="btn btn-success btn-sm" href="{{route('stud.pdfRequest', ['requestID' => $requestInfo->request_id])}}">PRINT REQUEST</a>
+        @endif
     </div>
 
     <script src="{{ asset('js/main.js') }}"></script>

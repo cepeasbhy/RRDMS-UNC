@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DbHelperController;
 use Illuminate\Support\Facades\Auth;
+use Dompdf\Dompdf;
 
 class StudRequestController extends Controller
 {
@@ -61,5 +62,25 @@ class StudRequestController extends Controller
         }
 
         return view('RequestRecord/Student/change_stud_pass');
+    }
+
+    public function downloadRequestPdf(DbHelperController $db, $requestID){
+        $studentRequest = $db->getRequesteeInfo($requestID);
+        $student = $db->getStudentInfo($studentRequest['studentInfo']->student_id);
+
+        $dompdf = new Dompdf();
+
+        $html = view('RequestRecord/Student/request_pdf',[
+            'student' => $student['studentInfo'],
+            'credentials' => $student['credentials'],
+            'requestedDocumentDetails' => $studentRequest['requestedDocumentDetails'],
+            'requestInfo' => $studentRequest['requestInfo']
+        ]);
+
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        $dompdf->stream('Request');
+
+        return redirect()->back();
     }
 }
