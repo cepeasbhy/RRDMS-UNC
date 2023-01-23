@@ -6,11 +6,53 @@
 
     .container{
         width: 60%;
+        margin: auto;
     }
 
     .header{
-        font-size: 13px;
+        font-size: 20px;
         text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .student-info{
+        display: flex;
+        justify-content: center;
+    }
+
+    .data-value{
+        font-weight: bold;
+    }
+
+    table{
+        font-size: 20px;
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .floatbox {
+        display: block;
+        box-sizing: border-box;
+        margin: 0px -10px;
+    }
+
+    .floatbox::after {
+        clear: both;
+        content: '';
+        display: block;
+    }
+
+    .float-item {
+        float: left;
+        box-sizing: border-box;
+        width: 33%;
+        margin-bottom: 20px;
+        padding: 0px 10px;
+    }
+
+    .float-item:nth-child(2n + 1) {
+        clear: both;
     }
 </style>
 
@@ -23,300 +65,440 @@
         <h6>registrar@unc.edu.ph</h6>
         <h6>REQUEST FOR SCHOOL RECORDS</h6>
     </div>
-    <div class="student-info row justify-content-center mb-3">
-        <div class="col">
-            <div class="info-group d-flex">
-                <label class="me-2">Name: </label>
-                <label class="fw-bold">{{strtoupper($student->last_name)}},  {{strtoupper($student->first_name)}} {{strtoupper($student->middle_name)}}</label>
-            </div>
-            <div class="info-group d-flex">
-                <label class="me-2">Student ID: </label>
-                <label class="fw-bold">{{$student->student_id}}</label>
-            </div>
-            <div class="info-group d-flex">
-                <label class="me-2">Department: </label>
-                <label class="fw-bold">{{$student->dept_name}}</label>
-            </div>
-            <div class="info-group d-flex">
-                <label class="me-2">Course: </label>
-                <label class="fw-bold">{{$student->course_name}}</label>
-            </div>
-        </div>
-        <div class="col">
-            <div class="info-group d-flex">
-                <label class="me-2">Mobile Number: </label>
-                <label class="fw-bold">{{$student->phone_number}}</label>
-            </div>
-            <div class="info-group d-flex">
-                <label class="me-2">Email Address: </label>
-                <label class="fw-bold">{{$student->email}}</label>
-            </div>
-            <div class="info-group d-flex">
-                <label class="me-2">Current Address: </label>
-                <label class="fw-bold">{{$student->address}}</label>
-            </div>
-        </div>
+    <div class="student-info">
+        <table>
+            <tr>
+                <td>Name: <span class="data-value">{{strtoupper($student->last_name)}},  {{strtoupper($student->first_name)}} {{strtoupper($student->middle_name)}}</span></td>
+                <td>Mobile Number: <span class="data-value">{{$student->phone_number}}</span></td>
+            </tr>
+            <tr>
+                <td>Stduent ID: <span class="data-value">{{$student->student_id}}</span></td>
+                <td>Email: <span class="data-value">{{$student->email}}</span></td>
+            </tr>
+            <tr>
+                <td>Department: <span class="data-value">{{$student->dept_name}}</td>
+                <td>Address: <span class="data-value">{{$student->address}}</span></td>
+            </tr>
+            <tr>
+                <td>Course: <span class="data-value">{{$student->course_name}}</span></td>
+            </tr>
+        </table>
     </div>
-
     <div class="row">
-        <h6>REQUESTED DOCUMENTS</h6>
-
-        <div class="row mb-0">
+        <div style="margin-bottom: 20px">
+             <h5 class="my-auto">REQUESTED DOCUMENTS</h5>
+        </div>
+        <div class="floatbox">
             @if ($requestedDocumentDetails->diploma != null)
-                <div class="col-4 mb-3">
-                    <div class="row">
-                        <h6 class="ms-1 fw-bold">DIPLOMA</h6>
+                <div class="float-item">
+                    <span style="font-size: 15px; font-weight:bold">DIPLOMA</span>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Description</td>
+                                <td>Price</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ($requestedDocumentDetails->diploma != null)
+                                @foreach ($requestedDocumentDetails->diploma as $diploma)
+                                    <tr>
+                                        @if($diploma['description'] != "TOTAL PRICE")
+                                            <td>
+                                                <span style="font-size: 13px; font-weight:bold">{{$diploma['description']}}</span>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <span style="font-size: 13px; font-weight:bold">{{$diploma['description']}}</span>
+                                            </td>
+                                        @endif
+            
+                                        @if($diploma['description'] != "TOTAL PRICE")
+                                            <td>
+                                                <span style="font-size: 13px">P{{number_format($diploma['price'], 2)}}</span>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <span style="font-size: 13px; font-weight:bold">P{{number_format($diploma['price'], 2)}}</span>
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            @endif     
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                @if ($requestedDocumentDetails->transcript_of_record != null)
+                    <div class="float-item">
+                        <span style="font-size: 15px; font-weight:bold">TRANSCRIPT OF RECORD</span>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px">No. of Copies:</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['copies']}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px">Purpose:</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px">Other Purpose:</span>
+                                    </td>
+                                    <td>
+                                        @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
+                                            <span style="font-size: 13px">NOT STATED</span>
+                                        @else
+                                            <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['other_purpose']}}</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px; font-weight:bold">TOTAL PRICE:</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px; font-weight:bold">P{{number_format($requestedDocumentDetails->transcript_of_record[0]['price'], 2)}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="row ms-2">
-                        <div class="row">
-                            <div class="col-7">
-                                <span class="fw-bold">DESCRIPTION</span>
-                            </div>
-                            <div class="col">
-                                <span class="fw-bold">PRICE</span>
-                            </div>
-                        </div>
-                        @foreach ($requestedDocumentDetails->diploma as $diploma)
-                        <div class="row">
-                            <div class="col-7">
-                                @if($diploma['description'] == "TOTAL PRICE")
-                                    <span class="fw-bold" style="font-size: 13px">{{$diploma['description']}}</span>
-                                @else
-                                    <span style="font-size: 13px">{{$diploma['description']}}</span>
-                                @endif
-                            </div>
-                            <div class="col">
-                                @if($diploma['description'] == "TOTAL PRICE")
-                                    <span class="fw-bold" style="font-size: 13px">₱{{number_format($diploma['price'], 2)}}</span>
-                                @else
-                                    <span style="font-size: 13px">₱{{number_format($diploma['price'], 2)}}</span>
-                                @endif
-                            </div>
-                        </div>
-                        @endforeach
+                @endif
+            @endif
+            
+            @if ($requestedDocumentDetails->certificate != null)
+                <div class="float-item">
+                    <span style="font-size: 15px; font-weight:bold">CERTIFICATES</span>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Description</td>
+                                <td>Copies</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($requestedDocumentDetails->certificate as $certificate)
+                                @foreach($certificate as $description => $value)
+                                    <tr>
+                                        @if ($description == "TOTAL PRICE")
+                                            <td>
+                                                <span style="font-size: 13px; font-weight:bold">{{$description}}</span>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <span style="font-size: 13px">{{$description}}</span>
+                                            </td>
+                                        @endif
+                                        
+                                        @if ($description == "TOTAL PRICE")
+                                            <td>    
+                                                <span style="font-size: 13px; font-weight:bold">P{{number_format($value, 2)}}</span>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <span style="font-size: 13px">{{$value}}</span>
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            @endforeach 
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                @if ($requestedDocumentDetails->copy_of_grades != null)
+                    <div class="float-item">
+                        <span style="font-size: 15px; font-weight:bold">COPY OF GRADES</span>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px">No. of Copies:</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px">{{$requestedDocumentDetails->copy_of_grades['copies']}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px">School Year:</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px">{{$requestedDocumentDetails->copy_of_grades['schoolYear']}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px">Semester:</span>
+                                    </td>
+                                    <td>
+                                        @switch($requestedDocumentDetails->copy_of_grades['semester'])
+                                            @case(1)
+                                                <span style="font-size: 13px">1st Semester</span>
+                                                @break
+                                            @case(2)
+                                                <span style="font-size: 13px">2nd Semester</span>
+                                                @break
+                                            @default
+                                                <span style="font-size: 13px">Summer Semester</span>
+                                        @endswitch
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px; font-weight:bold">TOTAL PRICE:</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px; font-weight:bold">P{{number_format($requestedDocumentDetails->copy_of_grades[0]['price'],2)}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+                @endif
+            @endif
+            
+            @if ($requestedDocumentDetails->authentication != null)
+                <div class="float-item">
+                    <span style="font-size: 15px; font-weight:bold">AUTHENTICATION</span>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Description</td>
+                                <td>Price</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($requestedDocumentDetails->authentication as $auth)
+                                <tr>
+                                    @if($auth['description'] == "TOTAL PRICE")
+                                        <td>
+                                            <span style="font-size: 13px; font-weight:bold">{{$auth['description']}}</span>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <span style="font-size: 13px">{{$auth['description']}}</span>
+                                        </td>   
+                                    @endif
+
+                                    @if($auth['description'] == "TOTAL PRICE")
+                                        <td>
+                                            <span style="font-size: 13px; font-weight:bold">P{{number_format($auth['price'], 2)}}</span>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <span style="font-size: 13px">P{{number_format($auth['price'], 2)}}</span>
+                                        </td>
+                                    @endif
+                                </tr>
+                            @endforeach  
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                @if ($requestedDocumentDetails->photocopy != null)
+                    <div class="float-item">
+                        <span style="font-size: 15px; font-weight:bold">PHOTOCOPY</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Description</td>
+                                    <td>Price</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($requestedDocumentDetails->photocopy as $photoCopy)
+                                    <tr>
+                                        @if($photoCopy['description'] == "TOTAL PRICE")
+                                            <td>
+                                                <span style="font-size: 13px; font-weight:bold">{{$photoCopy['description']}}</span>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <span style="font-size: 13px">{{$photoCopy['description']}}</span>
+                                            </td>
+                                        @endif
+
+                                        @if($photoCopy['description'] != 'Photocopy Type')
+                                            @if($photoCopy['description'] == "TOTAL PRICE")
+                                                <td>
+                                                    <span style="font-size: 13px; font-weight:bold">P{{number_format($photoCopy['value'],2)}}</span>
+                                                </td>
+                                            @else
+                                                <td>
+                                                    <span style="font-size: 13px">P{{number_format($photoCopy['value'],2)}}</span>
+                                                </td>
+                                            @endif
+                                        @else
+                                            <td>
+                                                <span style="font-size: 13px">{{strtoupper($photoCopy['value'])}}</span>
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach 
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+            @endif
+        </div>
+
+        <div class="floatbox">
+            @if ($requestedDocumentDetails->photocopy != null && $requestedDocumentDetails->authentication != null)
+                <div class="float-item">
+                    <span style="font-size: 15px; font-weight:bold">PHOTOCOPY</span>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Description</td>
+                                <td>Price</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($requestedDocumentDetails->photocopy as $photoCopy)
+                                <tr>
+                                    @if($photoCopy['description'] == "TOTAL PRICE")
+                                        <td>
+                                            <span style="font-size: 13px; font-weight:bold">{{$photoCopy['description']}}</span>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <span style="font-size: 13px">{{$photoCopy['description']}}</span>
+                                        </td>
+                                    @endif
+
+                                    @if($photoCopy['description'] != 'Photocopy Type')
+                                        @if($photoCopy['description'] == "TOTAL PRICE")
+                                            <td>
+                                                <span style="font-size: 13px; font-weight:bold">P{{number_format($photoCopy['value'],2)}}</span>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <span style="font-size: 13px">P{{number_format($photoCopy['value'],2)}}</span>
+                                            </td>
+                                        @endif
+                                    @else
+                                        <td>
+                                            <span style="font-size: 13px">{{strtoupper($photoCopy['value'])}}</span>
+                                        </td>
+                                    @endif
+                                </tr>
+                            @endforeach 
+                        </tbody>
+                    </table>
                 </div>
             @endif
 
-            @if ($requestedDocumentDetails->transcript_of_record != null)
-                <div class="col-4 mb-3">
-                    <div class="row">
-                        <h6 class="ms-1 fw-bold">TRANSCRIPT OF RECORD</h6>
-                    </div>
-                    <div class="row ms-3">
-                        <div class="col">
-                            <div class="row">
-                                <div class="col-5">
+            @if ($requestedDocumentDetails->transcript_of_record != null && $requestedDocumentDetails->diploma != null)
+                <div class="float-item">
+                    <span style="font-size: 15px; font-weight:bold">TRANSCRIPT OF RECORD</span>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
                                     <span style="font-size: 13px">No. of Copies:</span>
-                                </div>
-                                <div class="col">
+                                </td>
+                                <td>
                                     <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['copies']}}</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <span style="font-size: 13px">Purpose:</span>
-                                </div>
-                                <div class="col">
+                                </td>
+                                <td>
                                     <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <span style="font-size: 13px">Other Purpose:</span>
-                                </div>
-                                <div class="col">
+                                </td>
+                                <td>
                                     @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
                                         <span style="font-size: 13px">NOT STATED</span>
                                     @else
                                         <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['other_purpose']}}</span>
                                     @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5">
-                                    <span class="fw-bold" style="font-size: 13px">TOTAL PRICE:</span>
-                                </div>
-                                <div class="col">
-                                    <span class="fw-bold" style="font-size: 13px">₱{{number_format($requestedDocumentDetails->transcript_of_record[0]['price'], 2)}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-            
-            @if ($requestedDocumentDetails->certificate != null)
-                <div class="col-4 mb-3">
-                    <div class="row">
-                        <h6 class="ms-1 fw-bold">CERTIFICATES</h6>
-                    </div>
-                    <div class="row ms-3">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="fw-bold">DESCRIPTION</span>
-                            </div>
-                            <div class="col">
-                                <span class="fw-bold">COPIES</span>
-                            </div>
-                        </div>
-                        @foreach ($requestedDocumentDetails->certificate as $certificate)
-                            @foreach($certificate as $description => $value)
-                                <div class="row">
-                                    <div class="col-7">
-                                        @if ($description == "TOTAL PRICE")
-                                            <span class="fw-bold" style="font-size: 13px">{{$description}}</span>
-                                        @else
-                                            <span style="font-size: 13px">{{$description}}</span>
-                                        @endif
-                                    </div>
-                                    <div class="col">
-                                        @if ($description == "TOTAL PRICE")
-                                            <span class="fw-bold" style="font-size: 13px">₱{{number_format($value, 2)}}</span>
-                                        @else
-                                            <span style="font-size: 13px">{{$value}}</span>
-                                        @endif
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endforeach
-                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px; font-weight:bold">TOTAL PRICE:</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px; font-weight:bold">P{{number_format($requestedDocumentDetails->transcript_of_record[0]['price'], 2)}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             @endif
 
-            @if ($requestedDocumentDetails->copy_of_grades != null)
-                <div class="col-4 mb-3">
-                    <div class="row">
-                        <h6 class="ms-1 fw-bold">COPY OF GRADES</h6>
-                    </div>
-                    <div class="row ms-3">
-                        <div class="row">
-                            <div class="col-5">
-                                <span style="font-size: 13px">No. of Copies:</span>
-                            </div>
-                            <div class="col">
-                                <span style="font-size: 13px">{{$requestedDocumentDetails->copy_of_grades['copies']}}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5">
-                                <span style="font-size: 13px">School Year:</span>
-                            </div>
-                            <div class="col">
-                                <span style="font-size: 13px">{{$requestedDocumentDetails->copy_of_grades['schoolYear']}}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5">
-                                <span style="font-size: 13px">Semester:</span>
-                            </div>
-                            <div class="col">
-                                @switch($requestedDocumentDetails->copy_of_grades['semester'])
-                                    @case(1)
-                                        <span style="font-size: 13px">1st Semester</span>
-                                        @break
-                                    @case(2)
-                                        <span style="font-size: 13px">2nd Semester</span>
-                                        @break
-                                    @default
-                                        <span style="font-size: 13px">Summer Semester</span>
-                                @endswitch
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5">
-                                <span class="fw-bold" style="font-size: 13px">TOTAL PRICE:</span>
-                            </div>
-                            <div class="col">
-                                <span class="fw-bold" style="font-size: 13px">₱{{number_format($requestedDocumentDetails->copy_of_grades[0]['price'],2)}}</span>
-                            </div>
-                        </div>
-                    </div>
+            @if ($requestedDocumentDetails->copy_of_grades != null && $requestedDocumentDetails->certificate != null)
+                <div class="float-item">
+                    <span style="font-size: 15px; font-weight:bold">COPY OF GRADES</span>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px">No. of Copies:</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px">{{$requestedDocumentDetails->copy_of_grades['copies']}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px">School Year:</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px">{{$requestedDocumentDetails->copy_of_grades['schoolYear']}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px">Semester:</span>
+                                </td>
+                                <td>
+                                    @switch($requestedDocumentDetails->copy_of_grades['semester'])
+                                        @case(1)
+                                            <span style="font-size: 13px">1st Semester</span>
+                                            @break
+                                        @case(2)
+                                            <span style="font-size: 13px">2nd Semester</span>
+                                            @break
+                                        @default
+                                            <span style="font-size: 13px">Summer Semester</span>
+                                    @endswitch
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px; font-weight:bold">TOTAL PRICE:</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px; font-weight:bold">P{{number_format($requestedDocumentDetails->copy_of_grades[0]['price'],2)}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             @endif
-            
-            @if ($requestedDocumentDetails->authentication != null)
-                <div class="col-4 mb-3">
-                    <div class="row">
-                        <h6 class="ms-1 fw-bold">AUTHENTICATION</h6>
-                    </div>
-                    <div class="row ms-2">
-                        <div class="row">
-                            <div class="col-7">
-                                <span class="fw-bold">DESCRIPTION</span>
-                            </div>
-                            <div class="col">
-                                <span class="fw-bold">PRICE</span>
-                            </div>
-                        </div>
-                        @foreach ($requestedDocumentDetails->authentication as $auth)
-                            <div class="row">
-                                <div class="col-7">
-                                    @if($auth['description'] == "TOTAL PRICE")
-                                        <span class="fw-bold" style="font-size: 13px">{{$auth['description']}}</span>
-                                    @else
-                                        <span style="font-size: 13px">{{$auth['description']}}</span>
-                                    @endif
-                                </div>
-                                <div class="col">
-                                    @if($auth['description'] == "TOTAL PRICE")
-                                        <span class="fw-bold" style="font-size: 13px">₱{{number_format($auth['price'], 2)}}</span>
-                                    @else
-                                        <span style="font-size: 13px">₱{{number_format($auth['price'], 2)}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
-            
-            @if ($requestedDocumentDetails->photocopy != null)
-                <div class="col-4 mb-3">
-                    <div class="row">
-                        <h6 class="ms-1 fw-bold">PHOTOCOPY</h6>
-                    </div>
-                    <div class="row ms-2">
-                        <div class="row">
-                            <div class="col-7">
-                                <span class="fw-bold">DESCRIPTION</span>
-                            </div>
-                            <div class="col">
-                                <span class="fw-bold">PRICE</span>
-                            </div>
-                        </div>
-                        @foreach ($requestedDocumentDetails->photocopy as $photoCopy)
-                            <div class="row">
-                                <div class="col-7">
-                                    @if($photoCopy['description'] == "TOTAL PRICE")
-                                        <span class="fw-bold" style="font-size: 13px">{{$photoCopy['description']}}</span>
-                                    @else
-                                        <span style="font-size: 13px">{{$photoCopy['description']}}</span>
-                                    @endif
-                                </div>
-                                <div class="col">
-                                    @if($photoCopy['description'] != 'Photocopy Type')
-                                        @if($photoCopy['description'] == "TOTAL PRICE")
-                                            <span class="fw-bold" style="font-size: 13px">₱{{number_format($photoCopy['value'],2)}}</span>
-                                        @else
-                                            <span style="font-size: 13px">₱{{number_format($photoCopy['value'],2)}}</span>
-                                        @endif
-                                    @else
-                                        <span style="font-size: 13px">{{strtoupper($photoCopy['value'])}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                        </div>
-                    </div>
-                </div>
-            @endif 
-
-            <div class="ms-3">
-                <span class="text-danger fw-bold" style="font-size: 20px">Total Fee: ₱{{ number_format($requestedDocumentDetails->total_fee, 2)}}</span>
-           </div>
-       </div>
+        </div>
+        <div class="ms-3">
+            <span class="text-danger fw-bold" style="font-size: 20px">Total Fee: P{{ number_format($requestedDocumentDetails->total_fee, 2)}}</span>
+        </div>
     </div>
 </div>
     

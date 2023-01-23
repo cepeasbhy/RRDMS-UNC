@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DbHelperController;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class StudRequestController extends Controller
 {
@@ -67,19 +68,20 @@ class StudRequestController extends Controller
         $studentRequest = $db->getRequesteeInfo($requestID);
         $student = $db->getStudentInfo($studentRequest['studentInfo']->student_id);
 
-        $dompdf = new Dompdf();
-
-        $html = view('RequestRecord/Student/request_pdf',[
+        $pdf = Pdf::loadView('RequestRecord/Student/request_pdf',[
             'student' => $student['studentInfo'],
             'credentials' => $student['credentials'],
             'requestedDocumentDetails' => $studentRequest['requestedDocumentDetails'],
             'requestInfo' => $studentRequest['requestInfo']
-        ]);
+        ])->setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
 
-        $dompdf->loadHtml($html);
-        $dompdf->render();
-        $dompdf->stream('Request');
+        return $pdf->download('Request.pdf');
 
-        return redirect()->back();
+        // return view('RequestRecord/Student/request_pdf',[
+        //         'student' => $student['studentInfo'],
+        //         'credentials' => $student['credentials'],
+        //         'requestedDocumentDetails' => $studentRequest['requestedDocumentDetails'],
+        //         'requestInfo' => $studentRequest['requestInfo']
+        // ]);
     }
 }
