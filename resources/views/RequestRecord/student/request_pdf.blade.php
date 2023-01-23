@@ -1,13 +1,27 @@
-@extends('layouts.app')
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
 
-<div class="container" style="width: 60%">
-    <div class="header text-center mt-2 mb-3">
-        <h6 style="font-size: 12px">UNIVERSITY OF NUEVA CACERES</h6>
-        <h6 style="font-size: 12px">OFFICE OF THE REGISTRAR</h6>
-        <h6 style="font-size: 12px">CITY OF NAGA</h6>
-        <h6 style="font-size: 12px">Tel. Nos. (054) 473-78-44 / 472-61-00 local 168</h6>
-        <h6 style="font-size: 12px">registrar@unc.edu.ph</h6>
-        <h6 style="font-size: 12px">REQUEST FOR SCHOOL RECORDS</h6>
+    .container{
+        width: 60%;
+    }
+
+    .header{
+        font-size: 13px;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="header">
+        <h6>UNIVERSITY OF NUEVA CACERES</h6>
+        <h6>OFFICE OF THE REGISTRAR</h6>
+        <h6>CITY OF NAGA</h6>
+        <h6>Tel. Nos. (054) 473-78-44 / 472-61-00 local 168</h6>
+        <h6>registrar@unc.edu.ph</h6>
+        <h6>REQUEST FOR SCHOOL RECORDS</h6>
     </div>
     <div class="student-info row justify-content-center mb-3">
         <div class="col">
