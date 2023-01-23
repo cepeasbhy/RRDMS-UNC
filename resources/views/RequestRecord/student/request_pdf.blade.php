@@ -95,8 +95,8 @@
                     <table>
                         <thead>
                             <tr>
-                                <td>Description</td>
-                                <td>Price</td>
+                                <td style="font-size: 13px; font-weight:bold">Description</td>
+                                <td style="font-size: 13px; font-weight:bold">Price</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -182,8 +182,8 @@
                     <table>
                         <thead>
                             <tr>
-                                <td>Description</td>
-                                <td>Copies</td>
+                                <td style="font-size: 13px; font-weight:bold">Description</td>
+                                <td style="font-size: 13px; font-weight:bold">Copies</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -274,8 +274,8 @@
                     <table>
                         <thead>
                             <tr>
-                                <td>Description</td>
-                                <td>Price</td>
+                                <td style="font-size: 13px; font-weight:bold">Description</td>
+                                <td style="font-size: 13px; font-weight:bold">Price</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -312,8 +312,8 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <td>Description</td>
-                                    <td>Price</td>
+                                    <td style="font-size: 13px; font-weight:bold">Description</td>
+                                    <td style="font-size: 13px; font-weight:bold">Price</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -360,8 +360,8 @@
                     <table>
                         <thead>
                             <tr>
-                                <td>Description</td>
-                                <td>Price</td>
+                                <td style="font-size: 13px; font-weight:bold">Description</td>
+                                <td style="font-size: 13px; font-weight:bold">Price</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -497,7 +497,18 @@
             @endif
         </div>
         <div class="ms-3">
-            <span class="text-danger fw-bold" style="font-size: 20px">Total Fee: P{{ number_format($requestedDocumentDetails->total_fee, 2)}}</span>
+            <span style="font-size: 20px; font-weight:bold">Total Fee: P{{ number_format($requestedDocumentDetails->total_fee, 2)}}</span>
+        </div>
+
+        <div style="margin-top: 20px">
+            <h6 style="font-weight: bold">NON-DISCLOSURE/CONFIDENTIALITY AGREEMENTS</h6>
+            <p style="font-size: 12px; text-align:justify">
+                The parties agree to comply with, and have adequate measures in place to ensure that its directors, officers, employees, and Representatives comply at all times with: (a) the 
+                provisions and obligations contained in Republic Act No. 10173 or the “Data Privacy Act of the Philippines” and its implementing rules and regulations, and (b) other
+                applicable data privacy laws and regulations, as may be promulgated and/or amended from time to time. By agreeing to execute and enter into this Agreement, the parties
+                agree that any information exchanged between them may be collected, processed, shared and used but only for purposes relevant to the Transaction. Each of the parties
+                agrees to hold the other free and harmless from any costs or liability arising from its failure to comply with the requirements of the Data Privacy Act of the Philippines.
+            </p>
         </div>
     </div>
 </div>
