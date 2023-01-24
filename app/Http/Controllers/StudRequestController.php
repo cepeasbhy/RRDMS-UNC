@@ -68,7 +68,7 @@ class StudRequestController extends Controller
         $studentRequest = $db->getRequesteeInfo($requestID);
         $student = $db->getStudentInfo($studentRequest['studentInfo']->student_id);
 
-        $pdf = Pdf::loadView('RequestRecord/Student/request_pdf',[
+        $pdf = Pdf::loadView('RequestRecord/Student/pdf/sections_pdf',[
             'student' => $student['studentInfo'],
             'credentials' => $student['credentials'],
             'requestedDocumentDetails' => $studentRequest['requestedDocumentDetails'],
