@@ -7,22 +7,26 @@
 
 @section('content')
     <div class="my-3 row align-items-center">
-        <div class="col-sm-6">
-            <h3>Student Credential Management</h3>
-            <span class="badge bg-success mb-2">{{ session('msg') }}</span>
-        </div>
+        @if (Auth::user()->account_role == 'rec_assoc')
+            <div class="col-sm-9">
+            @else
+                <div class="col-sm-6">
+        @endif
+        <h3>Student Credential Management</h3>
+        <span class="badge bg-success mb-2">{{ session('msg') }}</span>
+    </div>
+    <div class="col-sm-3">
+        <form class="w-100" action="{{ route('addStudent') }}" method="get">
+            <input class="w-100 btn btn-sm btn-success" type="submit" value="ADD STUDENT">
+        </form>
+    </div>
+    @if (Auth::user()->account_role == 'cic')
         <div class="col-sm-3">
-            <form class="w-100" action="{{ route('addStudent') }}" method="get">
-                <input class="w-100 btn btn-sm btn-success" type="submit" value="ADD STUDENT">
+            <form class="w-100" action="{{ route('requestArchive') }}" method="get">
+                <input class="w-100 btn btn-sm btn-danger" type="submit" value="REQUEST FROM ARCHIVES">
             </form>
         </div>
-        @if (Auth::user()->account_role == 'cic')
-            <div class="col-sm-3">
-                <form class="w-100" action="{{route('requestArchive')}}" method="get">
-                    <input class="w-100 btn btn-sm btn-danger" type="submit" value="REQUEST FROM ARCHIVES">
-                </form>
-            </div>
-        @endif
+    @endif
     </div>
 
     <div class="container my-3">
@@ -60,7 +64,7 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#myTable').DataTable({
-                    "language":{
+                    "language": {
                         "lengthMenu": "Display _MENU_ records per page",
                         "zeroRecords": "No Records Available",
                         "info": "Showing page _PAGE_ of _PAGES_",
