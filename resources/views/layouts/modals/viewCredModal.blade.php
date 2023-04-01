@@ -22,8 +22,8 @@
                 <div class="modal-footer">
                     @if ($fromRequestedView == false)
                         <button class="btn btn-small btn-success" data-bs-toggle="modal" data-bs-target="{{'#'.'update-'.$credential->document_id}}">Update</button>
-                        @if($credential->document_name != 'Picture')
-                            <button class="btn btn-small btn-danger" data-bs-toggle="modal" data-bs-target="{{'#'.'del-'.$credential->document_id}}">Delete</button>
+                        @if($credential->document_name != 'Picture' && Auth::user()->account_role == 'rec_assoc')
+                            <button class="btn btn-small btn-danger" data-bs-toggle="modal" data-bs-target="{{'#'.'del-'.$credential->document_id}}">Dispose</button>
                         @endif
                     @endif
                 </div>

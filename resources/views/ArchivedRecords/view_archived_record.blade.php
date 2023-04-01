@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-6">
                     <button class="btn btn-danger btn-sm btn-block" style="width: 100%" data-bs-toggle="modal"
-                        data-bs-target="#delete-modal">DELETE</button>
+                        data-bs-target="#delete-modal">DISPOSE</button>
                 </div>
             </div>
         </div>

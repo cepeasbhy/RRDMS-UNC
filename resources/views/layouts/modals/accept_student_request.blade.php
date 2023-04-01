@@ -18,7 +18,7 @@
                     <form action="{{ route($routeName, ['request_id' => $request_id->request_id]) }}" method="post"
                         id="dateForm">
                         @csrf
-                        <input class="form-control" type="date" required name="releaseDate">
+                        <input class="form-control" type="date" required name="releaseDate" min="{{date("Y-m-d")}}">
                     </form>
                 @endif
 

@@ -72,9 +72,6 @@
                     @endif
                     @if ($accountInfo['accountInfo']->account_role != 'student')
                         <button id="clickButton" class="col btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#admin-update-account">Update Information</button>
-                        @if($accountInfo['accountInfo']->account_role != 'admin')
-                            <button class="col btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#admin-delete-account">Delete Account</button>
-                        @endif
                     @endif
                     </div>
                 </div>

@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-sm-3">
-            <a class="btn btn-success btn-sm" href="{{route('register')}}" rel="noopener noreferrer">REGISTER STAFF</a>
+            <a class="btn btn-success btn-sm" href="{{route('register')}}" rel="noopener noreferrer">ADD REGISTRAR STAFF</a>
         </div>
     </div>
     <div class="container">

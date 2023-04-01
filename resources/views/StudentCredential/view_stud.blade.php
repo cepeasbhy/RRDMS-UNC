@@ -55,16 +55,14 @@
                     <input class="form-control form-control-sm" type="text" value="{{date("Y-m-d",strtotime($student->updated_at))}}" readonly>
                 </div>
             </div>
-            <div class="row g-2">
-                <div class="col-6">
-                    <button id="clickButton" class="btn btn-success btn-sm btn-block" 
-                    style="width: 100%" data-bs-toggle="modal" data-bs-target="#update-modal">UPDATE</button>
+            @if (Auth::user()->account_role == 'cic')
+                <div class="row g-2">
+                    <div class="col">
+                        <button id="clickButton" class="btn btn-success btn-sm btn-block" 
+                        style="width: 100%" data-bs-toggle="modal" data-bs-target="#update-modal">UPDATE</button>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <button class="btn btn-danger btn-sm btn-block" 
-                    style="width: 100%" data-bs-toggle="modal" data-bs-target="#delete-modal">DELETE</button>
-                </div>
-            </div>
+            @endif
         </div>
         <div class="col mb-2">
             <div class="border-start border-danger border-4">
@@ -87,10 +85,12 @@
                     @endif
                 @endforeach
             </div>
-            <div class="col mt-3 text-center">
-                <button class="btn btn-sm btn-success w-75" data-bs-toggle="modal" 
-                data-bs-target="#add-single-rec">ADD A RECORD</button>
-            </div>
+            @if(Auth::user()->account_role == 'cic')
+                <div class="col mt-3 text-center">
+                    <button class="btn btn-sm btn-success w-75" data-bs-toggle="modal" 
+                    data-bs-target="#add-single-rec">ADD A RECORD</button>
+                </div>
+            @endif
         </div>
     </div>
         <!--Modal for Updating Student Information-->
