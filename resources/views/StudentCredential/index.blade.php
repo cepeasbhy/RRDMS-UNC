@@ -35,8 +35,8 @@
                 <th class="custom-th bg-danger">STUDENT ID</th>
                 <th class="custom-th bg-danger">FIRST NAME</th>
                 <th class="custom-th bg-danger">LAST NAME</th>
+                <th class="custom-th bg-danger">DEPARTMENT</th>
                 <th class="custom-th bg-danger">PROGRAM</th>
-                <th class="custom-th bg-danger">COURSE</th>
                 <th class="custom-th bg-danger">ACTION</th>
             </thead>
             <tbody>
