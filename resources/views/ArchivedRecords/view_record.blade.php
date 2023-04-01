@@ -62,13 +62,9 @@
                 </div>
             </div>
             <div class="row g-2">
-                <div class="col-6">
+                <div class="col">
                     <button id="clickButton" class="btn btn-success btn-sm btn-block" style="width: 100%"
                         data-bs-toggle="modal" data-bs-target="#archive-modal">ARCHIVE</button>
-                </div>
-                <div class="col-6">
-                    <button class="btn btn-danger btn-sm btn-block" style="width: 100%" data-bs-toggle="modal"
-                        data-bs-target="#delete-modal">DELETE</button>
                 </div>
             </div>
         </div>
@@ -94,10 +90,6 @@
                         </div>
                     @endif
                 @endforeach
-            </div>
-            <div class="col mt-3 text-center">
-                <button class="btn btn-sm btn-success w-75" data-bs-toggle="modal" data-bs-target="#add-single-rec">ADD A
-                    RECORD</button>
             </div>
         </div>
     </div>
