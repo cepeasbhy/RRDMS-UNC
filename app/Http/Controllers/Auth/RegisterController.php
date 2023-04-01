@@ -47,7 +47,6 @@ class RegisterController extends Controller
             'assigned_dept' => ['nullable', 'string', 'max:255'],
             'phone_number' => ['nullable', 'string', 'max:11'],
             'email' => ['required', 'email', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
     }
 
@@ -75,7 +74,7 @@ class RegisterController extends Controller
             'middle_name' => $data['middle_name'],
             'phone_number' => $data['phone_number'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make('welcometounc'),
         ]);
     }
 
