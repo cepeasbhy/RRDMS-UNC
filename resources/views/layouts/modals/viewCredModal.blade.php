@@ -21,8 +21,10 @@
                 </div>
                 <div class="modal-footer">
                     @if ($fromRequestedView == false)
-                        <button class="btn btn-small btn-success" data-bs-toggle="modal" data-bs-target="{{'#'.'update-'.$credential->document_id}}">Update</button>
-                        @if($credential->document_name != 'Picture' && Auth::user()->account_role == 'rec_assoc')
+                        @if ((Auth::user()->account_role == 'rec_assoc' && $student->status == 2) || Auth::user()->account_role == 'cic')
+                            <button class="btn btn-small btn-success" data-bs-toggle="modal" data-bs-target="{{'#'.'update-'.$credential->document_id}}">Update</button>
+                        @endif
+                        @if($credential->document_name != 'Picture' && Auth::user()->account_role == 'rec_assoc' && $student->status == 2)
                             <button class="btn btn-small btn-danger" data-bs-toggle="modal" data-bs-target="{{'#'.'del-'.$credential->document_id}}">Dispose</button>
                         @endif
                     @endif
