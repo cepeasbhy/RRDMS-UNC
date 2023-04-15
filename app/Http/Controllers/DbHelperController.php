@@ -830,4 +830,8 @@ class DbHelperController extends Controller
             'description' => $description
         ]);
     }
+
+    public function getTransacLogs($staffID){
+        return log::where('staff_id', $staffID)->get();
+    }
 }

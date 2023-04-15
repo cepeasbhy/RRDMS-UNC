@@ -57,9 +57,14 @@ class AdminController extends Controller
         ]);
     }
 
-    public function viewAccountInfo(AccountController $account, $role, $userID){
+    public function viewAccountInfo(DbHelperController $db, AccountController $account, $role, $userID){
         $accountInfo = $account->getAccountInfo($role, $userID);
-        return view('/admin/view_account', ['accountInfo' => $accountInfo]);
+        $transacLogs = $db->getTransacLogs($userID);
+
+        return view('/admin/view_account', [
+            'accountInfo' => $accountInfo,
+            'transacLogs' => $transacLogs
+        ]);
     }
 
     public function exportGradList(Request $request){

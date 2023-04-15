@@ -1,17 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row w-50 my-3">
-        <div class="col">
-            <div class="mb-3">
-                <a class="btn btn-success btn-sm" href="{{route('admin.viewAccounts')}}"><i class="bi bi-arrow-bar-left"></i> BACK</a>
-            </div>
+    <div class="row mb-3 mt-3">
+        <div class="mb-3">
+            <a class="btn btn-success btn-sm" href="{{route('admin.viewAccounts')}}"><i class="bi bi-arrow-bar-left"></i> BACK</a>
+        </div>
+        <div class="col-5">
             <div class="border-start border-danger border-4">
                 <h4 class="ms-3">ACCOUNT INFORMATION</h4>
             </div>
             <span class="badge bg-success mb-2">{{session('msg')}}</span>
-            <div class="ms-3 mt-3">
-                <div class="mb-3">
+                <div class="ms-2 mb-3">
                     <div class="row align-items-center mb-3">
                         <img class="col-3 img-fluid rounded-circle student-pic" data-bs-toggle="modal" data-bs-target="#view-account-picture"
                         src="{{asset('storage/'.$accountInfo['picturePath'])}}">
@@ -73,10 +72,56 @@
                     @if ($accountInfo['accountInfo']->account_role != 'student')
                         <button id="clickButton" class="col btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#admin-update-account">Update Information</button>
                     @endif
-                    </div>
                 </div>
             </div>
         </div>
+        @if($accountInfo['accountInfo']->account_role != 'student')
+            <div class="col-7 mb-2">
+                <div class="border-start border-danger border-4">
+                    <h4 class="ms-3">TRANSACTION LOGS</h4>
+                </div>
+                <div class="row">
+                    <table class="table transacLogTable">
+                        <thead>
+                            <th class="custom-th bg-danger">DATE</th>
+                            <th class="custom-th bg-danger">TIME</th>
+                            <th class="custom-th bg-danger">DESCRIPTION</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($transacLogs as $log)
+                                <tr class="custom-tr">
+                                    <td class="custom-td">{{date('H:i',strtotime($log->created_at))}}</td>
+                                    <td class="custom-td">{{date('Y-m-d',strtotime($log->created_at))}}</td>
+                                    <td class="custom-td">{{$log->description}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+                integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('.transacLogTable').DataTable({
+                        "language": {
+                            "lengthMenu": "Display _MENU_ logs per page",
+                            "zeroRecords": "No Logs Available",
+                            "info": "Showing page _PAGE_ of _PAGES_",
+                            "infoEmpty": "No Logs Available",
+                            "infoFiltered": "(filtered from _MAX_ total records)"
+                        },
+                        "table" :{
+                            "style":{
+                                "font-size" : "100px"
+                            }
+                        }
+                    });
+                });
+            </script>    
+        @endif
     </div>
 
     @extends('layouts.modals.deleteAccountModal')
