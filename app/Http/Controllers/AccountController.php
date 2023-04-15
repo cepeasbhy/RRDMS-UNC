@@ -142,7 +142,7 @@ class AccountController extends Controller
         }   
     }
 
-    public function adminUpdateStaffAccount(Request $request, $userID){
+    public function adminUpdateStaffAccount(DbHelperController $db, Request $request, $userID){
         $request->validate([
             'firstName' => ['required', 'string', 'max:255'],
             'lastName' => ['required', 'string', 'max:255'],
@@ -165,6 +165,9 @@ class AccountController extends Controller
         Staff::where('staff_id', $userID)->update([
             'assigned_dept' => $request->input('assignedDept')
         ]);
+
+        $description = "Updated account with user a ID of ".$userID;
+        $db->createLog($description);
 
         return back()->with('msg', 'Account Successfully Updated');
     }
@@ -203,8 +206,14 @@ class AccountController extends Controller
         $db->setAccountActiveStatus($userID, $activeStatus);
 
         if($activeStatus == 0){
+            $description = "Deactivated account with a user ID of ".$userID;
+            $db->createLog($description);
+    
             return back()->with('msg', 'Account has been deactivated');
         }
+
+        $description = "Reactivated account with a user ID of ".$userID;
+        $db->createLog($description);
 
         return back()->with('msg', 'Account has been reactivated');
     }

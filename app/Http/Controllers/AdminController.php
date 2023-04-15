@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ExportStudList;
+use App\Models\Department;
 use App\Http\Controllers\DbHelperController;
-use App\Models\RecordPrice;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -67,8 +67,12 @@ class AdminController extends Controller
         ]);
     }
 
-    public function exportGradList(Request $request){
+    public function exportGradList(DbHelperController $db, Request $request){
         $fileName = $this->getFileName($request->input('department_id'), 'GRADUATES_LIST');
+        $department = Department::select('dept_name')->where('department_id', $request->input('department_id'))->firstOrFail();;
+
+        $description = "Exported list of grudates for the ".$department->dept_name;
+        $db->createLog($description);
 
         if(is_null($request->input('department_id')) && is_null($request->input('admissionYear')) &&
         is_null($request->input('admissionYear'))){
@@ -82,7 +86,10 @@ class AdminController extends Controller
         }
     }
 
-    public function exportAllGraduates(Request $request){
+    public function exportAllGraduates(DbHelperController $db, Request $request){
+        $description = "Exported a master list of graduates";
+        $db->createLog($description);
+
         return Excel::download(new ExportStudList(
             isGraduated: true,
             isEpoxrtAll: true,
@@ -90,8 +97,13 @@ class AdminController extends Controller
         ), 'GRADUATES-MASTER-LIST.xlsx');
     }
 
-    public function exportStudList(Request $request){
+    public function exportStudList(DbHelperController $db, Request $request){
         $fileName = $this->getFileName($request->input('department_id'), 'STUDENT_LIST');
+
+        $department = Department::select('dept_name')->where('department_id', $request->input('department_id'))->firstOrFail();
+
+        $description = "Exported list of students for the ".$department->dept_name;
+        $db->createLog($description);
 
         if(is_null($request->input('department_id')) && is_null($request->input('admissionYear')) &&
         is_null($request->input('admissionYear'))){
@@ -105,7 +117,11 @@ class AdminController extends Controller
         }
     }
 
-    public function exportAllStudents(Request $request){
+    public function exportAllStudents(DbHelperController $db,Request $request){
+
+        $description = "Exported a master list of students";
+        $db->createLog($description);
+
         return Excel::download(new ExportStudList(
             isGraduated: false,
             isEpoxrtAll: true,
@@ -140,6 +156,9 @@ class AdminController extends Controller
 
     public function updatePrices(Request $request, DbHelperController $db){
         $db->updatePrices($request);
+
+        $description = "Updated record prices";
+        $db->createLog($description);
 
         return redirect()->route('admin.home')->with('successMsg', 'Prices Successfully Updated');
     }
