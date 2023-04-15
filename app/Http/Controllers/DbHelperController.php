@@ -669,7 +669,7 @@ class DbHelperController extends Controller
             'available_status' => 1
         ]);
 
-        $description = "Cancelled request for an archived record with an ID of ".$archive['requestedArchived']->archive_id;
+        $description = "Cancelled request for an archived record with a request ID of ".$archive['requestedArchived']->archive_id;
         $this->createLog($description);
     }
 
@@ -679,7 +679,7 @@ class DbHelperController extends Controller
             'status' => 2
         ]);
 
-        $description = "Rejected request for an archived with a request ID of ".$requestID;
+        $description = "Rejected request for an archived record with a request ID of ".$requestID;
         
         $this->createLog($description);
     }
@@ -687,7 +687,7 @@ class DbHelperController extends Controller
     public function accpetRequestedArchive($requestID){
         RequestedArchive::where('request_id', $requestID)->update(['status' => 1]);
 
-        $description = "Granted request for an archived with a request ID of ".$requestID;
+        $description = "Granted request for an archived record with a request ID of ".$requestID;
         $this->createLog($description);
     }
 
