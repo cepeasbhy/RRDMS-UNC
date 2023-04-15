@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Http\Controllers\CredentialController;
 use App\Models\Department;
 use App\Models\RecordPrice;
+use App\Models\log;
 use Illuminate\Support\Facades\Auth;
 
 class DbHelperController extends Controller
@@ -256,6 +257,9 @@ class DbHelperController extends Controller
 
         $credController = new CredentialController;
         $credController->uploadStudentCredentials($request);
+
+        $description = "Added new student to the database with a student ID of ".$request->input('student_id');
+        $this->createLog($description);
     }
 
     public function updateStudent(Request $request, $id, $isFromArchive){
@@ -290,6 +294,9 @@ class DbHelperController extends Controller
                 'course_id' => $request->input('course_id'),
             ]);
         }
+
+        $description = "Updated student information with a student ID of ".$id;
+        $this->createLog($description);
     }
 
     public function deleteStudent($studentID, $isFromArchive){
@@ -309,6 +316,9 @@ class DbHelperController extends Controller
         $credController->deleteAllStudCreds($studentID);
         Student::where('student_id', $studentID)->delete();
         User::where('user_id', $studentID)->delete();
+
+        $description = "Disposed student record with a student ID of ".$studentID;
+        $this->createLog($description);
     }
 
     public function singleArchive($studentID){
@@ -332,6 +342,9 @@ class DbHelperController extends Controller
 
         $credController = new CredentialController;
         $credController->archiveCredentials($studentID);
+
+        $description = "Archived student with a student ID of ".$studentID;
+        $this->createLog($description);
 
     }
 
@@ -639,6 +652,10 @@ class DbHelperController extends Controller
         Archive::where('archive_id', $id)->update([
             'available_status' => 0
         ]);
+
+        $description = "Requested an archived with an ID of ".$id;
+        $this->createLog($description);
+
     }
 
     public function deleteRequestedArchive($requestID){
@@ -649,6 +666,9 @@ class DbHelperController extends Controller
         Archive::where('archive_id', $archive['requestedArchived']->archive_id)->update([
             'available_status' => 1
         ]);
+
+        $description = "Cancelled request for an archived record with an ID of ".$archive['requestedArchived']->archive_id;
+        $this->createLog($description);
     }
 
     public function rejectRequestedArchive($requestID, Request $request){
@@ -656,10 +676,17 @@ class DbHelperController extends Controller
             'reason_for_rejection' => $request->input('reason'),
             'status' => 2
         ]);
+
+        $description = "Rejected request for an archived with a request ID of ".$requestID;
+        
+        $this->createLog($description);
     }
 
     public function accpetRequestedArchive($requestID){
         RequestedArchive::where('request_id', $requestID)->update(['status' => 1]);
+
+        $description = "Granted request for an archived with a request ID of ".$requestID;
+        $this->createLog($description);
     }
 
     public function getRequestedArchives(){
@@ -688,6 +715,9 @@ class DbHelperController extends Controller
         ]);
 
         RequestedArchive::where('request_id', $id)->delete();
+
+        $description = "Returned the record to archive with an archive ID of ".$archive['requestedArchived']->archive_id;
+        $this->createLog($description);
     }
 
     public function getRequestedDocuments(){
@@ -734,6 +764,9 @@ class DbHelperController extends Controller
             'status' => 'DENIED',
             'reason_for_rejection' => $denialReason
         ]);
+
+        $description = "Rejected student request with a request ID of ".$requestID;
+        $this->createLog($description);
     }
 
     public function acceptStudentRequest($requestID, $releaseDate){
@@ -741,12 +774,18 @@ class DbHelperController extends Controller
             'status' => 'SET FOR RELEASE',
             'release_date' => $releaseDate
         ]);
+
+        $description = "Sets released date for request with a request ID of ".$requestID;
+        $this->createLog($description);
     }
 
     public function completeStudentRequest($requestID){
         ModelsRequest::where('request_id', $requestID)->update([
             'status' => 'COMPLETED',
         ]);
+
+        $description = "Completed student's request with a request ID of ".$requestID;
+        $this->createLog($description);
     }
 
     public function cancelStudentRequest($requestID){
@@ -778,5 +817,15 @@ class DbHelperController extends Controller
 
     public function setAccountActiveStatus($userID, $activeStatus){
         User::where('user_id', $userID)->update(['activated_status' => $activeStatus]);
+    }
+
+    public function createLog($description){
+
+        $logID = 'LOG'.'_'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
+        log::create([
+            'log_id' => $logID,
+            'staff_id' => Auth::user()->user_id,
+            'description' => $description
+        ]);
     }
 }

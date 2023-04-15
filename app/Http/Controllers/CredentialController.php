@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DbHelperController;
 use Illuminate\Http\Request;
 use App\Models\Credential;
 use Illuminate\Support\Facades\File;
@@ -72,18 +73,25 @@ class CredentialController extends Controller
     }
 
     public function deleteCredential($docID){
+        $db = new DbHelperController;
 
         $credential = Credential::select(
-             'document_loc'
+             'document_loc',
+             'student_id',
+             'document_name'
          )->where('document_id', $docID)->firstOrFail();
  
          unlink(storage_path('app\public\\'.$credential->document_loc));
  
          Credential::where('document_id', $docID)->delete();
+
+        $description = "Deleted ".$credential->document_name." associated to student with an ID of ".$credential->student_id;
+        $db->createLog($description);
     }
 
     public function updateCredential($request, $studID, $docID){
 
+        $db = new DbHelperController;
         $credential = Credential::where('document_id', $docID)->firstOrFail();
         unlink(storage_path('app\public\\'.$credential->document_loc));
         if($credential->input_name == 'picture'){
@@ -101,6 +109,9 @@ class CredentialController extends Controller
         Credential::where('document_id', $docID)->update([
             'document_loc' => $newPath
         ]);
+
+        $description = "Updated ".$credential->document_name." associated to student with an ID of ".$credential->student_id;
+        $db->createLog($description);
     }
 
     public function getStudentPicture($id){

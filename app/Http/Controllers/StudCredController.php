@@ -63,8 +63,11 @@ class StudCredController extends Controller
         'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Updated');
     }
 
-    public function addSingleRec(CredentialController $credController, Request $request){
+    public function addSingleRec(DbHelperController $db, CredentialController $credController, Request $request){
         $credController->saveCredential($request, $request->keyName, $request->fileName);
+        
+        $description = "Added a new credential named ".$request->fileName." for student with an ID of ".$request->student_id;
+        $db->createLog($description);
 
         return redirect('/stud_cred_mngmnt/view_student/'.$request->student_id)->header('Cache-Control',
         'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Added');
