@@ -119,8 +119,11 @@ class ArchivedRecordsController extends Controller
         return redirect('/archived_records')->with('msg', 'Record Successfully Archived');
     }
 
-    public function addSingleRec(CredentialController $credController, Request $request){
+    public function addSingleRec(DbHelperController $db, CredentialController $credController, Request $request){
         $credController->saveCredential($request, $request->keyName, $request->fileName);
+
+        $description = "Added a new credential named ".$request->fileName." for student with an ID of ".$request->student_id;
+        $db->createLog($description);
 
         return redirect('/archived_records/view_record/'.$request->student_id)->header('Cache-Control',
         'no-store, no-cache, must-revalidate')->with('msgCred', 'Credential Successfully Added');
