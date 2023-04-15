@@ -51,9 +51,10 @@
                             class="text-danger">*</label>
                         <select name="status" class="form-select form-select-sm">
                             <option value="">Choose...</option>
-                            <option value="0">INACTIVE</option>
                             <option value="1">ACTIVE</option>
-                            <option value="2">GRADUATED</option>
+                            <option value="2">TRANSFERED</option>
+                            <option value="3">DROPPED OUT</option>
+                            <option value="4">GRADUATED</option>
                         </select>
                     </div>
                     @if (Auth::user()->account_role == 'rec_assoc')
