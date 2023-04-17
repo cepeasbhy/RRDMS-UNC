@@ -11,7 +11,7 @@
                     <div class="selection"></div>
                     <div class="form-group mb-2">
                         <label class="col-form-label col-form-label-sm">Batch Year</label>
-                        <input name="admissionYear" class="form-control form-control-sm" type="text">
+                        <input name="batchYear" class="form-control form-control-sm" type="text">
                     </div>
                 </form>
             </div>

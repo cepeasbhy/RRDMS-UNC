@@ -74,6 +74,13 @@ class ExportStudList implements FromCollection, ShouldAutoSize, WithHeadings
 
         if($this->isGraduated){
             $studentCollection->where('status', 4);
+
+            if(!is_null($request->input('batchYear'))){
+                $studentCollection->whereYear(
+                    'date_graduated',
+                    $request->input('batchYear')
+                );
+            }
         }
 
         return $studentCollection->orderBy('last_name', 'ASC')->get();
