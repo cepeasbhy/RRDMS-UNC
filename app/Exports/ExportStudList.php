@@ -96,7 +96,7 @@ class ExportStudList implements FromCollection, ShouldAutoSize, WithHeadings
         );
 
         if($this->isGraduated){
-            $studentCollection->where('status', 2);
+            $studentCollection->where('status', 4);
         }
 
         return $studentCollection->orderBy('last_name', 'ASC')->get();
