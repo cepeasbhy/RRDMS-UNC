@@ -30,7 +30,7 @@
                         @enderror
                     </div>
 
-                    <label for="password" class="">{{ __('Password') }}</label>
+                    <label for="password" class="password-label">{{ __('Password') }}</label>
                     <div class="input-container">
                         <span class="input-icon">
                             <i class="bi bi-key-fill"></i>

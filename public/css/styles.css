@@ -29,7 +29,7 @@
     padding: 1rem;
 }
 
-.form-group{
+.form-group {
     display: grid;
     place-items: center;
     min-width: 60%;
@@ -37,7 +37,7 @@
     border-radius: 0.50rem;
 }
 
-.form-group-header{
+.form-group-header {
     min-width: 100%;
     background-color: var(--text-color-gray-sub);
     place-self: start;
@@ -47,34 +47,35 @@
     border-top-right-radius: 0.50rem;
 }
 
-.form-group-header > h5{
+.form-group-header>h5 {
     font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-500);
+    font-size: var(--font-size-400);
 }
 
-.unc-logo {
-    place-self: center;
-}
-
-.form-content{
+.form-content {
     min-width: 80%;
     padding: 1rem;
 }
 
-.form-button{
-    min-width: 20em;
+.form-button {
+    max-width: 5em;
     background-color: var(--bg-color-red-sub);
     color: var(--text-color-white-sub);
     border: none;
     border-radius: 0.25rem;
     padding: 0.15rem;
+    padding-inline: 1rem ;
 }
 
-.form-button-container{
+.form-button-container {
     padding: 0.75rem;
     text-align: center;
 }
 
+.unc-logo {
+    place-self: center;
+    padding: 1rem;
+}
 
 .input-container {
     display: flex;
@@ -101,5 +102,52 @@
 .input-icon,
 .input-box {
     padding: 0.40rem;
+}
+
+.password-label{
+    padding-top: 1rem;
+}
+
+
+@media (min-width: 40em){
+
+    .form-group-header {
+        min-width: 100%;
+        background-color: var(--text-color-gray-sub);
+        place-self: start;
+        padding: 0.50rem;
+        border-bottom: 1px solid #ddd;
+        border-top-left-radius: 0.50rem;
+        border-top-right-radius: 0.50rem;
+    }
+
+    .form-group-header>h5 {
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-500);
+    }
+
+    .unc-logo {
+        place-self: center;
+    }
+
+    .form-content {
+        min-width: 80%;
+        padding: 1rem;
+    }
+
+    .form-button {
+        min-width: 20em;
+        background-color: var(--bg-color-red-sub);
+        color: var(--text-color-white-sub);
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.15rem;
+    }
+
+    .form-button-container {
+        padding: 0.75rem;
+        text-align: center;
+    }
+
 }
 
