@@ -113,9 +113,9 @@ class ArchivedRecordsController extends Controller
         return redirect('/archived_records/view_record/' . $id)->with('msg', 'Record Successfully Updated');
     }
 
-    public function archiveSingleRecord(DbHelperController $db, $id)
+    public function archiveSingleRecord(Request $request, DbHelperController $db, $id)
     {
-        $db->singleArchive($id);
+        $db->singleArchive($id, $request);
         return redirect('/archived_records')->with('msg', 'Record Successfully Archived');
     }
 

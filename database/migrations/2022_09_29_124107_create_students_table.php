@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('course_id');
             $table->integer('archive_status')->default(0);
             $table->integer('admission_year');
+            $table->date('date_graduated')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
 

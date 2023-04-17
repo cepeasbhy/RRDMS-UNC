@@ -127,7 +127,6 @@
                                 @endswitch
                             </select>
                         </div>
-                    @endif
                     <div class="form-group mb-2">
                         <label class="col-form-label col-form-label-sm" for="">Admission Year <span
                                 class="text-danger">*</span></label>

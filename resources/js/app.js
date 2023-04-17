@@ -14,3 +14,4 @@ import './bootstrap';
 
 import './components/Selection';
 import './components/addRecSelection';
+import './components/setStudentState';

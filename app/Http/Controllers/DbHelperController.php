@@ -138,6 +138,7 @@ class DbHelperController extends Controller
                 'phone_number',
                 'email',
                 'status',
+                'date_graduated',
                 'archive_status',
                 'account_role',
                 'activated_status',
@@ -177,6 +178,7 @@ class DbHelperController extends Controller
                 'address',
                 'phone_number',
                 'status',
+                'date_graduated',
                 'archive_status',
                 'admission_year',
                 'archives.created_at AS date_archived',
@@ -323,7 +325,7 @@ class DbHelperController extends Controller
         $this->createLog($description);
     }
 
-    public function singleArchive($studentID){
+    public function singleArchive($studentID, Request $request){
 
         $archiveID = 'ARCHIVE'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
         $studentDeptCourse = Student::select(
@@ -331,9 +333,19 @@ class DbHelperController extends Controller
             'course_id'
         )->where('student_id', $studentID)->first();
 
-        Student::where('student_id', $studentID)->update([
-            'archive_status' => 1
-        ]);
+        if($request->input('status') == 4){
+            Student::where('student_id', $studentID)->update([
+                'archive_status' => 1,
+                'status' => 4,
+                'date_graduated' => $request->input('gradDate')
+            ]);
+        }else{
+            Student::where('student_id', $studentID)->update([
+                'archive_status' => 1,
+                'status' =>$request->input('status')
+            ]);
+        }
+        
 
         Archive::create([
             'student_id' => $studentID,

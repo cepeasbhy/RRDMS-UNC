@@ -57,6 +57,13 @@
                             <input class="form-control form-control-sm" type="text" value="GRADUATED" readonly>
                     @endswitch
                 </div>
+                @if($student->status == 4)
+                    <div class="mb-2">
+                        <label class="col-form-label col-form-label-sm" for="">Date Graduated</label>
+                        <input class="form-control form-control-sm" type="text"
+                            value="{{ date('Y-m-d', strtotime($student->date_graduated)) }}" readonly>
+                    </div>
+                @endif
                 <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Date Archived</label>
                     <input class="form-control form-control-sm" type="text"

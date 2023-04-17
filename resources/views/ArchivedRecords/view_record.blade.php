@@ -67,7 +67,7 @@
             <div class="row g-2">
                 <div class="col">
                     <button id="clickButton" class="btn btn-success btn-sm btn-block" style="width: 100%"
-                        data-bs-toggle="modal" data-bs-target="#archive-modal">ARCHIVE</button>
+                        data-bs-toggle="modal" data-bs-target="#archive-details-modal">ARCHIVE</button>
                 </div>
             </div>
         </div>
@@ -96,6 +96,7 @@
             </div>
         </div>
     </div>
+    @extends('layouts.modals.ArchivedRecords.archive_rec_detail')
     <!--Modal for Archiving Credential-->
     @extends('layouts.modals.ArchivedRecords.archiveCredModal')
     <!--Modal for Deleting Record-->
