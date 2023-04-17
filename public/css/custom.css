@@ -4,13 +4,13 @@
     font-family: 'Nunito', sans-serif;
 }
 
-#container, #request-container{
+/* #container, #request-container{
     margin: auto;
 }
-
+*/
 #request-container{width: 80%;}
 
-#container{width: 70%;}
+/* #container{width: 70%;} */
 
 .custom-th{
     font-size: 13px;
