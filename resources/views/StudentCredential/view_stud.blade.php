@@ -26,7 +26,7 @@
                     <input class="form-control form-control-sm" type="text" value="{{$student->email}}" readonly>
                 </div>
                 <div class="mb-2">
-                    <label class="col-form-label col-form-label-sm" for="">Program</label>
+                    <label class="col-form-label col-form-label-sm" for="">Department</label>
                     <input class="form-control form-control-sm" type="text" value="{{$student->dept_name}}" readonly>
                 </div>
                 <div class="mb-2">
@@ -36,11 +36,14 @@
                 <div class="mb-2">
                     <label class="col-form-label col-form-label-sm" for="">Status</label>
                     @switch($student->status)
-                        @case(0)
-                            <input class="form-control form-control-sm" type="text" value="INACTIVE" readonly>
-                            @break
                         @case(1)
                             <input class="form-control form-control-sm" type="text" value="ACTIVE" readonly>
+                            @break
+                        @case(2)
+                            <input class="form-control form-control-sm" type="text" value="TRANSFERED" readonly>
+                            @break
+                        @case(3)
+                            <input class="form-control form-control-sm" type="text" value="DROPPED OUT" readonly>
                             @break
                         @default
                             <input class="form-control form-control-sm" type="text" value="GRADUATED" readonly>

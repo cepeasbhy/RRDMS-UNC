@@ -66,9 +66,6 @@
                             </span>
                         @enderror
                     </div>
-                    @if (Auth::user()->account_role == 'rec_assoc')
-                        <div class="selection"></div>
-                    @else
                         <div class="form-group mb-2">
                             <input type="hidden" name="department_id" value="{{$staff->assigned_dept}}">
                             <label class="col-form-label col-form-label-sm">Course</label>

@@ -8,24 +8,9 @@
             <div class="modal-body">
                 <form id="exportGradList" action="{{route('admin.exportGraduates')}}" method="get">
                     @csrf
+                    <div class="selection"></div>
                     <div class="form-group mb-2">
-                        <label class="col-form-label col-form-label-sm">Department
-                        </label>
-                        <select class="form-select form-select-sm " name="department_id">
-                            <option value="">Choose...</option>
-                            <option value="001">Arts and Science</option>
-                            <option value="002">Business and Accountancy</option>
-                            <option value="003">Computer Studies</option>
-                            <option value="004">Criminal Justice Education</option>
-                            <option value="005">Education</option>
-                            <option value="006">Engineering and Architecture</option>
-                            <option value="007">Nursing</option>
-                            <option value="008">Graduate Studies</option>
-                            <option value="009">School of Law</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label class="col-form-label col-form-label-sm">Admission Year</label>
+                        <label class="col-form-label col-form-label-sm">Batch Year</label>
                         <input name="admissionYear" class="form-control form-control-sm" type="text">
                     </div>
                 </form>

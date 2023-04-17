@@ -10,6 +10,9 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ExportStudList implements FromCollection, ShouldAutoSize, WithHeadings
 {
+    private $isGraduated;
+    private $isExportAll;
+    private $request;
     
     public function __construct($isGraduated, $isEpoxrtAll, Request $request, )
     {
@@ -47,11 +50,16 @@ class ExportStudList implements FromCollection, ShouldAutoSize, WithHeadings
             'courses', 'courses.course_id', '=', 'students.course_id'
         );
 
-
         if(!is_null($request->input('department_id'))){
-            $studentCollection->where(
-                'students.department_id', $request->input('department_id')
-            );
+            if(!is_null($request->input('course_id'))){
+                $studentCollection->where(
+                    'students.course_id', $request->input('course_id')
+                );
+            }else{
+                $studentCollection->where(
+                    'students.department_id', $request->input('department_id')
+                );
+            }
         }
         
         if(!is_null($request->input('admissionYear'))){
@@ -100,7 +108,7 @@ class ExportStudList implements FromCollection, ShouldAutoSize, WithHeadings
             'Last Name',
             'First Name',
             'Middle Name',
-            'Program',
+            'Department',
             'Course'
         ];
     }
