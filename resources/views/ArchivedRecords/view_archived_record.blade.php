@@ -48,7 +48,7 @@
                             <input class="form-control form-control-sm" type="text" value="ACTIVE" readonly>
                             @break
                         @case(2)
-                            <input class="form-control form-control-sm" type="text" value="TRANSFERED" readonly>
+                            <input class="form-control form-control-sm" type="text" value="TRANSFERRED" readonly>
                             @break
                         @case(3)
                             <input class="form-control form-control-sm" type="text" value="DROPPED OUT" readonly>
