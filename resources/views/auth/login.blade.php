@@ -7,8 +7,8 @@
         </div>
         <h2>Registrar Records and Document Management System</h2>
 
-        <section class="form-group">
-            <div class="form-group-header">
+        <section class="form-block">
+            <div class="form-block-header">
                 <h5>ACCOUNT LOGIN</h5>
             </div>
 

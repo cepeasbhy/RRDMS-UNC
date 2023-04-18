@@ -29,7 +29,7 @@
     padding: 1rem;
 }
 
-.form-group {
+.form-block {
     display: grid;
     place-items: center;
     min-width: 60%;
@@ -37,7 +37,7 @@
     border-radius: 0.50rem;
 }
 
-.form-group-header {
+.form-block-header {
     min-width: 100%;
     background-color: var(--text-color-gray-sub);
     place-self: start;
@@ -47,7 +47,7 @@
     border-top-right-radius: 0.50rem;
 }
 
-.form-group-header>h5 {
+.form-block-header>h5 {
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-400);
 }
@@ -81,6 +81,7 @@
     display: flex;
     border: 1px solid #ddd;
     border-radius: 0.25rem;
+
 }
 
 .input-icon {
@@ -109,10 +110,17 @@
     padding-top: 1rem;
 }
 
+.input-group{
+    flex-direction: column;
+}
+
+.input-group > label{
+    padding-top: 1rem;
+}
 
 @media (min-width: 40em){
 
-    .form-group-header {
+    .form-block-header {
         min-width: 100%;
         background-color: var(--text-color-gray-sub);
         place-self: start;
@@ -122,7 +130,7 @@
         border-top-right-radius: 0.50rem;
     }
 
-    .form-group-header>h5 {
+    .form-block-header>h5 {
         font-weight: var(--font-weight-bold);
         font-size: var(--font-size-500);
     }
