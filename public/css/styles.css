@@ -6,7 +6,7 @@
     --font-weight-bold: 600;
 
     --bg-color-red-sub: hsl(0, 61%, 35%);
-    --bg-color-green-sub: hsl(120, 69%, 21%);
+    --bg-color-green-sub: hsl(120, 55%, 21%);
     --bg-color-blue-sub: hsl(240, 74%, 39%);
     --text-color-gray-sub: hsl(0, 0%, 95%);
     --text-color-white-sub: hsl(0, 0%, 100%);
@@ -118,6 +118,138 @@
     padding-top: 1rem;
 }
 
+.grid-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    min-width: 100%;
+    padding-bottom: 1rem;
+}
+
+.head-container {
+    max-width: fit-content;
+    border-left: 3px solid var(--bg-color-red-sub);
+}
+
+.head-container h4 {
+    margin: 0;
+}
+
+.link-button {
+    max-width: 20%;
+    color: var(--text-color-white-sub);
+    background-color: var(--bg-color-red-sub);
+    border: none;
+    text-decoration: none;
+    padding-block: 0.4rem;
+    padding-inline: clamp(2rem, 5vw, 8rem);
+    border-radius: 0.45rem;
+}
+
+.link-button-container {
+    text-align: center;
+    padding-top: 2px;
+    justify-self: end;
+}
+
+.link-button:hover {
+    --text-color-gray-darker: hsl(0, 0%, 85%);
+    color: var(--text-color-gray-darker);
+    cursor: pointer;
+}
+
+.button-container {
+    min-width: 100%;
+}
+
+[role="tablist"] {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 0.25rem;
+    padding: 0;
+}
+
+.nav-link {
+    background-color: transparent;
+    border: none;
+    padding-inline: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.nav-link.active {
+    color: var(--bg-color-blue-sub);
+    border-bottom: 2px solid maroon;
+}
+
+.tab-container {
+    border-top: 2px solid #ddd;
+    min-width: 100%;
+    padding-top: 1rem;
+}
+
+.tab-container__contents {
+    display: none;
+}
+
+.tab-container__contents table {
+    min-width: 100%;
+}
+
+.tab-container__contents table tbody tr td {
+    padding-block: 1rem;
+}
+
+.tab-container__contents table tbody tr:nth-child(even) {
+    background-color: var(--text-color-gray-sub);
+}
+
+.tab-container__contents table tbody tr td form {
+    margin: 0;
+}
+
+.active {
+    display: block;
+}
+
+.table-header {
+    background-color: var(--bg-color-red-sub);
+    color: var(--text-color-white-sub);
+    padding: 0.25rem;
+}
+
+@media (max-width: 40em) {
+
+    .nav-link{
+        font-size: 0.70rem;
+    }
+
+    .tab-container__contents table tbody tr td {
+        display: block;
+        padding-block: 1rem;
+        text-align: right;
+        margin-inline: 1rem;
+        position: relative;
+    }
+
+    td[data-label="Course"]{
+        font-size: 0.75rem;
+    }
+
+    .tab-container__contents table tbody tr td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        font-weight: var(--font-weight-bold);
+    }
+
+    .table-header {
+        display: none;
+    }
+}
+
+
 @media (min-width: 40em){
 
     .form-block-header {
@@ -144,9 +276,19 @@
         padding: 1rem;
     }
 
+    .view{
+        --bg-color: var(--bg-color-green-sub);
+        --min-width:4em;
+    }
+
+    .login{
+        --bg-color: var(--bg-color-red-sub);
+        --min-width: 20em;
+    }
+
     .form-button {
-        min-width: 20em;
-        background-color: var(--bg-color-red-sub);
+        min-width: var(--min-width);
+        background-color: var(--bg-color);
         color: var(--text-color-white-sub);
         border: none;
         border-radius: 0.25rem;
@@ -157,6 +299,108 @@
         padding: 0.75rem;
         text-align: center;
     }
+
+    .grid-container{
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: auto 1fr;
+        gap: 1rem;
+        min-width: 100%;
+        padding-bottom: 1rem;
+    }
+
+    .head-container{
+        max-width: fit-content;
+        border-left: 3px solid var(--bg-color-red-sub);
+    }
+
+    .head-container h4{
+        margin: 0;
+    }
+
+    .link-button{
+        max-width: 25%;
+        color: var(--text-color-white-sub);
+        background-color: var(--bg-color-red-sub);
+        border: none;
+        text-decoration: none;
+        padding-block: 0.4rem;
+        padding-inline: clamp(2rem, 9vw, 9rem);
+        border-radius: 0.45rem;
+    }
+
+    .link-button-container{
+        text-align: center;
+        padding-top: 2px;
+        justify-self: end;
+    }
+
+    .link-button:hover{
+    --text-color-gray-darker: hsl(0, 0%, 85%);
+        color: var(--text-color-gray-darker);
+        cursor: pointer;
+    }
+
+    .button-container{
+        min-width: 100%;
+    }
+
+    [role="tablist"]{
+        margin: 0;
+        list-style: none;
+        display: flex;
+        gap: 0.25rem;
+        padding: 0;
+    }
+
+    .nav-link{
+        background-color: transparent;
+        border: none;
+        padding-inline: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .nav-link.active{
+        color: var(--bg-color-blue-sub);
+        border-bottom: 2px solid maroon;
+    }
+
+    .tab-container{
+        border-top: 2px solid #ddd;
+        min-width: 100%;
+        padding-top: 1rem;
+    }
+
+    .tab-container__contents{
+        display: none;
+    }
+
+    .tab-container__contents table{
+        min-width: 100%;
+    }
+
+    .tab-container__contents table tbody tr td {
+        padding-block: 1rem;
+    }
+
+    .tab-container__contents table tbody tr:nth-child(even){
+        background-color: var(--text-color-gray-sub);
+    }
+
+    .tab-container__contents table tbody tr td form{
+        margin: 0;
+    }
+
+    .active{
+        display: block;
+    }
+
+    .table-header{
+        background-color: var(--bg-color-red-sub);
+        color: var(--text-color-white-sub);
+        padding: 0.25rem;
+    }
+
 
 }
 
