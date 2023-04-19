@@ -107,7 +107,7 @@
                 @if ($requestedDocumentDetails->copy_of_grades != null)
                     @yield('copy-grades')
                 @else
-                    @if ($requestedDocumentDetails->photocopy != null && $requestedDocumentDetails->diploma == null)
+                    @if ($requestedDocumentDetails->photocopy != null)
                         @yield('photocopy')
                     @endif
                 @endif
@@ -115,14 +115,28 @@
             
             @if ($requestedDocumentDetails->authentication != null)
                @yield('authentication')
-            @else
-                @if ($requestedDocumentDetails->photocopy != null)
-                    @yield('photocopy')
-                @endif
+            @endif
+
+            @if (
+                $requestedDocumentDetails->photocopy != null &&
+                $requestedDocumentDetails->certificate != null &&
+                $requestedDocumentDetails->diploma == null
+            )
+                @yield('photocopy')
             @endif
         </div>
 
         <div class="floatbox">
+            @if (
+                $requestedDocumentDetails->photocopy != null &&
+                $requestedDocumentDetails->certificate != null &&
+                $requestedDocumentDetails->diploma != null &&
+                $requestedDocumentDetails->copy_of_grades == null &&
+                $requestedDocumentDetails->transcript_of_record == null
+            )
+                @yield('photocopy')
+            @endif
+            
             @if (   $requestedDocumentDetails->photocopy != null &&
                     $requestedDocumentDetails->authentication != null &&
                     $requestedDocumentDetails->copy_of_grades != null &&
