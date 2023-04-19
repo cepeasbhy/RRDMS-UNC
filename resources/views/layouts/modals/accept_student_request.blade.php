@@ -8,7 +8,7 @@
                 @endif
 
                 @if ($request_status->status == 'SET FOR RELEASE')
-                    <h5 class="modal-title" id="title-modal">Set Transaction to Completed</h5>
+                    <h5 class="modal-title" id="title-modal">Set Date for Completed Transaction</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 @endif
             </div>
@@ -26,7 +26,7 @@
                     <form action="{{ route('cic.completeTransaction', ['request_id' => $request_id->request_id]) }}"
                         method="post" id="completeTransaction">
                         @csrf
-                        <p>Complete This Transaction?</p>
+                        <input class="form-control" type="date" required name="completedDate" min="{{date("Y-m-d")}}">
                     </form>
                 @endif
 

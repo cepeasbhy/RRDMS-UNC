@@ -46,8 +46,8 @@ class CicReqRecordManagmentController extends Controller
         return redirect('/cic/request')->with('msgCred', 'Request Has Been Accepted.');
     }
 
-    public function completeRequest(DbHelperController $db, $requestID){
-        $db->completeStudentRequest($requestID);
+    public function completeRequest(DbHelperController $db, Request $request, $requestID){
+        $db->completeStudentRequest($requestID, $request);
         return redirect('/cic/request')->with('msgCred', 'Request Has Been Completed.');
     }
 

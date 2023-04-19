@@ -15,6 +15,7 @@ class Request extends Model
         'course_id',
         'department_id',
         'release_date',
+        'date_completed',
         'status',
         'reason_for_rejection'
     ];

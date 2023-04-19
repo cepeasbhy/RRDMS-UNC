@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('course_id');
             $table->date('release_date')->nullable();
             $table->string('status')->default('IN PROGRESS');
+            $table->date('date_completed')->nullable();
             $table->string('reason_for_rejection')->nullable();
             $table->timestamps();
 

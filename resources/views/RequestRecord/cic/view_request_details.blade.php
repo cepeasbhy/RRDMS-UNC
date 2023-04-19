@@ -54,6 +54,12 @@
                                 >{{trim($requestInfo->reason_for_rejection)}}</textarea>
                             </div>
                         @endif
+                        @if ($requestInfo->date_completed != null)
+                            <div class="form-group mb-1">
+                                <label>Date Completed</label>
+                                <input class="form-control form-control-sm" type="text" value="{{$requestInfo->date_completed}}" readonly>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-4">

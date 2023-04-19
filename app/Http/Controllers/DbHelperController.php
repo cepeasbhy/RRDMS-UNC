@@ -793,9 +793,10 @@ class DbHelperController extends Controller
         $this->createLog($description);
     }
 
-    public function completeStudentRequest($requestID){
+    public function completeStudentRequest($requestID, Request $request){
         ModelsRequest::where('request_id', $requestID)->update([
             'status' => 'COMPLETED',
+            'date_completed' => $request->input('completedDate')
         ]);
 
         $description = "Completed student's request with a request ID of ".$requestID;
