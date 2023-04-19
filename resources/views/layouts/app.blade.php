@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
+    <script src="{{ asset('/js/tabs.js') }}" defer></script>
     @yield('css-link')
     <title>RRDM-UNC</title>
 </head>

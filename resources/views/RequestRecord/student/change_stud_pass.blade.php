@@ -89,7 +89,7 @@
                     </div>
 
                     <div class="form-button-container">
-                        <button type="submit" class="form-button">
+                        <button type="submit" class="login form-button">
                             {{ __('Finish Account Setup') }}
                         </button>
                     </div>
