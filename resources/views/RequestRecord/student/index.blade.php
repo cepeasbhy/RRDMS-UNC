@@ -7,7 +7,7 @@
 
 @section('content')
     <section class="view-container">
-        <div class="grid-container">
+        <div class="mix-container">
             <div class="head-container">
                 <h4>
                     Request History

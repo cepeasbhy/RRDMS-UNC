@@ -22,7 +22,7 @@
         <section>
             @yield('content')
         </section>
-        <section id="request-container">
+        <section class="main-container">
             @yield('request-content')
         </section>
     </main>
