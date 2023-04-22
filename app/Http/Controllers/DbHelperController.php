@@ -11,9 +11,11 @@ use App\Models\RequestedDocument;
 use App\Models\Staff;
 use App\Models\User;
 use App\Http\Controllers\CredentialController;
+use App\Http\Controllers\mailController;
 use App\Models\Department;
 use App\Models\RecordPrice;
 use App\Models\log;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class DbHelperController extends Controller
@@ -232,6 +234,7 @@ class DbHelperController extends Controller
     }
 
     public function insertStudent(Request $request){
+
         $request -> validate([
             'student_id' => ['required', 'string', 'unique:students'],
             'first_name' => ['required', 'string', 'max:255'],
@@ -261,6 +264,22 @@ class DbHelperController extends Controller
 
         $credController = new CredentialController;
         $credController->uploadStudentCredentials($request);
+        
+        $subject = 'RRDMS ACCOUNT CREDENTIAL';
+        $body = '
+            Greetings!
+            <br>
+            <br>
+            Welcome to Registrar Records and Document Management System. 
+            You are now able to request records online! Here are your credentials in 
+            logging into the system:
+        '.'<br> <br> USERNAME: '.$request->input('student_id').'
+        <br> DEFAULT PASSWORD: welcometounc'.'
+        <br> <br> You will be redirected first in setting up your account. Please fill out all of the 
+        requested information and change your default password';
+
+        $mail = new mailController($request->input('email'), $subject, $body, false, '');
+        $mail->sendEmail();
 
         $description = "Added new student to the database with a student ID of ".$request->input('student_id');
         $this->createLog($description);
@@ -485,6 +504,33 @@ class DbHelperController extends Controller
             'copy_of_grades' =>$copyGrades,
             'total_fee' => ($certFees + $copyOfGradeFees + $torFees + $diplomaFees + $authentication['authFees'] + $photocopy['photoCopyFees'])
         ]);
+
+        $requestInfo = ModelsRequest::where('request_id', $requestID)->firstOrFail();
+        $studentInfo = User::where('user_id', $requestInfo->student_id)->firstOrFail();
+        $studentRequest = $this->getRequesteeInfo($requestID);
+        $student = $this->getStudentInfo($requestInfo->student_id);
+
+        $pdf = Pdf::loadView('RequestRecord/Student/pdf/sections_pdf',[
+            'student' => $student['studentInfo'],
+            'credentials' => $student['credentials'],
+            'requestedDocumentDetails' => $studentRequest['requestedDocumentDetails'],
+            'requestInfo' => $studentRequest['requestInfo']
+        ])->setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+
+        $studentInfo = User::where('user_id', $studentID)->firstOrFail();
+        $subject = 'REQUEST FOR RECORD SUCCESSFULLY RECEIVED';
+        $body = '
+        Greetings!
+        <br>
+        <br>
+        We have successfully received your request for records. Please take note of the
+        request ID <b>'.$requestID.'</b> as this will be used for tracking your request. 
+        Another email will be sent later on with regards to the status of your request. 
+        <br><br> If you have any clarifications or concerns with your request, please don\'t 
+        hesitate to contact us. <br><br> Attached below is the PDF version of your request';
+
+        $mail = new mailController($studentInfo->email, $subject, $body, true, $pdf);
+        $mail->sendEmail();
 
     }
 
@@ -779,6 +825,23 @@ class DbHelperController extends Controller
             'reason_for_rejection' => $denialReason
         ]);
 
+        $requestInfo = ModelsRequest::where('request_id', $requestID)->firstOrFail();
+        $studentInfo = User::where('user_id', $requestInfo->student_id)->firstOrFail();
+
+        $subject = 'REQUEST FOR RECORDS HAS BEEN REJECTED';
+        $body = '
+        Greetings!
+        <br>
+        <br>
+        We regret to inform you that we are unable to proceed in fulfilling your request 
+        <b>'.$requestID.'</b> due to the following reason(s) <b>'.$denialReason.'</b>
+        <br> You may submit another request for your records and have the necessary 
+        steps in complying the requirements for your requested record. <br> If you have
+        any clarifications or concerns, please don\'t hesitate in contacting us';
+
+        $mail = new mailController($studentInfo->email, $subject, $body, false, '');
+        $mail->sendEmail();
+
         $description = "Rejected student request with a request ID of ".$requestID;
         $this->createLog($description);
     }
@@ -788,6 +851,22 @@ class DbHelperController extends Controller
             'status' => 'SET FOR RELEASE',
             'release_date' => $releaseDate
         ]);
+
+        $subject = 'REQUESTED RECORD IS SET FOR RELEASING';
+        $body = '
+        Greetings!
+        <br>
+        <br>
+        This is to inform you that your request <b>'.$requestID.'</b> have been processed 
+        and is set to be released on <b> '.$releaseDate.'</b> at our office. 
+        <br> If you have any clarifications or concerns with your request please don\'t hesitate 
+        to contact us';
+
+        $requestInfo = ModelsRequest::where('request_id', $requestID)->firstOrFail();
+        $studentInfo = User::where('user_id', $requestInfo->student_id)->firstOrFail();
+        
+        $mail = new mailController($studentInfo->email, $subject, $body, false, '');
+        $mail->sendEmail();
 
         $description = "Sets released date for request with a request ID of ".$requestID;
         $this->createLog($description);
