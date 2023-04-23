@@ -2,12 +2,12 @@
 
 @section('diploma')
     <div class="float-item">
-        <span style="font-size: 15px; font-weight:bold">DIPLOMA</span>
+        <span style="font-size: 20px; font-weight:bold">DIPLOMA</span>
         <table>
             <thead>
                 <tr>
-                    <td style="font-size: 13px; font-weight:bold">Description</td>
-                    <td style="font-size: 13px; font-weight:bold">Price</td>
+                    <td style="font-size: 17px; font-weight:bold">Description</td>
+                    <td style="font-size: 17px; font-weight:bold">Price</td>
                 </tr>
             </thead>
             <tbody>
@@ -16,21 +16,21 @@
                         <tr>
                             @if($diploma['description'] != "TOTAL PRICE")
                                 <td>
-                                    <span style="font-size: 13px; font-weight:bold">{{$diploma['description']}}</span>
+                                    <span style="font-size: 17px;">{{$diploma['description']}}</span>
                                 </td>
                             @else
                                 <td>
-                                    <span style="font-size: 13px; font-weight:bold">{{$diploma['description']}}</span>
+                                    <span style="font-size: 17px; font-weight:bold">{{$diploma['description']}}</span>
                                 </td>
                             @endif
 
                             @if($diploma['description'] != "TOTAL PRICE")
                                 <td>
-                                    <span style="font-size: 13px">P{{number_format($diploma['price'], 2)}}</span>
+                                    <span style="font-size: 17px">P{{number_format($diploma['price'], 2)}}</span>
                                 </td>
                             @else
                                 <td>
-                                    <span style="font-size: 13px; font-weight:bold">P{{number_format($diploma['price'], 2)}}</span>
+                                    <span style="font-size: 17px; font-weight:bold">P{{number_format($diploma['price'], 2)}}</span>
                                 </td>
                             @endif
                         </tr>
@@ -44,12 +44,12 @@
 
 @section('certificate')
     <div class="float-item">
-        <span style="font-size: 15px; font-weight:bold">CERTIFICATES</span>
+        <span style="font-size: 20px; font-weight:bold">CERTIFICATES</span>
         <table>
             <thead>
                 <tr>
-                    <td style="font-size: 13px; font-weight:bold">Description</td>
-                    <td style="font-size: 13px; font-weight:bold">Copies</td>
+                    <td style="font-size: 17px; font-weight:bold">Description</td>
+                    <td style="font-size: 17px; font-weight:bold">Copies</td>
                 </tr>
             </thead>
             <tbody>
@@ -59,21 +59,21 @@
                             <tr>
                                 @if ($description == "TOTAL PRICE")
                                     <td>
-                                        <span style="font-size: 13px; font-weight:bold">{{$description}}</span>
+                                        <span style="font-size: 17px; font-weight:bold">{{$description}}</span>
                                     </td>
                                 @else
                                     <td>
-                                        <span style="font-size: 13px">{{$description}}</span>
+                                        <span style="font-size: 17px">{{$description}}</span>
                                     </td>
                                 @endif
                                 
                                 @if ($description == "TOTAL PRICE")
                                     <td>    
-                                        <span style="font-size: 13px; font-weight:bold">P{{number_format($value, 2)}}</span>
+                                        <span style="font-size: 17px; font-weight:bold">P{{number_format($value, 2)}}</span>
                                     </td>
                                 @else
                                     <td>
-                                        <span style="font-size: 13px">{{$value}}</span>
+                                        <span style="font-size: 17px">{{$value}}</span>
                                     </td>
                                 @endif
                             </tr>
@@ -87,12 +87,12 @@
 
 @section('authentication')
     <div class="float-item">
-        <span style="font-size: 15px; font-weight:bold">AUTHENTICATION</span>
+        <span style="font-size: 20px; font-weight:bold">AUTHENTICATION</span>
         <table>
             <thead>
                 <tr>
-                    <td style="font-size: 13px; font-weight:bold">Description</td>
-                    <td style="font-size: 13px; font-weight:bold">Price</td>
+                    <td style="font-size: 17px; font-weight:bold">Description</td>
+                    <td style="font-size: 17px; font-weight:bold">Price</td>
                 </tr>
             </thead>
             <tbody>
@@ -101,21 +101,21 @@
                         <tr>
                             @if($auth['description'] == "TOTAL PRICE")
                                 <td>
-                                    <span style="font-size: 13px; font-weight:bold">{{$auth['description']}}</span>
+                                    <span style="font-size: 17px; font-weight:bold">{{$auth['description']}}</span>
                                 </td>
                             @else
                                 <td>
-                                    <span style="font-size: 13px">{{$auth['description']}}</span>
+                                    <span style="font-size: 17px">{{$auth['description']}}</span>
                                 </td>   
                             @endif
 
                             @if($auth['description'] == "TOTAL PRICE")
                                 <td>
-                                    <span style="font-size: 13px; font-weight:bold">P{{number_format($auth['price'], 2)}}</span>
+                                    <span style="font-size: 17px; font-weight:bold">P{{number_format($auth['price'], 2)}}</span>
                                 </td>
                             @else
                                 <td>
-                                    <span style="font-size: 13px">P{{number_format($auth['price'], 2)}}</span>
+                                    <span style="font-size: 17px">P{{number_format($auth['price'], 2)}}</span>
                                 </td>
                             @endif
                         </tr>
@@ -129,12 +129,12 @@
 
 @section('photocopy')
     <div class="float-item">
-        <span style="font-size: 15px; font-weight:bold">PHOTOCOPY</span>
+        <span style="font-size: 20px; font-weight:bold">PHOTOCOPY</span>
         <table>
             <thead>
                 <tr>
-                    <td style="font-size: 13px; font-weight:bold">Description</td>
-                    <td style="font-size: 13px; font-weight:bold">Price</td>
+                    <td style="font-size: 17px; font-weight:bold">Description</td>
+                    <td style="font-size: 17px; font-weight:bold">Price</td>
                 </tr>
             </thead>
             <tbody>
@@ -143,27 +143,27 @@
                         <tr>
                             @if($photoCopy['description'] == "TOTAL PRICE")
                                 <td>
-                                    <span style="font-size: 13px; font-weight:bold">{{$photoCopy['description']}}</span>
+                                    <span style="font-size: 17px; font-weight:bold">{{$photoCopy['description']}}</span>
                                 </td>
                             @else
                                 <td>
-                                    <span style="font-size: 13px">{{$photoCopy['description']}}</span>
+                                    <span style="font-size: 17px">{{$photoCopy['description']}}</span>
                                 </td>
                             @endif
 
                             @if($photoCopy['description'] != 'Photocopy Type')
                                 @if($photoCopy['description'] == "TOTAL PRICE")
                                     <td>
-                                        <span style="font-size: 13px; font-weight:bold">P{{number_format($photoCopy['value'],2)}}</span>
+                                        <span style="font-size: 17px; font-weight:bold">P{{number_format($photoCopy['value'],2)}}</span>
                                     </td>
                                 @else
                                     <td>
-                                        <span style="font-size: 13px">P{{number_format($photoCopy['value'],2)}}</span>
+                                        <span style="font-size: 17px">P{{number_format($photoCopy['value'],2)}}</span>
                                     </td>
                                 @endif
                             @else
                                 <td>
-                                    <span style="font-size: 13px">{{strtoupper($photoCopy['value'])}}</span>
+                                    <span style="font-size: 17px">{{strtoupper($photoCopy['value'])}}</span>
                                 </td>
                             @endif
                         </tr>
@@ -176,44 +176,44 @@
 
 @section('tor')
     <div class="float-item">
-        <span style="font-size: 15px; font-weight:bold">TRANSCRIPT OF RECORD</span>
+        <span style="font-size: 20px; font-weight:bold">TRANSCRIPT OF RECORD</span>
         <table>
             <tbody>
                 @if($requestedDocumentDetails->transcript_of_record != null)
                     <tr>
                         <td>
-                            <span style="font-size: 13px">No. of Copies:</span>
+                            <span style="font-size: 17px">No. of Copies:</span>
                         </td>
                         <td>
-                            <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['copies']}}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span style="font-size: 13px">Purpose:</span>
-                        </td>
-                        <td>
-                            <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
+                            <span style="font-size: 17px">{{$requestedDocumentDetails->transcript_of_record['copies']}}</span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span style="font-size: 13px">Other Purpose:</span>
+                            <span style="font-size: 17px">Purpose:</span>
+                        </td>
+                        <td>
+                            <span style="font-size: 17px">{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span style="font-size: 17px">Other Purpose:</span>
                         </td>
                         <td>
                             @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
-                                <span style="font-size: 13px">NOT STATED</span>
+                                <span style="font-size: 17px">NOT STATED</span>
                             @else
-                                <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['other_purpose']}}</span>
+                                <span style="font-size: 17px">{{$requestedDocumentDetails->transcript_of_record['other_purpose']}}</span>
                             @endif
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span style="font-size: 13px; font-weight:bold">TOTAL PRICE:</span>
+                            <span style="font-size: 17px; font-weight:bold">TOTAL PRICE:</span>
                         </td>
                         <td>
-                            <span style="font-size: 13px; font-weight:bold">P{{number_format($requestedDocumentDetails->transcript_of_record[0]['price'], 2)}}</span>
+                            <span style="font-size: 17px; font-weight:bold">P{{number_format($requestedDocumentDetails->transcript_of_record[0]['price'], 2)}}</span>
                         </td>
                     </tr>
                 @endif
@@ -224,49 +224,49 @@
 
 @section('copy-grades')
     <div class="float-item">
-        <span style="font-size: 15px; font-weight:bold">COPY OF GRADES</span>
+        <span style="font-size: 20px; font-weight:bold">COPY OF GRADES</span>
         <table>
             <tbody>
                 @if($requestedDocumentDetails->copy_of_grades != null)
                     <tr>
                         <td>
-                            <span style="font-size: 13px">No. of Copies:</span>
+                            <span style="font-size: 17px">No. of Copies:</span>
                         </td>
                         <td>
-                            <span style="font-size: 13px">{{$requestedDocumentDetails->copy_of_grades['copies']}}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span style="font-size: 13px">School Year:</span>
-                        </td>
-                        <td>
-                            <span style="font-size: 13px">{{$requestedDocumentDetails->copy_of_grades['schoolYear']}}</span>
+                            <span style="font-size: 17px">{{$requestedDocumentDetails->copy_of_grades['copies']}}</span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span style="font-size: 13px">Semester:</span>
+                            <span style="font-size: 17px">School Year:</span>
+                        </td>
+                        <td>
+                            <span style="font-size: 17px">{{$requestedDocumentDetails->copy_of_grades['schoolYear']}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span style="font-size: 17px">Semester:</span>
                         </td>
                         <td>
                             @switch($requestedDocumentDetails->copy_of_grades['semester'])
                                 @case(1)
-                                    <span style="font-size: 13px">1st Semester</span>
+                                    <span style="font-size: 17px">1st Semester</span>
                                     @break
                                 @case(2)
-                                    <span style="font-size: 13px">2nd Semester</span>
+                                    <span style="font-size: 17px">2nd Semester</span>
                                     @break
                                 @default
-                                    <span style="font-size: 13px">Summer Semester</span>
+                                    <span style="font-size: 17px">Summer Semester</span>
                             @endswitch
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span style="font-size: 13px; font-weight:bold">TOTAL PRICE:</span>
+                            <span style="font-size: 17px; font-weight:bold">TOTAL PRICE:</span>
                         </td>
                         <td>
-                            <span style="font-size: 13px; font-weight:bold">P{{number_format($requestedDocumentDetails->copy_of_grades[0]['price'],2)}}</span>
+                            <span style="font-size: 17px; font-weight:bold">P{{number_format($requestedDocumentDetails->copy_of_grades[0]['price'],2)}}</span>
                         </td>
                     </tr>
                 @endif

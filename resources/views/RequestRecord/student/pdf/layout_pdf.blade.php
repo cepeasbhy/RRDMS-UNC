@@ -5,7 +5,7 @@
     }
 
     .container{
-        width: 60%;
+        width: 90%;
         margin: auto;
     }
 
@@ -17,8 +17,7 @@
     }
 
     .student-info{
-        display: flex;
-        justify-content: center;
+        width: 80%;
     }
 
     .data-value{
@@ -58,12 +57,12 @@
 
 <div class="container">
     <div class="header">
-        <h6>UNIVERSITY OF NUEVA CACERES</h6>
-        <h6>OFFICE OF THE REGISTRAR</h6>
-        <h6>CITY OF NAGA</h6>
-        <h6>Tel. Nos. (054) 473-78-44 / 472-61-00 local 168</h6>
-        <h6>registrar@unc.edu.ph</h6>
-        <h6>REQUEST FOR SCHOOL RECORDS</h6>
+        <h5>UNIVERSITY OF NUEVA CACERES</h5>
+        <h5>OFFICE OF THE REGISTRAR</h5>
+        <h5>CITY OF NAGA</h5>
+        <h5>Tel. Nos. (054) 473-78-44 / 472-61-00 local 168</h5>
+        <h5>registrar@unc.edu.ph</h5>
+        <h5>REQUEST FOR SCHOOL RECORDS</h5>
     </div>
     <div class="student-info">
         <table>
@@ -154,7 +153,7 @@
             @endif
         </div>
         <div class="ms-3">
-            <span style="font-size: 20px; font-weight:bold">Total Fee: P{{ number_format($requestedDocumentDetails->total_fee, 2)}}</span>
+            <span style="font-size: 30px; font-weight:bold">Total Fee: P{{ number_format($requestedDocumentDetails->total_fee, 2)}}</span>
         </div>
 
         <div style="margin-top: 20px">
