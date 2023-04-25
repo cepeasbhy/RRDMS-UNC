@@ -65,7 +65,7 @@ input[type=number] {
 }
 
 .form-content {
-    min-width: 80%;
+    max-width: 80%;
     padding: 1rem;
 }
 
@@ -96,7 +96,7 @@ input[type=number] {
 
 .login{
     --bg-color: var(--bg-color-red-sub);
-    --min-width: 20em;
+    --min-width: 50%;
 }
 
 .unc-logo {
@@ -400,11 +400,6 @@ input[type=number] {
     .view {
         --bg-color: var(--bg-color-green-sub);
         --min-width: 4em;
-    }
-
-    .login {
-        --bg-color: var(--bg-color-red-sub);
-        --min-width: 20em;
     }
 }
 
