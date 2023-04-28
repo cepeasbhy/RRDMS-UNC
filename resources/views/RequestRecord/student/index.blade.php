@@ -8,7 +8,7 @@
 @section('content')
     <section class="view-container">
         <div class="mix-container">
-            <div class="head-container">
+            <div class="head-container request-head">
                 <h4>
                     Request History
                 </h4>
