@@ -27,27 +27,27 @@
             <ul id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pending-requests" data-tab-target="#pending-request"
-                        data-bs-target="#pending-request" type="button" role="tab" aria-controls="pending-request"
-                        aria-selected="true">Pending
+                        data-bs-target="#pending-request" type="button" role="tab"
+                        aria-controls="pending-request">Pending
                         Requests</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="for-release" data-tab-target="#set-for-release"
-                        data-bs-target="#set-for-release" type="button" role="tab" aria-controls="set-for-release"
-                        aria-selected="false">Set For Release
+                        data-bs-target="#set-for-release" type="button" role="tab" aria-controls="set-for-release">Set
+                        For Release
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="denied-requests" data-tab-target="#rejected-requests"
-                        data-bs-target="#rejected-requests" type="button" role="tab" aria-controls="rejected-requests"
-                        aria-selected="false">Denied
+                        data-bs-target="#rejected-requests" type="button" role="tab"
+                        aria-controls="rejected-requests">Denied
                         Requests
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="completed-requests" data-tab-target="#accepted-requests"
-                        data-bs-target="#accepted-requests" type="button" role="tab" aria-controls="accepted-requests"
-                        aria-selected="false">Completed
+                        data-bs-target="#accepted-requests" type="button" role="tab"
+                        aria-controls="accepted-requests">Completed
                         Requests</button>
                 </li>
             </ul>
@@ -97,12 +97,12 @@
 
             <div class="tab-container__contents" id="set-for-release" role="tabpanel" aria-labelledby="for-release"
                 data-tab-content>
-                <table class="table forReleaseTable">
+                <table class="forReleaseTable">
                     <thead>
                         <th class="table-header">Request ID</th>
                         <th class="table-header">Student ID</th>
-                        <th class="table-header">First Name</th>
-                        <th class="table-header">Last Name</th>
+                        <th class="table-header">Name</th>
+                        {{-- <th class="table-header">Last Name</th> --}}
                         <th class="table-header">Release Date</th>
                         <th class="table-header">Course</th>
                         <th class="table-header">Status</th>
@@ -114,13 +114,15 @@
                                 <tr>
                                     <td data-label="Request Id">{{ $documentDetails->request_id }}</td>
                                     <td data-label="Student Id">{{ $documentDetails->student_id }}</td>
-                                    <td data-label="First Name">{{ $documentDetails->first_name }}</td>
-                                    <td data-label="Last Name">{{ $documentDetails->last_name }}</td>
+                                    <td data-label="First Name">{{ $documentDetails->first_name }}
+                                        {{ $documentDetails->last_name }}</td>
+                                    {{-- <td data-label="Last Name">{{ $documentDetails->last_name }}</td> --}}
                                     <td data-label="Release Date">{{ $documentDetails->release_date }}</td>
                                     <td data-label="Course">{{ $documentDetails->course_name }}</td>
                                     <td data-label="Status">
                                         @if ($documentDetails->status == 'SET FOR RELEASE')
-                                            <span class="badge bg-info text-dark">-SET FOR RELEASE-</span>
+                                            <span class="badge bg-info text-dark">-SET FOR
+                                                RELEASE-</span>
                                         @endif
                                     </td>
                                     <td data-label="Action">
@@ -128,7 +130,7 @@
                                             action="{{ route('stud.viewRequest', ['request_id' => $documentDetails->request_id]) }}"
                                             method="post">
                                             @csrf
-                                            <button class="btn btn-sm btn-success">VIEW</button>
+                                            <button class="view form-button">VIEW</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -138,14 +140,14 @@
                 </table>
             </div>
 
-            <div class="tab-container__contents" id="rejected-requests" role="tabpanel"
-                aria-labelledby="denied-requests" data-tab-content>
-                <table class="table deniedRequestTable">
+            <div class="tab-container__contents" id="rejected-requests" role="tabpanel" aria-labelledby="denied-requests"
+                data-tab-content>
+                <table class="deniedRequestTable">
                     <thead>
                         <th class="table-header">Request ID</th>
                         <th class="table-header">Student ID</th>
-                        <th class="table-header">First Name</th>
-                        <th class="table-header">Last Name</th>
+                        <th class="table-header">Name</th>
+                        {{-- <th class="table-header">Last Name</th> --}}
                         <th class="table-header">Release Date</th>
                         <th class="table-header">Course</th>
                         <th class="table-header">Status</th>
@@ -157,8 +159,9 @@
                                 <tr>
                                     <td data-label="Request Id">{{ $documentDetails->request_id }}</td>
                                     <td data-label="Student Id">{{ $documentDetails->student_id }}</td>
-                                    <td data-label="First Name">{{ $documentDetails->first_name }}</td>
-                                    <td data-label="Last Name">{{ $documentDetails->last_name }}</td>
+                                    <td data-label="First Name">{{ $documentDetails->first_name }}
+                                        {{ $documentDetails->last_name }}</td>
+                                    {{-- <td data-label="Last Name">{{ $documentDetails->last_name }}</td> --}}
                                     <td data-label="Release Date">{{ $documentDetails->release_date }}</td>
                                     <td data-label="Course">{{ $documentDetails->course_name }}</td>
                                     <td data-label="Status">
@@ -171,7 +174,7 @@
                                             action="{{ route('stud.viewRequest', ['request_id' => $documentDetails->request_id]) }}"
                                             method="post">
                                             @csrf
-                                            <button class="btn btn-sm btn-success">VIEW</button>
+                                            <button class="view form-button">VIEW</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -183,12 +186,12 @@
 
             <div class="tab-container__contents" id="accepted-requests" role="tabpanel"
                 aria-labelledby="completed-requests" data-tab-content>
-                <table class="table completedRequestTable">
+                <table class="completedRequestTable">
                     <thead>
                         <th class="table-header">Request ID</th>
                         <th class="table-header">Student ID</th>
-                        <th class="table-header">First Name</th>
-                        <th class="table-header">Last Name</th>
+                        <th class="table-header">Name</th>
+                        {{-- <th class="table-header">Last Name</th> --}}
                         <th class="table-header">Release Date</th>
                         <th class="table-header">Course</th>
                         <th class="table-header">Status</th>
@@ -200,8 +203,9 @@
                                 <tr>
                                     <td data-label="Request Id">{{ $documentDetails->request_id }}</td>
                                     <td data-label="Student Id">{{ $documentDetails->student_id }}</td>
-                                    <td data-label="First Name">{{ $documentDetails->first_name }}</td>
-                                    <td data-label="Last Name">{{ $documentDetails->last_name }}</td>
+                                    <td data-label="First Name">{{ $documentDetails->first_name }}
+                                        {{ $documentDetails->last_name }}</td>
+                                    {{-- <td data-label="Last Name">{{ $documentDetails->last_name }}</td> --}}
                                     <td data-label="Release Date">{{ $documentDetails->release_date }}</td>
                                     <td data-label="Course">{{ $documentDetails->course_name }}</td>
                                     <td data-label="Status">
@@ -214,7 +218,7 @@
                                             action="{{ route('stud.viewRequest', ['request_id' => $documentDetails->request_id]) }}"
                                             method="post">
                                             @csrf
-                                            <button class="btn btn-sm btn-success">VIEW</button>
+                                            <button class="view form-button">VIEW</button>
                                         </form>
                                     </td>
                                 </tr>
