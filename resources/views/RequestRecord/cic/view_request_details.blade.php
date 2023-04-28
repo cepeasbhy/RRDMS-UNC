@@ -108,6 +108,7 @@
                                     </p>
                                 </div>
                             </div>
+                            <br>
                         @endif
 
                         @if ($requestedDocumentDetails->certificate != null)
@@ -144,8 +145,8 @@
                                         @endforeach
                                     @endforeach
                                 </div>
-
                             </div>
+                            <br>
                         @endif
 
                         @if ($requestedDocumentDetails->copy_of_grades != null)
@@ -184,6 +185,7 @@
                                         ₱{{ number_format($requestedDocumentDetails->copy_of_grades[0]['price'], 2) }}</p>
                                 </div>
                             </div>
+                            <br>
                         @endif
 
                         @if ($requestedDocumentDetails->authentication != null)
@@ -219,6 +221,7 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <br>
                         @endif
 
                         @if ($requestedDocumentDetails->photocopy != null)
@@ -257,6 +260,7 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <br>
                         @endif
                     </section>
 
