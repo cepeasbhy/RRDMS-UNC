@@ -150,6 +150,11 @@ input[type=number] {
     gap: 1rem;
 }
 
+.grid-container{
+    display: grid;
+    gap: 1rem;
+}
+
 .mix-container {
     display: flex;
     flex-direction: row;
@@ -266,8 +271,16 @@ input[type=number] {
     justify-content: space-between;
 }
 
+.request-image-val{
+    --max-width: 35%
+}
+
+.view-request-val{
+    --max-width: 55%
+}
+
 .profile-image {
-    max-width: 35%;
+    max-width: var(--max-width);
     clip-path: circle();
     object-fit: contain;
 }
@@ -342,13 +355,69 @@ input[type=number] {
 }
 
 .cells {
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    grid-template-columns: repeat(1, 1fr);
     place-items: start;
+}
+
+.back.view.form-button{
+    padding-inline: 0.5rem;
+}
+
+.flex-container.photocopy-prices.req-docs{
+    max-width: 90%;
+    margin-left: 2rem;
+}
+
+.grid-container.wide-gap{
+    gap: 5rem;
+    width: clamp(30%, 80%, 100%);
+}
+
+.flex-container.inner.req-details{
+    border: 2px solid maroon;
+}
+
+.grid-container.grid-orientation{
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.print{
+    color: var(--text-color-white-sub);
+        border: none;
+        text-decoration: none;
+    padding-inline: 1rem;
+    padding-block: 0.28rem;
+    background-color: var(--bg-color-green-sub);
+    border-radius: 0.25rem;
+}
+
+.print:hover, .cancel:hover{
+    opacity: 0.9;
+    color: var(--text-color-gray-sub);
+}
+
+.view-buttons{
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+
+.cancel{
+    max-width: 100%;
+    background-color: var(--bg-color-red-sub);
+    color: var(--text-color-white-sub);
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.15rem;
+    padding-inline: 1rem;
 }
 
 @media (max-width: 63em) {
     .inner-cell{
         justify-self: center;
+    }
+
+    .grid-container.grid-orientation {
+        grid-template-columns: repeat(auto-fill, minmax(60%, 1fr));
     }
 }
 
@@ -401,6 +470,12 @@ input[type=number] {
         --bg-color: var(--bg-color-green-sub);
         --min-width: 4em;
     }
+
+    .pic-direction{
+        flex-direction: column;
+        gap: 1rem;
+    }
+
 }
 
 
@@ -437,11 +512,6 @@ input[type=number] {
         border: none;
         border-radius: 0.25rem;
         padding: 0.15rem;
-    }
-
-    .form-button-container {
-        padding: 0.75rem;
-        text-align: center;
     }
 
     /*Had to use grid here*/
@@ -554,6 +624,11 @@ input[type=number] {
 
     .wide-screen-grid{
         place-self: start;
+    }
+
+    .cells {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        place-items: center;
     }
 
 
