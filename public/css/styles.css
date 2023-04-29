@@ -435,7 +435,7 @@ input[type=number] {
 }
 
 .cred-card{
-    max-width: 40%;
+    max-width: 30%;
     border: 1px solid #ddd;
     gap: 0;
     border-radius: 5px;
@@ -457,6 +457,7 @@ input[type=number] {
 .student-information {
     gap: 3rem;
 }
+
 
 @media (max-width: 63em) {
     .inner-cell{
@@ -701,7 +702,7 @@ input[type=number] {
 
     .student-information{
         width: 100%;
-        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 3rem;
     }
 
