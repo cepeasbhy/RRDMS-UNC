@@ -135,26 +135,26 @@
                                         <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['copies']}}</span>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-5">
-                                        <span style="font-size: 13px">Purpose:</span>
+                                @if($requestedDocumentDetails->transcript_of_record['purpose'] != null)
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <span style="font-size: 13px">Purpose:</span>
+                                        </div>
+                                        <div class="col">
+                                            <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5">
-                                        <span style="font-size: 13px">Other Purpose:</span>
-                                    </div>
-                                    <div class="col">
-                                        @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
-                                            <span style="font-size: 13px">NOT STATED</span>
-                                        @else
+                                @endif
+                                @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] != null)
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <span style="font-size: 13px">Other Purpose:</span>
+                                        </div>
+                                        <div class="col">
                                             <span style="font-size: 13px">{{$requestedDocumentDetails->transcript_of_record['other_purpose']}}</span>
-                                        @endif
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                                 <div class="row">
                                     <div class="col-5">
                                         <span class="fw-bold" style="font-size: 13px">TOTAL PRICE:</span>
@@ -241,7 +241,7 @@
                                             <span style="font-size: 13px">2nd Semester</span>
                                             @break
                                         @default
-                                            <span style="font-size: 13px">Summer Semester</span>
+                                            <span style="font-size: 13px">Summer</span>
                                     @endswitch
                                 </div>
                             </div>
@@ -365,8 +365,7 @@
             <a class="btn btn-success btn-sm" href="{{route('stud.pdfRequest', ['requestID' => $requestInfo->request_id])}}">PRINT REQUEST</a>
         @endif
     </div>
-
-    <script src="{{ asset('js/main.js') }}"></script>
+    
     <!--Modal for Rejecting Request-->
     @extends('layouts.modals.delete_student_request', ['routeName' => 'cic.rejectRequest', 'request_id' => $requestedDocumentDetails, 'request_status' => $requestInfo])
     <!--Modal for Accepting Request-->

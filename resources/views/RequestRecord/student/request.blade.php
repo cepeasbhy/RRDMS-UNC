@@ -24,6 +24,7 @@
             <div class="border-start border-danger border-4 mb-3">
                 <h4 class="ms-1 my-auto">REQUEST RECORDS</h4>
             </div>
+            <span class="badge bg-danger mb-2" style="width: 35%">{{ session('msgCred') }}</span>
             <form action="{{ route('stud.submitRequest') }}" method="post">
                 @csrf
                 <div class="row">
@@ -82,19 +83,19 @@
                         </div>
                         <div class="col">
                             <div class="form-group mb-1">
-                                <input class="form-check-input" type="checkbox" name="reqTOR" value="true"
+                                <input id="torReq" class="form-check-input" type="checkbox" name="reqTOR" value="true"
                                     onchange="enableButton()">
                                 <label>Request for Transcript of Record</label>
                             </div>
                             <div class="form-group mb-2">
                                 <label>Number of Copies</label>
-                                <input name="tor[copies]"class="form-control form-control-sm" type="number" min="1">
+                                <input id="torCopies" name="tor[copies]"class="form-control form-control-sm" type="number" min="1">
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Purpose</label>
-                                        <select class="form-select form-select-sm" name="tor[purpose]" id="">
+                                        <select id="selectPurpose" class="form-select form-select-sm" name="tor[purpose]" id="">
                                             <option value="">Choose</option>
                                             <option value="Records and References">Records and References</option>
                                             <option value="Board Examination">Board Examination</option>
@@ -106,7 +107,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Others, pls. specify</label>
-                                        <input name="tor[other_purpose]" class="form-control form-control-sm"
+                                        <input id="inputPurpose" name="tor[other_purpose]" class="form-control form-control-sm"
                                             type="text">
                                     </div>
                                 </div>
@@ -123,19 +124,19 @@
                         </div>
                         <div class="col">
                             <div class="form-group mb-1">
-                                <input class="form-check-input" type="checkbox" name="reqCopyGrade" value="true"
+                                <input id="reqCopyGrade" class="form-check-input" type="checkbox" name="reqCopyGrade" value="true"
                                     onchange="enableButton()">
                                 <label>Request Copy of Grades</label>
                             </div>
                             <div class="form-group mb-2">
                                 <label>Number of Copies</label>
-                                <input name="copyGrades[copies]" class="form-control form-control-sm" type="number">
+                                <input id="numCopiesGrade" name="copyGrades[copies]" class="form-control form-control-sm" type="number">
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Semester</label>
-                                        <select class="form-select form-select-sm" name="copyGrades[semester]"
+                                        <select id="semester" class="form-select form-select-sm" name="copyGrades[semester]"
                                             id="">
                                             <option value="">Choose</option>
                                             <option value="1">1st Semester</option>
@@ -147,7 +148,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>School Year</label>
-                                        <input name="copyGrades[schoolYear]" class="form-control form-control-sm"
+                                        <input id="schoolYear" name="copyGrades[schoolYear]" class="form-control form-control-sm"
                                             type="text" placeholder="e.g. 2019-2020">
                                     </div>
                                 </div>

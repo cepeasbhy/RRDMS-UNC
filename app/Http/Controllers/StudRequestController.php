@@ -52,6 +52,15 @@ class StudRequestController extends Controller
     }
 
     public function submitRequest(Request $request, DbHelperController $db){
+
+        if( $request->input('certificate') == null &&
+            $request->input('reqCopyGrade') == null &&
+            $request->input('reqTOR') == null &&
+            $request->input('diploma') == null
+        ){
+            return redirect('/request/make_request')->with('msgCred', 'Please ensure you have provided the necessary details.');
+        }
+
         $db->insertRequest($request, Auth::user()->user_id);
         return redirect('/request')->with('msgCred', 'Request Has Been Submitted.');
     }

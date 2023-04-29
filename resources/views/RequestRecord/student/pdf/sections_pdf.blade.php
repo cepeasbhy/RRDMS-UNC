@@ -188,26 +188,26 @@
                             <span style="font-size: 17px">{{$requestedDocumentDetails->transcript_of_record['copies']}}</span>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <span style="font-size: 17px">Purpose:</span>
-                        </td>
-                        <td>
-                            <span style="font-size: 17px">{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span style="font-size: 17px">Other Purpose:</span>
-                        </td>
-                        <td>
-                            @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
-                                <span style="font-size: 17px">NOT STATED</span>
-                            @else
+                    @if($requestedDocumentDetails->transcript_of_record['purpose'] != null)
+                        <tr>
+                            <td>
+                                <span style="font-size: 17px">Purpose:</span>
+                            </td>
+                            <td>
+                                <span style="font-size: 17px">{{$requestedDocumentDetails->transcript_of_record['purpose']}}</span>
+                            </td>
+                        </tr>
+                    @endif
+                    @if($requestedDocumentDetails->transcript_of_record['other_purpose'] != null)
+                        <tr>
+                            <td>
+                                <span style="font-size: 17px">Other Purpose:</span>
+                            </td>
+                            <td>
                                 <span style="font-size: 17px">{{$requestedDocumentDetails->transcript_of_record['other_purpose']}}</span>
-                            @endif
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    @endif
                     <tr>
                         <td>
                             <span style="font-size: 17px; font-weight:bold">TOTAL PRICE:</span>
