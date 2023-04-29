@@ -70,17 +70,17 @@
                         @foreach ($studentRequests as $documentDetails)
                             @if ($documentDetails->release_date == null && $documentDetails->status == 'IN PROGRESS')
                                 <tr>
-                                    <td data-label="Request Id">{{ $documentDetails->request_id }}</td>
-                                    <td data-label="Student Id">{{ $documentDetails->student_id }}</td>
-                                    <td data-label="First Name">{{ $documentDetails->first_name }}</td>
-                                    <td data-label="Last Name">{{ $documentDetails->last_name }}</td>
-                                    <td data-label="Course">{{ $documentDetails->course_name }}</td>
-                                    <td data-label="Status">
+                                    <td data-label="Request Id:">{{ $documentDetails->request_id }}</td>
+                                    <td data-label="Student Id:">{{ $documentDetails->student_id }}</td>
+                                    <td data-label="First Name:">{{ $documentDetails->first_name }}</td>
+                                    <td data-label="Last Name:">{{ $documentDetails->last_name }}</td>
+                                    <td data-label="Course:">{{ $documentDetails->course_name }}</td>
+                                    <td data-label="Status:">
                                         @if ($documentDetails->release_date == null)
                                             <span class="badge bg-secondary">-PENDING-</span>
                                         @endif
                                     </td>
-                                    <td data-label="Action">
+                                    <td data-label="Action:">
                                         <form
                                             action="{{ route('stud.viewRequest', ['request_id' => $documentDetails->request_id]) }}"
                                             method="post">
@@ -112,20 +112,20 @@
                         @foreach ($studentRequests as $documentDetails)
                             @if ($documentDetails->release_date != null && $documentDetails->status == 'SET FOR RELEASE')
                                 <tr>
-                                    <td data-label="Request Id">{{ $documentDetails->request_id }}</td>
-                                    <td data-label="Student Id">{{ $documentDetails->student_id }}</td>
-                                    <td data-label="First Name">{{ $documentDetails->first_name }}
+                                    <td data-label="Request Id:">{{ $documentDetails->request_id }}</td>
+                                    <td data-label="Student Id:">{{ $documentDetails->student_id }}</td>
+                                    <td data-label="Name:">{{ $documentDetails->first_name }}
                                         {{ $documentDetails->last_name }}</td>
                                     {{-- <td data-label="Last Name">{{ $documentDetails->last_name }}</td> --}}
-                                    <td data-label="Release Date">{{ $documentDetails->release_date }}</td>
-                                    <td data-label="Course">{{ $documentDetails->course_name }}</td>
-                                    <td data-label="Status">
+                                    <td data-label="Release Date:">{{ $documentDetails->release_date }}</td>
+                                    <td data-label="Course:">{{ $documentDetails->course_name }}</td>
+                                    <td data-label="Status:">
                                         @if ($documentDetails->status == 'SET FOR RELEASE')
                                             <span class="badge bg-info text-dark">-SET FOR
                                                 RELEASE-</span>
                                         @endif
                                     </td>
-                                    <td data-label="Action">
+                                    <td data-label="Action:">
                                         <form
                                             action="{{ route('stud.viewRequest', ['request_id' => $documentDetails->request_id]) }}"
                                             method="post">
@@ -157,19 +157,19 @@
                         @foreach ($studentRequests as $documentDetails)
                             @if ($documentDetails->release_date == null && $documentDetails->status == 'DENIED')
                                 <tr>
-                                    <td data-label="Request Id">{{ $documentDetails->request_id }}</td>
-                                    <td data-label="Student Id">{{ $documentDetails->student_id }}</td>
-                                    <td data-label="First Name">{{ $documentDetails->first_name }}
+                                    <td data-label="Request Id:">{{ $documentDetails->request_id }}</td>
+                                    <td data-label="Student Id:">{{ $documentDetails->student_id }}</td>
+                                    <td data-label="Name:">{{ $documentDetails->first_name }}
                                         {{ $documentDetails->last_name }}</td>
                                     {{-- <td data-label="Last Name">{{ $documentDetails->last_name }}</td> --}}
-                                    <td data-label="Release Date">{{ $documentDetails->release_date }}</td>
-                                    <td data-label="Course">{{ $documentDetails->course_name }}</td>
-                                    <td data-label="Status">
+                                    <td data-label="Release Date:">{{ $documentDetails->release_date }}</td>
+                                    <td data-label="Course:">{{ $documentDetails->course_name }}</td>
+                                    <td data-label="Status:">
                                         @if ($documentDetails->status == 'DENIED')
                                             <span class="badge bg-danger">-DENIED-</span>
                                         @endif
                                     </td>
-                                    <td data-label="Action">
+                                    <td data-label="Action:">
                                         <form
                                             action="{{ route('stud.viewRequest', ['request_id' => $documentDetails->request_id]) }}"
                                             method="post">
@@ -201,19 +201,19 @@
                         @foreach ($studentRequests as $documentDetails)
                             @if ($documentDetails->release_date != null && $documentDetails->status == 'COMPLETED')
                                 <tr>
-                                    <td data-label="Request Id">{{ $documentDetails->request_id }}</td>
-                                    <td data-label="Student Id">{{ $documentDetails->student_id }}</td>
-                                    <td data-label="First Name">{{ $documentDetails->first_name }}
+                                    <td data-label="Request Id:">{{ $documentDetails->request_id }}</td>
+                                    <td data-label="Student Id:">{{ $documentDetails->student_id }}</td>
+                                    <td data-label="Name:">{{ $documentDetails->first_name }}
                                         {{ $documentDetails->last_name }}</td>
                                     {{-- <td data-label="Last Name">{{ $documentDetails->last_name }}</td> --}}
-                                    <td data-label="Release Date">{{ $documentDetails->release_date }}</td>
-                                    <td data-label="Course">{{ $documentDetails->course_name }}</td>
-                                    <td data-label="Status">
+                                    <td data-label="Release Date:">{{ $documentDetails->release_date }}</td>
+                                    <td data-label="Course:">{{ $documentDetails->course_name }}</td>
+                                    <td data-label="Status:">
                                         @if ($documentDetails->status == 'COMPLETED')
                                             <span class="badge bg-success">-COMPLETED-</span>
                                         @endif
                                     </td>
-                                    <td data-label="Action">
+                                    <td data-label="Action:">
                                         <form
                                             action="{{ route('stud.viewRequest', ['request_id' => $documentDetails->request_id]) }}"
                                             method="post">
