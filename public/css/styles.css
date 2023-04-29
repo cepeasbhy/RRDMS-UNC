@@ -421,6 +421,43 @@ input[type=number] {
     padding-inline: 0.5rem;
 }
 
+.readonly-container{
+    display: block;
+    font-size: 0.875rem;
+}
+
+.readonly-box{
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    color: #212529;
+}
+
+.cred-card{
+    max-width: 40%;
+    border: 1px solid #ddd;
+    gap: 0;
+    border-radius: 5px;
+}
+
+.outer-cred-card{
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.student-info-view{
+    max-width: 80%;
+    border: 2px solid firebrick;
+    grid-auto-flow: row;
+}
+
+.student-information {
+    gap: 3rem;
+}
+
 @media (max-width: 63em) {
     .inner-cell{
         justify-self: center;
@@ -660,6 +697,12 @@ input[type=number] {
     .cic-buttons{
         grid-auto-flow: column;
         place-content: center;
+    }
+
+    .student-information{
+        width: 100%;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        gap: 3rem;
     }
 
 }
