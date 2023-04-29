@@ -416,6 +416,11 @@ input[type=number] {
     gap: 3rem;
 }
 
+.req-from-archives{
+    font-size: 0.85rem;
+    padding-inline: 0.5rem;
+}
+
 @media (max-width: 63em) {
     .inner-cell{
         justify-self: center;
@@ -482,7 +487,6 @@ input[type=number] {
     }
 
 }
-
 
 @media (min-width: 40em){
 
@@ -642,6 +646,27 @@ input[type=number] {
         gap: 5rem;
     }
 
+    .student-lists{
+        grid-auto-flow: column;
+        max-width: 90%;
+        justify-content: space-between;
+    }
+
+    .req-from-archives{
+        font-size: 1rem;
+        padding: 0.25rem 1rem;
+    }
+
+    .cic-buttons{
+        grid-auto-flow: column;
+        place-content: center;
+    }
 
 }
 
+@media(max-width: 45em) {
+    .student-lists {
+        grid-auto-flow: row;
+        text-align: center;
+    }
+}
