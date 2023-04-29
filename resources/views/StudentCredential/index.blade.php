@@ -8,7 +8,7 @@
 @section('content')
     <section class="view-container">
         <div class="grid-container student-lists form-content">
-            <div class="shead">
+            <div class="head-container request-head" style="margin-bottom: 0">
                 <h2>Student Credential Management</h2>
                 <span class="badge bg-success mb-2">{{ session('msg') }}</span>
             </div>
