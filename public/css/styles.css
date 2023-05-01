@@ -96,6 +96,11 @@ input[type=number] {
     --min-width:4em;
 }
 
+.request{
+    --bg-color: var(--bg-color-red-sub);
+    --min-width: 20%;
+}
+
 .view[disabled]{
     --bg-color-green-sub-disabled: hsl(120 55% 21% / 0.5);
     --bg-color:var(--bg-color-green-sub-disabled);
