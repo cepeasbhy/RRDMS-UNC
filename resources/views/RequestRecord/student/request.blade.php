@@ -82,18 +82,18 @@
                         </div>
                         <div class="inner flex-container">
                             <div>
-                                <input class="form-check-input" type="checkbox" name="reqTOR" value="true"
+                                <input id="torReq" class="form-check-input" type="checkbox" name="reqTOR" value="true"
                                     onchange="enableButton()">
                                 <label>Request for Transcript of Record</label>
                             </div>
                             <div>
                                 <label>Number of Copies</label>
-                                <input name="tor[copies]" class="copies-box" type="number" min="1">
+                                <input id="torCopies" name="tor[copies]" class="copies-box" type="number" min="1">
                             </div>
                             <div class="inner-grid-container">
                                 <div>
                                     <label>Purpose</label>
-                                    <select class="form-select form-select-sm" name="tor[purpose]" id="">
+                                    <select id="selectPurpose" class="form-select form-select-sm" name="tor[purpose]" id="">
                                         <option value="">Choose</option>
                                         <option value="Records and References">Records and References</option>
                                         <option value="Board Examination">Board Examination</option>
@@ -103,7 +103,7 @@
                                 </div>
                                 <div>
                                     <label>Others, pls. specify</label>
-                                    <input name="tor[other_purpose]" class="form-control form-control-sm" type="text">
+                                    <input id="inputPurpose" name="tor[other_purpose]" class="form-control form-control-sm" type="text">
                                 </div>
                             </div>
                         </div>
@@ -119,20 +119,20 @@
                         </div>
                         <div class="inner flex-container">
                             <div>
-                                <input class="form-check-input" type="checkbox" name="reqCopyGrade" value="true"
+                                <input id="reqCopyGrade" class="form-check-input" type="checkbox" name="reqCopyGrade" value="true"
                                     onchange="enableButton()">
                                 <label>Request Copy of Grades</label>
                             </div>
                             <div class="form-group mb-2">
                                 <label>Number of Copies</label>
-                                <input name="copyGrades[copies]" class="copies-box" type="number">
+                                <input id="numCopiesGrade" name="copyGrades[copies]" class="copies-box" type="number">
                             </div>
                             <div class="inner-grid-container">
                                 <div>
                                     <div class="form-group">
                                         <label>Semester</label>
                                         <select class="form-select form-select-sm" name="copyGrades[semester]"
-                                            id="">
+                                            id="semester">
                                             <option value="">Choose</option>
                                             <option value="1">1st Semester</option>
                                             <option value="2">2nd Semester</option>
@@ -143,7 +143,7 @@
                                 <div>
                                     <div class="form-group">
                                         <label>School Year</label>
-                                        <input name="copyGrades[schoolYear]" class="form-control form-control-sm"
+                                        <input id="schoolYear" name="copyGrades[schoolYear]" class="form-control form-control-sm"
                                             type="text" placeholder="e.g. 2019-2020">
                                     </div>
                                 </div>
