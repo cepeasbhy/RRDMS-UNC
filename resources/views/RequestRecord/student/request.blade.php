@@ -76,7 +76,7 @@
                         <div class="head-container">
                             <h4 class="ms-2">Transcript of Record</h4>
                         </div>
-                        <div class="alert alert-info p-1 mb-1">
+                        <div class="alert alert-info p-1 mb-1 mt-2">
                             <span style="font-size: 0.75rem">Transcript of Record cost
                                 ₱{{ number_format($recordPrices['torPrice'], 2, '.') }}</span>
                         </div>
@@ -113,7 +113,7 @@
                         <div class="head-container">
                             <h4 class="ms-2">Copy of Grades</h4>
                         </div>
-                        <div class="alert alert-info p-1 mb-1">
+                        <div class="alert alert-info p-1 mb-1 mt-2">
                             <span style="font-size: 12px">Copy of Grades cost
                                 ₱{{ number_format($recordPrices['copyGradePrice'], 2, '.') }}</span>
                         </div>
@@ -155,7 +155,7 @@
                         <div class="head-container">
                             <h4 class="ms-2">Certificates</h4>
                         </div>
-                        <div class="alert alert-info p-1 mb-1">
+                        <div class="alert alert-info p-1 mb-1 mt-2">
                             <span class="label-sm">Certificate cost
                                 ₱{{ number_format($recordPrices['certPrice'], 2, '.') }} each</span>
                         </div>
@@ -414,7 +414,7 @@
                         <div class="head-container">
                             <h4 class="ms-2">Authentication</h4>
                         </div>
-                        <div class="alert alert-info p-1 mb-1">
+                        <div class="alert alert-info p-1 mb-1 mt-2">
                             <span class="label-sm">Authentication cost
                                 ₱{{ number_format($recordPrices['authPrice'], 2, '.') }} each</span>
                         </div>
