@@ -508,7 +508,7 @@ input[type=number] {
 }
 
 /* Mobile View Table */
-@media (max-width: 40em) {
+@media (max-width: 50em) {
 
     .nav-link{
         font-size: 0.70rem;
@@ -653,32 +653,6 @@ input[type=number] {
     .nav-link.active{
         color: var(--bg-color-blue-sub);
         border-bottom: 2px solid maroon;
-    }
-
-    .tab-container{
-        border-top: 2px solid #ddd;
-        min-width: 100%;
-        padding-top: 1rem;
-    }
-
-    .tab-container__contents{
-        display: none;
-    }
-
-    .tab-container__contents table{
-        min-width: 100%;
-    }
-
-    .tab-container__contents table tbody tr td {
-        padding-block: 1rem;
-    }
-
-    .tab-container__contents table tbody tr:nth-child(even){
-        background-color: var(--text-color-gray-sub);
-    }
-
-    .tab-container__contents table tbody tr td form{
-        margin: 0;
     }
 
     .active{
