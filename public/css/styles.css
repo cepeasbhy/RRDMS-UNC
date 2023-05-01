@@ -467,7 +467,18 @@ input[type=number] {
 
 .add-student{
     --min-width: 30%;
-    --bg-color: var(--bg-color-green-sub);
+    --bg-color: var(--bg-color-green-sub)
+}
+
+.display-total-price{
+    display: flex;
+    justify-content: center;
+
+}
+
+.price{
+    flex-grow: 1;
+    text-align: right;
 }
 
 

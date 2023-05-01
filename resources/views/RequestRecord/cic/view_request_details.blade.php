@@ -130,9 +130,8 @@
                                 </div>
                             @endforeach
                         </div>
-
-
                     </div>
+                    <br>
                 @endif
 
                 @if ($requestedDocumentDetails->transcript_of_record != null)
@@ -140,18 +139,20 @@
                     <div class="flex-container photocopy-prices req-docs">
                         <div style="font-weight: 500">
                             <p style="font-size: 0.75rem; margin: 0">No. of Copies:</p>
-                            <p style="font-size: 0.75rem; margin: 0">Purpose:</p>
-                            <p style="font-size: 0.75rem; margin: 0">Other Purpose:</p>
+                            @if($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
+                                <p style="font-size: 0.75rem; margin: 0">Purpose:</p>
+                            @else
+                                <p style="font-size: 0.75rem; margin: 0">Other Purpose:</p>
+                            @endif
                             <p style="font-size: 0.85rem; font-weight: 600; margin: 0">TOTAL PRICE:</p>
                         </div>
 
                         <div style="text-align: end">
                             <p style="font-size: 0.75rem; margin: 0">
                                 {{ $requestedDocumentDetails->transcript_of_record['copies'] }}</p>
+                            @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
                             <p style="font-size: 0.75rem; margin: 0">
                                 {{ $requestedDocumentDetails->transcript_of_record['purpose'] }}</p>
-                            @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
-                                <p style="font-size: 0.75rem; margin: 0">NOT STATED</p>
                             @else
                                 <p style="font-size: 0.75rem; margin: 0">
                                     {{ $requestedDocumentDetails->transcript_of_record['other_purpose'] }}</p>
@@ -313,9 +314,15 @@
                     </div>
                     <br>
                 @endif
+                <div class="display-total-price">
+                    <div class="description">
+                        <h5 style="font-weight: var(--font-weight-bold); margin-left: 1rem">TOTAL PRICE</h5>
+                    </div>
+                    <div class="price">
+                        <h5 style="font-weight: var(--font-weight-bold);">₱{{ number_format($requestedDocumentDetails->total_fee, 2) }}</h5>
+                    </div>
+                </div>
             </section>
-
-
         </div>
 
         <div class="form-button-container flex-container view-buttons">
