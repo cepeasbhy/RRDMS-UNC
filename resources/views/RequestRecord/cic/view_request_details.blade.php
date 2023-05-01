@@ -139,8 +139,11 @@
                     <div class="flex-container photocopy-prices req-docs">
                         <div style="font-weight: 500">
                             <p style="font-size: 0.75rem; margin: 0">No. of Copies:</p>
-                            <p style="font-size: 0.75rem; margin: 0">Purpose:</p>
-                            <p style="font-size: 0.75rem; margin: 0">Other Purpose:</p>
+                            @if($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
+                                <p style="font-size: 0.75rem; margin: 0">Purpose:</p>
+                            @else
+                                <p style="font-size: 0.75rem; margin: 0">Other Purpose:</p>
+                            @endif
                             <p style="font-size: 0.85rem; font-weight: 600; margin: 0">TOTAL PRICE:</p>
                         </div>
 
