@@ -41,6 +41,13 @@ input[type=number] {
     padding: 1rem 1rem 1rem 0.5rem;
 }
 
+.form-pair{margin-top: 1rem;}
+
+.form-pair label{
+    padding-bottom: 0.25rem;
+    font-size: 0.85rem;
+}
+
 .form-block {
     display: grid;
     place-items: center;
@@ -458,6 +465,11 @@ input[type=number] {
     gap: 3rem;
 }
 
+.add-student{
+    --min-width: 30%;
+    --bg-color: var(--bg-color-green-sub);
+}
+
 
 @media (max-width: 63em) {
     .inner-cell{
@@ -704,6 +716,10 @@ input[type=number] {
         width: 100%;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 3rem;
+    }
+
+    .add-student-container {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     }
 
 }
