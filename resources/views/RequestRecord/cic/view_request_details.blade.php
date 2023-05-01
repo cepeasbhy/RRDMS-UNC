@@ -300,6 +300,13 @@
                     @endif
                 </div>
 
+                @if ($requestInfo->date_completed != null)
+                    <div class="form-group mb-1">
+                        <label>Date Completed</label>
+                        <input class="form-control form-control-sm" type="text" value="{{$requestInfo->date_completed}}" readonly>
+                    </div>
+                @endif
+
                 @if ($requestInfo->reason_for_rejection != null)
                     <div class="form-group mb-1">
                         <label>Reason for Rejection</label>
