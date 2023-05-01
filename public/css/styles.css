@@ -458,6 +458,17 @@ input[type=number] {
     gap: 3rem;
 }
 
+.display-total-price{
+    display: flex;
+    justify-content: center;
+  
+}
+
+.price{
+    flex-grow: 1;
+    text-align: right;
+}
+
 
 @media (max-width: 63em) {
     .inner-cell{

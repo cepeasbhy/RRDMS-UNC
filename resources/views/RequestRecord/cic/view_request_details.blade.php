@@ -130,9 +130,8 @@
                                 </div>
                             @endforeach
                         </div>
-
-
                     </div>
+                    <br>
                 @endif
 
                 @if ($requestedDocumentDetails->transcript_of_record != null)
@@ -313,9 +312,15 @@
                     </div>
                     <br>
                 @endif
+                <div class="display-total-price">
+                    <div class="description">
+                        <h5 style="font-weight: var(--font-weight-bold); margin-left: 1rem">TOTAL PRICE</h5>
+                    </div>
+                    <div class="price">
+                        <h5 style="font-weight: var(--font-weight-bold);">₱{{ number_format($requestedDocumentDetails->total_fee, 2) }}</h5>
+                    </div>
+                </div>
             </section>
-
-
         </div>
 
         <div class="form-button-container flex-container view-buttons">
