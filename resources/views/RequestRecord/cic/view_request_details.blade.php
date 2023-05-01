@@ -150,10 +150,9 @@
                         <div style="text-align: end">
                             <p style="font-size: 0.75rem; margin: 0">
                                 {{ $requestedDocumentDetails->transcript_of_record['copies'] }}</p>
+                            @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
                             <p style="font-size: 0.75rem; margin: 0">
                                 {{ $requestedDocumentDetails->transcript_of_record['purpose'] }}</p>
-                            @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
-                                <p style="font-size: 0.75rem; margin: 0">NOT STATED</p>
                             @else
                                 <p style="font-size: 0.75rem; margin: 0">
                                     {{ $requestedDocumentDetails->transcript_of_record['other_purpose'] }}</p>
