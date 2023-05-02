@@ -442,6 +442,11 @@ input[type=number] {-moz-appearance: textfield;}
     text-align: right;
 }
 
+.link-button.link-view-button{
+    padding-inline: 1rem;
+    background-color: var(--bg-color-green-sub);
+}
+
 
 @media (max-width: 63em) {
     .inner-cell{justify-self: center;}
@@ -457,6 +462,8 @@ input[type=number] {-moz-appearance: textfield;}
     #archivedRecordsTable td[data-label="Program"],td[data-label="Department"] {font-size: 0.70rem;}
 
     .archive-top-container {flex-direction: column;}
+
+    .pendingRequestsTable td[data-label="Archive Id"]{font-size: 0.75rem;}
 
 }
 
