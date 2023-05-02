@@ -89,6 +89,21 @@ input[type=number] {-moz-appearance: textfield;}
     text-align: center;
 }
 
+.blue-view{
+    --bg-color: var(--bg-color-blue-sub);
+    --min-width: 7rem
+}
+
+.green-approve{
+    --bg-color: var(--bg-color-green-sub);
+    --min-width: 7rem
+}
+
+.red-reject {
+    --bg-color: var(--bg-color-red-sub);
+    --min-width: 7rem
+}
+
 .view{
     --bg-color: var(--bg-color-green-sub);
     --min-width:4em;
@@ -447,6 +462,14 @@ input[type=number] {-moz-appearance: textfield;}
     background-color: var(--bg-color-green-sub);
 }
 
+.tri-button-container{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tri-button-container form{margin-bottom: 0.25rem;}
+
 
 @media (max-width: 63em) {
     .inner-cell{justify-self: center;}
@@ -617,6 +640,8 @@ input[type=number] {-moz-appearance: textfield;}
         object-fit: contain;
     }
 
+    .bigger-image{max-width: 11rem;}
+
     .wide-screen-grid{place-self: start;}
 
     .cells {
@@ -654,6 +679,10 @@ input[type=number] {-moz-appearance: textfield;}
 
     .add-student-container {grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));}
 
+    .tri-button-container {
+        justify-content: center;
+        flex-direction: row;
+    }
 }
 
 @media(max-width: 45em) {

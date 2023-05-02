@@ -1,100 +1,103 @@
 @extends('layouts.app')
+@extends('layouts.header')
 
 @section('content')
-    <div class="row mt-4">
+    <section class="main-container" style="max-width: 80%; margin-top: 3rem">
         <form class="mb-3" action="{{ route('getRequests') }}" method="get">
-            <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+            <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
-        <div class="col">
-            <div class="col">
-                <div class="border-start border-danger border-4">
-                    <h4 class="ms-3">REQUESTER INFORMATION</h4>
+        <div class="grid-container wide-gap grid-orientation" style="width: 100%">
+            <div class="flex-container inner" style="gap: 3rem;">
+                <div class="head-container request-head">
+                    <h4>REQUESTER INFORMATION</h4>
                 </div>
-            </div>
-            <div class="row align-items-center ms-3 mb-3">
-                <img class="col-3 img-fluid rounded-circle student-pic" src="{{asset('storage/'.$staffPicture->picture_path)}}">
-                <div class="col-9">
-                    <span class="h4 fw-bold">{{$staff->last_name}}, {{$staff->first_name}}</span>
-                    <br>
-                    <span>{{$staff->staff_id}}</span>
-                    @if($staff->account_role == 'cic')
+                <div class="flex-container pic-direction">
+                    <img class="profile-image view-request-val bigger-image"
+                        src="{{ asset('storage/' . $staffPicture->picture_path) }}">
+                    <div class="user-info">
+                        <span class="h4 fw-bold">{{ $staff->last_name }}, {{ $staff->first_name }}</span>
                         <br>
-                        <span>College in Charge</span>
-                    @endif
-                </div>
-            </div>
-            <div class="row ms-3">
-                <div class="form-group mb-2">
-                    <label>Assigned Department</label>
-                    <input class="form-control form-control-sm w-75" type="text" readonly value="{{$staff->dept_name}}">
-                </div>
-                <div class="form-group mb-2">
-                    <label>Request ID</label>
-                    <input class="form-control form-control-sm w-75" value="{{$requestInfo->request_id}}" type="text" readonly> 
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="col">
-                <div class="border-start border-danger border-4">
-                    <h4 class="ms-3">REQUESTED ARCHIVE</h4>
-                </div>
-                <div class="row align-items-center ms-3 mb-3">
-                    <img class="col-3 img-fluid rounded-circle student-pic" src="{{asset('storage/'.$picturePath->document_loc)}}">
-                    <div class="col-9">
-                        <span class="h4 fw-bold">{{$student->last_name}}, {{$student->first_name}}</span>
-                        <br>
-                        <span>{{$student->student_id}}</span>
-                        <br>
-                        <span>{{$student->course_name}}</span>
+                        <span>{{ $staff->staff_id }}</span>
+                        @if ($staff->account_role == 'cic')
+                            <br>
+                            <span>College in Charge</span>
+                        @endif
                     </div>
                 </div>
-                <div class="row">
-                    <div class="form-group mb-2">
+                <div>
+                    <div class="readonly-container">
+                        <label>Assigned Department</label>
+                        <input class="readonly-box" type="text" readonly value="{{ $staff->dept_name }}">
+                    </div>
+                    <div class="readonly-container" style="margin-top: 1rem">
+                        <label>Request ID</label>
+                        <input class="readonly-box" value="{{ $requestInfo->request_id }}" type="text" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-container inner" style="gap: 3rem;">
+                <div class="head-container request-head">
+                    <h4>REQUESTED ARCHIVE</h4>
+                </div>
+                <div class="flex-container pic-direction">
+                    <img class="profile-image view-request-val bigger-image"
+                        src="{{ asset('storage/' . $picturePath->document_loc) }}">
+                    <div class="user-info">
+                        <span class="h4 fw-bold">{{ $student->last_name }}, {{ $student->first_name }}</span>
+                        <br>
+                        <span>{{ $student->student_id }}</span>
+                        <br>
+                        <span>{{ $student->course_name }}</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="readonly-container">
                         <label>Archive ID</label>
-                        <input class="form-control form-control-sm" value="{{$student->archive_id}}"type="text" readonly>
+                        <input class="readonly-box" value="{{ $student->archive_id }}"type="text" readonly>
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="readonly-container" style="margin-top: 1rem">
                         <label>Department</label>
-                        <input class="form-control form-control-sm" value="{{$student->dept_name}}"type="text" readonly>
+                        <input class="readonly-box" value="{{ $student->dept_name }}"type="text" readonly>
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="readonly-container" style="margin-top: 1rem">
                         <label>Date Requested</label>
-                        <input class="form-control form-control-sm" value="{{date('Y-m-d', strtotime($requestInfo->created_at))}}"type="text" readonly>
+                        <input class="readonly-box"
+                            value="{{ date('Y-m-d', strtotime($requestInfo->created_at)) }}"type="text" readonly>
                     </div>
-                    @if($requestInfo->status == 2)
-                        <div class="form-group mb-2">
+                    @if ($requestInfo->status == 2)
+                        <div class="readonly-container" style="margin-top: 1rem">
                             <label>Reason for Rejecting</label>
-                            <textarea class="form-control form-control-sm" style="resize: none" readonly
-                            >{{$requestInfo->reason_for_rejection}}</textarea>
+                            <textarea class="readonly-box" style="resize: none" readonly>{{ $requestInfo->reason_for_rejection }}</textarea>
                         </div>
                     @endif
                 </div>
-                <div class="row">
-                    <div class="col-4">
+                <div class="flex-container tri-button-container">
+                    <div>
                         <form action="{{ route('viewRequestedRecord', ['id' => $requestInfo->request_id]) }}"
                             method="post">
                             @csrf
-                            <button class="btn btn-sm btn-primary w-100">VIEW</button>
+                            <button class="form-button blue-view">VIEW</button>
                         </form>
                     </div>
-                    @if($requestInfo->status == 0)
-                        <div class="col-4">
-                            <form action="{{ route('acceptRequestFromLogs', ['requestID' => $requestInfo->request_id]) }}" method="post">
+                    @if ($requestInfo->status == 0)
+                        <di>
+                            <form action="{{ route('acceptRequestFromLogs', ['requestID' => $requestInfo->request_id]) }}"
+                                method="post">
                                 @csrf
-                                <button class="btn btn-success btn-sm w-100">APPROVE</button>
+                                <button class="form-button green-approve">APPROVE</button>
                             </form>
-                        </div>
-                        <div class="col-4">
-                            <button class="btn btn-danger btn-sm w-100" data-bs-toggle="modal"
+                        </di>
+                        <div>
+                            <button class="form-button red-reject" data-bs-toggle="modal"
                                 data-bs-target="#reject-request-modal">REJECT</button>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-     <!--Modal for Rejecting Request-->
-     @extends('layouts.modals.ArchivedRecords.reject_request_modal', ['routeName' => 'rejectRequest'])
+    <!--Modal for Rejecting Request-->
+    @extends('layouts.modals.ArchivedRecords.reject_request_modal', ['routeName' => 'rejectRequest'])
 @endsection
