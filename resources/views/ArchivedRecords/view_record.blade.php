@@ -42,18 +42,21 @@
                     @switch($student->status)
                         @case(1)
                             <input class="form-control form-control-sm" type="text" value="ACTIVE" readonly>
-                            @break
+                        @break
+
                         @case(2)
                             <input class="form-control form-control-sm" type="text" value="TRANSFERRED" readonly>
-                            @break
+                        @break
+
                         @case(3)
                             <input class="form-control form-control-sm" type="text" value="DROPPED OUT" readonly>
-                            @break
+                        @break
+
                         @default
                             <input class="form-control form-control-sm" type="text" value="GRADUATED" readonly>
                     @endswitch
                 </div>
-                @if($student->status == 4)
+                @if ($student->status == 4)
                     <div class="mb-2">
                         <label class="col-form-label col-form-label-sm" for="">Date Graduated</label>
                         <input class="form-control form-control-sm" type="text"
