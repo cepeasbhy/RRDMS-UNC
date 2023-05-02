@@ -30,7 +30,7 @@
 
         <div class="tab-container" style="min-width: 80%; border-top: 0">
             <div class="tab-container__contents active">
-                <table>
+                <table id="studentsTable">
                     <thead>
                         <th class="table-header">STUDENT ID</th>
                         <th class="table-header">FIRST NAME</th>
@@ -58,13 +58,16 @@
                         @endforeach
                     </tbody>
                 </table>
-                <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
                     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
                 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
                 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
                 <script type="text/javascript">
                     $(document).ready(function() {
-                        $('#myTable').DataTable({
+                        $('#studentsTable').DataTable({
                             "language": {
                                 "lengthMenu": "Display _MENU_ records per page",
                                 "zeroRecords": "No Records Available",
@@ -75,7 +78,4 @@
                         });
                     });
                 </script>
-            </div>
-        </div>
-    </section>
 @endsection

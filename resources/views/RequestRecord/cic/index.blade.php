@@ -7,7 +7,7 @@
 
 @section('content')
     <section class="main-container">
-        <form style="margin-top: 2rem" class="mb-3" action="{{ route('StudCredHome') }}" method="get">
+        <form style="margin-top: 2rem" class="mb-3" action="{{ route('home') }}" method="get">
             <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
 
