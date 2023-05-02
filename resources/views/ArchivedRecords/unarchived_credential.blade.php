@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('layouts.header')
 
 @section('css-link')
     <link rel="stylesheet" href="{{ asset('/css/index.css') }}">
@@ -6,59 +7,62 @@
 @endsection
 
 @section('content')
-    <section class="my-3 row align-items-center">
+    <section class="main-container" style="max-width: 80%; margin-top: 3rem">
         <form class="mb-3" action="{{ route('index') }}" method="get">
-            <button class="btn btn-success btn-sm"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+            <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
-        <div class="col-sm-8 border-start border-danger border-4">
+        <div class="head-container request-head">
             <h3>Unarchived Records</h3>
             <span class="badge bg-success mb-2">{{ session('msg') }}</span>
         </div>
-    </section>
 
-    <section class="container my-3">
-        <table id="archivedRecordsTable" class="table table-striped" style="width: 100%">
-            <thead>
-                <th class="custom-th bg-danger">STUDENT ID</th>
-                <th class="custom-th bg-danger">FIRST NAME</th>
-                <th class="custom-th bg-danger">LAST NAME</th>
-                <th class="custom-th bg-danger">PROGRAM</th>
-                <th class="custom-th bg-danger">ADMISSION YEAR</th>
-                <th class="custom-th bg-danger">ACTION</th>
-            </thead>
-            <tbody>
-                @foreach ($students as $student)
-                    <tr class="custom-tr">
-                        <td class="custom-td">{{ $student->student_id }}</td>
-                        <td class="custom-td">{{ $student->first_name }}</td>
-                        <td class="custom-td">{{ $student->last_name }}</td>
-                        <td class="custom-td">{{ $student->dept_name }}</td>
-                        <td class="custom-td">{{ $student->admission_year }}</td>
-                        <td class="custom-td">
-                            <form action="{{ route('checkRecord', ['id' => $student->student_id]) }}" method="GET">
-                                @csrf
-                                <input type="submit" value="VIEW" class="btn btn-success btn-sm">
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-        </table>
-        <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-        <script type="text/javascript">
-           $(document).ready(function() {
-                $('#archivedRecordsTable').DataTable({
-                    "language": {
-                        "lengthMenu": "Display _MENU_ records per page",
-                        "zeroRecords": "No records available",
-                        "info": "Showing page _PAGE_ of _PAGES_",
-                        "infoEmpty": "No records available",
-                        "infoFiltered": "(filtered from _MAX_ total records)"
-                    }
-                });
-            });
-        </script>
+        <div class="tab-container">
+            <div class="tab-container__contents active">
+                <table id="archivedRecordsTable" style="width: 100%">
+                    <thead>
+                        <th class="table-header">STUDENT ID</th>
+                        <th class="table-header">FIRST NAME</th>
+                        <th class="table-header">LAST NAME</th>
+                        <th class="table-header">PROGRAM</th>
+                        <th class="table-header">ADMISSION YEAR</th>
+                        <th class="table-header">ACTION</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($students as $student)
+                            <tr>
+                                <td data-label="Student Id">{{ $student->student_id }}</td>
+                                <td data-label="First Name">{{ $student->first_name }}</td>
+                                <td data-label="Last Name">{{ $student->last_name }}</td>
+                                <td data-label="Program">{{ $student->dept_name }}</td>
+                                <td data-label="Admission Year">{{ $student->admission_year }}</td>
+                                <td data-label="Action">
+                                    <form action="{{ route('checkRecord', ['id' => $student->student_id]) }}"
+                                        method="GET">
+                                        @csrf
+                                        <input type="submit" value="VIEW" class="form-button view">
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                </table>
+                <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+                    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+                <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#archivedRecordsTable').DataTable({
+                            "language": {
+                                "lengthMenu": "Display _MENU_ records per page",
+                                "zeroRecords": "No records available",
+                                "info": "Showing page _PAGE_ of _PAGES_",
+                                "infoEmpty": "No records available",
+                                "infoFiltered": "(filtered from _MAX_ total records)"
+                            }
+                        });
+                    });
+                </script>
+            </div>
+        </div>
     </section>
 @endsection
