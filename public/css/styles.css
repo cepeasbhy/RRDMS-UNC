@@ -430,7 +430,7 @@ input[type=number] {-moz-appearance: textfield;}
     flex-direction: row;
     align-items: flex-start;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: start;
 }
 
 .student-info-view{
