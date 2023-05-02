@@ -64,7 +64,7 @@
                                     <form action="{{ route('makeRequestArchive', ['id' => $archive->archive_id]) }}"
                                         method="post">
                                         @csrf
-                                        <button class="form-button request">REQUEST</button>
+                                        <button class="print">REQUEST</button>
                                     </form>
                                 </td>
                             </tr>
@@ -94,7 +94,7 @@
                                         {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                     </td>
                                     <td data-label="Action">
-                                        <a class="form-button view" style="text-decoration: none"
+                                        <a class="print" style="text-decoration: none"
                                             href="{{ route('viewPendingRequestDetails', ['requestID' => $requestedArchive->request_id]) }}">View
                                             Request</a>
                                     </td>
@@ -126,7 +126,7 @@
                                         {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                     </td>
                                     <td data-label="Action">
-                                        <a class="form-button view" style="text-decoration: none"
+                                        <a class="print" style="text-decoration: none"
                                             href="{{ route('viewRequestedArchive', ['id' => $requestedArchive->request_id]) }}">View
                                             Record</a>
                                     </td>
@@ -158,7 +158,7 @@
                                         {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                     </td>
                                     <td data-label="Action">
-                                        <a class="form-button view" style="text-decoration: none"
+                                        <a class="print" style="text-decoration: none"
                                             href="{{ route('viewPendingRequestDetails', ['requestID' => $requestedArchive->request_id]) }}">View
                                             Request</a>
                                     </td>
