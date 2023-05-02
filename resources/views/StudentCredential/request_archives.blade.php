@@ -94,7 +94,7 @@
                                         {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                     </td>
                                     <td data-label="Action">
-                                        <a class="form-button view"
+                                        <a class="form-button view" style="text-decoration: none"
                                             href="{{ route('viewPendingRequestDetails', ['requestID' => $requestedArchive->request_id]) }}">View
                                             Request</a>
                                     </td>
@@ -126,7 +126,7 @@
                                         {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                     </td>
                                     <td data-label="Action">
-                                        <a class="form-button view"
+                                        <a class="form-button view" style="text-decoration: none"
                                             href="{{ route('viewRequestedArchive', ['id' => $requestedArchive->request_id]) }}">View
                                             Record</a>
                                     </td>
@@ -158,7 +158,7 @@
                                         {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                     </td>
                                     <td data-label="Action">
-                                        <a class="form-button view"
+                                        <a class="form-button view" style="text-decoration: none"
                                             href="{{ route('viewPendingRequestDetails', ['requestID' => $requestedArchive->request_id]) }}">View
                                             Request</a>
                                     </td>
