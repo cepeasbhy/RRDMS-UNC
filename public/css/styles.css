@@ -26,9 +26,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
-    -moz-appearance: textfield;
-}
+input[type=number] {-moz-appearance: textfield;}
 
 .main-container{
     max-width: 90%;
@@ -132,30 +130,20 @@ input[type=number] {
     flex-shrink: 0;
 }
 
-.input-box {
-    border: none;
-}
+.input-box {border: none;}
 
-.input-box:focus {
-    outline-width: 0;
-}
+.input-box:focus {outline-width: 0;}
 
 .input-icon,
 .input-box {
     padding: 0.40rem;
 }
 
-.password-label{
-    padding-top: 1rem;
-}
+.password-label{padding-top: 1rem;}
 
-.input-group{
-    flex-direction: column;
-}
+.input-group{flex-direction: column;}
 
-.input-group > label{
-    padding-top: 1rem;
-}
+.input-group > label{padding-top: 1rem;}
 
 .flex-container {
     display: flex;
@@ -181,9 +169,7 @@ input[type=number] {
     border-left: 3px solid var(--bg-color-red-sub);
 }
 
-.head-container h4 {
-    margin: 0;
-}
+.head-container h4 {margin: 0;}
 
 .link-button {
     max-width: 20%;
@@ -208,9 +194,7 @@ input[type=number] {
     cursor: pointer;
 }
 
-.button-container {
-    min-width: 100%;
-}
+.button-container {min-width: 100%;}
 
 [role="tablist"] {
     margin: 0;
@@ -238,29 +222,17 @@ input[type=number] {
     padding-top: 1rem;
 }
 
-.tab-container__contents {
-    display: none;
-}
+.tab-container__contents {display: none;}
 
-.tab-container__contents table {
-    min-width: 100%;
-}
+.tab-container__contents table {min-width: 100%;}
 
-.tab-container__contents table tbody tr td {
-    padding-block: 1rem;
-}
+.tab-container__contents table tbody tr td {padding-block: 1rem;}
 
-.tab-container__contents table tbody tr:nth-child(even) {
-    background-color: var(--text-color-gray-sub);
-}
+.tab-container__contents table tbody tr:nth-child(even) {background-color: var(--text-color-gray-sub);}
 
-.tab-container__contents table tbody tr td form {
-    margin: 0;
-}
+.tab-container__contents table tbody tr td form {margin: 0;}
 
-.active {
-    display: block;
-}
+.active {display: block;}
 
 .table-header {
     background-color: var(--bg-color-red-sub);
@@ -268,9 +240,7 @@ input[type=number] {
     padding: 0.25rem;
 }
 
-.choices-head {
-    justify-self: start;
-}
+.choices-head {justify-self: start;}
 
 .request-head {
     place-self: start;
@@ -283,13 +253,9 @@ input[type=number] {
     justify-content: space-between;
 }
 
-.request-image-val{
-    --max-width: 35%
-}
+.request-image-val{--max-width: 35%}
 
-.view-request-val{
-    --max-width: 55%
-}
+.view-request-val{--max-width: 55%}
 
 .profile-image {
     max-width: var(--max-width);
@@ -362,18 +328,14 @@ input[type=number] {
     text-align: center;
 }
 
-.nda p {
-    font-size: var(--font-size-400);
-}
+.nda p {font-size: var(--font-size-400);}
 
 .cells {
     grid-template-columns: repeat(1, 1fr);
     place-items: start;
 }
 
-.back.view.form-button{
-    padding-inline: 0.5rem;
-}
+.back.view.form-button{padding-inline: 0.5rem;}
 
 .flex-container.photocopy-prices.req-docs{
     max-width: 90%;
@@ -385,13 +347,9 @@ input[type=number] {
     width: clamp(30%, 80%, 100%);
 }
 
-.flex-container.inner.req-details{
-    border: 2px solid maroon;
-}
+.flex-container.inner.req-details{border: 2px solid maroon;}
 
-.grid-container.grid-orientation{
-    grid-template-columns: repeat(2, 1fr);
-}
+.grid-container.grid-orientation{grid-template-columns: repeat(2, 1fr);}
 
 .print{
     color: var(--text-color-white-sub);
@@ -466,9 +424,7 @@ input[type=number] {
     grid-auto-flow: row;
 }
 
-.student-information {
-    gap: 3rem;
-}
+.student-information {gap: 3rem;}
 
 .add-student{
     --min-width: 30%;
@@ -488,31 +444,26 @@ input[type=number] {
 
 
 @media (max-width: 63em) {
-    .inner-cell{
-        justify-self: center;
-    }
+    .inner-cell{justify-self: center;}
 
-    .grid-container.grid-orientation {
-        grid-template-columns: repeat(auto-fill, minmax(60%, 1fr));
-    }
+    .grid-container.grid-orientation {grid-template-columns: repeat(auto-fill, minmax(60%, 1fr));}
 }
 
 @media (max-width: 30em) {
-    .view-container{
-        padding:0
-    }
+    .view-container{padding:0}
 
-    .inner-cell{
-        justify-self: start;
-    }
+    .inner-cell{justify-self: start;}
+
+    #archivedRecordsTable td[data-label="Program"],td[data-label="Department"] {font-size: 0.70rem;}
+
+    .archive-top-container {flex-direction: column;}
+
 }
 
 /* Mobile View Table */
 @media (max-width: 50em) {
 
-    .nav-link{
-        font-size: 0.70rem;
-    }
+    .nav-link{font-size: 0.70rem;}
 
     .tab-container__contents table tbody tr td {
         display: block;
@@ -522,9 +473,7 @@ input[type=number] {
         position: relative;
     }
 
-    td[data-label="Course"]{
-        font-size: 0.75rem;
-    }
+    td[data-label="Course"]{font-size: 0.75rem;}
 
     .tab-container__contents table tbody tr td::before {
         content: attr(data-label);
@@ -533,9 +482,7 @@ input[type=number] {
         font-weight: var(--font-weight-bold);
     }
 
-    .table-header {
-        display: none;
-    }
+    .table-header {display: none;}
 
     .form-button {
         background-color: var(--bg-color);
@@ -571,9 +518,7 @@ input[type=number] {
         font-size: var(--font-size-500);
     }
 
-    .unc-logo {
-        place-self: center;
-    }
+    .unc-logo {place-self: center;}
 
     .form-content {
         min-width: 80%;
@@ -604,9 +549,7 @@ input[type=number] {
         border-left: 3px solid var(--bg-color-red-sub);
     }
 
-    .head-container h4{
-        margin: 0;
-    }
+    .head-container h4{margin: 0;}
 
     .link-button{
         max-width: 25%;
@@ -631,9 +574,7 @@ input[type=number] {
         cursor: pointer;
     }
 
-    .button-container{
-        min-width: 100%;
-    }
+    .button-container{min-width: 100%;}
 
     [role="tablist"]{
         margin: 0;
@@ -655,9 +596,7 @@ input[type=number] {
         border-bottom: 2px solid maroon;
     }
 
-    .active{
-        display: block;
-    }
+    .active{display: block;}
 
     .table-header{
         background-color: var(--bg-color-red-sub);
@@ -671,9 +610,7 @@ input[type=number] {
         object-fit: contain;
     }
 
-    .wide-screen-grid{
-        place-self: start;
-    }
+    .wide-screen-grid{place-self: start;}
 
     .cells {
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -708,9 +645,7 @@ input[type=number] {
         gap: 3rem;
     }
 
-    .add-student-container {
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    }
+    .add-student-container {grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));}
 
 }
 
@@ -719,4 +654,7 @@ input[type=number] {
         grid-auto-flow: row;
         text-align: center;
     }
+
+    .archive-button-orientation {flex-direction: column;}
+
 }
