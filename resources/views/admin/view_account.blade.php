@@ -20,7 +20,7 @@
                             {{ $accountInfo['accountInfo']->staff_id }}</label>
                     </div>
                 </div>
-                <div>
+                <div style="margin-top: 1rem">
                     <div class="readonly-container">
                         <label>Account Type</label>
                         @switch($accountInfo['accountInfo']->account_role)
