@@ -498,7 +498,10 @@ input[type=number] {-moz-appearance: textfield;}
     margin-left: 10%;
 }
 
-
+.link-button.back-link{
+    background-color: var(--bg-color-green-sub);
+    padding-inline: 0.75rem;
+}
 
 @media (max-width: 63em) {
     .inner-cell{justify-self: center;}
