@@ -27,27 +27,27 @@
                     </div>
                 </div>
                 <div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label style="font-size: 0.85rem" for="archive-id">Archive ID</label>
                         <input class="form-control form-control-sm" name="archive-id" type="text"
                             value="{{ $student->archive_id }}" readonly>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label style="font-size: 0.85rem" for="email">Email</label>
                         <input class="form-control form-control-sm" name="email" type="text"
                             value="{{ $student->email }}" readonly>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label style="font-size: 0.85rem" for="program">Program</label>
                         <input class="form-control form-control-sm" name="program" type="text"
                             value="{{ $student->dept_name }}" readonly>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label style="font-size: 0.85rem" for="admission-year">Admisson Year</label>
                         <input class="form-control form-control-sm" type="text" name="admission-year"
                             value="{{ $student->admission_year }}" readonly>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label style="font-size: 0.85rem" for="">Status</label>
                         @switch($student->status)
                             @case(1)
@@ -67,23 +67,23 @@
                         @endswitch
                     </div>
                     @if ($student->status == 4)
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label style="font-size: 0.85rem" for="date-graduated">Date Graduated</label>
                             <input class="form-control form-control-sm" type="text" name="date-graduated"
                                 value="{{ date('Y-m-d', strtotime($student->date_graduated)) }}" readonly>
                         </div>
                     @endif
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label style="font-size: 0.85rem" for="date-archived">Date Archived</label>
                         <input class="form-control form-control-sm" type="text" name="date-archived"
                             value="{{ date('Y-m-d', strtotime($student->date_archived)) }}" readonly>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label style="font-size: 0.85rem" for="date-filed">Date Filed</label>
                         <input class="form-control form-control-sm" type="text" name="date-filed"
                             value="{{ date('Y-m-d', strtotime($student->date_filed)) }}" readonly>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label style="font-size: 0.85rem" for="last-updated">Last Updated</label>
                         <input class="form-control form-control-sm" type="text" name="last-updated"
                             value="{{ date('Y-m-d', strtotime($student->updated_at)) }}" readonly>
@@ -105,7 +105,7 @@
                     <h4>STUDENT CREDENTIALS</h4>
                 </div>
                 <span class="badge bg-success mb-2">{{ session('msgCred') }}</span>
-                <div>
+                <div class="flex-container inner outer-cred-card">
                     @foreach ($credentials as $credential)
                         @if ($credential->document_name != 'Picture')
                             <div class="col-sm-4 mt-2">
