@@ -5,7 +5,7 @@
         <div class="unc-logo">
             <img src="{{ asset('/img/unc-logo.png') }}" height="100%" width="100px">
         </div>
-        <h2>Registrar Records and Document Management System</h2>
+        <h2 style="text-align: center">Registrar Records and Document Management System</h2>
 
         <section class="form-block">
             <div class="form-block-header">
