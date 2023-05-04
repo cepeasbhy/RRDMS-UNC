@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <section class="main-container" style="max-width: 80%; margin-top: 3rem">
+    <section class="main-container" style="max-width: 80%; margin-top: 1rem">
         <form class="mb-3" action="{{ route('index') }}" method="get">
             <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>

@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <section class="main-container" style="max-width: 80%; margin-top: 3rem">
+    <section class="main-container" style="max-width: 80%; margin-top: 1rem">
         <a class="link-button back-link" style="padding-block: 0.25rem" href="{{ route('admin.home') }}"><i
                 class="bi bi-arrow-bar-left"></i>
             BACK

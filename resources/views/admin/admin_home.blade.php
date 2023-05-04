@@ -2,7 +2,7 @@
 @extends('layouts.header')
 
 @section('content')
-    <section class="main-container" style="max-width: 80%; margin-top: 3rem">
+    <section class="main-container" style="max-width: 80%; margin-top: 1rem">
         <h4 class="head-container request-head">ADMIN TOOLS</h4>
         <span class="badge bg-danger mb-2">{{ session('errorMsg') }}</span>
         <span class="badge bg-success mb-2">{{ session('successMsg') }}</span>

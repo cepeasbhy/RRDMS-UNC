@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <section class="main-container" style="max-width: 80%; margin-top: 3rem">
+    <section class="main-container" style="max-width: 80%; margin-top: 1rem">
         <div class="flex-container archive-top-container" style="justify-content: space-between">
             <div>
                 <h3 class="head-container request-head">Archived Records Management</h3>

@@ -8,7 +8,7 @@
             BACK
         </a>
         <div class="grid-container wide-gap grid-orientation" style="width: 100%">
-            <div style="margin-top: 3rem">
+            <div style="margin-top: 1rem">
                 <h4 class="head-container request-head">ACCOUNT INFORMATION</h4>
                 <span class="badge bg-success mb-2">{{ session('msg') }}</span>
                 <div class="flex-container pic-direction">

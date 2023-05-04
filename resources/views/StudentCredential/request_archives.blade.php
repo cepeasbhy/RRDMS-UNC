@@ -11,7 +11,7 @@
             <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
 
-        <h4 class="head-container request-head" style="margin-top: 3rem">Archives Requesting</h4>
+        <h4 class="head-container request-head" style="margin-top: 1rem">Archives Requesting</h4>
         <span class="badge bg-success mb-2">{{ session('msg') }}</span>
 
         <div class="button-container">
