@@ -93,17 +93,17 @@
                         <div class="head-container request-head">
                             <h4>TRANSACTION LOGS</h4>
                         </div>
-                        <table class="transacLogTable" style="width: 100%; margin-top: 1rem">
+                        <table class="transacLogTable" style="width: 100%; margin-top: 1rem; font-size:14px">
                             <thead>
-                                <th class="table-header">DATE</th>
-                                <th class="table-header">TIME</th>
+                                <th class="table-header" style="width: 15%">TIME</th>
+                                <th class="table-header" style="width: 25%">DATE</th>
                                 <th class="table-header">DESCRIPTION</th>
                             </thead>
                             <tbody>
                                 @foreach ($transacLogs as $log)
                                     <tr>
-                                        <td data-lable="Date">{{ date('H:i', strtotime($log->created_at)) }}</td>
-                                        <td data-lable="Time">{{ date('Y-m-d', strtotime($log->created_at)) }}</td>
+                                        <td data-lable="Time">{{ date('H:i', strtotime($log->created_at)) }}</td>
+                                        <td data-lable="Date">{{ date('Y-m-d', strtotime($log->created_at)) }}</td>
                                         <td data-lable="Description">{{ $log->description }}</td>
                                     </tr>
                                 @endforeach
@@ -118,6 +118,7 @@
                     <script type="text/javascript" defer>
                         $(document).ready(function() {
                             $('.transacLogTable').DataTable({
+                                "searching":false,
                                 "language": {
                                     "lengthMenu": "Logs per page _MENU_",
                                     "zeroRecords": "No Logs Available",
@@ -125,11 +126,6 @@
                                     "infoEmpty": "",
                                     "infoFiltered": "(filtered from _MAX_ total records)"
                                 },
-                                "table": {
-                                    "style": {
-                                        "font-size": "100px"
-                                    }
-                                }
                             });
                         });
                     </script>
