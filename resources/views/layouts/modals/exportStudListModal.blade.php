@@ -1,4 +1,4 @@
-<div id="admin-export-stud" class="modal fade" tabindex="-1" aria-labelledby="title-modal" aria-hidden="true">
+<div id="admin-export-stud" class="modal fade" tabindex="-1" aria-labelledby="title-modal" aria-hidden="true" style="display: none" style="display: none">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="exportStudList" action="{{route('admin.exportStudList')}}" method="get">
+                <form id="exportStudList" action="{{route('admin.exportStudList')}}" method="get" >
                     @csrf
                     <div class="selection"></div>
                     <div class="form-group mb-2">

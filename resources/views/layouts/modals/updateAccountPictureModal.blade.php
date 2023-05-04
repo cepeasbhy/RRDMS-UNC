@@ -1,5 +1,5 @@
 @if ($accountInfo['accountInfo']->account_role != 'student')
-    <div id="update-staff-picture" class="modal fade" tabindex="-1" aria-labelledby="title-modal" aria-hidden="true">
+    <div id="update-staff-picture" class="modal fade" tabindex="-1" aria-labelledby="title-modal" aria-hidden="true" style="display: none">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

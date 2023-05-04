@@ -1,6 +1,6 @@
 @foreach ($credentials as $credential)
     @if ($credential->document_name != 'Picture')
-        <div id="{{'del-'.$credential->document_id}}" class="modal fade" tabindex="-1" aria-labelledby="title-modal" aria-hidden="true">
+        <div id="{{'del-'.$credential->document_id}}" class="modal fade" tabindex="-1" aria-labelledby="title-modal" aria-hidden="true" style="display: none">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
