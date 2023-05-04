@@ -100,33 +100,29 @@
                 </div>
             </div>
 
-            <div class="flex-container inner">
-                <div class="head-container request-head">
-                    <h4>STUDENT CREDENTIALS</h4>
-                </div>
-                <span class="badge bg-success mb-2">{{ session('msgCred') }}</span>
-                <div class="flex-container inner outer-cred-card">
-                    @foreach ($credentials as $credential)
-                        @if ($credential->document_name != 'Picture')
-                            <div class="col-sm-4 mt-2">
-                                <div class="card">
+                <div>
+                    <h4 class="head-container request-head">STUDENT CREDENTIALS</h4>
+                    <span class="badge bg-success mb-2">{{ session('msgCred') }}</span>
+                    <div class="flex-container inner outer-cred-card">
+                        @foreach ($credentials as $credential)
+                            @if ($credential->document_name != 'Picture')
+                                <div class="cred-card">
                                     <button class="btn p-0" data-bs-toggle="modal"
                                         data-bs-target="{{ '#' . $credential->document_id }}">
-                                        <img class="img-fluid p-1"
-                                            src="{{ url('storage/' . $credential->document_loc) }}">
+                                        <img class="img-fluid p-1" src="{{ asset('storage/' . $credential->document_loc) }}">
                                     </button>
-                                    <div class="card-body text-center p-0">
+                                    <div style="text-align: center;">
                                         <label
                                             class="col-form-label col-form-label-sm">{{ $credential->document_name }}</label>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-                <div class="form-button-container">
-                    <button class="print" data-bs-toggle="modal" data-bs-target="#add-single-rec">ADD A
-                        RECORD</button>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="form-button-container">
+                        <button class="print" data-bs-toggle="modal" data-bs-target="#add-single-rec">ADD A
+                            RECORD</button>
+                    </div>
                 </div>
             </div>
         </div>
