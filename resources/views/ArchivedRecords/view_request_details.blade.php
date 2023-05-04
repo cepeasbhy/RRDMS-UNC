@@ -7,19 +7,17 @@
             <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <div class="grid-container wide-gap grid-orientation" style="width: 100%">
-            <div class="flex-container inner" style="gap: 3rem;">
+            <div class="flex-container inner" style="gap: 1rem;">
                 <div class="head-container request-head">
                     <h4>REQUESTER INFORMATION</h4>
                 </div>
                 <div class="flex-container pic-direction">
-                    <img class="profile-image view-request-val bigger-image"
+                    <img class="profile-image view-request-val"
                         src="{{ asset('storage/' . $staffPicture->picture_path) }}">
                     <div class="user-info">
                         <span class="h4 fw-bold">{{ $staff->last_name }}, {{ $staff->first_name }}</span>
-                        <br>
                         <span>{{ $staff->staff_id }}</span>
                         @if ($staff->account_role == 'cic')
-                            <br>
                             <span>College in Charge</span>
                         @endif
                     </div>
@@ -36,18 +34,16 @@
                 </div>
             </div>
 
-            <div class="flex-container inner" style="gap: 3rem;">
+            <div class="flex-container inner" style="gap: 1rem;">
                 <div class="head-container request-head">
                     <h4>REQUESTED ARCHIVE</h4>
                 </div>
                 <div class="flex-container pic-direction">
-                    <img class="profile-image view-request-val bigger-image"
+                    <img class="profile-image view-request-val"
                         src="{{ asset('storage/' . $picturePath->document_loc) }}">
                     <div class="user-info">
                         <span class="h4 fw-bold">{{ $student->last_name }}, {{ $student->first_name }}</span>
-                        <br>
                         <span>{{ $student->student_id }}</span>
-                        <br>
                         <span>{{ $student->course_name }}</span>
                     </div>
                 </div>
