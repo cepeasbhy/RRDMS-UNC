@@ -2,7 +2,11 @@
 
 @section('content')
     <section class="main-container" style="max-width: 50%; margin-top: 1rem">
-        <div class="form-block" style="width: 100%">
+        <a class="link-button back-link" style="padding-block: 0.25rem" href="{{ route('admin.viewAccounts') }}"><i
+            class="bi bi-arrow-bar-left"></i>
+            BACK
+        </a>
+        <div class="form-block" style="width: 100%; margin-top: 1rem"">
             <div class="form-block-header">
                 {{ __('ACCOUNT REGISTRATION') }}
                 <br>
