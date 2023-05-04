@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="main-container" style="max-width: 80%; margin-top: 5rem">
+    <section class="main-container" style="max-width: 50%; margin-top: 1rem">
         <div class="form-block" style="width: 100%">
             <div class="form-block-header">
                 {{ __('ACCOUNT REGISTRATION') }}
