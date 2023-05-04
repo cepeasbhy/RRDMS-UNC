@@ -60,7 +60,10 @@ function AddRec(){
     return(
         <div>
             <div className="form-group">
-                <input type="hidden" name="fileName" value={fileName}/>
+                {keyName != "others" && 
+                    (<input type="hidden" name="fileName" value={fileName}/>)
+                }
+
                 <label className="col-form-label col-form-label-sm">Type of Record to add<span
                     className="text-danger">*</span></label>
                 <select className="form-select form-select-sm" name="keyName" onChange={changeSelectOptionHandler} required>
@@ -79,8 +82,16 @@ function AddRec(){
                     <option value="PoliceClearance">Police Clearance</option>
                     <option value="C1">C1 Receipt</option>
                     <option value="permitCrossEnroll">Permit to Cross Enroll</option>
+                    <option value="others">Others</option>
                 </select>
             </div>
+            {keyName == "others" && (
+                <div className="form-group mt-3">
+                    <label className="col-form-label col-form-label-sm">Enter document name<span
+                        className="text-danger">*</span></label>
+                    <input className="form-control form-control-sm" type="text" name="fileName" required/>
+                </div>
+            )}
             <div className="form-group mt-3">
                 <label className="col-form-label col-form-label-sm">Choose A File<span
                         className="text-danger">*</span></label>

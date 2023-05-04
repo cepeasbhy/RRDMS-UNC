@@ -6,7 +6,7 @@
             class="bi bi-arrow-bar-left"></i>
             BACK
         </a>
-        <div class="form-block" style="width: 100%; margin-top: 1rem"">
+        <div class="form-block" style="width: 100%; margin-top: 1rem">
             <div class="form-block-header">
                 {{ __('ACCOUNT REGISTRATION') }}
                 <br>
