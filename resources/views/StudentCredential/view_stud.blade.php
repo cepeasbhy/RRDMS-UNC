@@ -128,6 +128,8 @@
     @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCred'])
     <!--Modal for adding a Credential-->
     @extends('layouts.modals.addSingleRecModal', ['routeName' => 'addSingleRec'])
+    @extends('layouts.modals.proceedUpdateCred')
+
     @if (Session::has('errors'))
         <script>
             window.onload = function() {

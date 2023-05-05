@@ -143,6 +143,7 @@
     @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCredential'])
     <!--Modal for adding a Credential-->
     @extends('layouts.modals.addSingleRecModal', ['routeName' => 'addSingleRecArchive'])
+    @extends('layouts.modals.proceedUpdateCred')
 
     @if (Session::has('errors'))
         <script>

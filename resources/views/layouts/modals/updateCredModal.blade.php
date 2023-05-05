@@ -14,7 +14,7 @@
                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-danger" form="{{$credential->input_name}}">Proceed</button>
+                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="{{'#'.'proceed_update-'.$credential->document_id}}">Update</button>
                     <button class="btn btn-sm btn-success" data-bs-dismiss="modal">
                         Cancel
                     </button>
