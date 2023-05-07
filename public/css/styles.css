@@ -90,21 +90,6 @@ input[type=number] {-moz-appearance: textfield;}
     text-align: center;
 }
 
-.blue-view{
-    --bg-color: var(--bg-color-blue-sub);
-    --min-width: 7rem
-}
-
-.green-approve{
-    --bg-color: var(--bg-color-green-sub);
-    --min-width: 7rem
-}
-
-.red-reject {
-    --bg-color: var(--bg-color-red-sub);
-    --min-width: 7rem
-}
-
 .view{
     --bg-color: var(--bg-color-green-sub);
     --min-width:4em;
@@ -113,11 +98,6 @@ input[type=number] {-moz-appearance: textfield;}
 .request{
     --bg-color: var(--bg-color-red-sub);
     --min-width: 20%;
-}
-
-.view[disabled]{
-    --bg-color-green-sub-disabled: hsl(120 55% 21% / 0.5);
-    --bg-color:var(--bg-color-green-sub-disabled);
 }
 
 .login{
@@ -402,11 +382,6 @@ input[type=number] {-moz-appearance: textfield;}
     gap: 3rem;
 }
 
-.req-from-archives{
-    font-size: 0.85rem;
-    padding-inline: 0.5rem;
-}
-
 .readonly-container{
     display: block;
     font-size: 0.875rem;
@@ -441,11 +416,6 @@ input[type=number] {-moz-appearance: textfield;}
 }
 
 .student-information {gap: 3rem;}
-
-.add-student{
-    --min-width: 30%;
-    --bg-color: var(--bg-color-green-sub)
-}
 
 .display-total-price{
     display: flex;
@@ -510,6 +480,69 @@ input[type=number] {-moz-appearance: textfield;}
     font-weight: var(--font-weight-bold);
     text-transform: capitalize;
     margin-bottom: 0.5rem;
+}
+
+.green-button[disabled]{
+    --bg-color: hsl(120 55% 21% / 0.5);
+    --bg-color-hover: none;
+}
+
+.green-button{
+    --bg-color: var(--bg-color-green-sub);
+    --border-color: hsl(120, 55%, 71%);
+    --bg-color-hover: hsl(120, 55%, 28%);
+}
+
+.blue-button{
+    --bg-color: var(--bg-color-blue-sub);
+    --border-color: hsl(240, 74%, 70%);
+    --bg-color-hover: hsl(240, 74%, 45%);
+    width: 10rem;
+}
+
+.red-button{
+    --bg-color: var(--bg-color-red-sub);
+    --border-color: hsl(0, 61%, 65%);
+    --bg-color-hover: hsl(0, 61%, 40%);
+}
+
+.button-design{
+    position:relative;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    z-index: 1;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-color-white-sub);
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+}
+
+.button-design__link {
+    text-align: center;
+    display: block;
+}
+
+.button-design__link:hover{
+    color: white;
+}
+
+.button-design::before{
+    content: "";
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    background-color: transparent;
+    border-radius: 50%;
+    inset: 0;
+    margin: auto;
+    z-index: -1;
+    transition: transform 0.5s;
+}
+
+.button-design:hover::before{
+    transform: scale(30);
+    background-color: var(--bg-color-hover);
 }
 
 

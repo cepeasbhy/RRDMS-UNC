@@ -14,8 +14,9 @@
                 </h4>
             </div>
             <span class="badge bg-success mb-2">{{ session('msg') }}</span>
-            <div class="link-button-container">
-                <a href="{{ route('stud.makeRequest') }}" class="link-button">MAKE REQUEST</a>
+            <div class="link-button-container" style="min-width: 20%">
+                <a class="red-button button-design button-design__link" href="{{ route('stud.makeRequest') }}">MAKE
+                    REQUEST</a>
             </div>
         </div>
 

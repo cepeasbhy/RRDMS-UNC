@@ -5,7 +5,7 @@
     <section class="main-container" style="max-width: 80%">
         <div style="place-self: start">
             <form class="mb-3" action="{{ route('StudCredHome') }}" method="get">
-                <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+                <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
             </form>
         </div>
         <span class="badge bg-success mb-2">{{ session('msg') }}</span>
@@ -75,8 +75,8 @@
                     </div>
                     @if (Auth::user()->account_role == 'cic')
                         <div class="form-button-container">
-                            <button id="clickButton" class="print" style="width: 70%" data-bs-toggle="modal"
-                                data-bs-target="#update-modal">UPDATE</button>
+                            <button id="clickButton" class="green-button button-design" style="width: 45%"
+                                data-bs-toggle="modal" data-bs-target="#update-modal">UPDATE</button>
                         </div>
                     @endif
                 </div>
@@ -103,7 +103,7 @@
                 </div>
                 @if (Auth::user()->account_role == 'cic')
                     <div class="form-button-container">
-                        <button class="print" style="width: 70%" data-bs-toggle="modal"
+                        <button class="green-button button-design" style="width: 45%" data-bs-toggle="modal"
                             data-bs-target="#add-single-rec">ADD
                             A RECORD</button>
                     </div>

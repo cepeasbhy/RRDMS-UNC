@@ -7,21 +7,24 @@
         <span class="badge bg-danger mb-2">{{ session('errorMsg') }}</span>
         <span class="badge bg-success mb-2">{{ session('successMsg') }}</span>
         <div class="flex-container tri-button-container">
-            <div class="print" style="text-align: center">
-                <a style="text-decoration: none; color: white" href="{{ route('admin.viewAccounts') }}"
+            <div>
+                <a class="green-button button-design button-design__link" href="{{ route('admin.viewAccounts') }}"
                     rel="noopener noreferrer">ACCOUNT
                     MANAGEMENT</a>
             </div>
             <div>
-                <button class="print" data-bs-toggle="modal" data-bs-target="#admin-export-grad">EXPORT LIST OF
+                <button class="green-button button-design" data-bs-toggle="modal" data-bs-target="#admin-export-grad">EXPORT
+                    LIST OF
                     GRADUATES</button>
             </div>
             <div>
-                <button class="print" data-bs-toggle="modal" data-bs-target="#admin-export-stud">EXPORT LIST OF
+                <button class="green-button button-design" data-bs-toggle="modal" data-bs-target="#admin-export-stud">EXPORT
+                    LIST OF
                     STUDENTS</button>
             </div>
             <div>
-                <button class="print" data-bs-toggle="modal" data-bs-target="#admin-rec-prices">MANAGE RECORD
+                <button class="green-button button-design" data-bs-toggle="modal" data-bs-target="#admin-rec-prices">MANAGE
+                    RECORD
                     PRICES</button>
             </div>
         </div>

@@ -4,7 +4,7 @@
 @section('content')
     <section class="main-container" style="max-width: 80%; margin-top: 2rem">
         <form class="mb-3" action="{{ route('requestArchive') }}" method="get">
-            <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+            <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <div class="grid-container wide-gap grid-orientation" style="width: 100%">
             <div class="flex-container inner">
@@ -86,7 +86,7 @@
                 <div class="form-button-container">
                     <form action="{{ route('returnToArchive', ['id' => $requestID]) }}" method="post">
                         @csrf
-                        <button class="print">PUT BACK TO ARCHIVE</button>
+                        <button class="green-button button-design">PUT BACK TO ARCHIVE</button>
                     </form>
                 </div>
             </div>

@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-button-container">
-                        <button type="submit" class="login form-button">
+                        <button type="submit" class="red-button button-design" style="min-width: 40%">
                             {{ __('Login') }}
                         </button>
                     </div>

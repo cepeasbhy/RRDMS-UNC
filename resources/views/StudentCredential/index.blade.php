@@ -16,12 +16,14 @@
                 @if (Auth::user()->account_role == 'cic')
                     <div>
                         <form style="margin: 0" action="{{ route('addStudent') }}" method="get">
-                            <input class="print" type="submit" value="ADD STUDENT">
+                            <button class="green-button button-design" type="submit" value="ADD STUDENT">ADD A
+                                STUDENT</button>
                         </form>
                     </div>
                     <div>
                         <form style="margin: 0" action="{{ route('requestArchive') }}" method="get">
-                            <input class="cancel req-from-archives" type="submit" value="REQUEST FROM ARCHIVES">
+                            <button class="red-button button-design" type="submit" value="REQUEST FROM ARCHIVES">REQUEST
+                                FROM ARCHIVES</button>
                         </form>
                     </div>
                 @endif
@@ -62,20 +64,20 @@
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-                    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-                <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-                <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#studentsTable').DataTable({
-                            "language": {
-                                "lengthMenu": "Display _MENU_ records per page",
-                                "zeroRecords": "No Records Available",
-                                "info": "Showing page _PAGE_ of _PAGES_",
-                                "infoEmpty": "No records available",
-                                "infoFiltered": "(filtered from _MAX_ total records)"
-                            }
-                        });
-                    });
-                </script>
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#studentsTable').DataTable({
+                "language": {
+                    "lengthMenu": "Display _MENU_ records per page",
+                    "zeroRecords": "No Records Available",
+                    "info": "Showing page _PAGE_ of _PAGES_",
+                    "infoEmpty": "No records available",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                }
+            });
+        });
+    </script>
 @endsection

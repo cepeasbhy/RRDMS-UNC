@@ -4,7 +4,7 @@
 @section('content')
     <section class="main-container" style="max-width: 50%; margin-top: 1rem">
         <form action="{{ route('requestArchive') }}" method="get">
-            <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i>
+            <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i>
                 BACK</button>
         </form>
         <h4 class="head-container request-head">REQUESTED ARCHIVE</h4>
@@ -45,7 +45,8 @@
         </div>
 
         <div style="text-align: center; margin-top: 1rem">
-            <button class="cancel" data-bs-toggle="modal" data-bs-target="#cancel-request-modal">CANCEL REQUEST</button>
+            <button class="red-button button-design" data-bs-toggle="modal" data-bs-target="#cancel-request-modal">CANCEL
+                REQUEST</button>
         </div>
     </section>
 

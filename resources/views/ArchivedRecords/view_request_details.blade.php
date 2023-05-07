@@ -4,7 +4,7 @@
 @section('content')
     <section class="main-container" style="max-width: 80%; margin-top: 1rem">
         <form class="mb-3" action="{{ route('getRequests') }}" method="get">
-            <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+            <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <div class="grid-container wide-gap grid-orientation" style="width: 100%">
             <div class="flex-container inner" style="gap: 1rem;">
@@ -12,8 +12,7 @@
                     <h4>REQUESTER INFORMATION</h4>
                 </div>
                 <div class="flex-container pic-direction">
-                    <img class="profile-image view-request-val"
-                        src="{{ asset('storage/' . $staffPicture->picture_path) }}">
+                    <img class="profile-image view-request-val" src="{{ asset('storage/' . $staffPicture->picture_path) }}">
                     <div class="user-info">
                         <span class="h4 fw-bold">{{ $staff->last_name }}, {{ $staff->first_name }}</span>
                         <span>{{ $staff->staff_id }}</span>
@@ -39,8 +38,7 @@
                     <h4>REQUESTED ARCHIVE</h4>
                 </div>
                 <div class="flex-container pic-direction">
-                    <img class="profile-image view-request-val"
-                        src="{{ asset('storage/' . $picturePath->document_loc) }}">
+                    <img class="profile-image view-request-val" src="{{ asset('storage/' . $picturePath->document_loc) }}">
                     <div class="user-info">
                         <span class="h4 fw-bold">{{ $student->last_name }}, {{ $student->first_name }}</span>
                         <span>{{ $student->student_id }}</span>
@@ -73,7 +71,7 @@
                         <form action="{{ route('viewRequestedRecord', ['id' => $requestInfo->request_id]) }}"
                             method="post">
                             @csrf
-                            <button class="form-button blue-view">VIEW</button>
+                            <button class="blue-button button-design">VIEW</button>
                         </form>
                     </div>
                     @if ($requestInfo->status == 0)
@@ -81,11 +79,11 @@
                             <form action="{{ route('acceptRequestFromLogs', ['requestID' => $requestInfo->request_id]) }}"
                                 method="post">
                                 @csrf
-                                <button class="form-button green-approve">APPROVE</button>
+                                <button class="green-button button-design" style="width: 8rem">APPROVE</button>
                             </form>
                         </di>
                         <div>
-                            <button class="form-button red-reject" data-bs-toggle="modal"
+                            <button class="red-button button-design" style="width: 8rem" data-bs-toggle="modal"
                                 data-bs-target="#reject-request-modal">REJECT</button>
                         </div>
                     @endif

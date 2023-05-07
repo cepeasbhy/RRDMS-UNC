@@ -4,7 +4,7 @@
 @section('content')
     <section class="main-container" style="max-width: 80%">
         <form class="mb-3" action="{{ route('index') }}" method="get">
-            <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+            <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
 
         <div class="grid-container wide-gap grid-orientation" style="width: 100%">
@@ -91,40 +91,43 @@
                 </div>
                 <div class="form-button-container flex-container" style="justify-content: center">
                     <div>
-                        <button id="clickButton" class="print" style="padding-block: 0.15rem" data-bs-toggle="modal"
+                        <button id="clickButton" class="green-button button-design"
+                            style="padding-block: 0.15rem; width: 8rem" data-bs-toggle="modal"
                             data-bs-target="#update-modal">UPDATE</button>
                     </div>
                     <div>
-                        <button class="cancel" data-bs-toggle="modal" data-bs-target="#delete-modal">DISPOSE</button>
+                        <button class="red-button button-design" style="padding-block: 0.15rem; width: 8rem"
+                            data-bs-toggle="modal" data-bs-target="#delete-modal">DISPOSE</button>
                     </div>
                 </div>
             </div>
 
-                <div>
-                    <h4 class="head-container request-head">STUDENT CREDENTIALS</h4>
-                    <span class="badge bg-success mb-2">{{ session('msgCred') }}</span>
-                    <div class="flex-container inner outer-cred-card">
-                        @foreach ($credentials as $credential)
-                            @if ($credential->document_name != 'Picture')
-                                <div class="cred-card">
-                                    <button class="btn p-0" data-bs-toggle="modal"
-                                        data-bs-target="{{ '#' . $credential->document_id }}">
-                                        <img class="img-fluid p-1" src="{{ asset('storage/' . $credential->document_loc) }}">
-                                    </button>
-                                    <div style="text-align: center;">
-                                        <label
-                                            class="col-form-label col-form-label-sm">{{ $credential->document_name }}</label>
-                                    </div>
+            <div>
+                <h4 class="head-container request-head">STUDENT CREDENTIALS</h4>
+                <span class="badge bg-success mb-2">{{ session('msgCred') }}</span>
+                <div class="flex-container inner outer-cred-card">
+                    @foreach ($credentials as $credential)
+                        @if ($credential->document_name != 'Picture')
+                            <div class="cred-card">
+                                <button class="btn p-0" data-bs-toggle="modal"
+                                    data-bs-target="{{ '#' . $credential->document_id }}">
+                                    <img class="img-fluid p-1" src="{{ asset('storage/' . $credential->document_loc) }}">
+                                </button>
+                                <div style="text-align: center;">
+                                    <label
+                                        class="col-form-label col-form-label-sm">{{ $credential->document_name }}</label>
                                 </div>
-                            @endif
-                        @endforeach
-                    </div>
-                    <div class="form-button-container">
-                        <button class="print" data-bs-toggle="modal" data-bs-target="#add-single-rec">ADD A
-                            RECORD</button>
-                    </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+                <div class="form-button-container">
+                    <button class="green-button button-design" data-bs-toggle="modal"
+                        data-bs-target="#add-single-rec">ADD A
+                        RECORD</button>
                 </div>
             </div>
+        </div>
         </div>
 
     </section>

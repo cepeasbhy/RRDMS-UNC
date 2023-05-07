@@ -7,8 +7,8 @@
 
 @section('content')
     <section class="main-container" style="max-width: 80%; margin-top: 1rem">
-        <a class="link-button back-link" style="padding-block: 0.25rem" href="{{ route('admin.home') }}"><i
-                class="bi bi-arrow-bar-left"></i>
+        <a class="green-button button-design button-design__link" style="padding-block: 0.25rem; width: 6rem"
+            href="{{ route('admin.home') }}"><i class="bi bi-arrow-bar-left"></i>
             BACK
         </a>
         <div class="head-container request-head" style="margin-top: 2rem">
@@ -16,8 +16,9 @@
         </div>
         <span class="badge bg-success mb-2 mt-2">{{ session('msg') }}</span>
         <div style="margin-bottom: 2rem;">
-            <a style="padding-block: 0.25rem;  border-radius: 5px" class="link-button back-link"
-                href="{{ route('register') }}" rel="noopener noreferrer">ADD REGISTRAR
+            <a class="green-button button-design button-design__link"
+                style="padding-block: 0.25rem;  border-radius: 5px; width: 15rem" href="{{ route('register') }}"
+                rel="noopener noreferrer">ADD REGISTRAR
                 STAFF
             </a>
         </div>

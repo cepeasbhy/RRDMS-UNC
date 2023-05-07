@@ -4,7 +4,7 @@
 @section('content')
     <section class="main-container" style="max-width: 80%; margin-top: 1rem">
         <form class="mb-3" action="{{ route('toBeArchived') }}" method="get">
-            <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+            <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
 
         <div class="grid-container wide-gap grid-orientation" style="width: 100%">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="form-button-container">
-                    <button id="clickButton" class="print" data-bs-toggle="modal"
+                    <button id="clickButton" class="green-button button-design" data-bs-toggle="modal"
                         data-bs-target="#archive-details-modal">ARCHIVE</button>
                 </div>
             </div>

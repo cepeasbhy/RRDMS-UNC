@@ -8,7 +8,7 @@
 @section('content')
     <section class="main-container" style="max-width: 80%">
         <form class="mb-3" action="{{ route('admin.home') }}" method="get">
-            <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+            <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
         <h4 class="head-container request-head">College of {{ $deptName->dept_name }}</h4>
         <div class="tab-container">

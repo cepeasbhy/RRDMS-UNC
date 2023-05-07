@@ -8,7 +8,7 @@
 @section('content')
     <section class="main-container">
         <form style="margin-top: 2rem" class="mb-3" action="{{ route('StudCredHome') }}" method="get">
-            <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+            <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
 
         <h4 class="head-container request-head" style="margin-top: 1rem">Archives Requesting</h4>

@@ -5,7 +5,7 @@
     <section class="main-container">
         <div class="request-head" style="margin-bottom: 3rem">
             <form class="mb-3" action="{{ route('StudCredHome') }}" method="get">
-                <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+                <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
             </form>
         </div>
 
@@ -237,7 +237,7 @@
                 </div>
 
                 <div class="form-button-container">
-                    <button class="form-button add-student">ADD STUDENT</button>
+                    <button class="green-button button-design" style="min-width: 18%">ADD STUDENT</button>
                 </div>
             </form>
         </section>

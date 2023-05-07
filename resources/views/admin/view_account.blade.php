@@ -118,7 +118,7 @@
                     <script type="text/javascript" defer>
                         $(document).ready(function() {
                             $('.transacLogTable').DataTable({
-                                "searching":false,
+                                "searching": false,
                                 "language": {
                                     "lengthMenu": "Logs per page _MENU_",
                                     "zeroRecords": "No Logs Available",

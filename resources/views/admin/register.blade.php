@@ -2,8 +2,8 @@
 
 @section('content')
     <section class="main-container" style="max-width: 50%; margin-top: 1rem">
-        <a class="link-button back-link" style="padding-block: 0.25rem" href="{{ route('admin.viewAccounts') }}"><i
-            class="bi bi-arrow-bar-left"></i>
+        <a class="green-button button-design button-design__link" style="padding-block: 0.25rem; width: 6rem"
+            href="{{ route('admin.viewAccounts') }}"><i class="bi bi-arrow-bar-left"></i>
             BACK
         </a>
         <div class="form-block" style="width: 100%; margin-top: 1rem">
@@ -134,7 +134,7 @@
                         @enderror
                     </div>
                     <div style="margin-top: 1rem; text-align: center">
-                        <button type="submit" class="form-button login">
+                        <button type="submit" class="red-button button-design" style="min-width: 40%">
                             {{ __('Register') }}
                         </button>
                     </div>

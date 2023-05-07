@@ -7,12 +7,12 @@
         <div class="request-head main-container" style="width: 100%; max-width: 80%">
             @if (Auth::user()->account_role == 'cic')
                 <form action="{{ route('cic.request') }}" method="get">
-                    <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i>
+                    <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i>
                         BACK</button>
                 </form>
             @elseif (Auth::user()->account_role == 'student')
                 <form action="{{ route('stud.request') }}" method="get">
-                    <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i>
+                    <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i>
                         BACK</button>
                 </form>
             @endif
@@ -328,24 +328,29 @@
 
         <div class="form-button-container flex-container view-buttons">
             @if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'cic')
-                <button class="print" data-bs-toggle="modal" data-bs-target="#accept-request-modal">ACCEPT
+                <button class="green-button button-design" data-bs-toggle="modal"
+                    data-bs-target="#accept-request-modal">ACCEPT
                     REQUEST</button>
-                <button class="cancel" data-bs-toggle="modal" data-bs-target="#delete-request-modal">REJECT
+                <button class="red-button button-design" data-bs-toggle="modal"
+                    data-bs-target="#delete-request-modal">REJECT
                     REQUEST</button>
             @endif
 
             @if ($requestInfo->status == 'SET FOR RELEASE' && Auth::user()->account_role == 'cic')
-                <button class="print" data-bs-toggle="modal" data-bs-target="#accept-request-modal">COMPLETE
+                <button class="green-button button-design" data-bs-toggle="modal"
+                    data-bs-target="#accept-request-modal">COMPLETE
                     REQUEST</button>
             @endif
 
             @if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'student')
-                <button class="cancel" data-bs-toggle="modal" data-bs-target="#delete-request-modal">CANCEL
+                <button class="red-button button-design" data-bs-toggle="modal"
+                    data-bs-target="#delete-request-modal">CANCEL
                     REQUEST</button>
             @endif
 
             @if (Auth::user()->account_role == 'student')
-                <a class=" print" href="{{ route('stud.pdfRequest', ['requestID' => $requestInfo->request_id]) }}">PRINT
+                <a class=" green-button button-design button-design__link"
+                    href="{{ route('stud.pdfRequest', ['requestID' => $requestInfo->request_id]) }}">PRINT
                     REQUEST</a>
             @endif
         </div>

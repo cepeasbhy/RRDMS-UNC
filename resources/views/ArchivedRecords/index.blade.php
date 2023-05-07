@@ -14,10 +14,13 @@
             </div>
             <div class="flex-container archive-button-orientation">
                 <form class="w-100" action="{{ route('toBeArchived') }}" method="get">
-                    <input class="print" style="padding-block: 0.15rem" type="submit" value="ARCHIVE A RECORD">
+                    <button class="green-button button-design" style="padding-block: 0.15rem; width: 12rem" type="submit"
+                        value="ARCHIVE A RECORD">
+                        ARCHIVE A RECORD</button>
                 </form>
                 <form class="w-100" action="{{ route('getRequests') }}" method="get">
-                    <input class="cancel" type="submit" value="VIEW REQUESTS">
+                    <button class="red-button button-design" style="padding-block: 0.15rem;" type="submit"
+                        value="VIEW REQUESTS">VIEW REQUESTS</button>
                 </form>
             </div>
         </div>

@@ -93,7 +93,8 @@
                             <div class="inner-grid-container">
                                 <div>
                                     <label>Purpose</label>
-                                    <select id="selectPurpose" class="form-select form-select-sm" name="tor[purpose]" id="">
+                                    <select id="selectPurpose" class="form-select form-select-sm" name="tor[purpose]"
+                                        id="">
                                         <option value="">Choose</option>
                                         <option value="Records and References">Records and References</option>
                                         <option value="Board Examination">Board Examination</option>
@@ -103,7 +104,8 @@
                                 </div>
                                 <div>
                                     <label>Others, pls. specify</label>
-                                    <input id="inputPurpose" name="tor[other_purpose]" class="form-control form-control-sm" type="text">
+                                    <input id="inputPurpose" name="tor[other_purpose]" class="form-control form-control-sm"
+                                        type="text">
                                 </div>
                             </div>
                         </div>
@@ -119,8 +121,8 @@
                         </div>
                         <div class="inner flex-container">
                             <div>
-                                <input id="reqCopyGrade" class="form-check-input" type="checkbox" name="reqCopyGrade" value="true"
-                                    onchange="enableButton()">
+                                <input id="reqCopyGrade" class="form-check-input" type="checkbox" name="reqCopyGrade"
+                                    value="true" onchange="enableButton()">
                                 <label>Request Copy of Grades</label>
                             </div>
                             <div class="form-group mb-2">
@@ -143,8 +145,9 @@
                                 <div>
                                     <div class="form-group">
                                         <label>School Year</label>
-                                        <input id="schoolYear" name="copyGrades[schoolYear]" class="form-control form-control-sm"
-                                            type="text" placeholder="e.g. 2019-2020">
+                                        <input id="schoolYear" name="copyGrades[schoolYear]"
+                                            class="form-control form-control-sm" type="text"
+                                            placeholder="e.g. 2019-2020">
                                     </div>
                                 </div>
                             </div>
@@ -504,7 +507,8 @@
                             comply with the requirements of the Data Privacy Act of the Philippines.
                         </p>
                         <div class="form-button-container">
-                            <button id="submitSelected" class="view form-button" disabled>SUBMIT REQUEST</button>
+                            <button id="submitSelected" class="green-button button-design" disabled>SUBMIT
+                                REQUEST</button>
                         </div>
                     </div>
 

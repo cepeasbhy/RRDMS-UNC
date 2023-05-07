@@ -4,7 +4,7 @@
 @section('content')
     <section class="main-container" style="max-width: 80%; margin-top: 1rem">
         <form class="mb-3" action="{{ route('viewRequestDetails', ['requestID' => $requestID]) }}" method="get">
-            <button class="back view form-button"><i class="bi bi-arrow-bar-left"></i> BACK</button>
+            <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
         </form>
 
         <div class="grid-container wide-gap grid-orientation" style="width: 100%">

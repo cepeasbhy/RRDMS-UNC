@@ -3,7 +3,8 @@
 
 @section('content')
     <section class="main-container" style="max-width: 50%; margin-top: 2rem">
-        <button class="back view form-button" onclick="history.back()"><i class="bi bi-arrow-bar-left"></i>
+        <button class="green-button button-design button-design__link" onclick="history.back()"><i
+                class="bi bi-arrow-bar-left"></i>
             BACK</button>
 
         <div class="flex-container info-wrapper">
@@ -72,9 +73,10 @@
                         @endif
                     </form>
                     <div class="flex-container form-button-container account-buttons">
-                        <button class="print" style="padding-block: 0.15rem" form="accountUpdateForm">Update
+                        <button class="green-button button-design button-design__link" style="padding-block: 0.15rem"
+                            form="accountUpdateForm">Update
                             Information</button>
-                        <button id="clickButton" class="cancel" data-bs-toggle="modal"
+                        <button id="clickButton" class="red-button button-design button-design__link" data-bs-toggle="modal"
                             data-bs-target="#change-pass-modal">Change Password</button>
                     </div>
                 </div>
