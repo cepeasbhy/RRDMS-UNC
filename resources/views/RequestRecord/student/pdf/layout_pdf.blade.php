@@ -156,15 +156,70 @@
             <span style="font-size: 30px; font-weight:bold">Total Fee: P{{ number_format($requestedDocumentDetails->total_fee, 2)}}</span>
         </div>
 
-        <div style="margin-top: 20px">
-            <h6 style="font-weight: bold">NON-DISCLOSURE/CONFIDENTIALITY AGREEMENTS</h6>
-            <p style="font-size: 12px; text-align:justify">
-                The parties agree to comply with, and have adequate measures in place to ensure that its directors, officers, employees, and Representatives comply at all times with: (a) the 
-                provisions and obligations contained in Republic Act No. 10173 or the “Data Privacy Act of the Philippines” and its implementing rules and regulations, and (b) other
-                applicable data privacy laws and regulations, as may be promulgated and/or amended from time to time. By agreeing to execute and enter into this Agreement, the parties
-                agree that any information exchanged between them may be collected, processed, shared and used but only for purposes relevant to the Transaction. Each of the parties
-                agrees to hold the other free and harmless from any costs or liability arising from its failure to comply with the requirements of the Data Privacy Act of the Philippines.
-            </p>
+        <div class="row" style="margin-top: 20px">
+            <div class="floatbox">
+                <div class="float-item">
+                    <h5 style="font-size: 20px; font-weight:bold">CLEARED</h5>
+                    <div class="sig-form-group" style="margin-top: 5px">
+                        <div class="office-name">
+                            <p style="font-size: 14px;">LIBRARY:</p>
+                        </div>
+                        <div class="line">
+                            <p>____________________________</p>
+                        </div>
+                    </div>
+                    <div class="sig-form-group" style="margin-top: 5px">
+                        <div class="office-name">
+                            <p style="font-size: 14px;">DEAN:</p>
+                        </div>
+                        <div class="line">
+                            <p>____________________________</p>
+                        </div>
+                    </div>
+                    <div class="sig-form-group" style="margin-top: 5px">
+                        <div class="office-name">
+                            <p style="font-size: 14px;">OSA:</p>
+                        </div>
+                        <div class="line">
+                            <p>____________________________</p>
+                        </div>
+                    </div>
+                    <div class="sig-form-group" style="margin-top: 5px">
+                        <div class="office-name">
+                            <p style="font-size: 14px;">GUIDANCE OFFICE:</p>
+                        </div>
+                        <div class="line">
+                            <p>____________________________</p>
+                        </div>
+                    </div>
+                    <div class="sig-form-group" style="margin-top: 5px">
+                        <div class="office-name">
+                            <p style="font-size: 14px;">CAREER & PLACEMENT:</p>
+                        </div>
+                        <div class="line">
+                            <p>____________________________</p>
+                        </div>
+                    </div>
+                    <div class="sig-form-group" style="margin-top: 5px">
+                        <div class="office-name">
+                            <p style="font-size: 14px;">ACCOUNTING:</p>
+                        </div>
+                        <div class="line">
+                            <p>____________________________</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-item" style="width: 60%">
+                    <h6 style="font-weight: bold">NON-DISCLOSURE/CONFIDENTIALITY AGREEMENTS</h6>
+                    <p style="font-size: 12px; text-align:justify">
+                        The parties agree to comply with, and have adequate measures in place to ensure that its directors, officers, employees, and Representatives comply at all times with: (a) the 
+                        provisions and obligations contained in Republic Act No. 10173 or the “Data Privacy Act of the Philippines” and its implementing rules and regulations, and (b) other
+                        applicable data privacy laws and regulations, as may be promulgated and/or amended from time to time. By agreeing to execute and enter into this Agreement, the parties
+                        agree that any information exchanged between them may be collected, processed, shared and used but only for purposes relevant to the Transaction. Each of the parties
+                        agrees to hold the other free and harmless from any costs or liability arising from its failure to comply with the requirements of the Data Privacy Act of the Philippines.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
