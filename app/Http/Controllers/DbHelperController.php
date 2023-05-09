@@ -17,7 +17,7 @@ use App\Models\RecordPrice;
 use App\Models\log;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\File;
 class DbHelperController extends Controller
 {
     public function getDeptRecords($deptID){
@@ -437,6 +437,8 @@ class DbHelperController extends Controller
         $copyGrades = null;
         $tor = null;
         $requestID = 'REQ'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
+        $folderPath = null;
+        $jsonFileLoc = [];
 
         $certFees = 0;
         $copyOfGradeFees = 0;
@@ -481,6 +483,36 @@ class DbHelperController extends Controller
         $authentication = $this->createJsonAuth($request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies);
         $photocopy = $this->createJsonPhotoCopy($request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies);
 
+        if($request->affidavit != null || $request->updatedPicture != null){
+            $folderPath = 'credentials/'.$studentID.'/'.$requestID;
+           
+            if($request->affidavit != null){
+                $docPath = $request->file('affidavit')->storeAs(
+                    $folderPath,
+                    '['.$studentID.'] AFFIDAVIT.'.$request->file('affidavit')->getClientOriginalExtension(),
+                    'public'
+                );
+
+                $json = array('affidavit' => $docPath );
+                array_push($jsonFileLoc, $json);
+
+            }
+
+            if($request->updatedPicture != null){
+                $docPath = $request->file('updatedPicture')->storeAs(
+                    $folderPath,
+                    '['.$studentID.'] PICTURE.'.$request->file('updatedPicture')->getClientOriginalExtension(),
+                    'public'
+                );
+
+                $json = array('picture' => $docPath );
+                array_push($jsonFileLoc, $json);
+            }
+
+
+        }
+
+
         $studentDeptCourse = Student::select(
             'department_id',
             'course_id'
@@ -490,7 +522,8 @@ class DbHelperController extends Controller
             'request_id' => $requestID,
             'student_id' => $studentID,
             'course_id' => $studentDeptCourse->course_id,
-            'department_id' => $studentDeptCourse->department_id
+            'department_id' => $studentDeptCourse->department_id,
+            'submitted_file_loc' => $jsonFileLoc
         ]);
 
         RequestedDocument::create([
@@ -789,6 +822,7 @@ class DbHelperController extends Controller
             'last_name',
             'course_name',
             'release_date',
+            'submitted_file_loc',
             'requests.status'
         )->leftJoin(
             'users', 'users.user_id', '=', 'requests.student_id'
@@ -883,6 +917,7 @@ class DbHelperController extends Controller
     }
 
     public function cancelStudentRequest($requestID){
+        File::deleteDirectory(storage_path('app\public\credentials\\'.Auth::user()->user_id.'\\'.$requestID));
         RequestedDocument::where('request_id', $requestID)->delete();
         ModelsRequest::where('request_id', $requestID)->delete();
     }

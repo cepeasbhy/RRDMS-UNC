@@ -24,7 +24,7 @@
             </div>
 
             <div>
-                <form action="{{ route('stud.submitRequest') }}" method="post" class="cells view-container">
+                <form action="{{ route('stud.submitRequest') }}" method="post" class="cells view-container" enctype="multipart/form-data">
                     @csrf
                     <div class="inner-cell">
                         <div class="head-container">
@@ -70,6 +70,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-form-label-sm" for="affidavit">Upload Affidavit file</label>
+                            <input id="affidavit" class="form-control form-control-sm w-100" type="file"
+                                name="affidavit">
+                        </div>
                     </div>
 
                     <div class="inner-cell">
@@ -107,6 +112,11 @@
                                     <input id="inputPurpose" name="tor[other_purpose]" class="form-control form-control-sm"
                                         type="text">
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label-sm" for="updatedPicture">Upload Updated Picture</label>
+                                <input id="updatedPicture" class="form-control form-control-sm w-100" type="file"
+                                    name="updatedPicture">
                             </div>
                         </div>
                     </div>

@@ -87,7 +87,40 @@
                         @endif
                     </div>
 
-
+                    <div>
+                        <h4 class="head-container request-head">SUBMITTED DOCUMENTS</h4>
+                        <span class="badge bg-success mb-2">{{ session('msgCred') }}</span>
+                        <div class="flex-container inner outer-cred-card">
+                            @if($requestedDocumentDetails->diploma != null)
+                                <div class="cred-card">
+                                    <button class="btn p-0" data-bs-toggle="modal"
+                                        data-bs-target="#affidavit">
+                                        <img class="img-fluid p-1" src="{{asset('storage/'.$requestInfo->submitted_file_loc[0]['affidavit'])}}">
+                                    </button>
+                                    <div style="text-align: center;">
+                                        <label
+                                            class="col-form-label col-form-label-sm">AFFIDAVIT</label>
+                                    </div>
+                                </div>
+                            @endif
+                            @if($requestedDocumentDetails->transcript_of_record != null)
+                                <div class="cred-card">
+                                    <button class="btn p-0" data-bs-toggle="modal"
+                                        data-bs-target="#picture">
+                                        @if($requestedDocumentDetails->diploma == null)
+                                            <img class="img-fluid p-1" src="{{asset('storage/'.$requestInfo->submitted_file_loc[0]['picture'])}}">
+                                        @else
+                                            <img class="img-fluid p-1" src="{{asset('storage/'.$requestInfo->submitted_file_loc[1]['picture'])}}">
+                                        @endif
+                                    </button>
+                                    <div style="text-align: center;">
+                                        <label
+                                            class="col-form-label col-form-label-sm">PICTURE</label>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -357,9 +390,10 @@
 
     </section>
 
-    <script src="{{ asset('js/main.js') }}"></script>
+    
     <!--Modal for Rejecting Request-->
     @extends('layouts.modals.delete_student_request', ['routeName' => 'cic.rejectRequest', 'request_id' => $requestedDocumentDetails, 'request_status' => $requestInfo])
     <!--Modal for Accepting Request-->
     @extends('layouts.modals.accept_student_request', ['routeName' => 'cic.acceptRequest', 'request_id' => $requestedDocumentDetails, 'request_status' => $requestInfo])
+    @extends('layouts.modals.viewSubmittedDoc')
 @endsection

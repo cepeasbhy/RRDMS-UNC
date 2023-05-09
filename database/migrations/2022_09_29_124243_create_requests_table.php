@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('status')->default('IN PROGRESS');
             $table->date('date_completed')->nullable();
             $table->string('reason_for_rejection')->nullable();
+            $table->json('submitted_file_loc')->nullable();
             $table->timestamps();
 
             $table->foreign('department_id')->references('department_id')->on('departments');

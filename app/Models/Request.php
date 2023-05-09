@@ -17,6 +17,11 @@ class Request extends Model
         'release_date',
         'date_completed',
         'status',
+        'submitted_file_loc',
         'reason_for_rejection'
+    ];
+
+    protected $casts = [
+        'submitted_file_loc' => 'json',
     ];
 }
