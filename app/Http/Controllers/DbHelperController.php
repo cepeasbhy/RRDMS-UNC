@@ -270,13 +270,14 @@ class DbHelperController extends Controller
             Greetings!
             <br>
             <br>
-            Welcome to Registrar Records and Document Management System. 
-            You are now able to request records online! Here are your credentials in 
+            Welcome to the Registrar Records and Document Management System! 
+            <br><br>You are now able to request records online. Here are your credentials in 
             logging into the system:
         '.'<br> <br> USERNAME: '.$request->input('student_id').'
         <br> DEFAULT PASSWORD: welcometounc'.'
-        <br> <br> You will be redirected first in setting up your account. Please fill out all of the 
-        requested information and change your default password';
+        <br> <br> You will be redirected first in setting up your account. Please ensure to fill out all of the 
+        necessary information and change your default password <br> <br> If you have any questions or
+        concerns with your account, please don\'t hesitate in contacting us.';
 
         $mail = new mailController($request->input('email'), $subject, $body, false, '');
         $mail->sendEmail();
@@ -868,9 +869,9 @@ class DbHelperController extends Controller
         <br>
         <br>
         We regret to inform you that we are unable to proceed in fulfilling your request 
-        <b>'.$requestID.'</b> due to the following reason(s) <b>'.$denialReason.'</b>
-        <br> You may submit another request for your records and have the necessary 
-        steps in complying the requirements for your requested record. <br> If you have
+        <b>'.$requestID.'</b> due to the following reason(s): <br><br> <b>'.$denialReason.'</b>
+        <br><br> You may submit another request for your records and have the necessary 
+        steps in complying the requirements for your requested record. <br><br> If you have
         any clarifications or concerns, please don\'t hesitate in contacting us';
 
         $mail = new mailController($studentInfo->email, $subject, $body, false, '');
