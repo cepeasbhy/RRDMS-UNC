@@ -12,9 +12,10 @@
         </form>
         <div class="head-container request-head">
             <h4>Archives Requesting</h4>
-            <span class="badge bg-success mb-2">{{ session('msg') }}</span>
         </div>
-
+        <div>
+            <span class="badge bg-success mb-2">{{session('msg')}}</span>
+        </div>
         <div class="button-container">
             <ul id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">

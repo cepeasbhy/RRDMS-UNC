@@ -109,21 +109,15 @@
                     </div>
                 @endif
             </div>
-
         </div>
-
     </section>
 
 
 
     <!--Modal for Updating Student Information-->
     @extends('layouts.modals.updateModal', ['routeName' => 'updateStudent', 'staff' => $staff])
-    <!--Modal for Deleting Student-->
-    @extends('layouts.modals.deleteModal', ['routeName' => 'deleteStudent', 'word' => 'records'])
     <!--Modal for Viewing Credential-->
     @extends('layouts.modals.viewCredModal', ['fromRequestedView' => false])
-    <!--Modal for deleting Credential-->
-    @extends('layouts.modals.deleteCredModal', ['routeName' => 'deleteCred'])
     <!--Modal for updating Credential-->
     @extends('layouts.modals.updateCredModal', ['routeName' => 'updateCred'])
     <!--Modal for adding a Credential-->

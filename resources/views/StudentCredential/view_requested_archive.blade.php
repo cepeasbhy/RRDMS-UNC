@@ -18,9 +18,7 @@
                     <div class="user-info">
                         <span class="h4 fw-bold">{{ $student->last_name }}, {{ $student->first_name }}
                             {{ mb_substr($student->middle_name, 0, 1) . '.' }}</span>
-                        <br>
                         <span>{{ $student->student_id }}</span>
-                        <br>
                         <span>{{ $student->course_name }}</span>
                     </div>
                 </div>
@@ -83,32 +81,22 @@
                             value="{{ date('Y-m-d', strtotime($student->updated_at)) }}" readonly>
                     </div>
                 </div>
-                <div class="form-button-container">
-                    <form action="{{ route('returnToArchive', ['id' => $requestID]) }}" method="post">
-                        @csrf
-                        <button class="green-button button-design">PUT BACK TO ARCHIVE</button>
-                    </form>
-                </div>
             </div>
 
             <div>
-                <div class="head-container request-head">
-                    <h4>STUDENT CREDENTIALS</h4>
-                </div>
+                <h4 class="head-container request-head">STUDENT CREDENTIALS</h4>
+                <span class="badge bg-success mb-2">{{ session('msgCred') }}</span>
                 <div class="flex-container inner outer-cred-card">
                     @foreach ($credentials as $credential)
                         @if ($credential->document_name != 'Picture')
-                            <div class="col-sm-4 mt-2">
-                                <div class="card">
-                                    <button class="btn p-0" data-bs-toggle="modal"
-                                        data-bs-target="{{ '#' . $credential->document_id }}">
-                                        <img class="img-fluid p-1"
-                                            src="{{ asset('storage/' . $credential->document_loc) }}">
-                                    </button>
-                                    <div class="card-body text-center p-0">
-                                        <label
-                                            class="col-form-label col-form-label-sm">{{ $credential->document_name }}</label>
-                                    </div>
+                            <div class="cred-card">
+                                <button class="btn p-0" data-bs-toggle="modal"
+                                    data-bs-target="{{ '#' . $credential->document_id }}">
+                                    <img class="img-fluid p-1" src="{{ asset('storage/' . $credential->document_loc) }}">
+                                </button>
+                                <div style="text-align: center;">
+                                    <label
+                                        class="col-form-label col-form-label-sm">{{ $credential->document_name }}</label>
                                 </div>
                             </div>
                         @endif

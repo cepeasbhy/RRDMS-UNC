@@ -60,7 +60,7 @@ class DbHelperController extends Controller
             'courses', 'courses.course_id', '=', 'students.course_id'
         )->leftJoin(
             'users', 'users.user_id', '=', 'students.student_id'
-        )->where('archive_status', 0);
+        )->where('status', 1);
 
         if(Auth::user()->account_role != 'cic'){
             return $students->get();
@@ -78,6 +78,7 @@ class DbHelperController extends Controller
             'first_name',
             'last_name',
             'dept_name',
+            'available_status',
             'course_name',
         )->leftJoin(
             'departments', 'departments.department_id', '=', 'archives.department_id'
@@ -88,7 +89,7 @@ class DbHelperController extends Controller
         );
 
         if(Auth::user()->account_role != 'cic'){
-            return $archivedRecords->get();
+            return $archivedRecords->where('available_status', 1)->get();
         }else{
             $staff = $this->getStaffInfo(Auth::user()->user_id);
             return $archivedRecords->where(
@@ -346,37 +347,43 @@ class DbHelperController extends Controller
     }
 
     public function singleArchive($studentID, Request $request){
+        $student = Student::select('archive_status')->where('student_id', $studentID)->firstOrFail();
 
-        $archiveID = 'ARCHIVE'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
-        $studentDeptCourse = Student::select(
-            'department_id',
-            'course_id'
-        )->where('student_id', $studentID)->first();
+        if($student->archive_status == 1){
+            Archive::where('student_id', $studentID)->update(['available_status' => 1]);
+        }else{
+            $archiveID = 'ARCHIVE'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
+            $studentDeptCourse = Student::select(
+                'department_id',
+                'course_id'
+            )->where('student_id', $studentID)->first();
+
+            Student::where('student_id', $studentID)->update([
+                'archive_status' => 1,
+            ]);
+
+            Archive::create([
+                'student_id' => $studentID,
+                'archive_id' => $archiveID,
+                'department_id' => $studentDeptCourse->department_id,
+                'course_id' => $studentDeptCourse->course_id,
+            ]);
+
+            $credController = new CredentialController;
+            $credController->archiveCredentials($studentID);
+        }
 
         if($request->input('status') == 4){
             Student::where('student_id', $studentID)->update([
-                'archive_status' => 1,
                 'status' => 4,
                 'date_graduated' => $request->input('gradDate')
             ]);
         }else{
             Student::where('student_id', $studentID)->update([
-                'archive_status' => 1,
-                'status' =>$request->input('status')
+                'status' => $request->input('status')
             ]);
         }
         
-
-        Archive::create([
-            'student_id' => $studentID,
-            'archive_id' => $archiveID,
-            'department_id' => $studentDeptCourse->department_id,
-            'course_id' => $studentDeptCourse->course_id,
-        ]);
-
-        $credController = new CredentialController;
-        $credController->archiveCredentials($studentID);
-
         $description = "Archived student with a student ID of ".$studentID;
         $this->createLog($description);
 
@@ -755,29 +762,39 @@ class DbHelperController extends Controller
     public function deleteRequestedArchive($requestID){
         $archive = $this->getRequestedArchiveInfo($requestID);
 
-        RequestedArchive::select()->where('request_id', $archive['requestInfo']->request_id)->delete();
-
         Archive::where('archive_id', $archive['requestedArchived']->archive_id)->update([
             'available_status' => 1
         ]);
+
+        RequestedArchive::where("request_id", $requestID)->delete();
 
         $description = "Cancelled request for an archived record with a request ID of ".$archive['requestedArchived']->archive_id;
         $this->createLog($description);
     }
 
     public function rejectRequestedArchive($requestID, Request $request){
+
+        $archive = $this->getRequestedArchiveInfo($requestID);
+        Archive::where('archive_id', $archive['requestedArchived']->archive_id)->update([
+            'available_status' => 1
+        ]);
+        
         RequestedArchive::where('request_id', $requestID)->update([
             'reason_for_rejection' => $request->input('reason'),
             'status' => 2
         ]);
 
         $description = "Rejected request for an archived record with a request ID of ".$requestID;
-        
         $this->createLog($description);
     }
 
     public function accpetRequestedArchive($requestID){
+        $requestInfo = RequestedArchive::where('request_id', $requestID)->firstOrFail();
+        $archiveInfo = Archive::where('archive_id', $requestInfo->archive_id)->firstOrFail();
+
         RequestedArchive::where('request_id', $requestID)->update(['status' => 1]);
+
+        Student::where('student_id', $archiveInfo->student_id)->update(['status' => 1]);
 
         $description = "Granted request for an archived record with a request ID of ".$requestID;
         $this->createLog($description);
@@ -799,19 +816,6 @@ class DbHelperController extends Controller
             'requestInfo' => $requestInfo,
             'requestedArchived' => $requestedArchived
         ];
-    }
-
-    public function returnToArchive($id){
-        $archive = $this->getRequestedArchiveInfo($id);
-
-        Archive::where('archive_id', $archive['requestedArchived']->archive_id)->update([
-            'available_status' => 1
-        ]);
-
-        RequestedArchive::where('request_id', $id)->delete();
-
-        $description = "Returned the record to archive with an archive ID of ".$archive['requestedArchived']->archive_id;
-        $this->createLog($description);
     }
 
     public function getRequestedDocuments(){

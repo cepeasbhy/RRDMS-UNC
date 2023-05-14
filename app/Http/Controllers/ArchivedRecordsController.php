@@ -37,10 +37,9 @@ class ArchivedRecordsController extends Controller
 
     public function viewRecord(DbHelperController $db, $studentID)
     {
-        $fromIndexPage = Student::select('archive_status'
-        )->where('student_id', $studentID)->firstOrFail();
+        $student = Student::select('status')->where('student_id', $studentID)->firstOrFail();
 
-        if (substr($fromIndexPage, -2, 1) == 0) {
+        if ($student->status == 1) {
             $student = $db->getStudentInfo($studentID);
             return view('ArchivedRecords.view_record', [
                 'student' => $student['studentInfo'],

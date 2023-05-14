@@ -50,9 +50,7 @@ Route::group(['middleware' => ['role:staff', 'prevent-back-history', 'redirect-d
     Route::get('/stud_cred_mngmnt/request_archive/view_requested_archive/{id}', [StudCredController::class, 'viewRequestedArchive'])->name('viewRequestedArchive');
     Route::post('/stud_cred_mngmnt/request_archive/make_request/{id}', [StudCredController::class, 'makeRequestArchive'])->name('makeRequestArchive');
     Route::post('/stud_cred_mngmnt/request_archive/cancel_request/{requestID}', [StudCredController::class, 'cancelRequestedArchive'])->name('cancelRequestedArchive');
-    Route::post('/stud_cred_mngmnt/request_archive//view_requested_archive/return_archive/{id}', [StudCredController::class, 'returnToArchive'])->name('returnToArchive');
     Route::post('/stud_cred_mngmnt/view_student/update/{id}', [StudCredController::class, 'update'])->name('updateStudent');
-    Route::post('/stud_cred_mngmnt/view_student/delete/{id}', [StudCredController::class, 'destroy'])->name('deleteStudent');
     Route::post('/stud_cred_mngmnt/add_student', [StudCredController::class, 'create'])->name('submitStudent');
     Route::post('/stud_cred_mngmnt/delete_cred/{studID}/{docID}', [StudCredController::class, 'deleteCred'])->name('deleteCred');
     Route::post('/stud_cred_mngmnt/update_cred/{studID}/{docID}', [StudCredController::class, 'updateCred'])->name('updateCred');

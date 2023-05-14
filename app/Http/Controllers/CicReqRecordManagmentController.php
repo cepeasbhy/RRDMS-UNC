@@ -38,17 +38,17 @@ class CicReqRecordManagmentController extends Controller
 
     public function rejectRequest(Request $request, DbHelperController $db, $requestID){
         $db->rejectStudentRequest($request->input('denyReason'), $requestID);
-        return redirect('/cic/request')->with('msgCred', 'Request Has Been Rejected.');
+        return redirect('/cic/request')->with('msg', 'Request Has Been Rejected.');
     }
 
     public function acceptRequest(Request $request, DbHelperController $db, $requestID){
         $db->acceptStudentRequest($requestID, $request->input('releaseDate'));
-        return redirect('/cic/request')->with('msgCred', 'Request Has Been Accepted.');
+        return redirect('/cic/request')->with('msg', 'Request Has Been Accepted.');
     }
 
     public function completeRequest(DbHelperController $db, Request $request, $requestID){
         $db->completeStudentRequest($requestID, $request);
-        return redirect('/cic/request')->with('msgCred', 'Request Has Been Completed.');
+        return redirect('/cic/request')->with('msg', 'Request Has Been Completed.');
     }
 
 }

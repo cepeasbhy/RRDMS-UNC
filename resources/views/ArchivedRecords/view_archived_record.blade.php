@@ -17,12 +17,11 @@
                     <img class="profile-image view-request-val" data-bs-toggle="modal"
                         data-bs-target="{{ '#' . $picturePath->document_id }}"
                         src="{{ asset('storage/' . $picturePath->document_loc) }}">
-                    <div>
+                    <div class="user-info">
                         <span class="h4 fw-bold">{{ $student->last_name }}, {{ $student->first_name }}
                             {{ mb_substr($student->middle_name, 0, 1) . '.' }}</span>
-                        <br>
+                        
                         <span>{{ $student->student_id }}</span>
-                        <br>
                         <span>{{ $student->course_name }}</span>
                     </div>
                 </div>

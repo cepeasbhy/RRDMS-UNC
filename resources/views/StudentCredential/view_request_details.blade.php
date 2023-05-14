@@ -12,9 +12,7 @@
             <img class="profile-image view-request-val" src="{{ asset('storage/' . $picturePath->document_loc) }}">
             <div class="user-info">
                 <span class="h4 fw-bold">{{ $student->last_name }}, {{ $student->first_name }}</span>
-                <br>
                 <span>{{ $student->student_id }}</span>
-                <br>
                 <span>{{ $student->course_name }}</span>
             </div>
         </div>

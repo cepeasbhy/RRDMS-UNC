@@ -113,7 +113,6 @@
                         <th class="table-header">Archive ID</th>
                         <th class="table-header">Staff ID</th>
                         <th class="table-header">Request Date</th>
-                        <th class="table-header">Action</th>
                     </thead>
                     <tbody>
                         @foreach ($requestedArchives as $requestedArchive)
@@ -124,11 +123,6 @@
                                     <td data-label="Staff Id">{{ $requestedArchive->staff_id }}</td>
                                     <td data-label="Request Date">
                                         {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
-                                    </td>
-                                    <td data-label="Action">
-                                        <a class="print" style="text-decoration: none"
-                                            href="{{ route('viewRequestedArchive', ['id' => $requestedArchive->request_id]) }}">View
-                                            Record</a>
                                     </td>
                                 </tr>
                             @endif

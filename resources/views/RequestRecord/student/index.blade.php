@@ -13,16 +13,16 @@
                     Request History
                 </h4>
             </div>
-            <span class="badge bg-success mb-2">{{ session('msg') }}</span>
+            <div>
+                <span class="badge bg-success mb-1">{{session('msg')}}</span>
+            </div>
             <div class="link-button-container" style="min-width: 20%">
                 <a class="red-button button-design button-design__link" href="{{ route('stud.makeRequest') }}">MAKE
                     REQUEST</a>
             </div>
         </div>
 
-        <div class="col mb-2">
-            <span class="badge bg-success mb-2">{{ session('msg') }}</span>
-        </div>
+       
 
         <div class="button-container">
             <ul id="myTab" role="tablist">

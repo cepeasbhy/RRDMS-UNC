@@ -37,7 +37,7 @@ class StudRequestController extends Controller
 
     public function cancelRequest(DbHelperController $db, $requestID){
         $db->cancelStudentRequest($requestID);
-        return redirect('/request')->with('msgCred', 'Request Has Been Deleted.');
+        return redirect('/request')->with('msg', 'You have successfully cancelled your request.');
     }
 
     public function makeRequest(DbHelperController $db){
@@ -62,7 +62,7 @@ class StudRequestController extends Controller
         }
 
         $db->insertRequest($request, Auth::user()->user_id);
-        return redirect('/request')->with('msgCred', 'Request Has Been Submitted.');
+        return redirect('/request')->with('msg', 'Request has been submitted.');
     }
 
     public function studAccountSetup(){
