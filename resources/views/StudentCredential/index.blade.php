@@ -8,9 +8,9 @@
 @section('content')
     <section class="view-container">
         <div class="grid-container student-lists form-content">
-            <div class="head-container request-head" style="margin-bottom: 0">
-                <h2>Student Credential Management</h2>
-                <span class="badge bg-success mb-2">{{ session('msg') }}</span>
+            <div>
+                <h2 class="head-container request-head" style="margin-bottom: 0">Student Credential Management</h2>
+
             </div>
             <div class="grid-container cic-buttons">
                 @if (Auth::user()->account_role == 'cic')
@@ -29,7 +29,9 @@
                 @endif
             </div>
         </div>
-
+        <div style="width: 79%">
+            <span style="text-align: left" class="badge bg-success mb-2">{{ session('msg') }}</span>
+        </div>
         <div class="tab-container" style="min-width: 80%; border-top: 0">
             <div class="tab-container__contents active">
                 <table id="studentsTable">
