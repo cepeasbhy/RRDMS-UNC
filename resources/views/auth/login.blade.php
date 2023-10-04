@@ -1,62 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-    <article class="view-container">
-        <div class="unc-logo">
-            <img src="{{ asset('/img/unc-logo.png') }}" height="100%" width="100px">
-        </div>
-        <h2 style="text-align: center">Registrar Records and Document Management System</h2>
+    <section class="login">
+        <img src="{{ asset('/img/unc-logo.png') }}" height="100%" width="100px">
+        <h1>Registrar Records and Document Management System</h1>
 
-        <section class="form-block">
-            <div class="form-block-header">
-                <h5>ACCOUNT LOGIN</h5>
-            </div>
+        <section class="login__content">
+            <h2>Account Login</h2>
 
-            <div class="form-content">
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <label for="user_id">User ID</label>
-                    <div class="input-container">
-                        <span class="input-icon">
-                            <i class="bi bi-person-circle"></i>
+            <form method="POST" class="login__content--form" action="{{ route('login') }}">
+                @csrf
+                <label for="user_id">User ID</label>
+                <div class="login__content--form-group">
+                    <span class="icon">
+                        <i class="bi bi-person-circle"></i>
+                    </span>
+                    <input id="user_id" type="text"
+                        class="@error('user_id') is-invalid @enderror" name="user_id"
+                        value="{{ old('user_id') }}" required placeholder="ID">
+                    @error('user_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
                         </span>
-                        <input id="user_id" type="text"
-                            class="input-box form-control @error('user_id') is-invalid @enderror" name="user_id"
-                            value="{{ old('user_id') }}" required>
-                        @error('user_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                    @enderror
+                </div>
 
-                    <label for="password" class="password-label">{{ __('Password') }}</label>
-                    <div class="input-container">
-                        <span class="input-icon">
-                            <i class="bi bi-key-fill"></i>
+                <label for="password" class="password-label">{{ __('Password') }}</label>
+                <div class="login__content--form-group">
+                    <span class="icon">
+                        <i class="bi bi-key-fill"></i>
+                    </span>
+                    <input id="password" type="password"
+                        class="@error('password') is-invalid @enderror" name="password" required
+                        autocomplete="current-password" placeholder="Password">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
                         </span>
-                        <input id="password" type="password"
-                            class="input-box form-control @error('password') is-invalid @enderror" name="password" required
-                            autocomplete="current-password">
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                    @enderror
+                </div>
 
-                    <div class="form-button-container">
-                        <button type="submit" class="red-button button-design" style="min-width: 40%">
-                            {{ __('Login') }}
-                        </button>
-                    </div>
-            </div>
-
-
-
+                <button type="submit">
+                    {{ __('Login') }}
+                </button>
             </form>
-            </div>
         </section>
 
-    </article>
+    </section>
 @endsection
