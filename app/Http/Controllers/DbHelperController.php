@@ -31,7 +31,7 @@ class DbHelperController extends Controller
             'last_name',
             'dept_name',
             'course_name',
-            'admission_year',
+            'admission_date',
         )->leftJoin(
             'departments',
             'departments.department_id',
@@ -65,7 +65,7 @@ class DbHelperController extends Controller
             'last_name',
             'dept_name',
             'course_name',
-            'admission_year',
+            'admission_date',
         )->leftJoin(
             'departments',
             'departments.department_id',
@@ -185,7 +185,7 @@ class DbHelperController extends Controller
             'archive_status',
             'account_role',
             'activated_status',
-            'admission_year',
+            'admission_date',
             'students.created_at',
             'students.updated_at'
         )->leftJoin(
@@ -233,7 +233,7 @@ class DbHelperController extends Controller
             'status',
             'date_graduated',
             'archive_status',
-            'admission_year',
+            'admission_date',
             'archives.created_at AS date_archived',
             'students.created_at AS date_filed',
             'archives.updated_at'
@@ -308,14 +308,14 @@ class DbHelperController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable', 'string', 'max:255'],
-            'admission_year' => ['required', 'integer', 'min:1948'],
+            'admission_date' => ['required', 'date'],
             'course_id' => ['required', 'string', 'max:255'],
             'department_id' => ['required', 'string', 'max:255'],
         ]);
 
         Student::create([
             'student_id' => $request->input('student_id'),
-            'admission_year' => $request->input('admission_year'),
+            'admission_date' => $request->input('admission_date'),
             'course_id' => $request->input('course_id'),
             'department_id' => $request->input('department_id')
         ]);
@@ -355,15 +355,16 @@ class DbHelperController extends Controller
 
     public function updateStudent(Request $request, $id, $isFromArchive)
     {
+
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'admission_year' => ['required', 'integer', 'min:1948'],
+            'admission_date' => ['required', 'date'],
             'course_id' => ['required', 'string', 'max:255'],
             'department_id' => ['required', 'string', 'max:255'],
-            'status' => ['required', 'integer', 'min:0', 'max:2'],
+            'status' => ['required', 'integer', 'min:0', 'max:4'],
         ]);
 
         User::where('user_id', $id)->update([
@@ -376,7 +377,7 @@ class DbHelperController extends Controller
         Student::where('student_id', $id)->update([
             'department_id' => $request->input('department_id'),
             'course_id' => $request->input('course_id'),
-            'admission_year' => $request->input('admission_year'),
+            'admission_date' => $request->input('admission_date'),
             'status' => $request->input('status')
         ]);
 
