@@ -9,7 +9,7 @@
 }
 
 @mixin container($min, $average, $max){
-    max-width: clamp($min, $average, $max);
+    width: clamp($min, $average, $max);
     margin-inline: auto;
 }
 
@@ -19,9 +19,62 @@
     gap: $gap;
 }
 
-body{
-    background-color: var(--clr-primary-bg);
+//Table layout for wide screens
+@mixin table-wide(){
+    & table{width: 100%;}
+    & thead{
+        background-color: var(--clr-primary-red);
+        color: var(--clr-neutral-white);
+        font-weight: var(--font-weight-600);
+        & th{padding-block: 1rem; padding-left: .5rem;}
+    }
+    & tbody tr{
+        &:nth-child(even){background-color: rgba(0 0 0 / .1)}
+        & td{
+            padding-block: 1rem;
+            &:last-of-type{text-align: center;}
+        }
+    }
 }
+
+//Table layout for small screens
+@mixin table-small(){
+    & thead{display: none}
+    & tbody tr td{
+        display: block;
+        text-align: right;
+        padding: .5rem 1rem;
+        position: relative;
+        &:last-of-type{text-align: right;}
+        &:nth-child(4){
+            font-size: .875rem;
+        }
+        &::before{
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            padding-left: 1rem;
+            font-weight: var(--font-weight-600);
+            font-size: 1rem;
+        }
+    }
+}
+
+@mixin link-button{
+    text-decoration: none;
+    background-color: var(--clr-secondary-green);
+    color: var(--clr-neutral-white);
+    padding: .5rem 1rem;
+    &:hover, &:focus, &:active{
+        background-color: transparent;
+        border: 1px solid var(--clr-secondary-green);
+        color: var(--clr-secondary-green);
+        font-weight: var(--font-weight-600);
+        box-shadow: 3px 3px 0 var(--clr-secondary-green);
+    }
+}
+
+body{background-color: var(--clr-primary-bg)}
 
 .content{
     @include flex(column, 2rem);
@@ -174,6 +227,134 @@ body{
     }
 }
 
+//Account management
+.manage-acc{
+    width: 90%;
+    padding-block: 3rem;
+
+    & .active{display: block;}
+
+    & a{@include link-button()}
+
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        margin-block: 3rem 2rem;
+        padding-left: .5rem;
+        border-left: 3px solid var(--clr-primary-red);
+    }
+
+    &__tabs{
+        padding-block: 2rem .5rem;
+
+        & ul{
+            @include flex(row, .5rem);
+            border-bottom: 1px solid #333;
+            & li{
+                padding-bottom: .5rem;
+                &:hover, &:focus, &:active{border-bottom: 2px solid var(--clr-accent-blue)}
+            }
+        }
+
+        & button{
+            background-color: transparent;
+            border: none;
+            padding: .5rem 1rem;
+            font-weight: var(--font-weight-500);
+            &:hover, &:focus, &:active{
+                font-weight: var(--font-weight-600);
+                color: var(--clr-accent-blue);
+            }
+        }
+    }
+
+    &__content{
+        &--group{
+            display: none;
+            @include table-wide()
+        }
+    }
+}
+
+//Registration page
+.register{
+    margin-block: 1rem;
+    padding-block: 2rem;
+    width: 90%;
+
+    & a{@include link-button()}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        margin-block: 2rem;
+        padding-left: .5rem;
+        border-left: 3px solid var(--clr-primary-red);
+    }
+
+    & h2{
+        font-size: var(--font-size-500);
+        text-transform: uppercase;
+        font-weight: var(--font-weight-600);
+        border-bottom: 1px solid var(--clr-accent-gray);
+        background-color: var(--clr-accent-gray-light);
+        padding: 1rem 2rem;
+    }
+
+    &__contents{
+        box-shadow: 0 0 5px rgba(0 0 0 / .6);
+        &--form{
+            padding: 1rem 3rem;
+            & .form-group{
+                & input[type="file"]{
+                    padding: .30rem .75rem;
+                    font-size: .875rem;
+                }
+                @include flex(column, .5rem);
+                margin-bottom: 1rem;
+                & input, select{
+                    background-color: transparent;
+                    border: 1px solid var(--clr-accent-gray);
+                    padding: .5rem 1rem;
+                    cursor: pointer;
+                }
+            }
+
+            & button{
+                width: 100%;
+                background-color: var(--clr-primary-red);
+                border: 0;
+                color: var(--clr-neutral-white);
+                font-weight: var(--font-weight-600);
+                padding: .5rem 1rem;
+                margin-block: 1rem;
+
+                &:hover, &:focus, &:active{
+                    background-color: transparent;
+                    border: 1px solid var(--clr-primary-red);
+                    color: var(--clr-primary-red);
+                    box-shadow: 3px 3px 0 var(--clr-primary-red);
+                }
+            }
+        }
+    }
+}
+
+//Departments Card
+.department{
+    padding-block: 3rem;
+    & a{@include link-button()}
+
+    & h2{
+        font-size: clamp(var(--font-size-600), 5vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        margin-block: 2rem;
+        padding-left: .5rem;
+        border-left: 5px solid var(--clr-primary-red);
+    }
+
+    &__contents{@include table-wide()}
+}
+
 @media(min-width: 50em){
     .login{
         padding-block: 3rem;
@@ -223,6 +404,36 @@ body{
         &__cards--group{
             @include grid(auto-fit, 300px, 1fr, 2rem)
         }
+    }
+
+    .manage-acc, .department{@include container(70%, 80vw, 90rem)}
+
+
+    .register{
+        @include container(40%, 50vw, 60%);
+        &__contents--form{
+            & .form-group{
+                flex-direction: row;
+                align-items: center;
+
+                & label{min-width: 15ch}
+                & input, select{width: 100%;}
+            }
+        }
+    }
+}
+
+//Media query for smaller tables
+@media(max-width: 800px){
+    .manage-acc{
+        &__content{
+            &--group {@include table-small()}
+        }
+    }
+
+    .department{
+        width: 90%;
+        &__contents{@include table-small()}
     }
 }
 

@@ -6,47 +6,43 @@
 @endsection
 
 @section('content')
-    <section class="main-container" style="max-width: 80%; margin-top: 1rem">
-        <a class="green-button button-design button-design__link" style="padding-block: 0.25rem; width: 6rem"
-            href="{{ route('admin.home') }}"><i class="bi bi-arrow-bar-left"></i>
+    <section class="manage-acc">
+        <a href="{{ route('admin.home') }}"><i class="bi bi-arrow-bar-left"></i>
             BACK
         </a>
-        <div class="head-container request-head" style="margin-top: 2rem">
-            <h3>Account Management</h3>
-        </div>
+        <h1>Account Management</h1>
         <span class="badge bg-success mb-2 mt-2">{{ session('msg') }}</span>
-        <div style="margin-bottom: 2rem;">
-            <a class="green-button button-design button-design__link"
-                style="padding-block: 0.25rem;  border-radius: 5px; width: 15rem" href="{{ route('register') }}"
-                rel="noopener noreferrer">ADD REGISTRAR
-                STAFF
-            </a>
-        </div>
-        <div class="button-container">
-            <ul id="myTab" role="tablist">
+        <a href="{{ route('register') }}" rel="noopener noreferrer">
+            ADD REGISTRAR STAFF
+        </a>
+        <div class="manage-acc__tabs">
+            <ul id="myTab" role="list">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="staffAccount" data-bs-toggle="tab" data-bs-target="#staff-account"
-                        type="button" role="tab" aria-controls="staff-account" aria-selected="true">Staff
-                        Accounts</button>
+                    <button class="nav-link active" id="staffAccount" data-bs-toggle="tab" data-tab-target="#staff-account" data-bs-target="#staff-account"
+                        type="button" role="tab" aria-controls="staff-account" aria-selected="true">
+                        Staff Accounts
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="studentAccount" data-bs-toggle="tab" data-bs-target="#student-account"
-                        type="button" role="tab" aria-controls="student-account" aria-selected="false">Student
-                        Accounts</button>
+                    <button class="nav-link" id="studentAccount" data-bs-toggle="tab" data-tab-target="#student-account" data-bs-target="#student-account"
+                        type="button" role="tab" aria-controls="student-account" aria-selected="false">
+                        Student Accounts</button>
                 </li>
             </ul>
         </div>
-        <div class="tab-container">
-            <div class="tab-container__contents active" id="staff-account" role="tabpanel"
-                aria-labelledby="staff-account-tab">
+        <div class="manage-acc__content">
+            <div class="manage-acc__content--group active" id="staff-account" role="tabpanel"
+                aria-labelledby="staff-account-tab" data-tab-content>
                 <table class="staffTable">
                     <thead>
-                        <th class="table-header">User ID</th>
-                        <th class="table-header">First Name</th>
-                        <th class="table-header">Last Name</th>
-                        <th class="table-header">Assigned Department</th>
-                        <th class="table-header">Position</th>
-                        <th class="table-header">Action</th>
+                        <tr>
+                            <th>User ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Assigned Department</th>
+                            <th>Position</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach ($staffAccounts as $staffAccount)
@@ -57,7 +53,7 @@
                                 @if ($staffAccount->dept_name == null)
                                     <td data-label="Assigned Dept.">Not Assigned</td>
                                 @else
-                                    <td data-label="Position">{{ $staffAccount->dept_name }}</td>
+                                    <td data-label="Dept.">{{ $staffAccount->dept_name }}</td>
                                 @endif
                                 @switch($staffAccount->account_role)
                                     @case('cic')
@@ -71,15 +67,17 @@
                                     @default
                                         <td data-label="Position">Records Associate</td>
                                 @endswitch
-                                <td data-label="Action"><a
-                                        href="{{ route('admin.viewAccountInfo', ['role' => 'staff', 'userID' => $staffAccount->staff_id]) }}"
-                                        class="link-button back-link" style="padding-block: 0.25rem">VIEW</a></td>
+                                <td data-label="Action">
+                                    <a href="{{ route('admin.viewAccountInfo', ['role' => 'staff', 'userID' => $staffAccount->staff_id]) }}">
+                                        VIEW
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            <div class="tab-container__contents" id="student-account" role="tabpanel" aria-labelledby="student-account-tab">
+            <div class="manage-acc__content--group" id="student-account" role="tabpanel" aria-labelledby="student-account-tab" data-tab-content>
                 <table class="studentTable">
                     <thead>
                         <th class="table-header">User ID</th>

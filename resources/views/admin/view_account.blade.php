@@ -2,14 +2,14 @@
 @extends('layouts.header')
 
 @section('content')
-    <section class="main-container" style="max-width: 80%">
-        <a class="link-button back-link" style="padding-block: 0.25rem" href="{{ route('admin.viewAccounts') }}"><i
-                class="bi bi-arrow-bar-left"></i>
+    <section class="acc-info">
+        <a href="{{ route('admin.viewAccounts') }}">
+            <i class="bi bi-arrow-bar-left"></i>
             BACK
         </a>
-        <div class="grid-container wide-gap grid-orientation" style="width: 100%">
+        <h1>ACCOUNT INFORMATION</h1>
+        <div class="acc-info__contents">
             <div style="margin-top: 1rem">
-                <h4 class="head-container request-head">ACCOUNT INFORMATION</h4>
                 <span class="badge bg-success mb-2">{{ session('msg') }}</span>
                 <div class="flex-container pic-direction">
                     <img class="profile-image view-request-val" data-bs-toggle="modal"
