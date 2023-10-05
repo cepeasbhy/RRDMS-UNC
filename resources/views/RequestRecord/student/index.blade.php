@@ -8,20 +8,21 @@
 @section('content')
     <section class="view-container">
         <div class="mix-container">
-            <div class="flex-container" style="flex-direction: column">
-                <h4 class="head-container request-head">
+            <div class="head-container request-head">
+                <h4>
                     Request History
                 </h4>
-                <span class="badge bg-success mb-1">{{ session('msg') }}</span>
             </div>
-
+            <div>
+                <span class="badge bg-success mb-1">{{session('msg')}}</span>
+            </div>
             <div class="link-button-container" style="min-width: 20%">
                 <a class="red-button button-design button-design__link" href="{{ route('stud.makeRequest') }}">MAKE
                     REQUEST</a>
             </div>
         </div>
 
-
+       
 
         <div class="button-container">
             <ul id="myTab" role="tablist">

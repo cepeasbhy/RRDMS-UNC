@@ -13,4 +13,3 @@ yarn-error.log
 /.idea
 /.vscode
 /node_modules/.vite
-node_modules
