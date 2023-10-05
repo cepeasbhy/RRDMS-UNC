@@ -28,31 +28,31 @@ class CredentialController extends Controller
             'Permit to Cross Enroll' => 'permitCrossEnroll'
         ];
 
-        foreach($descriptions as $fileName => $keyName){
-            if ($request->hasFile($keyName)){
+        foreach ($descriptions as $fileName => $keyName) {
+            if ($request->hasFile($keyName)) {
                 $this->saveCredential($request, $keyName, $fileName);
             }
         }
-       
     }
 
-    public function saveCredential($request, $keyName, $fileName){
+    public function saveCredential($request, $keyName, $fileName)
+    {
 
         $folderPath = '';
 
-        if($keyName == 'picture'){
+        if ($keyName == 'picture') {
             $folderPath = 'Picture';
-        }else{
-            $folderPath = 'credentials/'.$request->student_id;
+        } else {
+            $folderPath = 'credentials/' . $request->student_id;
         }
 
         $docPath = $request->file($keyName)->storeAs(
             $folderPath,
-            '['.$request->student_id.'] '.$fileName.'.'.$request->file($keyName)->getClientOriginalExtension(),
+            '[' . $request->student_id . '] ' . $fileName . '.' . $request->file($keyName)->getClientOriginalExtension(),
             'public'
         );
 
-        $id = 'DOC'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
+        $id = 'DOC' . '-' . date("Y") . "_" . substr(uniqid(), 9, 12);;
 
         Credential::create([
             'document_id' => $id,
@@ -61,94 +61,104 @@ class CredentialController extends Controller
             'document_name' => $fileName,
             'document_loc' => $docPath
         ]);
-
     }
 
-    public function deleteAllStudCreds($studentID){
+    public function deleteAllStudCreds($studentID)
+    {
 
         $picturePath = $this->getStudentPicture($studentID);
-        File::deleteDirectory(storage_path('app\public\credentials\\'.$studentID));
-        unlink(storage_path('app\public\\'.$picturePath->document_loc));
+        File::deleteDirectory(storage_path('app\public\credentials\\' . $studentID));
+        unlink(storage_path('app\public\\' . $picturePath->document_loc));
         Credential::where('student_id', $studentID)->delete();
     }
 
-    public function deleteCredential($docID){
+    public function deleteCredential($docID)
+    {
         $db = new DbHelperController;
 
         $credential = Credential::select(
-             'document_loc',
-             'student_id',
-             'document_name'
-         )->where('document_id', $docID)->firstOrFail();
- 
-         unlink(storage_path('app\public\\'.$credential->document_loc));
- 
-         Credential::where('document_id', $docID)->delete();
+            'document_loc',
+            'student_id',
+            'document_name'
+        )->where('document_id', $docID)->firstOrFail();
 
-        $description = "Deleted ".$credential->document_name." associated to student with an ID of ".$credential->student_id;
+        unlink(storage_path('app\public\\' . $credential->document_loc));
+
+        Credential::where('document_id', $docID)->delete();
+
+        $description = "Deleted " . $credential->document_name . " associated to student with an ID of " . $credential->student_id;
         $db->createLog($description);
     }
 
-    public function updateCredential($request, $studID, $docID){
+    public function updateCredential($request, $studID, $docID)
+    {
 
         $db = new DbHelperController;
         $credential = Credential::where('document_id', $docID)->firstOrFail();
-        unlink(storage_path('app\public\\'.$credential->document_loc));
-        if($credential->input_name == 'picture'){
+        unlink(storage_path('app\public\\' . $credential->document_loc));
+        if ($credential->input_name == 'picture') {
             $folderPath = 'Picture';
-        }else{
-            $folderPath = 'credentials/'.$studID;
+        } else {
+            $folderPath = 'credentials/' . $studID;
         }
 
         $newPath = $request->file($credential->input_name)->storeAs(
-                    $folderPath,
-                    '['.$studID.'] '.$credential->document_name.'.'.$request->file($credential->input_name)->getClientOriginalExtension(),
-                    'public'
-                );
+            $folderPath,
+            '[' . $studID . '] ' . $credential->document_name . '.' . $request->file($credential->input_name)->getClientOriginalExtension(),
+            'public'
+        );
 
         Credential::where('document_id', $docID)->update([
             'document_loc' => $newPath
         ]);
 
-        $description = "Updated ".$credential->document_name." associated to student with an ID of ".$credential->student_id;
+        $description = "Updated " . $credential->document_name . " associated to student with an ID of " . $credential->student_id;
         $db->createLog($description);
     }
 
-    public function getStudentPicture($id){
-        return Credential::select('document_id','document_loc')->where(
-            'student_id', $id,
-            )->where(
-            'document_name', 'Picture'
-            )->firstOrFail();
+    public function getStudentPicture($id)
+    {
+        return Credential::select('document_id', 'document_loc')->where(
+            'student_id',
+            $id,
+        )->where(
+            'document_name',
+            'Picture'
+        )->firstOrFail();
     }
 
-    public function getStudentCredenials($id){
+    public function getStudentCredenials($id)
+    {
         return Credential::select(
             'document_id',
             'document_name',
             'input_name',
             'document_loc'
         )->where(
-            'student_id', $id,
+            'student_id',
+            $id,
         )->get();
     }
 
-    public function archiveCredentials($studentID){
+    public function archiveCredentials($studentID)
+    {
         $unnecessaryCredentials = Credential::select(
             'document_loc'
-            )->where('student_id', $studentID)->whereNotIn('document_name',[
-                'Birth Certificate',
-                'Form 137',
-                'Transcript of Record',
-                'Form 9',
-                'Picture'
-            ])->get();
+        )->where('student_id', $studentID)->whereNotIn('document_name', [
+            'Birth Certificate',
+            'Form 137',
+            'Transcript of Record',
+            'Form 9',
+            'Picture'
+        ])->get();
 
-        foreach($unnecessaryCredentials as $creds){
-            unlink(storage_path('app\public\\'.$creds->document_loc));
+        foreach ($unnecessaryCredentials as $creds) {
+            unlink(storage_path('app\public\\' . $creds->document_loc));
         }
 
-        Credential::where('student_id', $studentID)->whereNotIn('document_name',
-        ['Birth Certificate', 'Picture', 'Form 137', 'Form 9', 'Transcript of Record'])->delete();
+        Credential::where('student_id', $studentID)->whereNotIn(
+            'document_name',
+            ['Birth Certificate', 'Picture', 'Form 137', 'Form 9', 'Transcript of Record']
+        )->delete();
     }
 }
