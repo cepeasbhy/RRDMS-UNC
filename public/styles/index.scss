@@ -75,6 +75,13 @@
     }
 }
 
+//Setting Image size
+@mixin img(){
+    clip-path: circle();
+    height: 8rem;
+    height: 8rem;
+}
+
 body{background-color: var(--clr-primary-bg)}
 
 .content{
@@ -229,7 +236,7 @@ body{background-color: var(--clr-primary-bg)}
     }
 }
 
-//Account management
+//Account management for admin
 .manage-acc{
     width: 90%;
     margin-inline: auto;
@@ -390,11 +397,7 @@ body{background-color: var(--clr-primary-bg)}
     &__contents{
         @include flex(column, 2rem);
 
-        & img{
-            clip-path: circle();
-            height: 8rem;
-            height: 8rem;
-        }
+        & img{@include img()}
 
         &--data{
             &-user{
@@ -426,6 +429,133 @@ body{background-color: var(--clr-primary-bg)}
                     @include link-button(--clr-primary-red);
                     border: 0;
                 }
+            }
+        }
+    }
+}
+
+//Manage Account Settings
+.account{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    & button{@include link-button(--clr-secondary-green); border: 0;}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        margin-block: 2rem;
+    }
+
+    & img{@include img()}
+
+    &__details{
+        &--user{
+            margin-block: 2rem;
+            @include flex(row, 2rem);
+            align-items: center;
+
+            &-info{
+                & p{
+                    margin-bottom: .25rem;
+                    &:first-of-type{
+                        font-size: var(--font-size-500);
+                        font-weight: var(--font-weight-600);
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+
+        &--data{
+            & .form-group{
+                @include flex(column, .5rem);
+                margin-bottom: 1rem;
+                & input{
+                    background-color: transparent;
+                    border: 1px solid var(--clr-accent-gray);
+                    padding: .5rem 1rem;
+                    cursor: pointer;
+
+                    &:hover, &:focus, &:active{box-shadow: 3px 3px 0 black}
+                }
+            }
+
+            &-buttons{
+                padding-top: 1.5rem;
+                @include flex(column, .75rem);
+                & button:last-of-type{@include link-button(--clr-primary-red)}
+            }
+        }
+    }
+}
+
+//Student information page
+.student{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    & a{@include link-button(--clr-secondary-green)}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        margin-block: 2rem;
+    }
+
+    & h2{
+        font-size: clamp(var(--font-size-500), 5vw, var(--font-size-600));
+        font-weight: var(--font-weight-700);
+        margin-block: 1rem;
+        padding-left: .5rem;
+        border-left: 4px solid var(--clr-primary-red);
+    }
+
+    &__data{
+        &--user{
+            & img{@include img()}
+            &-info{
+                @include flex(row, 2rem);
+                align-items: center;
+                padding-block: 1rem;
+                & p{
+                    margin-bottom: .5rem;
+                    &:first-of-type{
+                        font-size: var(--font-size-500);
+                        font-weight: var(--font-weight-600);
+                        text-transform: capitalize;
+                    }
+                }
+            }
+
+            & .form-group{
+                @include flex(column, .5rem);
+                margin-bottom: 1rem;
+                & input{
+                    padding: .5rem 1rem;
+                    background-color: transparent;
+                    border: 1px solid var(--clr-accent-gray);
+                }
+            }
+        }
+
+        &--logs{
+            padding-top: 1rem;
+            &-group{
+                @include grid(auto-fill, 180px, 1fr, 1rem);
+                place-content: center;
+
+                & .card{
+                    @include flex(column, 0);
+                    text-align: center;
+                    justify-content: space-between;
+                }
+
+                & button{
+                    background-color: transparent;
+                    border: 0;
+                }
+                & img{border-radius: .5rem;}
             }
         }
     }
@@ -484,7 +614,6 @@ body{background-color: var(--clr-primary-bg)}
 
     .manage-acc, .department{@include container(70%, 80vw, 90rem)}
 
-
     .register{
         @include container(40%, 50vw, 60%);
         &__contents--form{
@@ -511,6 +640,25 @@ body{background-color: var(--clr-primary-bg)}
                 @include table-wide();
                 & label{margin-bottom: 1rem;}
             }
+        }
+    }
+
+    .account{
+        @include container(40%, 45vw, 50rem);
+        &__details--data-buttons{
+            flex-direction: row;
+            justify-content: center;
+        }
+    }
+
+    .student__data{
+        @include flex(row, 2rem);
+        &--user{
+            width: 70%;
+        }
+        &--logs{
+            width: 100%;
+            & h2{margin-block: 0 2rem;}
         }
     }
 }

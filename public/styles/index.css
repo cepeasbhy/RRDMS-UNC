@@ -533,6 +533,170 @@ body {
   box-shadow: 3px 3px 0 var(--clr-primary-red);
 }
 
+.account {
+  width: 90%;
+  margin-inline: auto;
+  padding-block: 3rem;
+}
+.account button {
+  text-decoration: none;
+  background-color: var(--clr-secondary-green);
+  color: var(--clr-neutral-white);
+  padding: 0.5rem 1rem;
+  border: 0;
+}
+.account button:hover, .account button:focus, .account button:active {
+  background-color: transparent;
+  border: 1px solid var(--clr-secondary-green);
+  color: var(--clr-secondary-green);
+  font-weight: var(--font-weight-600);
+  box-shadow: 3px 3px 0 var(--clr-secondary-green);
+}
+.account h1 {
+  font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+  font-weight: var(--font-weight-700);
+  margin-block: 2rem;
+}
+.account img {
+  clip-path: circle();
+  height: 8rem;
+  height: 8rem;
+}
+.account__details--user {
+  margin-block: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+}
+.account__details--user-info p {
+  margin-bottom: 0.25rem;
+}
+.account__details--user-info p:first-of-type {
+  font-size: var(--font-size-500);
+  font-weight: var(--font-weight-600);
+  text-transform: capitalize;
+}
+.account__details--data .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.account__details--data .form-group input {
+  background-color: transparent;
+  border: 1px solid var(--clr-accent-gray);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.account__details--data .form-group input:hover, .account__details--data .form-group input:focus, .account__details--data .form-group input:active {
+  box-shadow: 3px 3px 0 black;
+}
+.account__details--data-buttons {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.account__details--data-buttons button:last-of-type {
+  text-decoration: none;
+  background-color: var(--clr-primary-red);
+  color: var(--clr-neutral-white);
+  padding: 0.5rem 1rem;
+}
+.account__details--data-buttons button:last-of-type:hover, .account__details--data-buttons button:last-of-type:focus, .account__details--data-buttons button:last-of-type:active {
+  background-color: transparent;
+  border: 1px solid var(--clr-primary-red);
+  color: var(--clr-primary-red);
+  font-weight: var(--font-weight-600);
+  box-shadow: 3px 3px 0 var(--clr-primary-red);
+}
+
+.student {
+  width: 90%;
+  margin-inline: auto;
+  padding-block: 3rem;
+}
+.student a {
+  text-decoration: none;
+  background-color: var(--clr-secondary-green);
+  color: var(--clr-neutral-white);
+  padding: 0.5rem 1rem;
+}
+.student a:hover, .student a:focus, .student a:active {
+  background-color: transparent;
+  border: 1px solid var(--clr-secondary-green);
+  color: var(--clr-secondary-green);
+  font-weight: var(--font-weight-600);
+  box-shadow: 3px 3px 0 var(--clr-secondary-green);
+}
+.student h1 {
+  font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+  font-weight: var(--font-weight-700);
+  margin-block: 2rem;
+}
+.student h2 {
+  font-size: clamp(var(--font-size-500), 5vw, var(--font-size-600));
+  font-weight: var(--font-weight-700);
+  margin-block: 1rem;
+  padding-left: 0.5rem;
+  border-left: 4px solid var(--clr-primary-red);
+}
+.student__data--user img {
+  clip-path: circle();
+  height: 8rem;
+  height: 8rem;
+}
+.student__data--user-info {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  padding-block: 1rem;
+}
+.student__data--user-info p {
+  margin-bottom: 0.5rem;
+}
+.student__data--user-info p:first-of-type {
+  font-size: var(--font-size-500);
+  font-weight: var(--font-weight-600);
+  text-transform: capitalize;
+}
+.student__data--user .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.student__data--user .form-group input {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid var(--clr-accent-gray);
+}
+.student__data--logs {
+  padding-top: 1rem;
+}
+.student__data--logs-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  place-content: center;
+}
+.student__data--logs-group .card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  text-align: center;
+  justify-content: space-between;
+}
+.student__data--logs-group button {
+  background-color: transparent;
+  border: 0;
+}
+.student__data--logs-group img {
+  border-radius: 0.5rem;
+}
+
 @media (min-width: 50em) {
   .login {
     padding-block: 3rem;
@@ -643,6 +807,28 @@ body {
   }
   .acc-info__contents--logs label {
     margin-bottom: 1rem;
+  }
+  .account {
+    width: clamp(40%, 45vw, 50rem);
+    margin-inline: auto;
+  }
+  .account__details--data-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .student__data {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  .student__data--user {
+    width: 70%;
+  }
+  .student__data--logs {
+    width: 100%;
+  }
+  .student__data--logs h2 {
+    margin-block: 0 2rem;
   }
 }
 @media (max-width: 800px) {

@@ -13,7 +13,7 @@
             <div class="acc-info__contents--data">
                 <h2>User</h2>
                 <div class="acc-info__contents--data-user">
-                    <img data-bs-toggle="modal"
+                    <img draggable="false" loading="lazy" data-bs-toggle="modal"
                         data-bs-target="#view-account-picture" src="{{ asset('storage/' . $accountInfo['picturePath']) }}">
                     <div class="acc-info__contents-user-info">
                         <h3>{{ $accountInfo['accountInfo']->last_name }}, {{ $accountInfo['accountInfo']->first_name }}</h3>
