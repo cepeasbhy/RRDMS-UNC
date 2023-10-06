@@ -8,7 +8,7 @@
         <h1>{{ __('ACCOUNT REGISTRATION') }}</h1>
         <div class="register__contents">
             <h2>Create Account</h2>
-            <span class="badge bg-success mb-2">{{ session('msg') }}</span>
+            <span style="margin-left: 1rem" class="badge bg-success mb-2">{{ session('msg') }}</span>
             <form class="register__contents--form" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

@@ -13,8 +13,8 @@ class Student extends Model
         'student_id',
         'course_id',
         'department_id',
-        'admission_year',
-        'year_graduated',
+        'admission_date',
+        'date_graduated',
         'status'
     ];
 }

@@ -60,17 +60,18 @@
     }
 }
 
-@mixin link-button{
+//Layout for green buttons
+@mixin link-button($color){
     text-decoration: none;
-    background-color: var(--clr-secondary-green);
+    background-color: var($color);
     color: var(--clr-neutral-white);
     padding: .5rem 1rem;
     &:hover, &:focus, &:active{
         background-color: transparent;
-        border: 1px solid var(--clr-secondary-green);
-        color: var(--clr-secondary-green);
+        border: 1px solid var($color);
+        color: var($color);
         font-weight: var(--font-weight-600);
-        box-shadow: 3px 3px 0 var(--clr-secondary-green);
+        box-shadow: 3px 3px 0 var($color);
     }
 }
 
@@ -150,6 +151,7 @@ body{background-color: var(--clr-primary-bg)}
 //Admin panel
 .admin{
     width: 90vw;
+    margin-inline: auto;
 
     & h1{
         font-size: clamp(var(--font-size-500), 7vw, var(--font-size-900));
@@ -230,11 +232,12 @@ body{background-color: var(--clr-primary-bg)}
 //Account management
 .manage-acc{
     width: 90%;
+    margin-inline: auto;
     padding-block: 3rem;
 
     & .active{display: block;}
 
-    & a{@include link-button()}
+    & a{@include link-button(--clr-secondary-green)}
 
     & h1{
         font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
@@ -281,8 +284,9 @@ body{background-color: var(--clr-primary-bg)}
     margin-block: 1rem;
     padding-block: 2rem;
     width: 90%;
+    margin-inline: auto;
 
-    & a{@include link-button()}
+    & a{@include link-button(--clr-secondary-green)}
     & h1{
         font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
         font-weight: var(--font-weight-700);
@@ -342,7 +346,7 @@ body{background-color: var(--clr-primary-bg)}
 //Departments Card
 .department{
     padding-block: 3rem;
-    & a{@include link-button()}
+    & a{@include link-button(--clr-secondary-green)}
 
     & h2{
         font-size: clamp(var(--font-size-600), 5vw, var(--font-size-900));
@@ -353,6 +357,78 @@ body{background-color: var(--clr-primary-bg)}
     }
 
     &__contents{@include table-wide()}
+}
+
+//Account info page
+.acc-info{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 2rem;
+
+    & a{@include link-button(--clr-secondary-green)}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        margin-block: 2rem;
+    }
+
+    & h2{
+        font-size: clamp(var(--font-size-500), 5vw, var(--font-size-700));
+        font-weight: var(--font-weight-600);
+        text-transform: uppercase;
+        padding-left: .5rem;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid var(--clr-primary-red);
+    }
+
+    & h3{
+        font-size: var(--font-size-500);
+        font-weight: var(--font-weight-600);
+        text-transform: capitalize
+    }
+
+    &__contents{
+        @include flex(column, 2rem);
+
+        & img{
+            clip-path: circle();
+            height: 8rem;
+            height: 8rem;
+        }
+
+        &--data{
+            &-user{
+                @include flex(row, 2rem);
+                align-items: center;
+                padding-bottom: 2rem;
+            }
+            &-readonly{
+                @include flex(column, .5rem);
+                padding-bottom: 1rem;
+                & input{
+                    padding: .5rem 1rem;
+                    background-color: transparent;
+                    border: 1px solid var(--clr-accent-gray);
+                }
+            }
+
+            &-buttons{
+                @include flex(column, 1rem);
+                justify-content: center;
+                margin-top: 1rem;
+
+                & .print{
+                    @include link-button(--clr-secondary-green);
+                    border: 0;
+                }
+
+                & .cancel{
+                    @include link-button(--clr-primary-red);
+                    border: 0;
+                }
+            }
+        }
+    }
 }
 
 @media(min-width: 50em){
@@ -421,6 +497,22 @@ body{background-color: var(--clr-primary-bg)}
             }
         }
     }
+
+    .acc-info{
+        @include container(70%, 80vw, 90rem);
+        &__contents{
+            flex-direction: row;
+            &--data{
+                width: 100%;
+                &-buttons{flex-direction: row}
+            }
+            &--logs{
+                width: 100%;
+                @include table-wide();
+                & label{margin-bottom: 1rem;}
+            }
+        }
+    }
 }
 
 //Media query for smaller tables
@@ -435,6 +527,8 @@ body{background-color: var(--clr-primary-bg)}
         width: 90%;
         &__contents{@include table-small()}
     }
+
+    .acc-info__contents--logs{ @include table-small()}
 }
 
 

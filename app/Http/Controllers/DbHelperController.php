@@ -18,9 +18,11 @@ use App\Models\log;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+
 class DbHelperController extends Controller
 {
-    public function getDeptRecords($deptID){
+    public function getDeptRecords($deptID)
+    {
         $deptName = Department::select('dept_name')->where('department_id', $deptID)->firstOrFail();
 
         $deptRecords = Student::select(
@@ -29,23 +31,33 @@ class DbHelperController extends Controller
             'last_name',
             'dept_name',
             'course_name',
-            'admission_year',
+            'admission_date',
         )->leftJoin(
-            'departments', 'departments.department_id', '=', 'students.department_id'
+            'departments',
+            'departments.department_id',
+            '=',
+            'students.department_id'
         )->leftJoin(
-            'courses', 'courses.course_id', '=', 'students.course_id'
+            'courses',
+            'courses.course_id',
+            '=',
+            'students.course_id'
         )->leftJoin(
-            'users', 'users.user_id', '=', 'students.student_id'
+            'users',
+            'users.user_id',
+            '=',
+            'students.student_id'
         )->where('students.department_id', $deptID)->get();
 
 
-        return([
+        return ([
             'deptName' => $deptName,
             'deptRecords' => $deptRecords
         ]);
     }
 
-    public function getUnarchivedRecords(){
+    public function getUnarchivedRecords()
+    {
 
         $students = Student::select(
             'student_id',
@@ -53,24 +65,34 @@ class DbHelperController extends Controller
             'last_name',
             'dept_name',
             'course_name',
-            'admission_year',
+            'admission_date',
         )->leftJoin(
-            'departments', 'departments.department_id', '=', 'students.department_id'
+            'departments',
+            'departments.department_id',
+            '=',
+            'students.department_id'
         )->leftJoin(
-            'courses', 'courses.course_id', '=', 'students.course_id'
+            'courses',
+            'courses.course_id',
+            '=',
+            'students.course_id'
         )->leftJoin(
-            'users', 'users.user_id', '=', 'students.student_id'
+            'users',
+            'users.user_id',
+            '=',
+            'students.student_id'
         )->where('status', 1);
 
-        if(Auth::user()->account_role != 'cic'){
+        if (Auth::user()->account_role != 'cic') {
             return $students->get();
-        }else{
+        } else {
             $staff = $this->getStaffInfo(Auth::user()->user_id);
             return $students->where('departments.department_id', $staff['staffInfo']->assigned_dept)->get();
         }
     }
 
-    public function getArchives(){
+    public function getArchives()
+    {
 
         $archivedRecords = Archive::select(
             'archive_id',
@@ -81,24 +103,35 @@ class DbHelperController extends Controller
             'available_status',
             'course_name',
         )->leftJoin(
-            'departments', 'departments.department_id', '=', 'archives.department_id'
+            'departments',
+            'departments.department_id',
+            '=',
+            'archives.department_id'
         )->leftJoin(
-            'courses', 'courses.course_id', '=', 'archives.course_id'
+            'courses',
+            'courses.course_id',
+            '=',
+            'archives.course_id'
         )->leftJoin(
-            'users', 'users.user_id', '=', 'archives.student_id'
+            'users',
+            'users.user_id',
+            '=',
+            'archives.student_id'
         );
 
-        if(Auth::user()->account_role != 'cic'){
+        if (Auth::user()->account_role != 'cic') {
             return $archivedRecords->where('available_status', 1)->get();
-        }else{
+        } else {
             $staff = $this->getStaffInfo(Auth::user()->user_id);
             return $archivedRecords->where(
-                        'archives.department_id', $staff['staffInfo']->assigned_dept
-                    )->where('available_status', 1)->get();
+                'archives.department_id',
+                $staff['staffInfo']->assigned_dept
+            )->where('available_status', 1)->get();
         }
     }
 
-    public function getStaffInfo($staffID){
+    public function getStaffInfo($staffID)
+    {
         $staffInfo = Staff::select(
             'staff_id',
             'assigned_dept',
@@ -111,100 +144,130 @@ class DbHelperController extends Controller
             'account_role',
             'activated_status'
         )->leftJoin(
-            'users', 'users.user_id', '=', 'staff.staff_id'
+            'users',
+            'users.user_id',
+            '=',
+            'staff.staff_id'
         )->leftJoin(
-            'departments', 'department_id', '=', 'staff.assigned_dept'
+            'departments',
+            'department_id',
+            '=',
+            'staff.assigned_dept'
         )->where('user_id', $staffID)->firstOrFail();
 
         $staffPicture = $this->getStaffPicture($staffID);
 
-        return[
+        return [
             'staffInfo' => $staffInfo,
             'staffPicture' => $staffPicture
         ];
     }
 
-    public function getStudentInfo($studentID){
+    public function getStudentInfo($studentID)
+    {
         $credentialController = new CredentialController;
 
         $credentials = $credentialController->getStudentCredenials($studentID);
         $stduentPicture = $credentialController->getStudentPicture($studentID);
 
         $studentInfo = Student::select(
-                'student_id',
-                'first_name',
-                'last_name',
-                'middle_name',
-                'dept_name',
-                'course_name',
-                'address',
-                'phone_number',
-                'email',
-                'status',
-                'date_graduated',
-                'archive_status',
-                'account_role',
-                'activated_status',
-                'admission_year',
-                'students.created_at',
-                'students.updated_at'
-            )->leftJoin(
-                'departments', 'departments.department_id', '=', 'students.department_id'
-            )->leftJoin(
-                'courses', 'courses.course_id', '=', 'students.course_id'
-            )->leftJoin(
-                'users', 'users.user_id', '=', 'students.student_id'
-            )->where('student_id', $studentID)->firstOrFail();
+            'student_id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'dept_name',
+            'course_name',
+            'address',
+            'phone_number',
+            'email',
+            'status',
+            'date_graduated',
+            'archive_status',
+            'account_role',
+            'activated_status',
+            'admission_date',
+            'students.created_at',
+            'students.updated_at'
+        )->leftJoin(
+            'departments',
+            'departments.department_id',
+            '=',
+            'students.department_id'
+        )->leftJoin(
+            'courses',
+            'courses.course_id',
+            '=',
+            'students.course_id'
+        )->leftJoin(
+            'users',
+            'users.user_id',
+            '=',
+            'students.student_id'
+        )->where('student_id', $studentID)->firstOrFail();
 
-        return[
+        return [
             'studentInfo' => $studentInfo,
             'picturePath' => $stduentPicture,
             'credentials' => $credentials
         ];
     }
 
-    public function getArchivedStudentInfo($studentID){
+    public function getArchivedStudentInfo($studentID)
+    {
         $credentialController = new CredentialController;
 
         $credentials = $credentialController->getStudentCredenials($studentID);
         $stduentPicture = $credentialController->getStudentPicture($studentID);
 
         $studentInfo = Archive::select(
-                'archive_id',
-                'archives.student_id',
-                'first_name',
-                'last_name',
-                'middle_name',
-                'dept_name',
-                'course_name',
-                'email',
-                'address',
-                'phone_number',
-                'status',
-                'date_graduated',
-                'archive_status',
-                'admission_year',
-                'archives.created_at AS date_archived',
-                'students.created_at AS date_filed',
-                'archives.updated_at'
-            )->leftJoin(
-                'students', 'students.student_id', '=', 'archives.student_id'
-            )->leftJoin(
-                'departments', 'departments.department_id', '=', 'archives.department_id'
-            )->leftJoin(
-                'courses', 'courses.course_id', '=', 'archives.course_id'
-            )->leftJoin(
-                'users', 'users.user_id', '=', 'archives.student_id'
-            )->where('archives.student_id', $studentID)->firstOrFail();
+            'archive_id',
+            'archives.student_id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'dept_name',
+            'course_name',
+            'email',
+            'address',
+            'phone_number',
+            'status',
+            'date_graduated',
+            'archive_status',
+            'admission_date',
+            'archives.created_at AS date_archived',
+            'students.created_at AS date_filed',
+            'archives.updated_at'
+        )->leftJoin(
+            'students',
+            'students.student_id',
+            '=',
+            'archives.student_id'
+        )->leftJoin(
+            'departments',
+            'departments.department_id',
+            '=',
+            'archives.department_id'
+        )->leftJoin(
+            'courses',
+            'courses.course_id',
+            '=',
+            'archives.course_id'
+        )->leftJoin(
+            'users',
+            'users.user_id',
+            '=',
+            'archives.student_id'
+        )->where('archives.student_id', $studentID)->firstOrFail();
 
-        return[
+        return [
             'studentInfo' => $studentInfo,
             'picturePath' => $stduentPicture,
             'credentials' => $credentials
         ];
     }
 
-    public function getCountDepartment(){
+    public function getCountDepartment()
+    {
         $asCount = Student::where('department_id', '001')->count();
         $cbaCount = Student::where('department_id', '002')->count();
         $csCount = Student::where('department_id', '003')->count();
@@ -215,7 +278,7 @@ class DbHelperController extends Controller
         $gradCount = Student::where('department_id', '008')->count();
         $lawCount = Student::where('department_id', '009')->count();
 
-        return([
+        return ([
             'asCount' => $asCount,
             'cbaCount' => $cbaCount,
             'csCount' => $csCount,
@@ -228,28 +291,31 @@ class DbHelperController extends Controller
         ]);
     }
 
-    public function getStaffPicture($staffID){
+    public function getStaffPicture($staffID)
+    {
         return Staff::select('picture_path')->where(
-            'staff_id', $staffID,
-            )->firstOrFail();
+            'staff_id',
+            $staffID,
+        )->firstOrFail();
     }
 
-    public function insertStudent(Request $request){
+    public function insertStudent(Request $request)
+    {
 
-        $request -> validate([
+        $request->validate([
             'student_id' => ['required', 'string', 'unique:students'],
             'first_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable', 'string', 'max:255'],
-            'admission_year' => ['required', 'integer', 'min:1948'],
+            'admission_date' => ['required', 'date'],
             'course_id' => ['required', 'string', 'max:255'],
             'department_id' => ['required', 'string', 'max:255'],
         ]);
 
         Student::create([
             'student_id' => $request->input('student_id'),
-            'admission_year' => $request->input('admission_year'),
+            'admission_date' => $request->input('admission_date'),
             'course_id' => $request->input('course_id'),
             'department_id' => $request->input('department_id')
         ]);
@@ -265,7 +331,7 @@ class DbHelperController extends Controller
 
         $credController = new CredentialController;
         $credController->uploadStudentCredentials($request);
-        
+
         $subject = 'RRDMS ACCOUNT CREDENTIAL';
         $body = '
             Greetings!
@@ -274,8 +340,8 @@ class DbHelperController extends Controller
             Welcome to the Registrar Records and Document Management System! 
             <br><br>You are now able to request records online. Here are your credentials in 
             logging into the system:
-        '.'<br> <br> USERNAME: '.$request->input('student_id').'
-        <br> DEFAULT PASSWORD: welcometounc'.'
+        ' . '<br> <br> USERNAME: ' . $request->input('student_id') . '
+        <br> DEFAULT PASSWORD: welcometounc' . '
         <br> <br> You will be redirected first in setting up your account. Please ensure to fill out all of the 
         necessary information and change your default password <br> <br> If you have any questions or
         concerns with your account, please don\'t hesitate in contacting us.';
@@ -283,53 +349,56 @@ class DbHelperController extends Controller
         $mail = new mailController($request->input('email'), $subject, $body, false, '');
         $mail->sendEmail();
 
-        $description = "Added new student to the database with a student ID of ".$request->input('student_id');
+        $description = "Added new student to the database with a student ID of " . $request->input('student_id');
         $this->createLog($description);
     }
 
-    public function updateStudent(Request $request, $id, $isFromArchive){
-        $request -> validate([
+    public function updateStudent(Request $request, $id, $isFromArchive)
+    {
+
+        $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'admission_year' => ['required', 'integer', 'min:1948'],
+            'admission_date' => ['required', 'date'],
             'course_id' => ['required', 'string', 'max:255'],
             'department_id' => ['required', 'string', 'max:255'],
-            'status' => ['required', 'integer', 'min:0','max:2'],
+            'status' => ['required', 'integer', 'min:0', 'max:4'],
         ]);
 
         User::where('user_id', $id)->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
-            'email' =>$request->input('email'),
+            'email' => $request->input('email'),
             'middle_name' => $request->input('middle_name'),
         ]);
 
         Student::where('student_id', $id)->update([
             'department_id' => $request->input('department_id'),
             'course_id' => $request->input('course_id'),
-            'admission_year' => $request->input('admission_year'),
+            'admission_date' => $request->input('admission_date'),
             'status' => $request->input('status')
         ]);
 
-        if($isFromArchive){
+        if ($isFromArchive) {
             Archive::where('student_id', $id)->update([
                 'department_id' => $request->input('department_id'),
                 'course_id' => $request->input('course_id'),
             ]);
         }
 
-        $description = "Updated student information with a student ID of ".$id;
+        $description = "Updated student information with a student ID of " . $id;
         $this->createLog($description);
     }
 
-    public function deleteStudent($studentID, $isFromArchive){
+    public function deleteStudent($studentID, $isFromArchive)
+    {
 
-        if($isFromArchive){
+        if ($isFromArchive) {
             $archive = Archive::select('archive_id')->where('student_id', $studentID)->first();
 
-            if($archive != null){
+            if ($archive != null) {
                 RequestedArchive::where('archive_id', $archive->archive_id)->delete();
             }
 
@@ -342,17 +411,18 @@ class DbHelperController extends Controller
         Student::where('student_id', $studentID)->delete();
         User::where('user_id', $studentID)->delete();
 
-        $description = "Disposed student record with a student ID of ".$studentID;
+        $description = "Disposed student record with a student ID of " . $studentID;
         $this->createLog($description);
     }
 
-    public function singleArchive($studentID, Request $request){
+    public function singleArchive($studentID, Request $request)
+    {
         $student = Student::select('archive_status')->where('student_id', $studentID)->firstOrFail();
 
-        if($student->archive_status == 1){
+        if ($student->archive_status == 1) {
             Archive::where('student_id', $studentID)->update(['available_status' => 1]);
-        }else{
-            $archiveID = 'ARCHIVE'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
+        } else {
+            $archiveID = 'ARCHIVE' . '-' . date("Y") . "_" . substr(uniqid(), 9, 12);
             $studentDeptCourse = Student::select(
                 'department_id',
                 'course_id'
@@ -373,23 +443,23 @@ class DbHelperController extends Controller
             $credController->archiveCredentials($studentID);
         }
 
-        if($request->input('status') == 4){
+        if ($request->input('status') == 4) {
             Student::where('student_id', $studentID)->update([
                 'status' => 4,
                 'date_graduated' => $request->input('gradDate')
             ]);
-        }else{
+        } else {
             Student::where('student_id', $studentID)->update([
                 'status' => $request->input('status')
             ]);
         }
-        
-        $description = "Archived student with a student ID of ".$studentID;
-        $this->createLog($description);
 
+        $description = "Archived student with a student ID of " . $studentID;
+        $this->createLog($description);
     }
 
-    public function getRecordPrices(){
+    public function getRecordPrices()
+    {
         $bachelorLawDegreePrice = RecordPrice::select('price')->where('description', 'Bachelor/Law Degree')->firstOrFail();
         $masteralDegreePrice = RecordPrice::select('price')->where('description', 'Masteral Degree')->firstOrFail();
         $tesdaDegreePrice = RecordPrice::select('price')->where('description', 'TESDA')->firstOrFail();
@@ -401,7 +471,7 @@ class DbHelperController extends Controller
         $photoOrdinaryPrice = RecordPrice::select('price')->where('description', 'Photocopy (Ordinary)')->firstOrFail();
         $photoColoredPrice = RecordPrice::select('price')->where('description', 'Photocopy (Colored)')->firstOrFail();
 
-        return([
+        return ([
             'bachelorLawDegreePrice' => $bachelorLawDegreePrice->price,
             'masteralDegreePrice' => $masteralDegreePrice->price,
             'tesdaDegreePrice' => $tesdaDegreePrice->price,
@@ -416,13 +486,14 @@ class DbHelperController extends Controller
     }
 
 
-    public function updatePrices(Request $request){
+    public function updatePrices(Request $request)
+    {
 
         $descriptions = [
             'Bachelor/Law Degree' => 'bachelorLawDegreePrice',
             'Masteral Degree' => 'masteralDegreePrice',
             'TESDA' => 'tesdaPrice',
-            'Caregiving' => 'caregivingPrice', 
+            'Caregiving' => 'caregivingPrice',
             'Transcript of Record' => 'torPrice',
             'Copy of Grades' => 'copyGradePrice',
             'Certificate' => 'certPrice',
@@ -432,19 +503,21 @@ class DbHelperController extends Controller
 
         ];
 
-        foreach($descriptions as $description => $inputName){
-            RecordPrice::where('description', $description
+        foreach ($descriptions as $description => $inputName) {
+            RecordPrice::where(
+                'description',
+                $description
             )->update(['price' => $request->input($inputName)]);
-    
         }
     }
 
-    public function insertRequest($request, $studentID){
+    public function insertRequest($request, $studentID)
+    {
         $recordPrices = Self::getRecordPrices();
         $certificates = null;
         $copyGrades = null;
         $tor = null;
-        $requestID = 'REQ'.'-'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
+        $requestID = 'REQ' . '-' . date("Y") . "_" . substr(uniqid(), 9, 12);
         $folderPath = null;
         $jsonFileLoc = [];
 
@@ -454,14 +527,14 @@ class DbHelperController extends Controller
         $diplomaFees = Self::computeDiplomaFees($request, $recordPrices);
 
         $totalCertCopies = 0;
-        $totalDiplomaCopies = $request->input('diploma') ? count($request->input('diploma')):null;
+        $totalDiplomaCopies = $request->input('diploma') ? count($request->input('diploma')) : null;
         $totalTorCopies = 0;
 
-        if($request->input('certificate') != null){
-            $certificates = $this -> createJsonCertificate($request);
-            foreach($certificates as $certificate){
-                foreach($certificate as $certName => $copies){
-                    $certFees += $copies*$recordPrices['certPrice'];
+        if ($request->input('certificate') != null) {
+            $certificates = $this->createJsonCertificate($request);
+            foreach ($certificates as $certificate) {
+                foreach ($certificate as $certName => $copies) {
+                    $certFees += $copies * $recordPrices['certPrice'];
                     $totalCertCopies += $copies;
                 }
             }
@@ -470,17 +543,17 @@ class DbHelperController extends Controller
             array_push($certificates, $json);
         }
 
-        if($request->input('reqCopyGrade') != null){
+        if ($request->input('reqCopyGrade') != null) {
             $copyGrades = $request->input('copyGrades');
-            $copyOfGradeFees = $copyGrades['copies']*$recordPrices['copyGradePrice'];
+            $copyOfGradeFees = $copyGrades['copies'] * $recordPrices['copyGradePrice'];
 
             $json = array('price' => $copyOfGradeFees);
             array_push($copyGrades, $json);
         }
 
-        if($request->input('reqTOR') != null){
+        if ($request->input('reqTOR') != null) {
             $tor = $request->input('tor');
-            $torFees = $tor['copies']*$recordPrices['torPrice'];
+            $torFees = $tor['copies'] * $recordPrices['torPrice'];
             $totalTorCopies = $tor['copies'];
 
             $json = array('price' => $torFees);
@@ -491,33 +564,30 @@ class DbHelperController extends Controller
         $authentication = $this->createJsonAuth($request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies);
         $photocopy = $this->createJsonPhotoCopy($request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies);
 
-        if($request->affidavit != null || $request->updatedPicture != null){
-            $folderPath = 'credentials/'.$studentID.'/'.$requestID;
-           
-            if($request->affidavit != null){
+        if ($request->affidavit != null || $request->updatedPicture != null) {
+            $folderPath = 'credentials/' . $studentID . '/' . $requestID;
+
+            if ($request->affidavit != null) {
                 $docPath = $request->file('affidavit')->storeAs(
                     $folderPath,
-                    '['.$studentID.'] AFFIDAVIT.'.$request->file('affidavit')->getClientOriginalExtension(),
+                    '[' . $studentID . '] AFFIDAVIT.' . $request->file('affidavit')->getClientOriginalExtension(),
                     'public'
                 );
 
-                $json = array('affidavit' => $docPath );
+                $json = array('affidavit' => $docPath);
                 array_push($jsonFileLoc, $json);
-
             }
 
-            if($request->updatedPicture != null){
+            if ($request->updatedPicture != null) {
                 $docPath = $request->file('updatedPicture')->storeAs(
                     $folderPath,
-                    '['.$studentID.'] PICTURE.'.$request->file('updatedPicture')->getClientOriginalExtension(),
+                    '[' . $studentID . '] PICTURE.' . $request->file('updatedPicture')->getClientOriginalExtension(),
                     'public'
                 );
 
-                $json = array('picture' => $docPath );
+                $json = array('picture' => $docPath);
                 array_push($jsonFileLoc, $json);
             }
-
-
         }
 
 
@@ -542,7 +612,7 @@ class DbHelperController extends Controller
             'certificate' => $certificates,
             'authentication' => $authentication['jsonAuth'],
             'photocopy' => $photocopy['jsonPhotoCopy'],
-            'copy_of_grades' =>$copyGrades,
+            'copy_of_grades' => $copyGrades,
             'total_fee' => ($certFees + $copyOfGradeFees + $torFees + $diplomaFees + $authentication['authFees'] + $photocopy['photoCopyFees'])
         ]);
 
@@ -551,7 +621,7 @@ class DbHelperController extends Controller
         $studentRequest = $this->getRequesteeInfo($requestID);
         $student = $this->getStudentInfo($requestInfo->student_id);
 
-        $pdf = Pdf::loadView('RequestRecord/Student/pdf/sections_pdf',[
+        $pdf = Pdf::loadView('RequestRecord/Student/pdf/sections_pdf', [
             'student' => $student['studentInfo'],
             'credentials' => $student['credentials'],
             'requestedDocumentDetails' => $studentRequest['requestedDocumentDetails'],
@@ -565,51 +635,54 @@ class DbHelperController extends Controller
         <br>
         <br>
         We have successfully received your request for records. Please take note of the
-        request ID <b>'.$requestID.'</b> as this will be used for tracking your request. 
+        request ID <b>' . $requestID . '</b> as this will be used for tracking your request. 
         Another email will be sent later on with regards to the status of your request. 
         <br><br> If you have any clarifications or concerns with your request, please don\'t 
         hesitate to contact us. <br><br> Attached below is the PDF version of your request';
 
         $mail = new mailController($studentInfo->email, $subject, $body, true, $pdf);
         $mail->sendEmail();
-
     }
 
-    public function createJsonPhotoCopy(Request $request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies){
+    public function createJsonPhotoCopy(Request $request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies)
+    {
         $jsonPhotoCopy = [];
         $photoCopies = $this->checkNull($request, 'photocopy');
         $photocopyFees = 0;
         $basePrice = 0;
 
-        if($photoCopies != null){
-            if($photoCopies['photocopyType'] == "colored"){
+        if ($photoCopies != null) {
+            if ($photoCopies['photocopyType'] == "colored") {
                 $basePrice = $recordPrices['photoColoredPrice'];
-            }else{
+            } else {
                 $basePrice = $recordPrices['photoOrdinaryPrice'];
             }
 
-            foreach($photoCopies as $photoCopy){
-                if($photoCopy == 'Transcript of Record'){
-                    $photocopyFees += $basePrice*$totalTorCopies;
-                    $json = array('description' => $photoCopy,
-                                  'value' => $basePrice*$totalTorCopies
-                                 );
+            foreach ($photoCopies as $photoCopy) {
+                if ($photoCopy == 'Transcript of Record') {
+                    $photocopyFees += $basePrice * $totalTorCopies;
+                    $json = array(
+                        'description' => $photoCopy,
+                        'value' => $basePrice * $totalTorCopies
+                    );
                     array_push($jsonPhotoCopy, $json);
                 }
-                
-                if($photoCopy == 'Diploma'){
-                    $photocopyFees += $basePrice*$totalDiplomaCopies;
-                    $json = array('description' => $photoCopy, 
-                                  'value' => $basePrice*$totalDiplomaCopies
-                                 );
+
+                if ($photoCopy == 'Diploma') {
+                    $photocopyFees += $basePrice * $totalDiplomaCopies;
+                    $json = array(
+                        'description' => $photoCopy,
+                        'value' => $basePrice * $totalDiplomaCopies
+                    );
                     array_push($jsonPhotoCopy, $json);
                 }
-    
-                if($photoCopy == 'Certificate'){
-                    $photocopyFees += $basePrice*$totalCertCopies;
-                    $json = array('description' => $photoCopy,
-                                  'value' => $basePrice*$totalCertCopies
-                                 );
+
+                if ($photoCopy == 'Certificate') {
+                    $photocopyFees += $basePrice * $totalCertCopies;
+                    $json = array(
+                        'description' => $photoCopy,
+                        'value' => $basePrice * $totalCertCopies
+                    );
                     array_push($jsonPhotoCopy, $json);
                 }
             }
@@ -620,41 +693,44 @@ class DbHelperController extends Controller
             $json = array('description' => 'TOTAL PRICE', 'value' => $photocopyFees);
             array_push($jsonPhotoCopy, $json);
 
-            return['jsonPhotoCopy' => $jsonPhotoCopy, 'photoCopyFees' => $photocopyFees];
-
+            return ['jsonPhotoCopy' => $jsonPhotoCopy, 'photoCopyFees' => $photocopyFees];
         }
 
-        return['jsonPhotoCopy' => null, 'photoCopyFees' => 0];
+        return ['jsonPhotoCopy' => null, 'photoCopyFees' => 0];
     }
 
-    public function createJsonAuth(Request $request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies){
+    public function createJsonAuth(Request $request, $recordPrices, $totalCertCopies, $totalDiplomaCopies, $totalTorCopies)
+    {
         $jsonAuth = [];
         $authentications = $this->checkNull($request, 'authentication');
         $authFees = 0;
 
-        if($authentications != null){
-            foreach($authentications as $authentication){
-                if($authentication == 'Transcript of Record'){
-                    $authFees += $recordPrices['authPrice']*$totalTorCopies;
-                    $json = array('description' => $authentication,
-                                  'price' => $recordPrices['authPrice']*$totalTorCopies
-                                 );
+        if ($authentications != null) {
+            foreach ($authentications as $authentication) {
+                if ($authentication == 'Transcript of Record') {
+                    $authFees += $recordPrices['authPrice'] * $totalTorCopies;
+                    $json = array(
+                        'description' => $authentication,
+                        'price' => $recordPrices['authPrice'] * $totalTorCopies
+                    );
                     array_push($jsonAuth, $json);
                 }
-                
-                if($authentication == 'Diploma'){
-                    $authFees += $recordPrices['authPrice']*$totalDiplomaCopies;
-                    $json = array('description' => $authentication, 
-                                  'price' => $recordPrices['authPrice']*$totalDiplomaCopies
-                                 );
+
+                if ($authentication == 'Diploma') {
+                    $authFees += $recordPrices['authPrice'] * $totalDiplomaCopies;
+                    $json = array(
+                        'description' => $authentication,
+                        'price' => $recordPrices['authPrice'] * $totalDiplomaCopies
+                    );
                     array_push($jsonAuth, $json);
                 }
-    
-                if($authentication == 'Certificate'){
-                    $authFees += $recordPrices['authPrice']*$totalCertCopies;
-                    $json = array('description' => $authentication,
-                                  'price' => $recordPrices['authPrice']*$totalCertCopies
-                                 );
+
+                if ($authentication == 'Certificate') {
+                    $authFees += $recordPrices['authPrice'] * $totalCertCopies;
+                    $json = array(
+                        'description' => $authentication,
+                        'price' => $recordPrices['authPrice'] * $totalCertCopies
+                    );
                     array_push($jsonAuth, $json);
                 }
             }
@@ -668,43 +744,48 @@ class DbHelperController extends Controller
         return ['jsonAuth' => null, 'authFees' => $authFees];
     }
 
-    public function createJsonDilpoma(Request $request, $recordPrices,){
+    public function createJsonDilpoma(Request $request, $recordPrices,)
+    {
 
         $jsonDiploma = [];
         $diplomas = $this->checkNull($request, 'diploma');
         $totalPrice = 0;
 
-        if($diplomas != null){
-            foreach($diplomas as $diploma){
-                if($diploma == 'Bachelor/Law Degree'){
+        if ($diplomas != null) {
+            foreach ($diplomas as $diploma) {
+                if ($diploma == 'Bachelor/Law Degree') {
                     $totalPrice += $recordPrices['bachelorLawDegreePrice'];
-                    $json = array('description' => $diploma, 
-                                  'price' => $recordPrices['bachelorLawDegreePrice']
-                                 );
+                    $json = array(
+                        'description' => $diploma,
+                        'price' => $recordPrices['bachelorLawDegreePrice']
+                    );
                     array_push($jsonDiploma, $json);
                 }
-                
-                if($diploma == 'Masteral Degree'){
+
+                if ($diploma == 'Masteral Degree') {
                     $totalPrice += $recordPrices['masteralDegreePrice'];
-                    $json = array('description' => $diploma, 
-                                  'price' => $recordPrices['masteralDegreePrice']
-                                 );
+                    $json = array(
+                        'description' => $diploma,
+                        'price' => $recordPrices['masteralDegreePrice']
+                    );
                     array_push($jsonDiploma, $json);
                 }
-    
-                if($diploma == 'TESDA'){
+
+                if ($diploma == 'TESDA') {
                     $totalPrice += $recordPrices['tesdaDegreePrice'];
-                    $json = array('description' => $diploma, 
-                                  'price' => $recordPrices['tesdaDegreePrice']
-                                 );
+                    $json = array(
+                        'description' => $diploma,
+                        'price' => $recordPrices['tesdaDegreePrice']
+                    );
                     array_push($jsonDiploma, $json);
                 }
-    
-                if($diploma == 'Caregiving'){
+
+                if ($diploma == 'Caregiving') {
                     $totalPrice += $recordPrices['caregivingDegreePrice'];
-                    $json = array('description' => $diploma, 
-                                  'price' => $recordPrices['caregivingDegreePrice']
-                                 );
+                    $json = array(
+                        'description' => $diploma,
+                        'price' => $recordPrices['caregivingDegreePrice']
+                    );
                     array_push($jsonDiploma, $json);
                 }
             }
@@ -718,31 +799,34 @@ class DbHelperController extends Controller
         return null;
     }
 
-    public function checkNull(Request $request, $keyName){
-        if($request->input($keyName) == null){
+    public function checkNull(Request $request, $keyName)
+    {
+        if ($request->input($keyName) == null) {
             return null;
-        }else{
+        } else {
             return $request->input($keyName);
         }
     }
 
-    public function createJsonCertificate(Request $request){
+    public function createJsonCertificate(Request $request)
+    {
         $certificates = $request->input('certificate');
         $numCopies = array_filter($request->input('numCopies'));
 
         $jsonCertificates = [];
 
-        foreach($certificates as $certificate){
+        foreach ($certificates as $certificate) {
             $json = array($certificate => $numCopies[$certificate]);
-            array_push($jsonCertificates, $json );
+            array_push($jsonCertificates, $json);
         }
 
         return $jsonCertificates;
     }
 
-    public function submitArchiveRequest($id){
+    public function submitArchiveRequest($id)
+    {
 
-        $requestID = 'REQ'.'-'.random_int(0, 1000)+random_int(0, 1000);
+        $requestID = 'REQ' . '-' . substr(uniqid(), 9, 12);
 
         RequestedArchive::create([
             'request_id' => $requestID,
@@ -754,12 +838,12 @@ class DbHelperController extends Controller
             'available_status' => 0
         ]);
 
-        $description = "Requested an archived with an ID of ".$id;
+        $description = "Requested an archived with an ID of " . $id;
         $this->createLog($description);
-
     }
 
-    public function deleteRequestedArchive($requestID){
+    public function deleteRequestedArchive($requestID)
+    {
         $archive = $this->getRequestedArchiveInfo($requestID);
 
         Archive::where('archive_id', $archive['requestedArchived']->archive_id)->update([
@@ -768,27 +852,29 @@ class DbHelperController extends Controller
 
         RequestedArchive::where("request_id", $requestID)->delete();
 
-        $description = "Cancelled request for an archived record with a request ID of ".$archive['requestedArchived']->archive_id;
+        $description = "Cancelled request for an archived record with a request ID of " . $archive['requestedArchived']->archive_id;
         $this->createLog($description);
     }
 
-    public function rejectRequestedArchive($requestID, Request $request){
+    public function rejectRequestedArchive($requestID, Request $request)
+    {
 
         $archive = $this->getRequestedArchiveInfo($requestID);
         Archive::where('archive_id', $archive['requestedArchived']->archive_id)->update([
             'available_status' => 1
         ]);
-        
+
         RequestedArchive::where('request_id', $requestID)->update([
             'reason_for_rejection' => $request->input('reason'),
             'status' => 2
         ]);
 
-        $description = "Rejected request for an archived record with a request ID of ".$requestID;
+        $description = "Rejected request for an archived record with a request ID of " . $requestID;
         $this->createLog($description);
     }
 
-    public function accpetRequestedArchive($requestID){
+    public function accpetRequestedArchive($requestID)
+    {
         $requestInfo = RequestedArchive::where('request_id', $requestID)->firstOrFail();
         $archiveInfo = Archive::where('archive_id', $requestInfo->archive_id)->firstOrFail();
 
@@ -796,19 +882,21 @@ class DbHelperController extends Controller
 
         Student::where('student_id', $archiveInfo->student_id)->update(['status' => 1]);
 
-        $description = "Granted request for an archived record with a request ID of ".$requestID;
+        $description = "Granted request for an archived record with a request ID of " . $requestID;
         $this->createLog($description);
     }
 
-    public function getRequestedArchives(){
-            if(Auth::user()->account_role != 'cic'){
-                return RequestedArchive::all();
-            }else{
-                return RequestedArchive::where('staff_id', Auth::user()->user_id)->get();
-            }
+    public function getRequestedArchives()
+    {
+        if (Auth::user()->account_role != 'cic') {
+            return RequestedArchive::all();
+        } else {
+            return RequestedArchive::where('staff_id', Auth::user()->user_id)->get();
+        }
     }
 
-    public function getRequestedArchiveInfo($id){
+    public function getRequestedArchiveInfo($id)
+    {
         $requestInfo = RequestedArchive::where('request_id', $id)->firstOrFail();
         $requestedArchived = Archive::where('archive_id', $requestInfo->archive_id)->firstOrFail();
 
@@ -818,7 +906,8 @@ class DbHelperController extends Controller
         ];
     }
 
-    public function getRequestedDocuments(){
+    public function getRequestedDocuments()
+    {
 
         $requestedDocument = ModelsRequest::select(
             'request_id',
@@ -830,22 +919,32 @@ class DbHelperController extends Controller
             'submitted_file_loc',
             'requests.status'
         )->leftJoin(
-            'users', 'users.user_id', '=', 'requests.student_id'
+            'users',
+            'users.user_id',
+            '=',
+            'requests.student_id'
         )->leftJoin(
-            'courses', 'courses.course_id', '=', 'requests.course_id'
+            'courses',
+            'courses.course_id',
+            '=',
+            'requests.course_id'
         )->leftJoin(
-            'students', 'students.student_id', '=', 'requests.student_id'
+            'students',
+            'students.student_id',
+            '=',
+            'requests.student_id'
         );
 
-        if(Auth::user()->account_role == 'student'){
+        if (Auth::user()->account_role == 'student') {
             return $requestedDocument->where('requests.student_id', Auth::user()->user_id)->get();
-        }else{
+        } else {
             $staff = $this->getStaffInfo(Auth::user()->user_id);
             return $requestedDocument->where('requests.department_id', $staff['staffInfo']->assigned_dept)->get();
         }
     }
 
-    public function getRequesteeInfo($id){
+    public function getRequesteeInfo($id)
+    {
         $requestInfo = ModelsRequest::where('request_id', $id)->firstOrFail();
         $studentInfo = Student::where('student_id', $requestInfo->student_id)->firstOrFail();
 
@@ -858,7 +957,8 @@ class DbHelperController extends Controller
         ];
     }
 
-    public function rejectStudentRequest($denialReason ,$requestID){
+    public function rejectStudentRequest($denialReason, $requestID)
+    {
         ModelsRequest::where('request_id', $requestID)->update([
             'status' => 'DENIED',
             'reason_for_rejection' => $denialReason
@@ -873,7 +973,7 @@ class DbHelperController extends Controller
         <br>
         <br>
         We regret to inform you that we are unable to proceed in fulfilling your request 
-        <b>'.$requestID.'</b> due to the following reason(s): <br><br> <b>'.$denialReason.'</b>
+        <b>' . $requestID . '</b> due to the following reason(s): <br><br> <b>' . $denialReason . '</b>
         <br><br> You may submit another request for your records and have the necessary 
         steps in complying the requirements for your requested record. <br><br> If you have
         any clarifications or concerns, please don\'t hesitate in contacting us';
@@ -881,11 +981,12 @@ class DbHelperController extends Controller
         $mail = new mailController($studentInfo->email, $subject, $body, false, '');
         $mail->sendEmail();
 
-        $description = "Rejected student request with a request ID of ".$requestID;
+        $description = "Rejected student request with a request ID of " . $requestID;
         $this->createLog($description);
     }
 
-    public function acceptStudentRequest($requestID, $releaseDate){
+    public function acceptStudentRequest($requestID, $releaseDate)
+    {
         ModelsRequest::where('request_id', $requestID)->update([
             'status' => 'SET FOR RELEASE',
             'release_date' => $releaseDate
@@ -896,51 +997,54 @@ class DbHelperController extends Controller
         Greetings!
         <br>
         <br>
-        This is to inform you that your request <b>'.$requestID.'</b> have been processed 
-        and is set to be released on <b> '.$releaseDate.'</b> at our office. 
+        This is to inform you that your request <b>' . $requestID . '</b> have been processed 
+        and is set to be released on <b> ' . $releaseDate . '</b> at our office. 
         <br> If you have any clarifications or concerns with your request please don\'t hesitate 
         to contact us';
 
         $requestInfo = ModelsRequest::where('request_id', $requestID)->firstOrFail();
         $studentInfo = User::where('user_id', $requestInfo->student_id)->firstOrFail();
-        
+
         $mail = new mailController($studentInfo->email, $subject, $body, false, '');
         $mail->sendEmail();
 
-        $description = "Sets released date for request with a request ID of ".$requestID;
+        $description = "Sets released date for request with a request ID of " . $requestID;
         $this->createLog($description);
     }
 
-    public function completeStudentRequest($requestID, Request $request){
+    public function completeStudentRequest($requestID, Request $request)
+    {
         ModelsRequest::where('request_id', $requestID)->update([
             'status' => 'COMPLETED',
             'date_completed' => $request->input('completedDate')
         ]);
 
-        $description = "Completed student's request with a request ID of ".$requestID;
+        $description = "Completed student's request with a request ID of " . $requestID;
         $this->createLog($description);
     }
 
-    public function cancelStudentRequest($requestID){
-        File::deleteDirectory(storage_path('app\public\credentials\\'.Auth::user()->user_id.'\\'.$requestID));
+    public function cancelStudentRequest($requestID)
+    {
+        File::deleteDirectory(storage_path('app\public\credentials\\' . Auth::user()->user_id . '\\' . $requestID));
         RequestedDocument::where('request_id', $requestID)->delete();
         ModelsRequest::where('request_id', $requestID)->delete();
     }
 
-    public function computeDiplomaFees($request, $recordPrices){
+    public function computeDiplomaFees($request, $recordPrices)
+    {
         $totalDiplomaFees = 0;
-        if($request->input('diploma') != null){
-            foreach($request->input('diploma') as $diploma){
-                if($diploma == 'Bachelor/Law Degree'){
+        if ($request->input('diploma') != null) {
+            foreach ($request->input('diploma') as $diploma) {
+                if ($diploma == 'Bachelor/Law Degree') {
                     $totalDiplomaFees += $recordPrices['bachelorLawDegreePrice'];
                 }
-                if($diploma == 'Masteral Degree'){
+                if ($diploma == 'Masteral Degree') {
                     $totalDiplomaFees += $recordPrices['masteralDegreePrice'];
                 }
-                if($diploma == 'TESDA'){
+                if ($diploma == 'TESDA') {
                     $totalDiplomaFees += $recordPrices['tesdaDegreePrice'];
                 }
-                if($diploma == 'Caregiving'){
+                if ($diploma == 'Caregiving') {
                     $totalDiplomaFees += $recordPrices['caregivingDegreePrice'];
                 }
             }
@@ -949,13 +1053,15 @@ class DbHelperController extends Controller
         return $totalDiplomaFees;
     }
 
-    public function setAccountActiveStatus($userID, $activeStatus){
+    public function setAccountActiveStatus($userID, $activeStatus)
+    {
         User::where('user_id', $userID)->update(['activated_status' => $activeStatus]);
     }
 
-    public function createLog($description){
+    public function createLog($description)
+    {
 
-        $logID = 'LOG'.'_'.date("Y")."_".random_int(0, 1000)+random_int(0, 1000);
+        $logID = 'LOG' . '_' . date("Y") . "_" . substr(uniqid(), 9, 12);;
         log::create([
             'log_id' => $logID,
             'staff_id' => Auth::user()->user_id,
@@ -963,7 +1069,8 @@ class DbHelperController extends Controller
         ]);
     }
 
-    public function getTransacLogs($staffID){
+    public function getTransacLogs($staffID)
+    {
         return log::where('staff_id', $staffID)->get();
     }
 }
