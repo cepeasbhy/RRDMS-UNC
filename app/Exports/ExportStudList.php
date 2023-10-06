@@ -13,8 +13,8 @@ class ExportStudList implements FromCollection, ShouldAutoSize, WithHeadings
     private $isGraduated;
     private $isExportAll;
     private $request;
-    
-    public function __construct($isGraduated, $isEpoxrtAll, Request $request, )
+
+    public function __construct($isGraduated, $isEpoxrtAll, Request $request,)
     {
         $this->isGraduated = $isGraduated;
         $this->isExportAll = $isEpoxrtAll;
@@ -22,60 +22,70 @@ class ExportStudList implements FromCollection, ShouldAutoSize, WithHeadings
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
-        if($this->isExportAll){
+        if ($this->isExportAll) {
             return $this->exportAllStudents();
-        }else{
+        } else {
             return $this->exportStudents($this->request);
         }
-        
     }
 
-    public function exportStudents(Request $request){
+    public function exportStudents(Request $request)
+    {
         $studentCollection = Student::select(
             'student_id',
             'last_name',
             'first_name',
             'middle_name',
             'dept_name',
-            'course_name'
+            'course_name',
         )->leftJoin(
-            'users', 'users.user_id', '=', 'students.student_id'
+            'users',
+            'users.user_id',
+            '=',
+            'students.student_id'
         )->leftJoin(
-            'departments', 'departments.department_id', '=', 'students.department_id'
+            'departments',
+            'departments.department_id',
+            '=',
+            'students.department_id'
         )->leftJoin(
-            'courses', 'courses.course_id', '=', 'students.course_id'
+            'courses',
+            'courses.course_id',
+            '=',
+            'students.course_id'
         );
 
-        if(!is_null($request->input('department_id'))){
-            if(!is_null($request->input('course_id'))){
+        if (!is_null($request->input('department_id'))) {
+            $studentCollection->where(
+                'students.department_id',
+                $request->input('department_id')
+            );
+            if (!is_null($request->input('course_id'))) {
                 $studentCollection->where(
-                    'students.course_id', $request->input('course_id')
-                );
-            }else{
-                $studentCollection->where(
-                    'students.department_id', $request->input('department_id')
+                    'students.course_id',
+                    $request->input('course_id')
                 );
             }
         }
-        
-        if(!is_null($request->input('admissionYear'))){
-            $studentCollection->where(
-                'admission_year', $request->input('admissionYear')
+
+        if (!is_null($request->input('admissionYear'))) {
+            $studentCollection->whereYear(
+                'admission_date',
+                $request->input('admissionYear')
             );
         }
 
-        if(!is_null($request->input('status'))){
+        if (!is_null($request->input('status'))) {
             $studentCollection->where('status', $request->input('status'));
         }
 
-        if($this->isGraduated){
+        if ($this->isGraduated) {
             $studentCollection->where('status', 4);
-
-            if(!is_null($request->input('batchYear'))){
+            if (!is_null($request->input('batchYear'))) {
                 $studentCollection->whereYear(
                     'date_graduated',
                     $request->input('batchYear')
@@ -86,30 +96,41 @@ class ExportStudList implements FromCollection, ShouldAutoSize, WithHeadings
         return $studentCollection->orderBy('last_name', 'ASC')->get();
     }
 
-    public function exportAllStudents(){
+    public function exportAllStudents()
+    {
         $studentCollection = Student::select(
             'student_id',
             'last_name',
             'first_name',
             'middle_name',
             'dept_name',
-            'course_name'
+            'course_name',
         )->leftJoin(
-            'users', 'users.user_id', '=', 'students.student_id'
+            'users',
+            'users.user_id',
+            '=',
+            'students.student_id'
         )->leftJoin(
-            'departments', 'departments.department_id', '=', 'students.department_id'
+            'departments',
+            'departments.department_id',
+            '=',
+            'students.department_id'
         )->leftJoin(
-            'courses', 'courses.course_id', '=', 'students.course_id'
+            'courses',
+            'courses.course_id',
+            '=',
+            'students.course_id'
         );
 
-        if($this->isGraduated){
+        if ($this->isGraduated) {
             $studentCollection->where('status', 4);
         }
 
         return $studentCollection->orderBy('last_name', 'ASC')->get();
     }
 
-    public function headings() : array{
+    public function headings(): array
+    {
         return [
             'Student ID',
             'Last Name',
