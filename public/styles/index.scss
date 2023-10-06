@@ -513,6 +513,13 @@ body{background-color: var(--clr-primary-bg)}
 
     &__data{
         &--user{
+            &-btn{
+                padding-top: 2rem;
+                @include flex(row, 1rem);
+                justify-content: center;
+                & button{@include link-button(--clr-secondary-green); border: 0}
+                & .dispose{@include link-button(--clr-primary-red)}
+            }
             & img{@include img()}
             &-info{
                 @include flex(row, 2rem);
@@ -537,6 +544,20 @@ body{background-color: var(--clr-primary-bg)}
                     border: 1px solid var(--clr-accent-gray);
                 }
             }
+
+            & .update{
+                @include link-button(--clr-secondary-green);
+                width: 100%;
+                border: 0;
+                margin-top: 1rem;
+            }
+
+            & .archive-btn{
+                @include link-button(--clr-secondary-green);
+                border: 0;
+                width: 100%;
+                margin-top: 1rem;
+            }
         }
 
         &--logs{
@@ -557,6 +578,409 @@ body{background-color: var(--clr-primary-bg)}
                 }
                 & img{border-radius: .5rem;}
             }
+
+            & .add{
+                @include link-button(--clr-secondary-green);
+                border: 0;
+                margin-top: 2rem;
+            }
+        }
+    }
+}
+
+//Homepage for both CIC and Records Associate
+.homepage{
+    width: 90%;
+    margin-inline: auto;
+    text-align: center;
+
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        margin-block: 2rem 3rem;
+    }
+
+    &__tools{@include flex(column, 2rem); align-items: center;}
+}
+
+//Student Credential Management Page
+.manage-student{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    & a{@include link-button(--clr-secondary-green)}
+
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-top: 4rem;
+    }
+
+    & h2{
+        font-size: clamp(var(--font-size-500), 5vw, var(--font-size-600));
+        font-weight: var(--font-weight-600);
+        padding-left: .5rem;
+        padding-bottom: 0;
+        border-left: 4px solid var(--clr-primary-red);
+        width: max-content;
+    }
+
+    & button{
+        @include link-button(--clr-secondary-green);
+        border: 0;
+        &.request{@include link-button(--clr-primary-red); margin-bottom: 2rem;}
+    }
+
+    &__subheading{
+        height: fit-content;
+        @include flex(row, 2rem);
+        justify-content: space-between;
+        align-items: start;
+    }
+
+    &__data{
+        @include table-wide();
+        & form input{@include link-button(--clr-secondary-green); border: 0;}
+    }
+
+}
+
+//Add Student Page
+.add-student{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    & a{@include link-button(--clr-secondary-green)}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-block: 2rem 1rem;
+    }
+
+    & h2{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-left: .5rem;
+        border-left: 4px solid var(--clr-primary-red);
+        margin-bottom: 1rem
+    }
+
+    & form{@include flex(column, 2rem)}
+
+    & button{@include link-button(--clr-secondary-green); border: 0}
+
+    & .form-group{
+        @include flex(column, .5rem);
+        margin-bottom: 1rem;
+
+        & span:not(.invalid-feedback){color: var(--clr-primary-red);}
+
+        & input:not([type="file"]), select{
+            background-color: transparent;
+            border: 1px solid var(--clr-accent-gray);
+            padding: .5rem 1rem;
+            cursor: pointer;
+        }
+    }
+
+
+}
+
+//Request from archives page from CIC
+.req-archives{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 2rem;
+
+    & a{@include link-button(--clr-secondary-green)}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-block: 2rem 1rem;
+    }
+
+    & .active{display: block;}
+
+    &__tabs{
+        padding-bottom: 1rem;
+        & ul{
+            @include flex(row, .5rem);
+            padding-inline: 0;
+            border-bottom: 1px solid #333;
+            & li{
+                padding-bottom: .5rem;
+                &:hover, &:focus, &:active{border-bottom: 2px solid var(--clr-accent-blue)}
+            }
+        }
+
+        & button{
+            background-color: transparent;
+            border: none;
+            padding: .5rem 1rem;
+            font-weight: var(--font-weight-500);
+
+            &:hover, &:focus, &:active{
+                font-weight: var(--font-weight-600);
+                color: var(--clr-accent-blue);
+            }
+        }
+    }
+
+    &__data{
+        display: none;
+        @include table-wide();
+        & button{@include link-button(--clr-secondary-green); border: 0;}
+    }
+}
+
+//Student Request Logs page
+.stud-req{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 2rem;
+
+    & a{@include link-button(--clr-secondary-green)}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-block: 2rem 1rem;
+    }
+
+    & .active{display: block;}
+
+    &__tabs{
+        padding-bottom: 1rem;
+        & ul{
+            @include flex(row, .5rem);
+            padding-inline: 0;
+            border-bottom: 1px solid #333;
+            & li{
+                padding-bottom: .5rem;
+                &:hover, &:focus, &:active{border-bottom: 2px solid var(--clr-accent-blue)}
+            }
+        }
+
+        & button{
+            background-color: transparent;
+            border: none;
+            padding: .5rem 1rem;
+            font-weight: var(--font-weight-500);
+
+            &:hover, &:focus, &:active{
+                font-weight: var(--font-weight-600);
+                color: var(--clr-accent-blue);
+            }
+        }
+    }
+
+    &__data{
+        display: none;
+        @include table-wide();
+        & tbody tr td button{@include link-button(--clr-secondary-green); border: 0;}
+    }
+}
+
+//Archived Records Page from Records associate
+.archives{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    & a, input[type="submit"]{@include link-button(--clr-secondary-green); border: 0;}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-block: 2rem 1rem;
+    }
+
+
+
+    & h2{
+        font-size: clamp(var(--font-size-500), 5vw, var(--font-size-600));
+        font-weight: var(--font-weight-600);
+        padding-left: .5rem;
+        border-left: 4px solid var(--clr-primary-red);
+        width: max-content;
+    }
+
+    &__subheading{
+        height: fit-content;
+        @include flex(row, 2rem);
+        justify-content: space-between;
+        align-items: start;
+        padding-bottom: 2rem;
+
+        &--buttons{@include flex(row, 1rem)}
+
+        & button{
+            @include link-button(--clr-secondary-green);
+            border: 0;
+        }
+
+        & .view{
+            @include link-button(--clr-primary-red)
+        }
+    }
+
+    &__data{@include table-wide()}
+}
+
+//Requested Record page from CIC
+.requested-record{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    & a{@include link-button(--clr-secondary-green)}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-block: 2rem 1rem;
+    }
+
+    & img{@include img()}
+
+    &__subheading{
+        @include flex(row, 2rem);
+        padding-block: 1rem 2rem;
+
+        align-items: center;
+        & p{margin-bottom: .5rem;}
+    }
+
+    & .form-group{
+        @include flex(column, .5rem);
+        & input, textarea{
+            padding: .5rem 1rem;
+            background-color: transparent;
+            border: 1px solid var(--clr-accent-gray);
+        }
+    }
+
+    & button{
+        @include link-button(--clr-primary-red);
+        border: 0;
+        width: 100%;
+        margin-block: 2rem;
+    }
+}
+
+//Requested records table from Records Associate
+.request{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    & a{@include link-button(--clr-secondary-green)}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-block: 2rem 1rem;
+    }
+
+    & .active{display: block;}
+
+    &__tabs{
+        padding-bottom: 1rem;
+        & ul{
+            @include flex(row, .5rem);
+            padding-inline: 0;
+            border-bottom: 1px solid #333;
+            & li{
+                padding-bottom: .5rem;
+                &:hover, &:focus, &:active{border-bottom: 2px solid var(--clr-accent-blue)}
+            }
+        }
+
+        & button{
+            background-color: transparent;
+            border: none;
+            padding: .5rem 1rem;
+            font-weight: var(--font-weight-500);
+
+            &:hover, &:focus, &:active{
+                font-weight: var(--font-weight-600);
+                color: var(--clr-accent-blue);
+            }
+        }
+    }
+
+    &__data{
+        display: none;
+        @include table-wide()
+    }
+}
+
+//Request Details from Records Associate
+.req-details{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    & a{@include link-button(--clr-secondary-green)}
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-block: 2rem 1rem;
+    }
+    & h2{
+        font-size: clamp(var(--font-size-500), 5vw, var(--font-size-600));
+        font-weight: var(--font-weight-600);
+        padding-left: .5rem;
+        border-left: 4px solid var(--clr-primary-red);
+    }
+
+    & img{@include img()}
+
+    &__data{
+        &--requester{
+            flex: 1;
+            padding-bottom: 2rem;
+            &-user{
+                padding-block: 2rem;
+                @include flex(row, 2rem);
+                align-items: center;
+                & p{
+                    margin-bottom: .5rem;
+                    &:first-of-type{
+                        font-size: var(--font-size-500);
+                        font-weight: var(--font-weight-600);
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+
+        & .form-group{
+            @include flex(column, .5rem);
+            & input, textarea{
+                background-color: transparent;
+                border: 1px solid var(--clr-accent-gray);
+                padding: .5rem 1rem;
+            }
+        }
+
+        &--buttons{
+            padding-top: 2rem;
+            @include flex(row, 1rem);
+            justify-content: center;
+            & button{
+                @include link-button(--clr-secondary-green);
+                border: 0;
+            }
+
+            & .view{@include link-button(--clr-accent-blue);}
+            & .reject{@include link-button(--clr-primary-red);}
         }
     }
 }
@@ -661,6 +1085,51 @@ body{background-color: var(--clr-primary-bg)}
             & h2{margin-block: 0 2rem;}
         }
     }
+
+    .homepage{
+        @include container(40%, 45vw, 50rem);
+        &__tools{flex-direction: row; justify-content: center;}
+    }
+
+    .manage-student__buttons{
+        @include flex(row, 2rem);
+        justify-content: end;
+        & form button{width: 100%}
+    }
+
+    .add-student{
+        @include container(70%, 80vw, 90rem);
+
+        & form{
+            flex-direction: row;
+        }
+
+        &__info{width: 70%}
+
+        &__credentials{
+            width: 100%;
+
+            & .bi-group{
+                @include flex(row, .5rem);
+                & .form-group{flex: 1;}
+            }
+        }
+
+        & .submit-btn{
+            width: 100%;
+            text-align: center;
+            padding-block: 2rem;
+
+            & button{width: clamp(30%, 40vw, 50%)}
+        }
+    }
+
+    .requested-record{@include container(40%, 45vw, 50rem)}
+
+    .req-details{
+        @include container(70%, 80vw, 90rem);
+        &__data{@include flex(row, 2rem)}
+    }
 }
 
 //Media query for smaller tables
@@ -677,6 +1146,42 @@ body{background-color: var(--clr-primary-bg)}
     }
 
     .acc-info__contents--logs{ @include table-small()}
+
+    .manage-student__data{@include table-small();  & tbody td:nth-child(5){font-size: .75rem}}
+
+    .req-archives{
+        &__tabs ul{
+            @include flex(column, 0);
+            align-items: center;
+        }
+        &__data{@include table-small();}
+    }
+
+    .stud-req{
+        &__tabs ul{
+            @include flex(column, 0);
+            align-items: center;
+        }
+        &__data{@include table-small();}
+    }
+
+    .archives{
+        &__subheading{
+            padding-bottom: 2rem;
+            flex-direction: column;
+            & button{margin-bottom: 1rem;}
+        }
+
+        &__data{@include table-small()}
+    }
+
+    .request{
+        &__tabs ul{
+            @include flex(column, 0);
+            align-items: center;
+        }
+        &__data{@include table-small();}
+    }
 }
 
 

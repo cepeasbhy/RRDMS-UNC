@@ -6,48 +6,50 @@
 @endsection
 
 @section('content')
-    <section class="main-container" style="max-width: 80%; margin-top: 1rem">
-        <form class="mb-3" action="{{ route('index') }}" method="get">
-            <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
-        </form>
-        <div class="head-container request-head">
-            <h4>Archives Requesting</h4>
-        </div>
-        <div>
-            <span class="badge bg-success mb-2">{{session('msg')}}</span>
-        </div>
-        <div class="button-container">
-            <ul id="myTab" role="tablist">
+    <section class="request">
+        <a href="{{ route('index') }}">
+            <i class="bi bi-arrow-bar-left"></i> BACK<
+        </a>
+        <h1>Request Logs</h1>
+        <span style="margin-left: 1rem" class="badge bg-success mb-2">{{session('msg')}}</span>
+
+        <div class="request__tabs">
+            <ul id="myTab" role="list">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="makeRequestTab" data-bs-toggle="tab"
                         data-bs-target="#pending-requests" type="button" role="tab" aria-controls="pending-requests"
-                        aria-selected="true">Pending
-                        Requests</button>
+                        aria-selected="true" data-tab-target="#pending-requests">
+                        Pending Requests
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="requests-tab" data-bs-toggle="tab" data-bs-target="#approved-request"
-                        type="button" role="tab" aria-controls="approved-request" aria-selected="false">Approved
-                        Requests</button>
+                    <button class="nav-link" id="requests-tab" data-bs-toggle="tab"
+                        data-tab-target="#approved-request" data-bs-target="#approved-request"
+                        type="button" role="tab" aria-controls="approved-request" aria-selected="false">
+                        Approved Requests
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="rejected-requests-tab" data-bs-toggle="tab"
                         data-bs-target="#rejected-requests" type="button" role="tab" aria-controls="rejected-requests"
-                        aria-selected="false">Rejected
-                        Requests</button>
+                        aria-selected="false" data-tab-target="#rejected-requests">
+                        Rejected Requests
+                    </button>
                 </li>
             </ul>
         </div>
 
-        <div class="tab-container">
-            <div class="tab-container__contents active" id="pending-requests" role="tabpanel"
-                aria-labelledby="pending-requests-tab">
+        <div class="request__data active" id="pending-requests" role="tabpanel"
+                aria-labelledby="pending-requests-tab" data-tab-content>
                 <table class="pendingRequestsTable">
                     <thead>
-                        <th class="table-header">Request ID</th>
-                        <th class="table-header">Archive ID</th>
-                        <th class="table-header">Staff ID</th>
-                        <th class="table-header">Request Date</th>
-                        <th class="table-header">Action</th>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Archive ID</th>
+                            <th>Staff ID</th>
+                            <th>Request Date</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach ($requestedArchives as $requestedArchive)
@@ -60,9 +62,9 @@
                                         {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                     </td>
                                     <td data-label="Action">
-                                        <a class="link-button link-view-button"
-                                            href="{{ route('viewRequestDetails', ['requestID' => $requestedArchive->request_id]) }}">View
-                                            Request</a>
+                                        <a href="{{ route('viewRequestDetails', ['requestID' => $requestedArchive->request_id]) }}">View
+                                            Request
+                                        </a>
                                     </td>
                                 </tr>
                             @endif
@@ -70,14 +72,16 @@
                 </table>
             </div>
 
-            <div class="tab-container__contents" id="approved-request" role="tabpanel" aria-labelledby="requests-tab">
+            <div class="request__data" id="approved-request" role="tabpanel" aria-labelledby="requests-tab" data-tab-content>
                 <table class="approvedRequestsTable">
                     <thead>
-                        <th class="table-header">Request ID</th>
-                        <th class="table-header">Archive ID</th>
-                        <th class="table-header">Staff ID</th>
-                        <th class="table-header">Request Date</th>
-                        <th class="table-header">Action</th>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Archive ID</th>
+                            <th>Staff ID</th>
+                            <th>Request Date</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach ($requestedArchives as $requestedArchive)
@@ -90,9 +94,9 @@
                                         {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                     </td>
                                     <td data-label="Action">
-                                        <a class="link-button link-view-button"
-                                            href="{{ route('viewRequestDetails', ['requestID' => $requestedArchive->request_id]) }}">View
-                                            Request</a>
+                                        <a href="{{ route('viewRequestDetails', ['requestID' => $requestedArchive->request_id]) }}">View
+                                            Request
+                                        </a>
                                     </td>
                                 </tr>
                             @endif
@@ -100,15 +104,17 @@
                 </table>
             </div>
 
-            <div class="tab-container__contents" id="rejected-requests" role="tabpanel"
-                aria-labelledby="rejected-requests-tab">
+            <div class="request__data" id="rejected-requests" role="tabpanel"
+                aria-labelledby="rejected-requests-tab" data-tab-content>
                 <table class="rejectedRequestsTable">
                     <thead>
-                        <th class="table-header">Request ID</th>
-                        <th class="table-header">Archive ID</th>
-                        <th class="table-header">Staff ID</th>
-                        <th class="table-header">Request Date</th>
-                        <th class="table-header">Action</th>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Archive ID</th>
+                            <th>Staff ID</th>
+                            <th>Request Date</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach ($requestedArchives as $requestedArchive)
@@ -121,16 +127,15 @@
                                         {{ date('Y-m-d', strtotime($requestedArchive->created_at)) }}
                                     </td>
                                     <td data-label="Action">
-                                        <a class="link-button link-view-button"
-                                            href="{{ route('viewRequestDetails', ['requestID' => $requestedArchive->request_id]) }}">View
-                                            Request</a>
+                                        <a href="{{ route('viewRequestDetails', ['requestID' => $requestedArchive->request_id]) }}">View
+                                            Request
+                                        </a>
                                     </td>
                                 </tr>
                             @endif
                         @endforeach
                 </table>
             </div>
-        </div>
 
     </section>
 
@@ -144,7 +149,7 @@
             $('.pendingRequestsTable').DataTable({
                 "language": {
                     "lengthMenu": "Display _MENU_ records per page",
-                    "zeroRecords": "No pending request available",
+                    "zeroRecords": " ",
                     "info": "Showing page _PAGE_ of _PAGES_",
                     "infoEmpty": "No pending request available",
                     "infoFiltered": "(filtered from _MAX_ total records)"
@@ -156,7 +161,7 @@
             $('.approvedRequestsTable').DataTable({
                 "language": {
                     "lengthMenu": "Display _MENU_ records per page",
-                    "zeroRecords": "No approved requests available",
+                    "zeroRecords": " ",
                     "info": "Showing page _PAGE_ of _PAGES_",
                     "infoEmpty": "No approved requests available",
                     "infoFiltered": "(filtered from _MAX_ total records)"
@@ -167,7 +172,7 @@
             $('.rejectedRequestsTable').DataTable({
                 "language": {
                     "lengthMenu": "Display _MENU_ records per page",
-                    "zeroRecords": "No rejected requests available",
+                    "zeroRecords": " ",
                     "info": "Showing page _PAGE_ of _PAGES_",
                     "infoEmpty": "No rejected requests available",
                     "infoFiltered": "(filtered from _MAX_ total records)"

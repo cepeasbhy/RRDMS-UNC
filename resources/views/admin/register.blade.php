@@ -27,7 +27,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="userID">{{ __('Picture') }}</label>
+                    <label for="picture">{{ __('Picture') }}</label>
                     <input id="picture" type="file"
                         class="form-control @error('picture') is-invalid @enderror" name="picture"
                         value="{{ old('picture') }}" required>

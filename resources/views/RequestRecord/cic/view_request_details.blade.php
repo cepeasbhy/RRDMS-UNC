@@ -395,7 +395,7 @@
 
     </section>
 
-    
+
     <!--Modal for Rejecting Request-->
     @extends('layouts.modals.delete_student_request', ['routeName' => 'cic.rejectRequest', 'request_id' => $requestedDocumentDetails, 'request_status' => $requestInfo])
     <!--Modal for Accepting Request-->
