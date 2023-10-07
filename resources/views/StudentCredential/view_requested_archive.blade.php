@@ -2,15 +2,16 @@
 @extends('layouts.header')
 
 @section('content')
-<section class="main-container" style="max-width: 80%; margin-top: 2rem">
-    <form class="mb-3" action="{{ route('requestArchive') }}" method="get">
-        <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i> BACK</button>
-    </form>
+<section class="">
+
+    {{-- TODO: FINISH THIS ONE --}}
+    <a href="{{ route('requestArchive') }}">
+        <i class="bi bi-arrow-bar-left"></i> BACK
+    </a>
+
+    <h1>Request Information</h1>
     <div class="grid-container wide-gap grid-orientation" style="width: 100%">
         <div class="flex-container inner">
-            <div class="head-container request-head">
-                <h4>STUDENT INFORMATION</h4>
-            </div>
             <div class="flex-container pic-direction">
                 <img class="profile-image view-request-val" data-bs-toggle="modal" data-bs-target="{{ '#' . $picturePath->document_id }}" src="{{ asset('storage/' . $picturePath->document_loc) }}">
                 <div class="user-info">

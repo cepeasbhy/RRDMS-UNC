@@ -18,10 +18,8 @@
 </head>
 
 <body>
-    <main class="main-container">
-        <section>
-            @yield('content')
-        </section>
+    <main>
+        @yield('content')
         <section class="main-container">
             @yield('request-content')
         </section>

@@ -2,397 +2,257 @@
 @extends('layouts.header')
 
 @section('request-content')
-    <section class="view-container">
+    <section class="stud-req-info">
+        @if (Auth::user()->account_role == 'cic')
+            <form action="{{ route('cic.request') }}" method="get">
+                <button class="accept">
+                    <i class="bi bi-arrow-bar-left"></i> BACK
+                </button>
+            </form>
+        @elseif (Auth::user()->account_role == 'student')
+            <form action="{{ route('stud.request') }}" method="get">
+                <button class="accept">
+                    <i class="bi bi-arrow-bar-left"></i> BACK
+                </button>
+            </form>
+        @endif
 
-        <div class="request-head main-container" style="width: 100%; max-width: 80%">
-            @if (Auth::user()->account_role == 'cic')
-                <form action="{{ route('cic.request') }}" method="get">
-                    <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i>
-                        BACK</button>
-                </form>
-            @elseif (Auth::user()->account_role == 'student')
-                <form action="{{ route('stud.request') }}" method="get">
-                    <button class="green-button button-design"><i class="bi bi-arrow-bar-left"></i>
-                        BACK</button>
-                </form>
-            @endif
-        </div>
-        <div class="grid-container wide-gap grid-orientation">
-            <div>
-                <div class="flex-container inner" style="gap: 3rem;">
-                    <article class="view-container">
-                        <div class="request-head head-container">
-                            <h4>STUDENT INFORMATION</h4>
-                        </div>
-                        <div class="wide-screen-grid flex-container pic-direction">
-                            <img class="profile-image view-request-val"
-                                src="{{ asset('storage/' . $picturePath->document_loc) }}">
-                            <div class="user-info">
-                                <span class="h4 fw-bold">{{ $student->last_name }}, {{ $student->first_name }}
-                                    {{ mb_substr($student->middle_name, 0, 1) . '.' }}</span>
-                                <span>{{ $student->student_id }}</span>
-                                <span>{{ $student->course_name }}</span>
-                                <span>{{ $student->dept_name }}</span>
-                            </div>
-                        </div>
-                    </article>
+        <h1>Request Details</h1>
 
-                    <div class="flex-container inner" style="height: fit-content;">
-                        <div class="form-group mb-1">
-                            <label>Request ID</label>
-                            <input class="form-control form-control-sm" type="text"
-                                value="{{ $requestInfo->request_id }}" readonly>
-                        </div>
-
-                        <div class="form-group mb-1">
-                            <label>Contact Number</label>
-                            <input class="form-control form-control-sm" type="text" value="{{ $student->phone_number }}"
-                                readonly>
-                        </div>
-
-                        <div class="form-group mb-1">
-                            <label>Email</label>
-                            <input class="form-control form-control-sm" type="text" value="{{ $student->email }}"
-                                readonly>
-                        </div>
-
-                        <div class="form-group mb-1">
-                            <label>Address</label>
-                            <textarea class="form-control form-control-sm" style="resize: none" readonly>{{ trim($student->address) }}</textarea>
-                        </div>
-
-                        <div class="form-group mb-1">
-                            <label>Release Date</label>
-                            @if ($requestInfo->release_date != null)
-                                <input class="form-control form-control-sm" type="text"
-                                    value="{{ $requestInfo->release_date }}" readonly>
-                            @else
-                                <input class="form-control form-control-sm" type="text" value="NOT FOR RELEASE" readonly>
-                            @endif
-                        </div>
-
-                        @if ($requestInfo->date_completed != null)
-                            <div class="form-group mb-1">
-                                <label>Date Completed</label>
-                                <input class="form-control form-control-sm" type="text"
-                                    value="{{ $requestInfo->date_completed }}" readonly>
-                            </div>
-                        @endif
-
-                        @if ($requestInfo->reason_for_rejection != null)
-                            <div class="form-group mb-1">
-                                <label>Reason for Rejection</label>
-                                <textarea class="form-control form-control-sm" style="resize: none; color: var(--bg-color-red-sub)" readonly>{{ trim($requestInfo->reason_for_rejection) }}</textarea>
-                            </div>
-                        @endif
-                    </div>
-
-                    <div>
-                        <h4 class="head-container request-head">SUBMITTED DOCUMENTS</h4>
-                        <div class="flex-container inner outer-cred-card">
-                            @if($requestInfo->submitted_file_loc != null)
-                                @if($requestedDocumentDetails->diploma != null)
-                                    <div class="cred-card">
-                                        <button class="btn p-0" data-bs-toggle="modal"
-                                            data-bs-target="#affidavit">
-                                            <img class="img-fluid p-1" src="{{asset('storage/'.$requestInfo->submitted_file_loc[0]['affidavit'])}}">
-                                        </button>
-                                        <div style="text-align: center;">
-                                            <label
-                                                class="col-form-label col-form-label-sm">AFFIDAVIT</label>
-                                        </div>
-                                    </div>
-                                @endif
-                                @if($requestedDocumentDetails->transcript_of_record != null)
-                                    <div class="cred-card">
-                                        <button class="btn p-0" data-bs-toggle="modal"
-                                            data-bs-target="#picture">
-                                            @if($requestedDocumentDetails->diploma == null)
-                                                <img class="img-fluid p-1" src="{{asset('storage/'.$requestInfo->submitted_file_loc[0]['picture'])}}">
-                                            @else
-                                                <img class="img-fluid p-1" src="{{asset('storage/'.$requestInfo->submitted_file_loc[1]['picture'])}}">
-                                            @endif
-                                        </button>
-                                        <div style="text-align: center;">
-                                            <label
-                                                class="col-form-label col-form-label-sm">PICTURE</label>
-                                        </div>
-                                    </div>
-                                @endif
-                            @else
-                                <div class="display-none ms-2">
-                                    <span class="fw-bold text-danger">NO DOCUMENTS HAS BEEN SUBMITTED</span>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
+        <article class="stud-req-info__data">
+            <h2>Requester</h2>
+            <div class="stud-req-info__data--student">
+                <img draggable="false"
+                    src="{{ asset('storage/' . $picturePath->document_loc) }}">
+                <div class="details">
+                    <p>{{ $student->last_name }}, {{ $student->first_name }}
+                        {{ mb_substr($student->middle_name, 0, 1) . '.' }}</p>
+                    <p>{{ $student->student_id }}</p>
+                    <p>{{ $student->course_name }}</p>
+                    <p>{{ $student->dept_name }}</p>
                 </div>
             </div>
 
-            <section>
-                <div class="request-head head-container">
-                    <h4>REQUESTED DOCUMENTS</h4>
-                </div>
+            <div class="form-group">
+                <label for="reqId">Request ID</label>
+                <input id="reqId" name="reqId" type="text"
+                    value="{{ $requestInfo->request_id }}" readonly>
+            </div>
 
+            <div class="form-group">
+                <label for="num">Contact Number</label>
+                <input id="num" name="num" type="text" value="{{ $student->phone_number }}"
+                    readonly>
+            </div>
 
-                @if ($requestedDocumentDetails->diploma != null)
-                    <h6 style="font-weight: var(--font-weight-bold); margin-left: 1rem">DIPLOMA</h6>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="text" value="{{ $student->email }}"
+                    readonly>
+            </div>
 
-                    <div class="flex-container photocopy-prices req-docs">
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" style="resize: none" readonly>{{ trim($student->address) }}</textarea>
+            </div>
 
-                        <div>
-                            <span class="fw-bold">DESCRIPTION</span>
-
-                            @foreach ($requestedDocumentDetails->diploma as $diploma)
-                                <div>
-                                    @if ($diploma['description'] == 'TOTAL PRICE')
-                                        <span class="fw-bold"
-                                            style="font-size: 0.85rem">{{ $diploma['description'] }}</span>
-                                    @else
-                                        <span style="font-size: 0.85rem">{{ $diploma['description'] }}</span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <div>
-                            <span class="fw-bold">PRICE</span>
-                            @foreach ($requestedDocumentDetails->diploma as $diploma)
-                                <div>
-                                    @if ($diploma['description'] == 'TOTAL PRICE')
-                                        <span class="fw-bold" style="font-size: 0.85rem">
-                                            ₱{{ number_format($diploma['price'], 2) }}</span>
-                                    @else
-                                        <span style="font-size: 0.75rem">₱{{ number_format($diploma['price'], 2) }}</span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <br>
+            <div class="form-group">
+                <label for="relDate">Release Date</label>
+                @if ($requestInfo->release_date != null)
+                    <input id="relDate" name="relDate" type="text"
+                        value="{{ $requestInfo->release_date }}" readonly>
+                @else
+                    <input id="relDate" name="relDate" type="text" value="NOT FOR RELEASE" readonly>
                 @endif
+            </div>
 
-                @if ($requestedDocumentDetails->transcript_of_record != null)
-                    <h6 style="font-weight: var(--font-weight-bold); margin-left: 1rem">TRANSCRIPT OF RECORD</h6>
-                    <div class="flex-container photocopy-prices req-docs">
-                        <div style="font-weight: 500">
-                            <p style="font-size: 0.75rem; margin: 0">No. of Copies:</p>
-                            @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
-                                <p style="font-size: 0.75rem; margin: 0">Purpose:</p>
-                            @else
-                                <p style="font-size: 0.75rem; margin: 0">Other Purpose:</p>
-                            @endif
-                            <p style="font-size: 0.85rem; font-weight: 600; margin: 0">TOTAL PRICE:</p>
-                        </div>
+            @if ($requestInfo->date_completed != null)
+                <div class="form-group">
+                    <label for="completed">Date Completed</label>
+                    <input id="completed" name="completed" type="text"
+                        value="{{ $requestInfo->date_completed }}" readonly>
+                </div>
+            @endif
 
-                        <div style="text-align: end">
-                            <p style="font-size: 0.75rem; margin: 0">
-                                {{ $requestedDocumentDetails->transcript_of_record['copies'] }}</p>
-                            @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
-                                <p style="font-size: 0.75rem; margin: 0">
-                                    {{ $requestedDocumentDetails->transcript_of_record['purpose'] }}</p>
+            @if ($requestInfo->reason_for_rejection != null)
+                <div class="form-group">
+                    <label for="reason">Reason for Rejection</label>
+                    <textarea id="reason" name="reason" style="resize: none; color: var(--bg-color-red-sub)" readonly>{{ trim($requestInfo->reason_for_rejection) }}</textarea>
+                </div>
+            @endif
+        </article>
+
+        <div class="stud-req-info__details">
+            <section class="stud-req-info__details--documents">
+                <h2>Submitted Documents</h2>
+                <div class="container">
+                    @if($requestInfo->submitted_file_loc != null)
+                        @if($requestedDocumentDetails->diploma != null)
+                            <div class="card">
+                                <button class="btn p-0" data-bs-toggle="modal"
+                                    data-bs-target="#affidavit">
+                                    <img draggable="false" loading="lazy" class="img-fluid p-1" src="{{asset('storage/'.$requestInfo->submitted_file_loc[0]['affidavit'])}}">
+                                </button>
+                                <h3>Affidavit</h3>
+                            </div>
+                        @endif
+                        @if($requestedDocumentDetails->transcript_of_record != null)
+                            <div class="container">
+                                <button class="btn p-0" data-bs-toggle="modal"
+                                    data-bs-target="#picture">
+                                    @if($requestedDocumentDetails->diploma == null)
+                                        <img draggable="false" loading="lazy" class="img-fluid p-1" src="{{asset('storage/'.$requestInfo->submitted_file_loc[0]['picture'])}}">
+                                    @else
+                                        <img draggable="false" loading="lazy" class="img-fluid p-1" src="{{asset('storage/'.$requestInfo->submitted_file_loc[1]['picture'])}}">
+                                    @endif
+                                </button>
+                                <h3>Picture</h3>
+                            </div>
+                        @endif
+                    @else
+                        <h3 class="fw-bold text-danger">No Documents Have Been Submitted</span>
+                    @endif
+                </div>
+            </section>
+
+            <section class="stud-req-info__details--request">
+                <h2>Requested Documents</h2>
+                @if ($requestedDocumentDetails->diploma != null)
+                    <div class="document">
+                        <h3>Diploma</h3>
+                        <p>Details</p>
+                        @foreach ($requestedDocumentDetails->diploma as $diploma)
+                            @if ($diploma['description'] == 'TOTAL PRICE')
+                                <p>{{ $diploma['description'] }}: ₱{{ number_format($diploma['price'], 2) }}</p>
                             @else
-                                <p style="font-size: 0.75rem; margin: 0">
-                                    {{ $requestedDocumentDetails->transcript_of_record['other_purpose'] }}</p>
+                                <p>{{ $diploma['description'] }}: ₱{{ number_format($diploma['price'], 2) }}</p>
                             @endif
-                            <p style="font-size: 0.85rem; font-weight: 600; margin: 0">
-                                ₱{{ number_format($requestedDocumentDetails->transcript_of_record[0]['price'], 2) }}
-                            </p>
-                        </div>
+                        @endforeach
                     </div>
-                    <br>
+                @endif
+                    {{-- TODO: Put span inside p tag --}}
+                @if ($requestedDocumentDetails->transcript_of_record != null)
+                    <div class="document">
+                        <h3>Transcript of Records</h3>
+                        <p>No. of Copies: <span>{{ $requestedDocumentDetails->transcript_of_record['copies'] }}</span></p>
+                        @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
+                            <p>Purpose: <span>{{ $requestedDocumentDetails->transcript_of_record['purpose'] }}</span></p>
+                        @else
+                            <p>Other Purpose: <span>{{ $requestedDocumentDetails->transcript_of_record['other_purpose'] }}</span></p>
+                        @endif
+                        <p>TOTAL PRICE: <span>₱{{ number_format($requestedDocumentDetails->transcript_of_record[0]['price'], 2) }}</span></p>
+                    </div>
                 @endif
 
                 @if ($requestedDocumentDetails->certificate != null)
-                    <h6 style="font-weight: var(--font-weight-bold); margin-left: 1rem">CERTIFICATES</h6>
-                    <div class="flex-container photocopy-prices req-docs">
-                        <div>
-                            <span class="fw-bold">DESCRIPTION</span>
-                            @foreach ($requestedDocumentDetails->certificate as $certificate)
-                                @foreach ($certificate as $description => $value)
-                                    <div>
-                                        @if ($description == 'TOTAL PRICE')
-                                            <span class="fw-bold" style="font-size: 0.85rem">{{ $description }}</span>
-                                        @else
-                                            <span style="font-size: 0.75rem">{{ $description }}</span>
-                                        @endif
-                                    </div>
-                                @endforeach
+                    <div class="document">
+                        <h3>Certificates</h3>
+                        <p>Details</p>
+                        @foreach ($requestedDocumentDetails->certificate as $certificate)
+                            @foreach ($certificate as $description => $value)
+                                @if ($description == 'TOTAL PRICE')
+                                    <p>{{ $description }}: ₱{{ number_format($value, 2) }}</p>
+                                @else
+                                    <p>{{ $description }}: {{ $value }}</p>
+                                @endif
                             @endforeach
-                        </div>
-
-                        <div>
-                            <span class="fw-bold">COPIES</span>
-                            @foreach ($requestedDocumentDetails->certificate as $certificate)
-                                @foreach ($certificate as $description => $value)
-                                    <div>
-                                        @if ($description == 'TOTAL PRICE')
-                                            <span class="fw-bold"
-                                                style="font-size: 0.85rem">₱{{ number_format($value, 2) }}</span>
-                                        @else
-                                            <span style="font-size: 0.75rem">{{ $value }}</span>
-                                        @endif
-                                    </div>
-                                @endforeach
-                            @endforeach
-                        </div>
+                        @endforeach
                     </div>
-                    <br>
                 @endif
 
                 @if ($requestedDocumentDetails->copy_of_grades != null)
-                    <h6 style="font-weight: var(--font-weight-bold); margin-left: 1rem">COPY OF GRADES</h6>
-                    <div class="flex-container photocopy-prices req-docs">
-                        <div style="font-weight: 500">
-                            <p style="font-size: 0.75rem; margin: 0">No. of Copies:</p>
-                            <p style="font-size: 0.75rem; margin: 0">School Year:</p>
-                            <p style="font-size: 0.75rem; margin: 0">Semester:</p>
-                            <p style="font-size: 0.85rem; font-weight: 600; margin: 0">TOTAL PRICE:</p>
-                        </div>
+                    <div class="document">
+                        <h3>Copy of Grades</h3>
+                        <p>No. of Copies: {{ $requestedDocumentDetails->copy_of_grades['copies'] }}</p>
+                        @if ($requestedDocumentDetails->copy_of_grades['schoolYear'] == null)
+                            <p>School Year: Not Stated</p>
+                        @else
+                            <p>School Year: {{ $requestedDocumentDetails->copy_of_grades['schoolYear'] }}</p>
+                        @endif
 
-                        <div style="text-align: end">
-                            <p style="font-size: 0.75rem; margin: 0">
-                                {{ $requestedDocumentDetails->copy_of_grades['copies'] }}</p>
-                            @if ($requestedDocumentDetails->copy_of_grades['schoolYear'] == null)
-                                <p style="font-size: 0.75rem; margin: 0">
-                                    Not Stated</p>
-                            @endif
-                            <p style="font-size: 0.75rem; margin: 0">
-                                {{ $requestedDocumentDetails->copy_of_grades['schoolYear'] }}</p>
+                        @switch($requestedDocumentDetails->copy_of_grades['semester'])
+                            @case(1)
+                                <p>Semester: 1st Semester</p>
+                            @break
 
-                            @switch($requestedDocumentDetails->copy_of_grades['semester'])
-                                @case(1)
-                                    <span style="font-size: 0.75rem; margin: 0">1st Semester</span>
-                                @break
+                            @case(2)
+                                <p>Semester: 2nd Semester</p>
+                            @break
 
-                                @case(2)
-                                    <span style="font-size: 0.75rem; margin: 0">2nd Semester</span>
-                                @break
-
-                                @default
-                                    <span style="font-size: 0.75rem; margin: 0">Summer Semester</span>
-                            @endswitch
-                            <p class="fw-bold" style="font-size: 0.85rem; margin: 0">
-                                ₱{{ number_format($requestedDocumentDetails->copy_of_grades[0]['price'], 2) }}</p>
-                        </div>
+                            @default
+                                <p>Semester: Summer Semester</p>
+                        @endswitch
+                        <p>TOTAL PRICE: ₱{{ number_format($requestedDocumentDetails->copy_of_grades[0]['price'], 2) }}</p>
                     </div>
-                    <br>
                 @endif
 
                 @if ($requestedDocumentDetails->authentication != null)
-                    <h6 style="font-weight: var(--font-weight-bold); margin-left: 1rem">AUTHENTICATION</h6>
-                    <div class="flex-container photocopy-prices req-docs">
-                        <div>
-                            <span class="fw-bold">DESCRIPTION</span>
-                            @foreach ($requestedDocumentDetails->authentication as $auth)
-                                <div>
-                                    @if ($auth['description'] == 'TOTAL PRICE')
-                                        <span class="fw-bold"
-                                            style="font-size: 0.85rem; margin: 0">{{ $auth['description'] }}</span>
-                                    @else
-                                        <span style="font-size: 0.75rem; margin: 0">{{ $auth['description'] }}</span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <div>
-                            <span class="fw-bold">PRICE</span>
-                            @foreach ($requestedDocumentDetails->authentication as $auth)
-                                <div>
-                                    @if ($auth['description'] == 'TOTAL PRICE')
-                                        <span class="fw-bold"
-                                            style="font-size: 0.85rem; margin: 0">₱{{ number_format($auth['price'], 2) }}</span>
-                                    @else
-                                        <span
-                                            style="font-size: 0.75rem; margin: 0">₱{{ number_format($auth['price'], 2) }}</span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <br>
+                    <h3>Authentication</h3>
+                    <p>Details</p>
+                    @foreach ($requestedDocumentDetails->authentication as $auth)
+                        @if ($auth['description'] == 'TOTAL PRICE')
+                            <p>{{ $auth['description'] }}: ₱{{ number_format($auth['price'], 2) }}</p>
+                        @else
+                            <p>{{ $auth['description'] }}: ₱{{ number_format($auth['price'], 2) }}</p>
+                        @endif
+                    @endforeach
                 @endif
 
                 @if ($requestedDocumentDetails->photocopy != null)
-                    <h6 style="font-weight: var(--font-weight-bold); margin-left: 1rem">PHOTOCOPY</h6>
-                    <div class="flex-container photocopy-prices req-docs">
-                        <div>
-                            <span class="fw-bold">DESCRIPTION</span>
-                            @foreach ($requestedDocumentDetails->photocopy as $photoCopy)
-                                <div>
-                                    @if ($photoCopy['description'] == 'TOTAL PRICE')
-                                        <span class="fw-bold"
-                                            style="font-size: 13px">{{ $photoCopy['description'] }}</span>
-                                    @else
-                                        <span style="font-size: 13px">{{ $photoCopy['description'] }}</span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <div>
-                            <span class="fw-bold">PRICE</span>
-                            @foreach ($requestedDocumentDetails->photocopy as $photoCopy)
-                                <div>
-                                    @if ($photoCopy['description'] != 'Photocopy Type')
-                                        @if ($photoCopy['description'] == 'TOTAL PRICE')
-                                            <span class="fw-bold"
-                                                style="font-size: 13px">₱{{ number_format($photoCopy['value'], 2) }}</span>
-                                        @else
-                                            <span
-                                                style="font-size: 13px">₱{{ number_format($photoCopy['value'], 2) }}</span>
-                                        @endif
-                                    @else
-                                        <span style="font-size: 13px">{{ strtoupper($photoCopy['value']) }}</span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
+                    <div class="document">
+                        <h3>Photocopy</h3>
+                        <p>Details</p>
+                        @foreach ($requestedDocumentDetails->photocopy as $photoCopy)
+                            @if ($photoCopy['description'] != 'Photocopy Type')
+                                @if ($photoCopy['description'] == 'TOTAL PRICE')
+                                    <p>{{ $photoCopy['description'] }}: ₱{{ number_format($photoCopy['value'], 2) }}</p>
+                                @else
+                                    <p>{{ $photoCopy['description'] }}: ₱{{ number_format($photoCopy['value'], 2) }}</p>
+                                @endif
+                            @else
+                                <p>{{ strtoupper($photoCopy['value']) }}</p>
+                            @endif
+                        @endforeach
                     </div>
-                    <br>
                 @endif
-                <div class="display-total-price" style="color: var(--bg-color-blue-sub)">
-                    <div class="description">
-                        <h5 style="font-weight: var(--font-weight-bold); margin-left: 1rem">TOTAL PRICE</h5>
-                    </div>
-                    <div class="price">
-                        <h5 style="font-weight: var(--font-weight-bold); ">
-                            ₱{{ number_format($requestedDocumentDetails->total_fee, 2) }}</h5>
-                    </div>
-                </div>
+
+                <p>Total Price: <span> ₱{{ number_format($requestedDocumentDetails->total_fee, 2) }}</span></p>
             </section>
         </div>
 
-        <div class="form-button-container flex-container view-buttons">
+        <div class="stud-req-info__buttons">
             @if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'cic')
-                <button class="green-button button-design" data-bs-toggle="modal"
-                    data-bs-target="#accept-request-modal">ACCEPT
-                    REQUEST</button>
-                <button class="red-button button-design" data-bs-toggle="modal"
-                    data-bs-target="#delete-request-modal">REJECT
-                    REQUEST</button>
+                <button class="accept" data-bs-toggle="modal"
+                    data-bs-target="#accept-request-modal">
+                    Accept Request
+                </button>
+                <button class="reject" data-bs-toggle="modal"
+                    data-bs-target="#delete-request-modal">
+                    Reject Request
+                </button>
             @endif
 
             @if ($requestInfo->status == 'SET FOR RELEASE' && Auth::user()->account_role == 'cic')
-                <button class="green-button button-design" data-bs-toggle="modal"
-                    data-bs-target="#accept-request-modal">COMPLETE
-                    REQUEST</button>
+                <button class="accept" data-bs-toggle="modal"
+                    data-bs-target="#accept-request-modal">
+                    Complete Request
+                </button>
             @endif
 
             @if ($requestInfo->status == 'IN PROGRESS' && Auth::user()->account_role == 'student')
-                <button class="red-button button-design" data-bs-toggle="modal"
-                    data-bs-target="#delete-request-modal">CANCEL
-                    REQUEST</button>
+                <button class="reject" data-bs-toggle="modal"
+                    data-bs-target="#delete-request-modal">
+                    Cancel Request
+                </button>
             @endif
 
             @if (Auth::user()->account_role == 'student')
-                <a class=" green-button button-design button-design__link"
-                    href="{{ route('stud.pdfRequest', ['requestID' => $requestInfo->request_id]) }}">PRINT
-                    REQUEST</a>
+                <a class="accept"
+                    href="{{ route('stud.pdfRequest', ['requestID' => $requestInfo->request_id]) }}">
+                    Print Request
+                </a>
             @endif
         </div>
-
     </section>
 
 

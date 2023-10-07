@@ -4,12 +4,12 @@
 @section('content')
 <div class="row d-flex align-items-center">
     <div class="row">
-        <h3>
+        <h1>
             ACCOUNT DEACTIVATED
-        </h3>
-        <h6>
+        </h1>
+        <h2>
             Please contact the University Registrar Office to reactivate your account
-        </h6>
+        </h2>
     </div>
 </div>
 @endsection

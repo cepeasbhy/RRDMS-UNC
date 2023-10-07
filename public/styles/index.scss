@@ -985,6 +985,86 @@ body{background-color: var(--clr-primary-bg)}
     }
 }
 
+//Request details of the student from the CIC
+.stud-req-info{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    //Buttons that needs to have green bg
+    & .accept{@include link-button(--clr-secondary-green); border: 0;}
+    //Buttons that needs to have red bg
+    & .reject{@include link-button(--clr-primary-red); border: 0}
+
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-block: 2rem 1rem;
+    }
+    & h2{
+        font-size: clamp(var(--font-size-500), 6vw, var(--font-size-600));
+        font-weight: var(--font-weight-600);
+        padding-left: .5rem;
+        border-left: 4px solid var(--clr-primary-red);
+        margin-block: 2rem;
+    }
+    & h3{
+        text-transform: uppercase;
+        font-weight: var(--font-weight-600);
+        font-size: var(--font-size-400);
+        margin-bottom: 1rem
+    }
+
+    &__data{
+        &--student{
+            @include flex(row, 2rem);
+            & img{@include img()}
+            margin-bottom: 2rem;
+
+            & .details p{
+                margin-bottom: .25rem;
+                &:first-of-type{
+                    font-weight: var(--font-weight-600);
+                    font-size: var(--font-size-500);
+                }
+            }
+        }
+
+        & .form-group{
+            @include flex(column, .5rem);
+            margin-bottom: 1rem;
+            & input, textarea{
+                padding: .5rem 1rem;
+                background-color: transparent;
+                border: 1px solid var(--clr-accent-gray);
+            }
+        }
+    }
+
+    &__details{
+        @include flex(column, 2rem);
+
+        &--documents .container{
+            @include grid(auto-fill, 180px, 1fr, 1rem);
+            text-align: center;
+        }
+
+        &--request{
+            & p{margin-bottom: .5rem;}
+            & .document p{
+                @include flex(row, .5rem);
+                justify-content: space-between;
+            }
+        }
+    }
+
+    &__buttons{
+        margin-top: 2rem;
+        text-align: center;
+    }
+}
+
 @media(min-width: 50em){
     .login{
         padding-block: 3rem;
@@ -1129,6 +1209,14 @@ body{background-color: var(--clr-primary-bg)}
     .req-details{
         @include container(70%, 80vw, 90rem);
         &__data{@include flex(row, 2rem)}
+    }
+
+    .stud-req-info__details{
+        padding-top: 1rem;
+        flex-direction: row;
+        padding-inline: 1rem;
+
+        &--documents{width: 50%}
     }
 }
 

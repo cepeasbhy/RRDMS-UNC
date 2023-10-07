@@ -3,7 +3,7 @@
 
 @section('content')
     <section class="admin">
-        <h1 class="head-container request-head">Admin Panel</h1>
+        <h1>Admin Panel</h1>
         <span class="badge bg-danger mb-2">{{ session('errorMsg') }}</span>
         <span class="badge bg-success mb-2">{{ session('successMsg') }}</span>
         <section class="admin__tools">
@@ -11,16 +11,16 @@
             <div class="admin__tools--shortcut">
                 <a class="green-button button-design button-design__link" href="{{ route('admin.viewAccounts') }}"
                     rel="noopener noreferrer">
-                    ACCOUNT MANAGEMENT
+                    Account Management
                 </a>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#admin-export-grad">
-                    EXPORT LIST OF GRADUATES
+                    Export List of Graduates
                 </button>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#admin-export-stud">EXPORT
-                    LIST OF STUDENTS
+                    List of Students
                 </button>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#admin-rec-prices">MANAGE
-                    RECORD PRICES
+                    Record Prices
                 </button>
             </div>
         </section>
