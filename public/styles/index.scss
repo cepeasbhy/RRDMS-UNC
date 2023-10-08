@@ -1065,6 +1065,46 @@ body{background-color: var(--clr-primary-bg)}
     }
 }
 
+//Account setup page for student when first logging into the site
+.acc-setup{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    &__wrapper{padding: 1.5rem 3rem}
+
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 2rem;
+    }
+    & h2{
+        font-size: clamp(1.10rem, 4vw, var(--font-size-500));
+        font-weight: var(--font-weight-600);
+        padding: 1rem;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--clr-accent-gray);
+        background-color: var(--clr-accent-gray);
+    }
+
+    & form{box-shadow: 0 0 4px rgba(0 0 0 / .6)}
+
+    & .form-group{@include flex(column, .5rem); margin-bottom: 1rem;}
+
+    & input{
+        padding: .5rem 1rem;
+        background-color: transparent;
+        border: 1px solid var(--clr-accent-gray);
+    }
+
+    & button{
+        @include link-button(--clr-secondary-green);
+        border: 0;
+        width: 100%;
+        margin-block: 1rem;
+    }
+}
+
 @media(min-width: 50em){
     .login{
         padding-block: 3rem;
@@ -1218,6 +1258,8 @@ body{background-color: var(--clr-primary-bg)}
 
         &--documents{width: 50%}
     }
+
+    .acc-setup{@include container(40%, 45vw, 50rem)}
 }
 
 //Media query for smaller tables
@@ -1270,6 +1312,7 @@ body{background-color: var(--clr-primary-bg)}
         }
         &__data{@include table-small();}
     }
+
 }
 
 
