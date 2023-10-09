@@ -16,10 +16,10 @@
                 <button type="button" data-bs-toggle="modal" data-bs-target="#admin-export-grad">
                     Export List of Graduates
                 </button>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#admin-export-stud">EXPORT
+                <button type="button" data-bs-toggle="modal" data-bs-target="#admin-export-stud">Export
                     List of Students
                 </button>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#admin-rec-prices">MANAGE
+                <button type="button" data-bs-toggle="modal" data-bs-target="#admin-rec-prices">Manage
                     Record Prices
                 </button>
             </div>

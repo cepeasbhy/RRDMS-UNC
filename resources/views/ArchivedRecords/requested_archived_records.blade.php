@@ -8,7 +8,7 @@
 @section('content')
     <section class="request">
         <a href="{{ route('index') }}">
-            <i class="bi bi-arrow-bar-left"></i> BACK<
+            <i class="bi bi-arrow-bar-left"></i> BACK
         </a>
         <h1>Request Logs</h1>
         <span style="margin-left: 1rem" class="badge bg-success mb-2">{{session('msg')}}</span>

@@ -4,7 +4,7 @@
 @section('content')
     <section class="req-details">
         <a href="{{ route('getRequests') }}">
-            <i class="bi bi-arrow-bar-left"></i> BACK<
+            <i class="bi bi-arrow-bar-left"></i> BACK
         </a>
 
         <h1>Request Details</h1>
