@@ -117,106 +117,106 @@
 
             <section class="stud-req-info__details--request">
                 <h2>Requested Documents</h2>
-                @if ($requestedDocumentDetails->diploma != null)
-                    <div class="document">
-                        <h3>Diploma</h3>
-                        <p>Details</p>
-                        @foreach ($requestedDocumentDetails->diploma as $diploma)
-                            @if ($diploma['description'] == 'TOTAL PRICE')
-                                <p>{{ $diploma['description'] }}: ₱{{ number_format($diploma['price'], 2) }}</p>
-                            @else
-                                <p>{{ $diploma['description'] }}: ₱{{ number_format($diploma['price'], 2) }}</p>
-                            @endif
-                        @endforeach
-                    </div>
-                @endif
-                    {{-- TODO: Put span inside p tag --}}
-                @if ($requestedDocumentDetails->transcript_of_record != null)
-                    <div class="document">
-                        <h3>Transcript of Records</h3>
-                        <p>No. of Copies: <span>{{ $requestedDocumentDetails->transcript_of_record['copies'] }}</span></p>
-                        @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
-                            <p>Purpose: <span>{{ $requestedDocumentDetails->transcript_of_record['purpose'] }}</span></p>
-                        @else
-                            <p>Other Purpose: <span>{{ $requestedDocumentDetails->transcript_of_record['other_purpose'] }}</span></p>
-                        @endif
-                        <p>TOTAL PRICE: <span>₱{{ number_format($requestedDocumentDetails->transcript_of_record[0]['price'], 2) }}</span></p>
-                    </div>
-                @endif
 
-                @if ($requestedDocumentDetails->certificate != null)
-                    <div class="document">
-                        <h3>Certificates</h3>
-                        <p>Details</p>
-                        @foreach ($requestedDocumentDetails->certificate as $certificate)
-                            @foreach ($certificate as $description => $value)
-                                @if ($description == 'TOTAL PRICE')
-                                    <p>{{ $description }}: ₱{{ number_format($value, 2) }}</p>
+                <div class="wrapper">
+                    @if ($requestedDocumentDetails->diploma != null)
+                        <div class="document">
+                            <h3>Diploma</h3>
+                            @foreach ($requestedDocumentDetails->diploma as $diploma)
+                                @if ($diploma['description'] == 'TOTAL PRICE')
+                                    <p>{{ $diploma['description'] }}: <span>₱{{ number_format($diploma['price'], 2) }}</span></p>
                                 @else
-                                    <p>{{ $description }}: {{ $value }}</p>
+                                    <p>{{ $diploma['description'] }}: <span>₱{{ number_format($diploma['price'], 2) }}</span></p>
                                 @endif
                             @endforeach
-                        @endforeach
-                    </div>
-                @endif
-
-                @if ($requestedDocumentDetails->copy_of_grades != null)
-                    <div class="document">
-                        <h3>Copy of Grades</h3>
-                        <p>No. of Copies: {{ $requestedDocumentDetails->copy_of_grades['copies'] }}</p>
-                        @if ($requestedDocumentDetails->copy_of_grades['schoolYear'] == null)
-                            <p>School Year: Not Stated</p>
-                        @else
-                            <p>School Year: {{ $requestedDocumentDetails->copy_of_grades['schoolYear'] }}</p>
-                        @endif
-
-                        @switch($requestedDocumentDetails->copy_of_grades['semester'])
-                            @case(1)
-                                <p>Semester: 1st Semester</p>
-                            @break
-
-                            @case(2)
-                                <p>Semester: 2nd Semester</p>
-                            @break
-
-                            @default
-                                <p>Semester: Summer Semester</p>
-                        @endswitch
-                        <p>TOTAL PRICE: ₱{{ number_format($requestedDocumentDetails->copy_of_grades[0]['price'], 2) }}</p>
-                    </div>
-                @endif
-
-                @if ($requestedDocumentDetails->authentication != null)
-                    <h3>Authentication</h3>
-                    <p>Details</p>
-                    @foreach ($requestedDocumentDetails->authentication as $auth)
-                        @if ($auth['description'] == 'TOTAL PRICE')
-                            <p>{{ $auth['description'] }}: ₱{{ number_format($auth['price'], 2) }}</p>
-                        @else
-                            <p>{{ $auth['description'] }}: ₱{{ number_format($auth['price'], 2) }}</p>
-                        @endif
-                    @endforeach
-                @endif
-
-                @if ($requestedDocumentDetails->photocopy != null)
-                    <div class="document">
-                        <h3>Photocopy</h3>
-                        <p>Details</p>
-                        @foreach ($requestedDocumentDetails->photocopy as $photoCopy)
-                            @if ($photoCopy['description'] != 'Photocopy Type')
-                                @if ($photoCopy['description'] == 'TOTAL PRICE')
-                                    <p>{{ $photoCopy['description'] }}: ₱{{ number_format($photoCopy['value'], 2) }}</p>
-                                @else
-                                    <p>{{ $photoCopy['description'] }}: ₱{{ number_format($photoCopy['value'], 2) }}</p>
-                                @endif
+                        </div>
+                    @endif
+                    @if ($requestedDocumentDetails->transcript_of_record != null)
+                        <div class="document">
+                            <h3>Transcript of Records</h3>
+                            <p>No. of Copies: <span>{{ $requestedDocumentDetails->transcript_of_record['copies'] }}</span></p>
+                            @if ($requestedDocumentDetails->transcript_of_record['other_purpose'] == null)
+                                <p>Purpose: <span>{{ $requestedDocumentDetails->transcript_of_record['purpose'] }}</span></p>
                             @else
-                                <p>{{ strtoupper($photoCopy['value']) }}</p>
+                                <p>Other Purpose: <span>{{ $requestedDocumentDetails->transcript_of_record['other_purpose'] }}</span></p>
                             @endif
-                        @endforeach
-                    </div>
-                @endif
+                            <p>TOTAL PRICE: <span>₱{{ number_format($requestedDocumentDetails->transcript_of_record[0]['price'], 2) }}</span></p>
+                        </div>
+                    @endif
 
-                <p>Total Price: <span> ₱{{ number_format($requestedDocumentDetails->total_fee, 2) }}</span></p>
+                    @if ($requestedDocumentDetails->certificate != null)
+                        <div class="document">
+                            <h3>Certificates</h3>
+                            @foreach ($requestedDocumentDetails->certificate as $certificate)
+                                @foreach ($certificate as $description => $value)
+                                    @if ($description == 'TOTAL PRICE')
+                                        <p>{{ $description }}: <span>₱{{ number_format($value, 2) }}</span></p>
+                                    @else
+                                        <p>{{ $description }}: <span>{{ $value }}</span></p>
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if ($requestedDocumentDetails->copy_of_grades != null)
+                        <div class="document">
+                            <h3>Copy of Grades</h3>
+                            <p>No. of Copies: {{ $requestedDocumentDetails->copy_of_grades['copies'] }}</p>
+                            @if ($requestedDocumentDetails->copy_of_grades['schoolYear'] == null)
+                                <p>School Year: <span>Not Stated</span></p>
+                            @else
+                                <p>School Year: <span>{{ $requestedDocumentDetails->copy_of_grades['schoolYear'] }}</span></p>
+                            @endif
+
+                            @switch($requestedDocumentDetails->copy_of_grades['semester'])
+                                @case(1)
+                                    <p>Semester: <span>1st Semester</span></p>
+                                @break
+
+                                @case(2)
+                                    <p>Semester: <span>2nd Semester</span></p>
+                                @break
+
+                                @default
+                                    <p>Semester: <span>Summer Semester</span></p>
+                            @endswitch
+                            <p>TOTAL PRICE: <span>₱{{ number_format($requestedDocumentDetails->copy_of_grades[0]['price'], 2) }}</span></p>
+                        </div>
+                    @endif
+
+                    @if ($requestedDocumentDetails->authentication != null)
+                        <div class="document">
+                            <h3>Authentication</h3>
+                            @foreach ($requestedDocumentDetails->authentication as $auth)
+                                @if ($auth['description'] == 'TOTAL PRICE')
+                                    <p>{{ $auth['description'] }}: <span>₱{{ number_format($auth['price'], 2) }}</span></p>
+                                @else
+                                    <p>{{ $auth['description'] }}: <span>₱{{ number_format($auth['price'], 2) }}</span></p>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if ($requestedDocumentDetails->photocopy != null)
+                        <div class="document">
+                            <h3>Photocopy</h3>
+                            @foreach ($requestedDocumentDetails->photocopy as $photoCopy)
+                                @if ($photoCopy['description'] != 'Photocopy Type')
+                                    @if ($photoCopy['description'] == 'TOTAL PRICE')
+                                        <p>{{ $photoCopy['description'] }}: <span>₱{{ number_format($photoCopy['value'], 2) }}</span></p>
+                                    @else
+                                        <p>{{ $photoCopy['description'] }}: <span>₱{{ number_format($photoCopy['value'], 2) }}</span></p>
+                                    @endif
+                                @else
+                                    <p>{{ strtoupper($photoCopy['value']) }}</p>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                <p class="total">Total Price: <span> ₱{{ number_format($requestedDocumentDetails->total_fee, 2) }}</span></p>
             </section>
         </div>
 
