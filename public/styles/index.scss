@@ -1105,6 +1105,178 @@ body{background-color: var(--clr-primary-bg)}
     }
 }
 
+//Student homepage
+.stud-homepage{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    & a{@include link-button(--clr-secondary-green)}
+
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-block: 2rem 1rem;
+    }
+    & h2{
+        font-size: clamp(1.25rem, 5vw, var(--font-size-600));
+        font-weight: var(--font-weight-600);
+        padding-left: .5rem;
+        border-left: 4px solid var(--clr-primary-red);
+    }
+
+    &__subheading{
+        padding-block: 1rem 2rem;
+        @include flex(row, 2rem);
+        justify-content: space-between;
+    }
+
+    & .active{display: block;}
+
+    &__tabs{
+        padding-bottom: 1rem;
+        & ul{
+            @include flex(row, .5rem);
+            padding-inline: 0;
+            border-bottom: 1px solid #333;
+            & li{
+                padding-bottom: .5rem;
+                &:hover, &:focus, &:active{border-bottom: 2px solid var(--clr-accent-blue)}
+            }
+        }
+
+        & button{
+            background-color: transparent;
+            border: none;
+            padding: .5rem 1rem;
+            font-weight: var(--font-weight-500);
+
+            &:hover, &:focus, &:active{
+                font-weight: var(--font-weight-600);
+                color: var(--clr-accent-blue);
+            }
+        }
+    }
+
+    &__data{
+        display: none;
+        @include table-wide()
+    }
+}
+
+//Request Records Form for the Students
+.req-form{
+    width: 90%;
+    margin-inline: auto;
+    padding-block: 3rem;
+
+    & h1{
+        font-size: clamp(var(--font-size-600), 7vw, var(--font-size-900));
+        font-weight: var(--font-weight-700);
+        padding-bottom: 1rem;
+        margin-block: 2rem 1rem;
+    }
+    & h2{
+        font-size: clamp(1.5rem, 5vw, var(--font-size-600));
+        font-weight: var(--font-weight-600);
+        padding-left: .5rem;
+        border-left: 4px solid var(--clr-primary-red);
+    }
+    & h3{
+        font-size: clamp(1.10rem, 4vw, var(--font-size-500));
+        font-weight: var(--font-weight-600);
+        padding-left: .5rem;
+        border-left: 4px solid var(--clr-primary-red);
+    }
+    & img{@include img()}
+
+    &__subheading--user{
+        padding-block: 2rem;
+        @include flex(row, 2rem);
+        align-items: center;
+
+        & p{
+            margin-bottom: .5rem;
+            &:first-of-type{
+                font-size: var(--font-size-500);
+                font-weight: var(--font-weight-600);
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    & form{
+        padding: 2rem;
+
+        //To hide certain lables from screen but not screen readers
+        & input, select{
+            position: relative;
+            background-color: transparent;
+            &:not([type="file"]){
+                padding: .5rem 1rem;
+                border: 1px solid var(--clr-accent-gray);}
+        }
+        & .hidden{
+            position: absolute;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        & p{margin-top: 1rem; font-weight: var(--font-weight-600); text-transform: uppercase; margin-top: 1.5rem}
+        & p, & label{
+            @include flex(row, 1rem);
+            justify-content: space-between;
+            width: 100%
+        }
+
+        & .checkbox-group{@include flex(row, .5rem)}
+        & .form-group{@include flex(column, .5rem); padding-block: .5rem;}
+    }
+
+    &__content{
+        &--category{padding-block: 1rem}
+        & .flag{
+            background-color: lightblue;
+            width: 100%;
+            display: block;
+            padding: .5rem 1rem;
+            margin-block: .75rem;
+        }
+
+        &--nda{
+            text-align: center;
+
+            & h2{
+                text-transform: uppercase;
+                font-weight: var(--font-weight-700);
+                border: 0;
+            }
+            & p{text-align: left;}
+        }
+
+        & button{
+            @include link-button(--clr-secondary-green);
+            cursor: pointer;
+            text-align: center;
+            border: 0;
+
+            &[disabled]{
+                opacity: .7;
+                &:hover, &:focus, &:active{
+                    background-color: var(--clr-secondary-green);
+                    box-shadow: none;
+                    border: 0;
+                    color: var(--clr-neutral-white);
+                    font-weight: var(--font-weight-500);
+                }
+            }
+        }
+    }
+}
+
 @media(min-width: 50em){
     .login{
         padding-block: 3rem;
@@ -1260,6 +1432,8 @@ body{background-color: var(--clr-primary-bg)}
     }
 
     .acc-setup{@include container(40%, 45vw, 50rem)}
+
+    .req-form{@include container(50%, 55vw, 60rem)}
 }
 
 //Media query for smaller tables
@@ -1306,6 +1480,15 @@ body{background-color: var(--clr-primary-bg)}
     }
 
     .request{
+        &__tabs ul{
+            @include flex(column, 0);
+            align-items: center;
+        }
+        &__data{@include table-small();}
+    }
+
+    .stud-homepage{
+        &__subheading{flex-direction: column; align-items: start; gap: 1rem; padding-bottom: 3rem}
         &__tabs ul{
             @include flex(column, 0);
             align-items: center;
